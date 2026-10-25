@@ -454,3 +454,35 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .page-head > .meet-mark { width: 84px; }
 /* Nebel rechts bis an den Bildrand führen (neben der Windrose) */
 @media (min-width: 861px) { .wind .fog--right::before { right: calc(-1 * max(var(--pad), 110px) - 2px); } }
+
+.prices-hint { display: none; }
+
+/* ---------- Nur Handy (bis 600 px), iPad und Desktop bleiben unverändert ---------- */
+@media (max-width: 600px) {
+  /* Kompass: Medaillons exakt auf dem Kreis, Logo genau in der Mitte */
+  .compass-rose { --m: 92px; display: block; width: min(360px, 100%); aspect-ratio: 1; margin: 96px auto 100px; }
+  .compass-lines { width: 96%; }
+  .compass-center { position: absolute; left: 50%; top: 50%; width: 72px; transform: translate(-50%, -50%); }
+  .wind-card { position: absolute; width: 116px; padding: 0; transform: translate(-50%, calc(var(--m) / -2)); }
+  .wind-card[data-wind="norden"] { left: 50%; top: 14%; flex-direction: column-reverse; transform: translate(-50%, calc(-100% + var(--m) / 2)); }
+  .wind-card[data-wind="norden"] .wind-card-dir { margin: 0 0 6px; }
+  .wind-card[data-wind="norden"] .wind-card-sub { margin: 0 0 10px; }
+  .wind-card[data-wind="sueden"] { left: 50%; top: 86%; }
+  .wind-card[data-wind="westen"] { left: 14%; top: 50%; }
+  .wind-card[data-wind="osten"] { left: 86%; top: 50%; }
+  .medal { width: var(--m); outline-offset: 4px; }
+  .wind-card-dir { margin-top: 12px; font-size: 1.3rem; }
+  .wind-card-sub { font-size: .56rem; letter-spacing: .08em; }
+
+  /* Preise: nebeneinander zum Wischen, Empfehlung in der Mitte */
+  .prices { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--pad)); padding: 8px var(--pad) 18px; scrollbar-width: none; }
+  .prices::-webkit-scrollbar { display: none; }
+  .prices .price { flex: 0 0 78%; scroll-snap-align: center; padding: 64px 22px 70px; }
+  .price-amount { font-size: 2.8rem; }
+  .prices-hint { display: block; margin-top: 4px; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); text-shadow: var(--glow-light); }
+
+  /* Funktionieren / Wahrnehmen: zwei schmale Spalten statt untereinander */
+  .contrast { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contrast-label { font-size: 1.12rem; }
+  .contrast ul { font-size: .9rem; line-height: 1.5; }
+}

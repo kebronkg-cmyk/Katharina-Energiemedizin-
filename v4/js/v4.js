@@ -105,5 +105,13 @@
     });
   });
 
-  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+  // Handy: Preis-Leiste beim Laden auf die Empfehlung in der Mitte stellen
+  var prices = document.querySelector(".prices");
+  var featured = document.querySelector(".price--featured");
+  function centerFeatured() {
+    if (prices && featured && prices.scrollWidth > prices.clientWidth) {
+      prices.scrollLeft = featured.offsetLeft - (prices.clientWidth - featured.offsetWidth) / 2;
+    }
+  }
+  window.addEventListener("load", function () { ScrollTrigger.refresh(); centerFeatured(); });
 })();
