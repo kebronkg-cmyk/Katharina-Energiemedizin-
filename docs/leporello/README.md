@@ -11,8 +11,8 @@
 | Bilder | ca. 300 dpi |
 
 **Außen** (Feld 1 links = Titel vorne, Feld 4 rechts = Rückseite gefalzt):
-Titel · Über mich mit Gemälde · Ablauf, ganzer Mensch & Preise · Kennenlernen mit Gemälde und QR-Code
-**Innen:** die vier Winde von Süden bis Osten (Westen mit „Alles ist Energie“)
+Titel · Über mich & ganzer Mensch · Galerie „Aus dem Atelier“ (drei Gemälde) · Ablauf, Preise & Kennenlernen mit QR-Code
+**Innen:** die vier Winde von Süden bis Osten
 
 ## Bestellung (Empfehlung)
 - **Anbieter:** dieUmweltDruckerei (Recyclingpapier, Ökostrom); Alternative Saxoprint (Zickzackfalz).
