@@ -1,7 +1,7 @@
 # Flyer „Weg der vier Winde“
 
-**Druckdatei:** `flyer-din-lang-druck.pdf` (Seite 1 vorne, Seite 2 hinten)
-**Vorschau:** `vorschau-vorne.png`, `vorschau-hinten.png`
+**Fassung A** (ruhige Bild-Vorderseite): `flyer-din-lang-druck.pdf`, Vorschau `vorschau-vorne.png` / `vorschau-hinten.png`
+**Fassung B** (Vorderseite mit Infos und QR-Code, für Auslagen): `flyer-b-din-lang-druck.pdf`, Vorschau `vorschau-b-vorne.png` / `vorschau-b-hinten.png`
 
 | | |
 |---|---|
@@ -28,4 +28,4 @@ auf die Begleitungen selbst sind wegen des Heilmittelwerbegesetzes (§ 7 HWG, Zu
 riskant und sollten nur nach rechtlicher Prüfung ergänzt werden.
 
 ## Neu erzeugen
-`node docs/flyer/build.js` (benötigt Playwright)
+`node docs/flyer/build.js` (Fassung A) bzw. `node docs/flyer/build.js flyer-b-din-lang` (Fassung B), benötigt Playwright
