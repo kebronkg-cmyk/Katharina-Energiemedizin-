@@ -40,14 +40,16 @@ CROPS = [
     # Ausschnitte an den gelieferten Postern ausgemessen
     ("willkommen.jpg", "portrait-willkommen.webp", 53, 100, 0, 100, False),
     ("mut-zur-tiefe.jpg", "portrait-tiefe.webp", 58, 100, 21.5, 68, False),
-    # Eisberg-Grafik aus „Mut zur Tiefe“, bis ein eigenes Eisberg-Poster da ist
-    ("mut-zur-tiefe.jpg", "eisberg.webp", 15, 48, 28.3, 45.3, False),
+    # Eisberg aus dem Poster „Sichtbar ist nur die Spitze“ (Video-Frame)
+    ("eisberg-video.png", "eisberg.webp", 49.5, 99, 17, 73, False),
+    # zwei Gemälde von Katharina aus „Von der Fantasie zur Brücke“ (Video-Frame)
+    ("fantasie-video.png", "gemaelde-fiesta.webp", 4.8, 51.6, 22.2, 42.2, False),
+    ("fantasie-video.png", "gemaelde-amigos.webp", 49.7, 95.0, 58.5, 85.1, False),
     ("energetische-arbeit.jpg", "portrait-weide.webp", 57, 100, 0, 97.5, False),
     ("landkarte-arbeit.jpg", "portrait-weide-ganz.webp", 61, 100, 23, 99, False),
     # vorläufiges Porträt aus „Herzlich willkommen“, bis „Über mich“ da ist
     ("willkommen.jpg", "portrait-ueber-mich.webp", 63, 88, 6, 47.5, False),
     ("ueber-mich-persoenlich.jpg", "portrait-ueber-mich.webp", 2, 22, 23, 71, False),
-    ("eisberg.jpg", "eisberg.webp", 22, 78, 34, 68, True),
     ("schamanisch-einzigartig.jpg", "trommel.webp", 50, 100, 0, 47, True),
     ("heilung.jpg", "passionsblume.webp", 56, 100, 30, 85, True),
     ("natur.jpg", "weide-natur.webp", 46, 100, 0, 100, True),
@@ -59,6 +61,35 @@ CROPS = [
     ("seelenanteile.jpg", "feder.webp", 48, 70, 15, 33, True),
     ("logo-seite.jpg", "landschaft.webp", 0, 100, 60, 100, True),
 ]
+
+
+# Bereiche (in % des Ausschnitts), in denen ein Rest Posterschrift sitzt,
+# der sich nicht wegschneiden lässt, ohne das Motiv zu kappen. Sie werden
+# aus ihrem Rand heraus aufgefüllt (siehe erase).
+ERASE = {
+    "eisberg.webp": [(0, 0, 30, 13.5)],  # Schwung von „Spitze“ neben der Eisbergspitze
+}
+
+
+def erase(img, boxes):
+    """Füllt die Bereiche aus ihrem Rand heraus (Diffusion), sodass Verläufe
+    im Hintergrund weiterlaufen statt als Fläche aufzufallen."""
+    import numpy as np
+
+    w, h = img.size
+    arr = np.asarray(img, dtype=np.float32).copy()
+    mask = np.zeros((h, w), dtype=bool)
+    for x0, y0, x1, y1 in boxes:
+        mask[round(h * y0 / 100):round(h * y1 / 100), round(w * x0 / 100):round(w * x1 / 100)] = True
+    arr[mask] = arr[~mask].mean(axis=0)
+    for _ in range(1500):
+        p = np.pad(arr, ((1, 1), (1, 1), (0, 0)), mode="edge")
+        avg = (p[:-2, 1:-1] + p[2:, 1:-1] + p[1:-1, :-2] + p[1:-1, 2:]) / 4
+        arr[mask] = avg[mask]
+    # feines Rauschen, damit die Fläche nicht glatter wirkt als das Bild
+    rng = np.random.default_rng(0)
+    arr[mask] += rng.normal(0, 2.0, size=(mask.sum(), 3))
+    return Image.fromarray(arr.clip(0, 255).astype("uint8"))
 
 
 def trim_black(img):
@@ -108,10 +139,16 @@ def warm(img, ai):
 
 def crop_one(src, dst, x0, x1, y0, y1, ai):
     img = Image.open(RAW / src).convert("RGB")
-    img = trim_black(img)
+    # Video-Frames: Werte gelten fürs ganze Bild, weil die Poster selbst
+    # fast schwarz sind und die Randerkennung sonst ins Motiv schneidet
+    if not src.endswith("-video.png"):
+        img = trim_black(img)
     w, h = img.size
     box = (round(w * x0 / 100), round(h * y0 / 100), round(w * x1 / 100), round(h * y1 / 100))
-    img = warm(img.crop(box), ai)
+    img = img.crop(box)
+    if dst in ERASE:
+        img = erase(img, ERASE[dst])
+    img = warm(img, ai)
     if img.width > MAX_WIDTH:
         img = img.resize((MAX_WIDTH, round(img.height * MAX_WIDTH / img.width)), Image.LANCZOS)
     img.save(OUT / dst, "WEBP", quality=QUALITY, method=6)

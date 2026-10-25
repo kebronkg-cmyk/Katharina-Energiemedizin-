@@ -46,6 +46,9 @@ Das erzeugt `logo.webp` (komplett), `logo-mark.webp` (Spiralen), `logo-schriftzu
 2. `pip install Pillow && python3 tools/crop.py`
 3. `tools/preview.html` im Browser öffnen und prüfen: **kein Text, kein Logo, kein Rand** im Ausschnitt. Sonst Werte in `CROPS` (in `tools/crop.py`) anpassen und neu schneiden.
 
+Poster, die nur als Instagram-Video vorliegen: die ersten 5 Frames (vor der Instagram-Einblendung) mitteln und als `raw/<name>-video.png` speichern, z. B.
+`ffmpeg -i video.mp4 -vf "select='lt(n\,5)'" -vsync 0 f%02d.png`. Für `*-video.png` entfällt die automatische Randentfernung; die Prozentwerte gelten fürs ganze Bild. Reste von Posterschrift, die sich nicht wegschneiden lassen, füllt `ERASE` in `tools/crop.py` aus dem Rand heraus auf.
+
 Bis dahin liegen beschriftete Platzhalter in `img/` (`tools/placeholders.py`). Sie werden von `crop.py` überschrieben.
 
 ## Platzhalter im Text
