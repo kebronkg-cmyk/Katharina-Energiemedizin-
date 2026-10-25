@@ -23,7 +23,7 @@ Titel · Über mich & ganzer Mensch · Galerie „Aus dem Atelier“ (drei Gemä
 
 ## Vor dem Druck
 - [ ] Telefon / E-Mail ergänzen (Feld 4)
-- [ ] QR-Code auf die endgültige Domain umstellen
+- [ ] QR-Code auf die endgültige Domain umstellen (zeigt zurzeit auf https://blaufuchs-m8t3.pages.dev/)
 - [ ] Texte und Tiernamen von Katharina freigeben lassen
 
 ## Neu erzeugen

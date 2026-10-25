@@ -1,6 +1,6 @@
 # Offene Angaben von Katharina
 
-Diese Angaben fehlen noch auf der Website (Fassung `/v4/`). Auf der
+Diese Angaben fehlen noch auf der Website (Fassung mit Tieren, Ordner `site/`). Auf der
 Startseite und auf „Mein Weg“ stehen bis dahin neutrale, fertige Sätze statt
 Lücken. Sobald die Angaben da sind, werden sie eingesetzt.
 

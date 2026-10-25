@@ -11,7 +11,7 @@
 
 ## Vor dem Druck ergänzen
 - [ ] Telefon / E-Mail (Platz unter Instagram)
-- [ ] QR-Code auf die endgültige Domain umstellen (zeigt zurzeit auf die Vorschau-Seite)
+- [ ] QR-Code auf die endgültige Domain umstellen (zeigt zurzeit auf https://blaufuchs-m8t3.pages.dev/)
 - [ ] Freigabe der Texte durch Katharina
 
 ## Empfehlung zum Druck
