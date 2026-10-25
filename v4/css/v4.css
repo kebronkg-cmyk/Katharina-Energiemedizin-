@@ -70,6 +70,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--pearl); }
 .sky-layer { position: absolute; inset: 0; opacity: 0; }
 .sky-layer[data-scene="mitte"] { opacity: 1; }
+.sky-layer picture { display: contents; }
 .sky-layer img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50%) 50%; transform-origin: 50.5% 32%; will-change: transform; }
 .sky-veil { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse 72% 62% at 50% 45%, rgba(251, 246, 236, .93), rgba(251, 246, 236, .6) 70%, rgba(251, 246, 236, .42)); }
 .sky-dawn { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse 80% 70% at 50% 55%, rgba(251, 246, 236, .9), rgba(251, 246, 236, .45) 75%, rgba(244, 235, 221, .3)); }
@@ -459,6 +460,12 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 
 /* ---------- Nur Handy (bis 600 px), iPad und Desktop bleiben unverändert ---------- */
 @media (max-width: 600px) {
+  /* Hochformat-Gemälde: mittig, Wirbel-Zoom auf die Lichtöffnung */
+  .sky-layer img { object-position: 50% 50%; }
+  .sky-layer[data-scene="mitte"] img { transform-origin: 50% 40%; }
+  /* Tiername und Einleitung in die untere Bildhälfte, das Tier oben bleibt frei */
+  .wind-head { justify-content: flex-end; padding: 52vh 0 7vh; }
+  .wind-head::before { inset: 40% -40% -5%; }
   /* Kompass: Medaillons exakt auf dem Kreis, Logo genau in der Mitte */
   .compass-rose { --m: 92px; display: block; width: min(360px, 100%); aspect-ratio: 1; margin: 96px auto 100px; }
   .compass-lines { width: 96%; }
