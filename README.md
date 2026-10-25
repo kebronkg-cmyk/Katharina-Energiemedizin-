@@ -26,6 +26,8 @@ raw/                   Originaldateien (nicht im Git, siehe .gitignore)
 
 Lokal ansehen: `cd site && python3 -m http.server 8000`, dann http://localhost:8000 öffnen.
 
+Alle Links sind relativ, daher läuft die Seite auf Netlify und auf GitHub Pages (Unterpfad). GitHub Pages wird über `.github/workflows/pages.yml` veröffentlicht. Hinweis: Das Kontaktformular (Netlify Forms) funktioniert nur auf Netlify, nicht auf GitHub Pages.
+
 ## Logo
 
 Verwendet wird das **Originallogo** (vier goldene Spiralen, Schriftzug „Weg der vier Winde“, Zeile „Energiemedizin & Verkörperung“, Bogen). Da noch keine Vektordatei vorliegt, wurde es aus einem Screenshot freigestellt:
