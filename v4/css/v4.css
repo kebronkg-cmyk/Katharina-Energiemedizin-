@@ -67,8 +67,9 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .label::before, .label::after { content: ""; width: 30px; height: 1px; background: var(--gold); }
 
 /* ---------- Himmel ---------- */
-.sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--pearl); }
-.sky-layer { position: absolute; inset: 0; opacity: 0; }
+.sky { position: fixed; left: 0; right: 0; top: 0; height: 100lvh; z-index: -1; overflow: hidden; background: var(--pearl); contain: strict; }
+@supports not (height: 100lvh) { .sky { bottom: 0; height: auto; } }
+.sky-layer { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
 .sky-layer[data-scene="mitte"] { opacity: 1; }
 .sky-layer picture { display: contents; }
 .sky-layer img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50%) 50%; transform-origin: 50.5% 32%; will-change: transform; }
@@ -192,8 +193,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .band { position: relative; isolation: isolate; margin-inline: calc(-1 * var(--pad)); padding: 14vh var(--pad); }
 .band::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(to bottom, rgba(251, 246, 236, 0), rgba(251, 246, 236, .86) 24%, rgba(251, 246, 236, .86) 76%, rgba(251, 246, 236, 0));
-  backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, rgba(251, 246, 236, 0), rgba(251, 246, 236, .9) 24%, rgba(251, 246, 236, .9) 76%, rgba(251, 246, 236, 0));
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
 }
@@ -221,7 +221,6 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
   content: ""; position: absolute; z-index: -1; top: 0; bottom: 0;
   left: calc(-1 * var(--pad) - 2px); right: -24vw;
   background: linear-gradient(to right, rgba(251, 246, 236, .92) 0%, rgba(251, 246, 236, .86) 62%, rgba(251, 246, 236, 0) 100%);
-  backdrop-filter: blur(12px);
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent), linear-gradient(to right, #000 60%, transparent);
   -webkit-mask-composite: source-in; mask-composite: intersect;
   mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent), linear-gradient(to right, #000 60%, transparent);
@@ -245,7 +244,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
   position: relative; padding: clamp(56px, 7vw, 82px) clamp(26px, 4vw, 50px) clamp(60px, 8vw, 92px);
   border-radius: 260px 260px 10px 10px / 130px 130px 10px 10px;
   background: radial-gradient(120% 70% at 50% 0%, rgba(255, 251, 241, .95), rgba(251, 246, 236, .84) 55%, rgba(248, 241, 228, .76));
-  backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(8px);
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 70px), transparent);
   mask-image: linear-gradient(to bottom, #000 calc(100% - 70px), transparent);
 }
@@ -460,6 +459,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 
 /* ---------- Nur Handy (bis 600 px), iPad und Desktop bleiben unverändert ---------- */
 @media (max-width: 600px) {
+  .arch, .gate, .btn--ghost { backdrop-filter: none; }
   /* Hochformat-Gemälde: mittig, Wirbel-Zoom auf die Lichtöffnung */
   .sky-layer img { object-position: 50% 50%; }
   .sky-layer[data-scene="mitte"] img { transform-origin: 50% 40%; }
@@ -494,4 +494,36 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
   .contrast { grid-template-columns: 1fr 1fr; gap: 16px; }
   .contrast-label { font-size: 1.12rem; }
   .contrast ul { font-size: .9rem; line-height: 1.5; }
+}
+
+/* ---------- Der Himmel atmet ----------
+   Kaum merkliche Bewegungen: jedes Gemälde treibt in langen Zyklen ein
+   Hauch zur Seite, dreht sich minimal und atmet. Darüber wandern zwei
+   weiche Lichtschleier. Alles über eigene CSS-Eigenschaften (translate,
+   rotate, scale), damit es sich mit den Scroll-Effekten nicht in die
+   Quere kommt. */
+.sky-layer img { animation: drift 46s ease-in-out infinite alternate; }
+.sky-layer[data-scene="sueden"] img { animation-duration: 52s; animation-delay: -12s; }
+.sky-layer[data-scene="westen"] img { animation-duration: 58s; animation-delay: -30s; }
+.sky-layer[data-scene="norden"] img { animation-duration: 50s; animation-delay: -20s; }
+.sky-layer[data-scene="osten"] img { animation-duration: 54s; animation-delay: -8s; }
+@keyframes drift {
+  0%   { translate: -0.6% 0.2%; rotate: -0.12deg; scale: 1.025; }
+  50%  { translate: 0.3% -0.35%; rotate: 0.06deg; scale: 1.045; }
+  100% { translate: 0.7% 0.25%; rotate: 0.14deg; scale: 1.03; }
+}
+.sky-mist {
+  position: absolute; inset: -20%; pointer-events: none; opacity: .32;
+  background:
+    radial-gradient(38% 30% at 30% 40%, rgba(255, 248, 232, .9), transparent 70%),
+    radial-gradient(30% 26% at 72% 62%, rgba(255, 240, 220, .75), transparent 70%);
+  animation: mist 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes mist {
+  0%   { transform: translate3d(-4%, 1%, 0) scale(1); }
+  100% { transform: translate3d(5%, -2%, 0) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-layer img, .sky-mist { animation: none; }
 }

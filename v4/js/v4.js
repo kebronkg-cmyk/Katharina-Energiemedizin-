@@ -3,6 +3,8 @@
 (function () {
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
+  // Adressleiste am Handy löst keine Neuberechnung (und kein Springen) aus
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var layer = function (name) { return document.querySelector('.sky-layer[data-scene="' + name + '"]'); };
@@ -11,7 +13,8 @@
   // ---------- weiches Scrollen ----------
   var lenis = null;
   if (!reduced && window.Lenis) {
-    lenis = new Lenis({ duration: 1.35, smoothWheel: true });
+    // lerp statt fester Dauer: gleitet gleichmäßig nach, ohne Anfahr-Ruck
+    lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.85, smoothWheel: true });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -22,21 +25,21 @@
   }
 
   // ---------- Ankommen: in das Licht hineinfliegen ----------
-  var hero = { trigger: "#ankommen", start: "top top", end: "bottom top", scrub: true };
+  var hero = { trigger: "#ankommen", start: "top top", end: "bottom top", scrub: 1.2 };
   if (!reduced) gsap.to(layer("mitte").querySelector("img"), { scale: 1.45, ease: "none", scrollTrigger: hero });
-  gsap.to(".hero-inner", { opacity: 0, y: reduced ? 0 : -80, ease: "none", scrollTrigger: { trigger: "#ankommen", start: "top top", end: "60% top", scrub: true } });
-  gsap.to(".sky-veil", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#wahrnehmen", start: "top bottom", end: "top 30%", scrub: true } });
+  gsap.to(".hero-inner", { opacity: 0, y: reduced ? 0 : -80, ease: "none", scrollTrigger: { trigger: "#ankommen", start: "top top", end: "60% top", scrub: 1.2 } });
+  gsap.to(".sky-veil", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#wahrnehmen", start: "top bottom", end: "top 30%", scrub: 1.2 } });
 
   // ---------- die vier Winde: Himmel wechselt die Stimmung ----------
   winds.forEach(function (name) {
     var section = document.getElementById(name);
     var el = layer(name);
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: true } });
+    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: 1.2 } });
     if (!reduced) {
-      gsap.fromTo(el.querySelector("img"), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true } });
+      gsap.fromTo(el.querySelector("img"), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 1.2 } });
     }
   });
-  gsap.to(".sky-dawn", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#fragen", start: "top bottom", end: "top 25%", scrub: true } });
+  gsap.to(".sky-dawn", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#fragen", start: "top bottom", end: "top 25%", scrub: 1.2 } });
 
   // ---------- Inhalte steigen sanft auf ----------
   if (!reduced) {
