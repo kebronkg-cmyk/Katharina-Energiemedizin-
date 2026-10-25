@@ -63,7 +63,7 @@
   });
 
   // ---------- Navigation: ruhig durch den Himmel gleiten ----------
-  document.querySelectorAll('.bar a[href^="#"], .rose a, .onward a').forEach(function (a) {
+  document.querySelectorAll('.bar a[href^="#"], .rose a, .gate').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var target = document.querySelector(a.getAttribute("href"));
       if (!target) return;

@@ -78,6 +78,8 @@ ERASE = {
 UPSCALE = {
     "portrait-willkommen.webp": 2,
     "portrait-ueber-mich.webp": 2,
+    "gemaelde-fiesta.webp": 2,
+    "gemaelde-amigos.webp": 2,
 }
 
 
