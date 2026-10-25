@@ -23,7 +23,7 @@ from PIL import Image, ImageEnhance
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
-OUT = ROOT / "site" / "img"
+OUT = ROOT / "img"
 PREVIEW = ROOT / "tools" / "preview.html"
 
 MAX_WIDTH = 1600
@@ -129,7 +129,7 @@ def write_preview(results):
                 f'<p class="warn">Nur {w} px breit – nur klein verwenden (Kreis, Karte, Akzent).</p>'
                 if w < MIN_SHARP_WIDTH else ""
             )
-            body = f'<img src="../site/img/{dst}" alt=""><p>{w} × {h} px</p>{warn}'
+            body = f'<img src="../img/{dst}" alt=""><p>{w} × {h} px</p>{warn}'
         cards.append(
             f"<figure><figcaption><b>{dst}</b><br><small>aus raw/{src}</small></figcaption>{body}</figure>"
         )
@@ -150,7 +150,7 @@ def write_preview(results):
 <h1>Kontrolle der Bildausschnitte</h1>
 <p>Prüfen: kein eingebrannter Text, kein Logo, kein schwarzer Rand. Sonst Werte in <code>tools/crop.py</code> anpassen und neu schneiden.</p>
 <h2>Logo-Vergleich: Nachbau (SVG) und Original</h2>
-<div class="logos"><img src="../site/img/logo-mark.svg" alt="Nachbau"><img src="../site/img/logo-original.webp" alt="Original"></div>
+<div class="logos"><img src="../img/logo-mark.svg" alt="Nachbau"><img src="../img/logo-original.webp" alt="Original"></div>
 <div class="grid">
 {chr(10).join(cards)}
 </div>

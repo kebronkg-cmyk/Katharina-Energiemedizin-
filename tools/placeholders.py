@@ -1,7 +1,7 @@
 """Legt ruhige Platzhalterbilder für noch fehlende Ausschnitte an.
 
 Aufruf:  python3 tools/placeholders.py
-Nur Dateien, die in site/img/ noch nicht existieren, werden erzeugt.
+Nur Dateien, die in img/ noch nicht existieren, werden erzeugt.
 Sobald tools/crop.py mit den echten Postern läuft, werden sie überschrieben.
 """
 from pathlib import Path
@@ -9,7 +9,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "site" / "img"
+OUT = ROOT / "img"
 
 # Ziel -> (Breite, Höhe), grob nach den Zuschnitten aus crop.py
 SIZES = {

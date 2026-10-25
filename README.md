@@ -5,7 +5,7 @@ Statische Website für Katharina (Energiearbeit & Verkörperung). Reines HTML/CS
 ## Aufbau
 
 ```
-site/                  wird veröffentlicht (netlify.toml → publish = "site")
+(Hauptordner)           wird veröffentlicht – GitHub Pages und Netlify
   index.html           Startseite (die Reise in vier Kapiteln)
   begleitungen/        alle sieben Begleitungen mit Ankern
   ablauf-preise/       Ablauf, Mesa, Ort, Preise, FAQ
@@ -24,9 +24,9 @@ tools/
 raw/                   Originaldateien (nicht im Git, siehe .gitignore)
 ```
 
-Lokal ansehen: `cd site && python3 -m http.server 8000`, dann http://localhost:8000 öffnen.
+Lokal ansehen: `python3 -m http.server 8000`, dann http://localhost:8000 öffnen.
 
-Alle Links sind relativ, daher läuft die Seite auf Netlify und auf GitHub Pages (Unterpfad). GitHub Pages wird über `.github/workflows/pages.yml` veröffentlicht. Hinweis: Das Kontaktformular (Netlify Forms) funktioniert nur auf Netlify, nicht auf GitHub Pages.
+Alle Links sind relativ, daher läuft die Seite auf Netlify und auf GitHub Pages (Unterpfad). GitHub Pages veröffentlicht den Hauptordner dieses Zweigs direkt („Deploy from a branch“, `.nojekyll` schaltet Jekyll ab). Hinweis: Das Kontaktformular (Netlify Forms) funktioniert nur auf Netlify, nicht auf GitHub Pages.
 
 ## Logo
 
@@ -38,7 +38,7 @@ python3 tools/logo_raster.py raw/logo-screenshot.png
 
 Das erzeugt `logo.webp` (komplett), `logo-mark.webp` (Spiralen), `logo-schriftzug.webp` und `logo-original.webp` (unverändert). Header = Spiralen + Schriftzug, Hero und Footer = komplettes Logo. Das Favicon ist ein Vektor-Nachbau der Spiralen (`tools/logo.py`).
 
-**Sobald Katharina die Originaldatei (SVG/PDF/PNG in hoher Auflösung) liefert:** diese Dateien in `site/img/` ersetzen.
+**Sobald Katharina die Originaldatei (SVG/PDF/PNG in hoher Auflösung) liefert:** diese Dateien in `img/` ersetzen.
 
 ## Bilder aus den Postern
 
@@ -46,14 +46,14 @@ Das erzeugt `logo.webp` (komplett), `logo-mark.webp` (Spiralen), `logo-schriftzu
 2. `pip install Pillow && python3 tools/crop.py`
 3. `tools/preview.html` im Browser öffnen und prüfen: **kein Text, kein Logo, kein Rand** im Ausschnitt. Sonst Werte in `CROPS` (in `tools/crop.py`) anpassen und neu schneiden.
 
-Bis dahin liegen beschriftete Platzhalter in `site/img/` (`tools/placeholders.py`). Sie werden von `crop.py` überschrieben.
+Bis dahin liegen beschriftete Platzhalter in `img/` (`tools/placeholders.py`). Sie werden von `crop.py` überschrieben.
 
 ## Platzhalter im Text
 
 Alles, was noch von Katharina kommen muss, steht in `[ECKIGEN KLAMMERN]` und ist auf der Seite gelb hinterlegt (CSS-Klasse `.ph`). Suchen mit:
 
 ```
-grep -rn 'class="ph"' site
+grep -rn 'class="ph"' --include=*.html .
 ```
 
 ## Vor dem Livegang

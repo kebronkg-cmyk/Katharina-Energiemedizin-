@@ -1,9 +1,9 @@
 """Erzeugt die Bildmarke als Vektor (vier Spiralarme, um 90° rotiert).
 
 Aufruf:  python3 tools/logo.py
-Ausgabe: site/img/logo-mark.svg und site/favicon.svg
+Ausgabe: img/logo-mark.svg und favicon.svg
 
-Nachbau des Originallogos (site/img/logo.webp): Jeder Arm beginnt im
+Nachbau des Originallogos (img/logo.webp): Jeder Arm beginnt im
 Mittelpunkt, steigt auf und rollt sich im Uhrzeigersinn ein. Der Strich
 ist zur Mitte hin kräftig und läuft in der Spirale fein aus. Die drei
 anderen Arme sind dieselbe Form, um 90°, 180° und 270° gedreht.
@@ -93,6 +93,6 @@ def svg(w_start, w_end, title=True, weave=True):
 
 
 if __name__ == "__main__":
-    (ROOT / "site/img/logo-mark.svg").write_text(svg(4.0, 1.1))
-    (ROOT / "site/favicon.svg").write_text(svg(7, 2.8, title=False, weave=False))
+    (ROOT / "img/logo-mark.svg").write_text(svg(4.0, 1.1))
+    (ROOT / "favicon.svg").write_text(svg(7, 2.8, title=False, weave=False))
     print("logo-mark.svg und favicon.svg geschrieben")

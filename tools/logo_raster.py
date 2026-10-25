@@ -4,10 +4,10 @@ Aufruf:  python3 tools/logo_raster.py [raw/logo-screenshot.png]
 
 Sucht die helle Logo-Fläche zwischen den schwarzen Screenshot-Rändern,
 macht den cremefarbenen Hintergrund transparent und speichert:
-  site/img/logo.webp             komplettes Logo (Bildmarke, Schriftzug, Zeile, Bogen)
-  site/img/logo-mark.webp        nur die vier Spiralen
-  site/img/logo-schriftzug.webp  nur „Weg der vier Winde“
-  site/img/logo-original.webp    unveränderter Ausschnitt zum Vergleich
+  img/logo.webp             komplettes Logo (Bildmarke, Schriftzug, Zeile, Bogen)
+  img/logo-mark.webp        nur die vier Spiralen
+  img/logo-schriftzug.webp  nur „Weg der vier Winde“
+  img/logo-original.webp    unveränderter Ausschnitt zum Vergleich
 
 Sobald Katharina eine Vektordatei oder ein hochaufgelöstes Logo liefert,
 diese Dateien einfach durch die neuen ersetzen.
@@ -18,7 +18,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "site" / "img"
+OUT = ROOT / "img"
 
 # Teilbereiche in % des Logo-Ausschnitts (x von, y von, x bis, y bis)
 PARTS = {
