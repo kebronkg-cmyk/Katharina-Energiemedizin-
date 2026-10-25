@@ -322,13 +322,13 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 @media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } .pair > div:last-child { margin-top: 14vh; } }
 .steps { list-style: none; padding: 0; margin: 3vh 0 0; }
 .steps li { display: grid; grid-template-columns: 52px 1fr; gap: 2px 14px; padding: 16px 0; border-top: 1px solid rgba(176, 138, 76, .35); font-size: 1rem; }
-.steps span { grid-row: span 2; font-family: var(--serif); font-style: italic; font-size: 2rem; color: var(--gold); line-height: 1; }
+.steps .step-no { grid-row: span 2; font-family: var(--serif); font-style: italic; font-size: 2rem; color: var(--gold); line-height: 1; }
 .steps b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--earth); }
 
 .prices-wrap { width: min(1120px, 100%); margin-inline: auto; text-align: center; }
 .prices { display: grid; gap: 22px; margin-top: 4vh; }
 @media (min-width: 900px) { .prices { grid-template-columns: repeat(3, 1fr); align-items: end; } .price--featured { padding-top: 104px; } }
-.price-name { font-family: var(--serif); font-size: 1.75rem; color: var(--earth); margin-bottom: .1em; }
+.price-name { font-family: var(--serif); font-size: clamp(1.45rem, 2.1vw, 1.75rem); line-height: 1.2; color: var(--earth); margin-bottom: .3em; hyphens: manual; }
 .price-meta { font-size: .74rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); }
 .price-amount { font-family: var(--serif); font-size: 3.3rem; line-height: 1; color: var(--earth); margin: .2em 0 .5em; }
 .price p:last-child { font-size: .98rem; }
@@ -355,7 +355,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .wind--dark .gate-text small, .wind--dark .gate-text::after { color: var(--gold-light); }
 
 /* Platzhalter, die Katharina noch füllt */
-.ph { background: rgba(255, 236, 180, .75); color: #5E4300; padding: 0 .3em; border-radius: 3px; font-style: normal; text-shadow: none; }
+.ph { font: inherit; color: inherit; }
 .textlink { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--earth); text-decoration: none; border-bottom: 1px solid var(--gold); }
 .textlink:hover { color: var(--gold-deep); }
 .prices-fine { margin-top: 1vh; font-size: .82rem; color: var(--earth); }
@@ -452,3 +452,5 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .timeline li::before { content: ""; position: absolute; left: 5px; top: .55em; width: 11px; height: 11px; transform: rotate(45deg); background: var(--cream); border: 1px solid var(--gold); }
 .timeline .year { display: block; font-family: var(--serif); font-size: 1.35rem; color: var(--earth); }
 .page-head > .meet-mark { width: 84px; }
+/* Nebel rechts bis an den Bildrand führen (neben der Windrose) */
+@media (min-width: 861px) { .wind .fog--right::before { right: calc(-1 * max(var(--pad), 110px) - 2px); } }
