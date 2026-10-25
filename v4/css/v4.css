@@ -463,6 +463,8 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
   /* Hochformat-Gemälde: mittig, Wirbel-Zoom auf die Lichtöffnung */
   .sky-layer img { object-position: 50% 50%; }
   .sky-layer[data-scene="mitte"] img { transform-origin: 50% 40%; }
+  /* etwas näher heran, Mittelpunkt auf Höhe der Krafttiere */
+  .sky-layer { scale: 1.18; transform-origin: 50% 40%; }
   /* Tiername und Einleitung in die untere Bildhälfte, das Tier oben bleibt frei */
   .wind-head { justify-content: flex-end; padding: 52vh 0 7vh; }
   .wind-head::before { inset: 40% -40% -5%; }
