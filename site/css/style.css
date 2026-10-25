@@ -464,3 +464,21 @@ h1 em, h2 em, h3 em, h4 em { font-style: italic; }
   .card, .btn { transition: none; }
   .card:hover { transform: none; }
 }
+
+/* ---------- Bildgrößen nach Auflösung der Poster-Ausschnitte ----------
+   Die Ausschnitte sind teils nur 400–600 px breit: nie größer ziehen,
+   als sie scharf sind. Bildausschnitt (object-position) je Motiv. */
+.media--natural img { aspect-ratio: auto; object-fit: contain; }
+.media--hero { max-width: 440px; justify-self: center; }
+.media--medium { max-width: 440px; justify-self: center; }
+.media--eisberg { max-width: 360px; justify-self: center; }
+.media--about { max-width: 240px; }
+.media img[src$="portrait-weide.webp"] { object-position: 50% 22%; }
+.media img[src$="portrait-weide-ganz.webp"] { object-position: 60% 50%; }
+.media img[src$="gemaelde.webp"] { object-position: 50% 60%; }
+.media img[src$="portrait-tiefe.webp"] { object-position: 50% 30%; }
+/* Eisberg-Grafik weich in den dunklen Abschnitt auslaufen lassen */
+.media--eisberg img {
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+}

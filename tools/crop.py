@@ -37,19 +37,24 @@ BLACK_SHARE = 0.97
 # (Poster, Ziel, x von, x bis, y von, y bis, KI-Bild?)
 # Werte in % nach dem Entfernen der schwarzen Ränder.
 CROPS = [
-    ("willkommen.jpg", "portrait-willkommen.webp", 46, 100, 0, 100, False),
-    ("mut-zur-tiefe.jpg", "portrait-tiefe.webp", 52, 100, 14, 70, False),
-    ("energetische-arbeit.jpg", "portrait-weide.webp", 54, 100, 0, 100, False),
-    ("landkarte-arbeit.jpg", "portrait-weide-ganz.webp", 60, 100, 15, 100, False),
+    # Ausschnitte an den gelieferten Postern ausgemessen
+    ("willkommen.jpg", "portrait-willkommen.webp", 53, 100, 0, 100, False),
+    ("mut-zur-tiefe.jpg", "portrait-tiefe.webp", 58, 100, 21.5, 68, False),
+    # Eisberg-Grafik aus „Mut zur Tiefe“, bis ein eigenes Eisberg-Poster da ist
+    ("mut-zur-tiefe.jpg", "eisberg.webp", 15, 48, 28.3, 45.3, False),
+    ("energetische-arbeit.jpg", "portrait-weide.webp", 57, 100, 0, 97.5, False),
+    ("landkarte-arbeit.jpg", "portrait-weide-ganz.webp", 61, 100, 23, 99, False),
+    # vorläufiges Porträt aus „Herzlich willkommen“, bis „Über mich“ da ist
+    ("willkommen.jpg", "portrait-ueber-mich.webp", 63, 88, 6, 47.5, False),
     ("ueber-mich-persoenlich.jpg", "portrait-ueber-mich.webp", 2, 22, 23, 71, False),
     ("eisberg.jpg", "eisberg.webp", 22, 78, 34, 68, True),
     ("schamanisch-einzigartig.jpg", "trommel.webp", 50, 100, 0, 47, True),
     ("heilung.jpg", "passionsblume.webp", 56, 100, 30, 85, True),
-    ("natur.jpg", "weide-natur.webp", 45, 100, 0, 100, True),
+    ("natur.jpg", "weide-natur.webp", 46, 100, 0, 100, True),
     ("mesa.jpg", "mesa.webp", 0, 100, 58, 83, False),
-    ("klaerung.jpg", "klaerung.webp", 0, 100, 70, 91, False),
+    ("klaerung.jpg", "klaerung.webp", 0, 100, 66, 90.5, True),
     ("kreativ.jpg", "kreativ.webp", 5, 42, 18, 98, True),
-    ("alles-ist-energie.jpg", "gemaelde.webp", 46, 100, 0, 100, False),
+    ("alles-ist-energie.jpg", "gemaelde.webp", 54, 100, 0, 79, False),
     ("cord-cutting.jpg", "seil.webp", 0, 100, 12, 40, True),
     ("seelenanteile.jpg", "feder.webp", 48, 70, 15, 33, True),
     ("logo-seite.jpg", "landschaft.webp", 0, 100, 60, 100, True),
