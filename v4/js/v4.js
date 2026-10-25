@@ -36,7 +36,7 @@
       gsap.fromTo(el.querySelector("img"), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true } });
     }
   });
-  gsap.to(".sky-dawn", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#schritt", start: "top bottom", end: "top 25%", scrub: true } });
+  gsap.to(".sky-dawn", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#fragen", start: "top bottom", end: "top 25%", scrub: true } });
 
   // ---------- Inhalte steigen sanft auf ----------
   if (!reduced) {
@@ -62,7 +62,7 @@
   });
 
   // ---------- Navigation: ruhig durch den Himmel gleiten ----------
-  document.querySelectorAll('.bar a[href^="#"], .rose a, .gate').forEach(function (a) {
+  document.querySelectorAll('.bar a[href^="#"], .rose a, .gate, main a.btn[href^="#"], .foot a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var target = document.querySelector(a.getAttribute("href"));
       if (!target) return;
