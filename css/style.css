@@ -469,10 +469,11 @@ h1 em, h2 em, h3 em, h4 em { font-style: italic; }
    Die Ausschnitte sind teils nur 400–600 px breit: nie größer ziehen,
    als sie scharf sind. Bildausschnitt (object-position) je Motiv. */
 .media--natural img { aspect-ratio: auto; object-fit: contain; }
-.media--hero { max-width: 440px; justify-self: center; }
+.media--hero { max-width: 460px; justify-self: center; }
 .media--medium { max-width: 440px; justify-self: center; }
 .media--eisberg { max-width: 340px; justify-self: center; }
-.media--about { max-width: 240px; }
+.media--about { max-width: 280px; }
+.media--circle { max-width: 240px; justify-self: center; }
 .media img[src$="portrait-weide.webp"] { object-position: 50% 22%; }
 .media img[src$="portrait-weide-ganz.webp"] { object-position: 60% 50%; }
 .media img[src$="gemaelde.webp"] { object-position: 50% 60%; }

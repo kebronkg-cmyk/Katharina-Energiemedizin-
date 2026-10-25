@@ -19,7 +19,7 @@ import html
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
@@ -38,7 +38,8 @@ BLACK_SHARE = 0.97
 # Werte in % nach dem Entfernen der schwarzen Ränder.
 CROPS = [
     # Ausschnitte an den gelieferten Postern ausgemessen
-    ("willkommen.jpg", "portrait-willkommen.webp", 53, 100, 0, 100, False),
+    # Katharina komplett (beide Arme) aus dem Video „Herzlich willkommen“
+    ("willkommen-video.png", "portrait-willkommen.webp", 46.5, 100, 0, 98.6, False),
     ("mut-zur-tiefe.jpg", "portrait-tiefe.webp", 58, 100, 21.5, 68, False),
     # Eisberg aus dem Poster „Sichtbar ist nur die Spitze“ (Video-Frame)
     ("eisberg-video.png", "eisberg.webp", 49.5, 99, 17, 73, False),
@@ -47,8 +48,8 @@ CROPS = [
     ("fantasie-video.png", "gemaelde-amigos.webp", 49.7, 95.0, 58.5, 85.1, False),
     ("energetische-arbeit.jpg", "portrait-weide.webp", 57, 100, 0, 97.5, False),
     ("landkarte-arbeit.jpg", "portrait-weide-ganz.webp", 61, 100, 23, 99, False),
-    # vorläufiges Porträt aus „Herzlich willkommen“, bis „Über mich“ da ist
-    ("willkommen.jpg", "portrait-ueber-mich.webp", 63, 88, 6, 47.5, False),
+    # rundes Porträt, mittig auf das Gesicht (Video „Herzlich willkommen“)
+    ("willkommen-video.png", "portrait-ueber-mich.webp", 53.5, 85.4, 0, 56.1, False),
     ("ueber-mich-persoenlich.jpg", "portrait-ueber-mich.webp", 2, 22, 23, 71, False),
     ("schamanisch-einzigartig.jpg", "trommel.webp", 50, 100, 0, 47, True),
     ("heilung.jpg", "passionsblume.webp", 56, 100, 30, 85, True),
@@ -67,7 +68,16 @@ CROPS = [
 # der sich nicht wegschneiden lässt, ohne das Motiv zu kappen. Sie werden
 # aus ihrem Rand heraus aufgefüllt (siehe erase).
 ERASE = {
+    "portrait-willkommen.webp": [(0, 4, 6, 58)],  # Zeilenenden der Postertexte am linken Rand
     "eisberg.webp": [(0, 0, 30, 13.5)],  # Schwung von „Spitze“ neben der Eisbergspitze
+}
+
+
+# Kleine Ausschnitte, die groß gezeigt werden: hochwertig vergrößern und
+# leicht nachschärfen, damit sie auf hochauflösenden Displays klar wirken.
+UPSCALE = {
+    "portrait-willkommen.webp": 2,
+    "portrait-ueber-mich.webp": 2,
 }
 
 
@@ -149,6 +159,10 @@ def crop_one(src, dst, x0, x1, y0, y1, ai):
     if dst in ERASE:
         img = erase(img, ERASE[dst])
     img = warm(img, ai)
+    if dst in UPSCALE:
+        f = UPSCALE[dst]
+        img = img.resize((img.width * f, img.height * f), Image.LANCZOS)
+        img = img.filter(ImageFilter.UnsharpMask(radius=2, percent=70, threshold=2))
     if img.width > MAX_WIDTH:
         img = img.resize((MAX_WIDTH, round(img.height * MAX_WIDTH / img.width)), Image.LANCZOS)
     img.save(OUT / dst, "WEBP", quality=QUALITY, method=6)
