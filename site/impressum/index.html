@@ -7,16 +7,20 @@
   <meta name="robots" content="noindex">
   <meta name="description" content="Impressum der Website Weg der vier Winde.">
   <meta name="theme-color" content="#F4EBDD">
-  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="../../fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../../fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/v4.css">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/v6.css">
+  <script src="../v3/js/vendor/gsap.min.js" defer></script>
+  <script src="../v3/js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../v3/js/vendor/lenis.min.js" defer></script>
+  <script src="../js/sub.js" defer></script>
 </head>
 <body class="sub">
   <a class="skip" href="#main">Zum Inhalt springen</a>
   <div class="sky" aria-hidden="true">
     <div class="sky-layer is-on" style="--focus: 50.5%">
-      <picture><source media="(max-width: 600px)" srcset="../../v3/img/szene-mitte-hoch.webp"><img src="../../v3/img/szene-mitte.webp" srcset="../../v3/img/szene-mitte-1280.webp 1280w, ../../v3/img/szene-mitte.webp 1584w" sizes="100vw" alt="" fetchpriority="high"></picture>
+      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-mitte-hoch.webp"><img src="../v3/img/szene-mitte.webp" srcset="../v3/img/szene-mitte-1280.webp 1280w, ../v3/img/szene-mitte.webp 1584w" sizes="100vw" alt="" fetchpriority="high"></picture>
     </div>
     <div class="sky-mist"></div>
     <div class="sky-veil" style="opacity: .85"></div>
@@ -24,17 +28,35 @@
 
   <header class="bar">
     <a class="bar-brand" href="../" aria-label="Weg der vier Winde, zur Startseite">
-      <img src="../../img/logo-mark.webp" alt="" width="321" height="275">
-      <img class="bar-word" src="../../img/logo-schriftzug.webp" alt="Weg der vier Winde" width="1044" height="152">
+      <img src="../img/logo-mark.webp" alt="" width="321" height="275">
+      <img class="bar-word" src="../img/logo-schriftzug.svg" alt="Weg der vier Winde" width="1070" height="161">
     </a>
-    <nav class="bar-nav" aria-label="Die vier Winde">
-      <a href="../#sueden">Süden</a>
-      <a href="../#westen">Westen</a>
-      <a href="../#norden">Norden</a>
-      <a href="../#osten">Osten</a>
+    <nav class="bar-nav" aria-label="Hauptnavigation">
+      <a href="../#kompass">Das Medizinrad</a>
+      <a href="../#begleitungen">Begleitungen</a>
+      <a href="../#preise">Preise</a>
+      <a href="../ueber-mich/">Über mich</a>
     </nav>
     <a class="btn btn--ghost bar-cta" href="../#kennenlernen">Kennenlernen</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
   </header>
+
+  <nav id="menu" class="menu" aria-label="Menü" hidden>
+    <div class="menu-inner">
+      <a class="menu-main" href="../#kompass">Das Medizinrad</a>
+      <ul class="menu-winds">
+        <li><a href="../#sueden"><img src="../v3/img/medaillon-sueden.webp" alt="" width="640" height="640"><span><b>1 · Süden</b>Loslassen</span></a></li>
+        <li><a href="../#westen"><img src="../v3/img/medaillon-westen.webp" alt="" width="640" height="640"><span><b>2 · Westen</b>Tiefer schauen</span></a></li>
+        <li><a href="../#norden"><img src="../v3/img/medaillon-norden.webp" alt="" width="640" height="640"><span><b>3 · Norden</b>Lebensfreude</span></a></li>
+        <li><a href="../#osten"><img src="../v3/img/medaillon-osten.webp" alt="" width="640" height="640"><span><b>4 · Osten</b>Neu beginnen</span></a></li>
+      </ul>
+      <a class="menu-main" href="../#begleitungen">Begleitungen</a>
+      <a class="menu-main" href="../#preise">Preise</a>
+      <a class="menu-main" href="../ueber-mich/">Über mich</a>
+      <a class="menu-main" href="../#fragen">Häufige Fragen</a>
+      <a class="btn btn--solid menu-cta" href="../#kennenlernen">Kennenlernen</a>
+    </div>
+  </nav>
 
   <main id="main">
     <section class="page-head">
@@ -63,7 +85,8 @@
     <p class="foot-note">Meine Arbeit ist eine energetische und körperorientierte Begleitung. Sie ersetzt keine ärztliche, psychotherapeutische oder heilpraktische Diagnose oder Behandlung. Ich stelle keine Diagnosen und gebe keine Heilversprechen. Bitte setze ärztlich verordnete Behandlungen oder Medikamente nicht eigenständig ab.</p>
     <nav class="foot-nav" aria-label="Weitere Seiten">
       <a href="../">Startseite</a>
-      <a href="../mein-weg/">Mein Weg</a>
+      <a href="../ueber-mich/">Über mich</a>
+      <a href="../#begleitungen">Begleitungen</a>
       <a href="../#fragen">Häufige Fragen</a>
       <a href="../#kennenlernen">Kennenlernen</a>
       <a href="../impressum/">Impressum</a>

@@ -3,13 +3,13 @@
    Medizinrad, Begleitungen zum Aufklappen, Seitenfenster, Wegweiser
    und Windübergänge. */
 
-@font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
-@font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-300-normal.woff2") format("woff2"); font-weight: 300; font-display: swap; }
-@font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-500-normal.woff2") format("woff2"); font-weight: 500 600; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("../fonts/bodoni-moda-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("../fonts/jost-latin-300-normal.woff2") format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("../fonts/jost-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("../fonts/jost-latin-500-normal.woff2") format("woff2"); font-weight: 500 600; font-display: swap; }
 
 :root {
   --cream: #FBF6EC;
@@ -161,7 +161,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .wind-dir { font-size: .72rem; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: .5rem; }
 .wind-name { font-size: clamp(3.4rem, 9vw, 7.4rem); font-style: italic; line-height: .95; margin: 0 0 .12em; }
 .wind-theme { font-size: clamp(1.45rem, 2.6vw, 2.1rem); margin: 0 0 1.6rem; }
-.wind-theme::after { content: ""; display: block; width: 190px; height: 24px; margin-top: 12px; background: url("../../img/ornament.svg") left center / contain no-repeat; }
+.wind-theme::after { content: ""; display: block; width: 190px; height: 24px; margin-top: 12px; background: url("../img/ornament.svg") left center / contain no-repeat; }
 .wind-head .lead { max-width: 24em; }
 .wind-head .soft { max-width: 30em; }
 
@@ -194,7 +194,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
   mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
 }
 .band-inner { position: relative; width: min(1120px, 100%); margin: 0 auto; text-align: center; }
-.band-inner::before { content: ""; display: block; width: 260px; max-width: 70%; height: 28px; margin: 0 auto 4vh; background: url("../../img/ornament.svg") center / contain no-repeat; }
+.band-inner::before { content: ""; display: block; width: 260px; max-width: 70%; height: 28px; margin: 0 auto 4vh; background: url("../img/ornament.svg") center / contain no-repeat; }
 .band-inner--text { width: min(980px, 100%); }
 .band-lede { width: min(680px, 100%); margin: 0 auto 4vh; }
 .wind--dark .band::before { background: linear-gradient(to bottom, rgba(21, 17, 26, 0), rgba(21, 17, 26, .75) 24%, rgba(21, 17, 26, .75) 76%, rgba(21, 17, 26, 0)); }
@@ -230,7 +230,7 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .wind--dark .fog::before { background: linear-gradient(to left, rgba(21, 17, 26, .86), rgba(21, 17, 26, .78) 62%, rgba(21, 17, 26, 0)); }
 @media (max-width: 760px) { .fog::before, .fog--right::before { left: calc(-1 * var(--pad)); right: calc(-1 * var(--pad)); } }
 .fog-inner > :last-child { margin-bottom: 0; }
-.fog .ornament { width: 220px; height: 26px; margin: 7vh 0; background: url("../../img/ornament.svg") left center / contain no-repeat; }
+.fog .ornament { width: 220px; height: 26px; margin: 7vh 0; background: url("../img/ornament.svg") left center / contain no-repeat; }
 .entry h3 { font-size: clamp(1.7rem, 2.6vw, 2.2rem); }
 .portrait { width: 150px; margin: 0 0 4vh; }
 .portrait img { aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--cream); outline: 1px solid var(--gold); outline-offset: 6px; }
@@ -751,7 +751,7 @@ p, li { text-wrap: pretty; }
   box-shadow: -40px 0 80px -40px rgba(20, 12, 8, .6);
   transform: translateX(104%); transition: transform .7s cubic-bezier(.2, .8, .2, 1);
 }
-.sheet-panel::before { content: ""; display: block; width: 220px; height: 26px; margin: 0 auto 22px; background: url("../../img/ornament.svg") center / contain no-repeat; }
+.sheet-panel::before { content: ""; display: block; width: 220px; height: 26px; margin: 0 auto 22px; background: url("../img/ornament.svg") center / contain no-repeat; }
 .sheet.is-open .sheet-backdrop { opacity: 1; }
 .sheet.is-open .sheet-panel { transform: none; }
 .sheet-close { position: absolute; top: 18px; right: 18px; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gold); cursor: pointer; background: linear-gradient(var(--earth), var(--earth)) center / 16px 1px no-repeat, linear-gradient(var(--earth), var(--earth)) center / 1px 16px no-repeat, var(--cream); rotate: 45deg; transition: background-color .3s ease; }
@@ -886,7 +886,7 @@ p, li { text-wrap: pretty; }
 .menu[hidden] { display: none; }
 .menu.is-open { opacity: 1; }
 .menu-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 100%; padding: 104px var(--pad) 48px; text-align: center; }
-.menu-inner::before { content: ""; width: 200px; height: 24px; margin-bottom: 14px; background: url("../../img/ornament.svg") center / contain no-repeat; }
+.menu-inner::before { content: ""; width: 200px; height: 24px; margin-bottom: 14px; background: url("../img/ornament.svg") center / contain no-repeat; }
 .menu-main { display: inline-flex; align-items: center; min-height: 52px; font-family: var(--serif); font-size: 1.75rem; color: var(--earth); text-decoration: none; }
 .menu-main:hover { color: var(--gold-deep); }
 .menu-winds { list-style: none; padding: 0; margin: 6px 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(380px, 100%); }
@@ -916,7 +916,7 @@ p, li { text-wrap: pretty; }
 .welcome-copy :is(h2, p) { text-shadow: var(--glow-light); }
 .welcome-title { font-size: clamp(3rem, 6.4vw, 5.6rem); line-height: 1; margin-bottom: .2em; }
 .welcome-title em { display: block; padding-left: .6em; }
-.welcome-orn { display: block; width: 240px; height: 26px; margin: 0 0 1.6rem; background: url("../../img/ornament.svg") left center / contain no-repeat; }
+.welcome-orn { display: block; width: 240px; height: 26px; margin: 0 0 1.6rem; background: url("../img/ornament.svg") left center / contain no-repeat; }
 .welcome-copy .aside { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
 .welcome-sign { margin: 1.4rem 0 .2rem; font-family: var(--serif); font-style: italic; font-size: 1.9rem; color: var(--gold-deep); }
 
