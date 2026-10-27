@@ -1254,3 +1254,21 @@ html:not(.js) .bloom-stage { position: relative; }
   50%  { translate: 0.6% -0.8%; scale: 1.08; }
   100% { translate: 1.5% 0.5%; scale: 1.05; }
 }
+
+/* =====================================================================
+   v10: Blüte freigestellt, kleiner, kürzere Strecke; Adler am Handy
+   ===================================================================== */
+.bloom-scroll { height: 190vh; }
+.bloom-stage { grid-template-columns: auto auto; justify-content: center; gap: 0 clamp(32px, 5vw, 90px); }
+.bloom-view { width: min(440px, 34vw); height: auto; aspect-ratio: 1; }
+.bloom-canvas { -webkit-mask-image: none; mask-image: none; }
+@media (max-width: 760px) {
+  .bloom-scroll { height: 175vh; }
+  .bloom-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; justify-content: stretch; gap: 3vh; }
+  .bloom-view { width: min(300px, 72vw); justify-self: center; }
+  .bloom-copy { min-height: 13.5em; }
+}
+/* Adler am Handy: Bild, Text, Bild */
+@media (max-width: 899px) { #osten .side-photo-art { order: 2; } }
+.bloom-scroll { height: 165vh; }
+@media (max-width: 760px) { .bloom-scroll { height: 150vh; } }

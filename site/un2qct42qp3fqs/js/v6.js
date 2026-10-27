@@ -96,16 +96,16 @@
     var wrap = document.querySelector(".bloom-scroll");
     if (!wrap) return;
     var canvas = wrap.querySelector(".bloom-canvas"), ctx = canvas.getContext("2d");
-    var COUNT = 144;
+    var COUNT = +wrap.dataset.frames || 95;
     var small = window.matchMedia("(max-width: 760px)").matches;
-    var dir = "../assets/bloom-frames/" + (small ? "720" : "1080") + "/f";
-    var frames = new Array(COUNT), loaded = 0, started = false, current = 0, drawn = -1, queued = false;
+    var dir = "../assets/bloom-frames/" + (small ? "480" : "880") + "/f";
+    var frames = new Array(COUNT), started = false, pos = 0, shown = -1, queued = false;
     function src(i) { return dir + String(i + 1).padStart(3, "0") + ".webp"; }
     function load(i) {
       return new Promise(function (res) {
         var img = new Image();
         img.decoding = "async";
-        img.onload = function () { frames[i] = img; loaded++; res(); if (i === current || drawn < 0) request(); };
+        img.onload = function () { (img.decode ? img.decode() : Promise.resolve()).catch(function () {}).then(function () { frames[i] = img; request(); res(); }); };
         img.onerror = res;
         img.src = src(i);
       });
@@ -118,48 +118,57 @@
       function worker() { if (next >= COUNT) return Promise.resolve(); var i = next++; return load(i).then(worker); }
       for (var w = 0; w < 6; w++) worker();
     }
-    // Canvas in Gerätepixeln anlegen (scharf auf Retina), Inhalt wie object-fit: cover
+    // Canvas in Gerätepixeln (scharf auf Retina); die freigestellte Blüte wird ganz gezeigt
     function size() {
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       var w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
-      if (w && h && (canvas.width !== w || canvas.height !== h)) { canvas.width = w; canvas.height = h; drawn = -1; request(); }
+      if (w && h && (canvas.width !== w || canvas.height !== h)) { canvas.width = w; canvas.height = h; ctx.imageSmoothingQuality = "high"; shown = -1; request(); }
     }
     function nearest(i) { for (var d = 0; d < COUNT; d++) { if (frames[i - d]) return frames[i - d]; if (frames[i + d]) return frames[i + d]; } return null; }
+    function put(img, alpha) {
+      var cw = canvas.width, ch = canvas.height, sc = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
+      var w = img.naturalWidth * sc, h = img.naturalHeight * sc;
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+    }
+    // zwischen zwei Bildern weich überblenden: die Bewegung wirkt flüssiger als die 18 Bilder pro Sekunde des Videos
     function draw() {
       queued = false;
-      var img = nearest(current);
-      if (!img || (drawn === current && frames[current])) return;
-      var cw = canvas.width, ch = canvas.height, iw = img.naturalWidth, ih = img.naturalHeight;
-      var sc = Math.max(cw / iw, ch / ih), w = iw * sc, h = ih * sc;
-      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-      drawn = frames[current] ? current : -1;
+      var i = Math.floor(pos), f = pos - i, a = frames[i] || nearest(i), b = frames[Math.min(i + 1, COUNT - 1)];
+      var key = Math.round(pos * 8);
+      if (!a || key === shown) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      put(a, 1);
+      if (b && b !== a && f > .02) put(b, f);
+      ctx.globalAlpha = 1;
+      shown = key;
     }
     function request() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
     window.addEventListener("resize", size);
     load(0).then(function () { size(); request(); });
-    // Rest erst laden, wenn die Blüte näher kommt
     if ("IntersectionObserver" in window) {
       var near = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { preloadAll(); near.disconnect(); } }, { rootMargin: "250% 0px" });
       near.observe(wrap);
     } else preloadAll();
 
     var steps = gsap.utils.toArray(".bloom-step", wrap);
-    if (reduced) { current = COUNT - 1; preloadAll(); return; }
+    if (reduced) { pos = COUNT - 1; preloadAll(); return; }
     var seq = { f: 0 };
-    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: .6 } });
-    tl.to(seq, { f: COUNT - 1, ease: "none", duration: 1, onUpdate: function () { var f = Math.round(seq.f); if (f !== current) { current = f; request(); } } }, 0)
-      .fromTo(".bloom-view", { scale: 1.08 }, { scale: 1, ease: "none", duration: 1 }, 0);
+    // die Blüte beginnt sich schon beim Hereinscrollen zu öffnen und ist offen, kurz bevor es weitergeht
+    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top 55%", end: "bottom bottom", scrub: .5 } });
+    tl.to(seq, { f: COUNT - 1, ease: "power1.inOut", duration: .94, onUpdate: function () { pos = seq.f; request(); } }, 0)
+      .fromTo(".bloom-view", { scale: .9 }, { scale: 1, ease: "none", duration: .94 }, 0)
+      .to({}, { duration: .06 }, .94);
     if (small) {
-      // am Handy: ein Textteil nach dem anderen
-      gsap.set(steps, { autoAlpha: 0, y: 16 });
-      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .1 }, .04).to(steps[0], { autoAlpha: 0, y: -16, duration: .08 }, .36)
-        .to(steps[1], { autoAlpha: 1, y: 0, duration: .1 }, .42).to(steps[1], { autoAlpha: 0, y: -16, duration: .08 }, .68)
-        .to(steps[2], { autoAlpha: 1, y: 0, duration: .1 }, .74);
+      gsap.set(steps, { autoAlpha: 0, y: 14 });
+      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .1 }, .12).to(steps[0], { autoAlpha: 0, y: -14, duration: .07 }, .42)
+        .to(steps[1], { autoAlpha: 1, y: 0, duration: .1 }, .47).to(steps[1], { autoAlpha: 0, y: -14, duration: .07 }, .7)
+        .to(steps[2], { autoAlpha: 1, y: 0, duration: .1 }, .75);
     } else {
-      gsap.set(steps, { autoAlpha: 0, y: 24 });
-      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .14 }, .02)
-        .to(steps[1], { autoAlpha: 1, y: 0, duration: .14 }, .34)
-        .to(steps[2], { autoAlpha: 1, y: 0, duration: .14 }, .66);
+      gsap.set(steps, { autoAlpha: 0, y: 22 });
+      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .14 }, .08)
+        .to(steps[1], { autoAlpha: 1, y: 0, duration: .14 }, .36)
+        .to(steps[2], { autoAlpha: 1, y: 0, duration: .14 }, .62);
     }
   })();
 
