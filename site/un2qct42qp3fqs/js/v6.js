@@ -39,10 +39,11 @@
   gsap.to(".sky-veil", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#willkommen", start: "top bottom", end: "top 30%", scrub: 1.2 } });
 
   // ---------- die vier Winde: Himmel wechselt die Stimmung ----------
+  var fades = [];
   winds.forEach(function (name) {
     var section = document.getElementById(name);
     var el = layer(name);
-    gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: 1.2 } });
+    fades.push(gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: 1.2 } }));
     if (!reduced) {
       gsap.fromTo(el.querySelector("img"), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 1.2 } });
     }
@@ -55,10 +56,9 @@
       gsap.from(el, { opacity: 0, y: 46, duration: 1.3, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
     });
     // Fotos und Gemälde schweben beim Scrollen leicht gegen die Bewegung
-    gsap.utils.toArray(".welcome-photo img, .energy-art img, .depth-art, .joy-photo, .eagle-clear").forEach(function (el) {
+    gsap.utils.toArray(".welcome-photo img, .energy-art img, .depth-art, .joy-photo, .side-photo-art, .head-photo").forEach(function (el) {
       gsap.fromTo(el, { yPercent: 5 }, { yPercent: -5, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.2 } });
     });
-    gsap.fromTo(".eagle-wide", { xPercent: -3 }, { xPercent: 3, ease: "none", scrollTrigger: { trigger: ".eagle-view", start: "top bottom", end: "bottom top", scrub: 1.2 } });
     // Mensch. Tier. Pflanze. … erscheinen nacheinander
     gsap.from(".energy-list span", { opacity: 0, y: 14, duration: .9, stagger: .22, ease: "power2.out", scrollTrigger: { trigger: ".energy-list", start: "top 85%", once: true } });
     // der Weg im Medizinrad zeichnet sich: Süden, Westen, Norden, Osten
@@ -68,7 +68,9 @@
     var petals = gsap.utils.toArray(".bloom-layer");
     var rings = gsap.utils.toArray(".bloom-ring");
     gsap.set(rings, { xPercent: -50, yPercent: -50, scale: .2, opacity: 0 });
-    gsap.timeline({ scrollTrigger: { trigger: ".bloom-flower", start: "top 88%", end: "center 42%", scrub: 1.4 } })
+    gsap.set(".bloom-flower", { xPercent: -50 });
+    gsap.timeline({ scrollTrigger: { trigger: ".nature", start: "top 92%", end: "top 30%", scrub: 1.4 } })
+      .fromTo(".bloom-flower", { yPercent: 78 }, { yPercent: 0, ease: "power1.out", duration: 2 }, 0)
       .fromTo(petals[0], { "--r": "0%", rotate: -70, scale: 1.3 }, { "--r": "34%", rotate: 0, scale: 1, ease: "power2.out", duration: 1 }, 0)
       .fromTo(petals[1], { "--r": "0%", rotate: -45, scale: 1.2 }, { "--r": "60%", rotate: 0, scale: 1, ease: "power2.out", duration: 1 }, .45)
       .fromTo(petals[2], { "--r": "0%", rotate: -25, scale: 1.12, filter: "blur(6px)" }, { "--r": "100%", rotate: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1.1 }, .9)
@@ -178,34 +180,44 @@
     })(t0);
   }
 
-  // ---------- Windübergang: der neue Himmel öffnet sich aus seiner Richtung ----------
+  // ---------- Windübergang: die Böe trägt die Seite fort, der echte Himmel öffnet sich ----------
   var busy = false;
   var main = document.querySelector("main");
-  function travel(name) {
+  // Deckkraft aller Himmel sofort auf den Stand der neuen Position setzen (kein Nachziehen, kein Flackern)
+  function settleSky() {
+    fades.forEach(function (tw) { var t = tw.scrollTrigger && tw.scrollTrigger.getTween(); if (t) t.progress(1); });
+  }
+  function travel(name, ox, oy) {
     var target = document.getElementById(name);
     if (!target || busy) return;
     if (reduced) { jumpTo(target); return; }
     busy = true;
     var v = blow[name];
-    var veil = document.createElement("div");
-    veil.className = "travel";
-    var sky = document.createElement("div");
-    sky.className = "travel-sky";
-    sky.style.backgroundImage = 'url("' + layer(name).querySelector("img").currentSrc + '")';
-    sky.style.backgroundPosition = (getComputedStyle(layer(name)).getPropertyValue("--focus").trim() || "50%") + " 50%";
-    sky.style.setProperty("--x", origin[name][0]); sky.style.setProperty("--y", origin[name][1]);
-    veil.appendChild(sky);
-    document.body.appendChild(veil);
-    gust(v, 2.4, veil);
+    var lay = layer(name), img = lay.querySelector("img");
+    lay.style.setProperty("--x", ox || origin[name][0]);
+    lay.style.setProperty("--y", oy || origin[name][1]);
+    lay.style.setProperty("--r", "0%");
+    lay.classList.add("is-opening");
+    gsap.set(lay, { opacity: 1 });
+    gust(v, 2.8);
     gsap.timeline()
-      // die Böe erfasst die Seite und trägt sie ein Stück mit
-      .to(main, { x: v[0] * 46, y: v[1] * 28, opacity: .55, duration: .8, ease: "power2.in" }, 0)
-      // der neue Himmel wirbelt weich und unscharf herein und wird klar
-      .fromTo(sky, { "--r": "0%", filter: "blur(24px)", scale: 1.24, rotate: (v[0] || -v[1]) * 4 },
-        { "--r": "175%", filter: "blur(0px)", scale: 1, rotate: 0, duration: 1.55, ease: "power2.inOut" }, .3)
-      .add(function () { jumpTo(target); gsap.set(main, { clearProps: "transform,opacity" }); }, 1.85)
-      .to(veil, { opacity: 0, duration: .9, ease: "power2.out" }, 1.95)
-      .add(function () { veil.remove(); busy = false; }, 2.9);
+      // die Böe erfasst die Seite und trägt sie fort
+      .to(main, { x: v[0] * 70, y: v[1] * 40, opacity: 0, filter: "blur(5px)", duration: .95, ease: "power2.in" }, 0)
+      // der neue Himmel weht aus seiner Richtung herein und wird klar
+      .to(lay, { "--r": "180%", duration: 1.7, ease: "power2.inOut" }, .2)
+      .fromTo(img, { filter: "blur(18px)" }, { filter: "blur(0px)", duration: 1.7, ease: "power2.out" }, .2)
+      // unsichtbar an die neue Stelle, der Himmel steht schon
+      .add(function () {
+        jumpTo(target);
+        settleSky();
+        lay.classList.remove("is-opening");
+        lay.style.removeProperty("--r");
+        img.style.filter = "";
+      }, 1.95)
+      // der Inhalt weht mit dem Wind herein
+      .fromTo(main, { x: -v[0] * 50, y: -v[1] * 30, opacity: 0, filter: "blur(5px)" },
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)", duration: 1.15, ease: "power3.out", clearProps: "transform,opacity,filter" }, 2.0)
+      .add(function () { busy = false; }, 3.1);
   }
   document.querySelectorAll("[data-travel]").forEach(function (a) {
     a.addEventListener("click", function (e) { e.preventDefault(); travel(a.dataset.travel); });
@@ -244,37 +256,12 @@
     });
   });
 
-  // ---------- Medizinrad: in die gewählte Wolke hineinfliegen ----------
-  var light = document.querySelector(".sky-light");
+  // ---------- Medizinrad: der Himmel öffnet sich aus dem angeklickten Medaillon ----------
   document.querySelectorAll(".wind-card").forEach(function (card) {
     card.addEventListener("click", function (e) {
-      var target = document.querySelector(card.getAttribute("href"));
-      if (!target) return;
       e.preventDefault();
-      if (reduced) { target.scrollIntoView(); return; }
-
-      var name = card.dataset.wind;
-      var medal = card.querySelector(".medal").getBoundingClientRect();
-      var src = layer(name).querySelector("img").currentSrc;
-      var focus = getComputedStyle(layer(name)).getPropertyValue("--focus").trim() || "50%";
-      var flight = document.createElement("div");
-      flight.className = "flight";
-      flight.style.backgroundImage = 'url("' + src + '")';
-      flight.style.backgroundPosition = focus + " 50%";
-      gsap.set(flight, { left: medal.left, top: medal.top, width: medal.width, height: medal.height });
-      document.body.appendChild(flight);
-      gust(blow[name], 2.2);
-
-      gsap.timeline({
-        onComplete: function () {
-          jumpTo(target);
-          gsap.timeline({ onComplete: function () { flight.remove(); } })
-            .to(flight, { opacity: 0, duration: .9, ease: "power2.out" }, .1)
-            .to(light, { opacity: 0, duration: 1.1, ease: "power2.out" }, 0);
-        }
-      })
-        .to(flight, { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight, borderRadius: 0, duration: 1.25, ease: "power3.inOut" })
-        .to(light, { opacity: .55, duration: .6, ease: "sine.in" }, .65);
+      var m = card.querySelector(".medal").getBoundingClientRect();
+      travel(card.dataset.wind, (m.left + m.width / 2) / window.innerWidth * 100 + "%", (m.top + m.height / 2) / window.innerHeight * 100 + "%");
     });
   });
 
