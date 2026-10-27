@@ -24,6 +24,23 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menuBtn.getAttribute("aria-expanded") === "true") setMenu(false); });
   }
 
+  // Galerie: Bild groß öffnen
+  var light = document.querySelector(".g-light");
+  if (light && light.showModal) {
+    var big = light.querySelector("img"), cap = light.querySelector(".g-cap"), from = null;
+    document.querySelectorAll(".g-open").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var img = btn.querySelector("img");
+        big.src = img.currentSrc || img.src; big.alt = img.alt;
+        cap.textContent = btn.parentElement.querySelector("figcaption").textContent;
+        from = btn; light.showModal();
+      });
+    });
+    function close() { light.close(); if (from) from.focus({ preventScroll: true }); }
+    light.querySelector(".g-close").addEventListener("click", close);
+    light.addEventListener("click", function (e) { if (e.target === light) close(); });
+  }
+
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -41,6 +58,15 @@
   gsap.utils.toArray(".welcome-photo img, .photos-one, .travel-photo").forEach(function (el) {
     gsap.fromTo(el, { yPercent: 6 }, { yPercent: -6, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.2 } });
   });
+
+  // Galerie: Bilder treiben beim Scrollen unterschiedlich schnell, das gibt Tiefe
+  if (window.matchMedia("(min-width: 761px)").matches) {
+    [[".g1", 10], [".g2", -8], [".g3", 14], [".g4", -6], [".g5", 12]].forEach(function (g) {
+      var el = document.querySelector(g[0]);
+      if (el) gsap.fromTo(el, { yPercent: g[1] }, { yPercent: -g[1], ease: "none", scrollTrigger: { trigger: ".gallery", start: "top bottom", end: "bottom top", scrub: 1.2 } });
+    });
+  }
+  gsap.fromTo(".gallery-sky", { yPercent: -6 }, { yPercent: 6, ease: "none", scrollTrigger: { trigger: ".gallery", start: "top bottom", end: "bottom top", scrub: true } });
 
   // die Passionsblume öffnet sich Schicht für Schicht
   var petals = gsap.utils.toArray(".bloom-layer");

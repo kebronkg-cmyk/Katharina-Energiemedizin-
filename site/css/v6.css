@@ -1407,3 +1407,81 @@ html:not(.js) .bloom-stage { position: relative; }
 /* zweites Bild näher an den Text darunter */
 .photos--flip { gap: 0 3vw; }
 @media (max-width: 899px) { .photos--flip .photos-one { margin-bottom: -6vh; } .photos--flip .fog { padding-top: 4vh; } }
+
+/* =====================================================================
+   Galerie „Aus dem Atelier“: eine Ausstellung im nächtlichen Traumhimmel
+   ===================================================================== */
+.gallery { position: relative; isolation: isolate; overflow: hidden; margin-inline: calc(-1 * var(--pad)); padding: 26vh var(--pad) 28vh; color: #F5EEE2;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.page-body > .gallery { margin-top: 6vh; }
+.gallery-sky { position: absolute; inset: 0; z-index: -3; background: #141228; }
+.gallery-sky img { width: 100%; height: 100%; object-fit: cover; animation: g-sky 50s ease-in-out infinite alternate; }
+@keyframes g-sky { from { scale: 1.08; translate: -1.5% 0; } to { scale: 1.16; translate: 1.5% -1%; } }
+/* farbige Schleier, die langsam durch den Himmel ziehen */
+.gallery-veil { position: absolute; inset: -10%; z-index: -2; pointer-events: none; }
+.gallery-veil span { position: absolute; width: 60%; aspect-ratio: 1; border-radius: 50%; opacity: .55; animation: g-veil 34s ease-in-out infinite alternate; }
+.gallery-veil span:nth-child(1) { left: -6%; top: 6%; background: radial-gradient(closest-side, rgba(150, 90, 200, .55), rgba(150, 90, 200, 0)); }
+.gallery-veil span:nth-child(2) { right: -8%; top: 30%; background: radial-gradient(closest-side, rgba(60, 170, 170, .38), rgba(60, 170, 170, 0)); animation-duration: 42s; animation-delay: -12s; }
+.gallery-veil span:nth-child(3) { left: 24%; bottom: -6%; background: radial-gradient(closest-side, rgba(232, 170, 90, .4), rgba(232, 170, 90, 0)); animation-duration: 38s; animation-delay: -22s; }
+@keyframes g-veil { from { translate: 0 0; scale: 1; } to { translate: 8% -6%; scale: 1.18; } }
+/* funkelnde Sterne */
+.gallery-stars, .gallery-stars::after { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(1.6px 1.6px at 12% 18%, #fff, transparent), radial-gradient(1.2px 1.2px at 28% 64%, #FFE9B8, transparent), radial-gradient(1.8px 1.8px at 46% 12%, #fff, transparent), radial-gradient(1.2px 1.2px at 63% 42%, #FFE9B8, transparent), radial-gradient(1.6px 1.6px at 78% 22%, #fff, transparent), radial-gradient(1.2px 1.2px at 88% 70%, #FFE9B8, transparent), radial-gradient(1.4px 1.4px at 8% 84%, #fff, transparent), radial-gradient(1.2px 1.2px at 36% 90%, #fff, transparent), radial-gradient(1.6px 1.6px at 70% 86%, #FFE9B8, transparent), radial-gradient(1.2px 1.2px at 94% 48%, #fff, transparent);
+  animation: g-twinkle 5s ease-in-out infinite alternate; }
+.gallery-stars::after { content: ""; background-position: 37% 53%; animation-delay: -2.5s; }
+@keyframes g-twinkle { from { opacity: .25; } to { opacity: 1; } }
+
+.gallery-head { position: relative; width: min(720px, 100%); margin: 0 auto 10vh; text-align: center; }
+.gallery-head .label { color: var(--gold-light); }
+.gallery-head .label::before, .gallery-head .label::after { background: var(--gold-light); }
+.gallery-head h2 { color: #FBF6EC; font-size: clamp(2.4rem, 5vw, 4.2rem); text-shadow: 0 0 30px rgba(20, 14, 40, .8); }
+.gallery-head h2 em { color: var(--gold-light); }
+.gallery-lede { font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 1.7vw, 1.38rem); line-height: 1.6; color: #EADFC9; text-shadow: 0 0 22px rgba(20, 14, 40, .9); }
+
+/* die Ausstellung: Bilder schweben versetzt im Raum */
+.gallery-wall { position: relative; width: min(1240px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(12, 1fr); gap: 7vh 2.4vw; align-items: start; }
+.g1 { grid-column: 1 / 5; }
+.g2 { grid-column: 5 / 9; margin-top: 16vh; }
+.g3 { grid-column: 9 / 13; margin-top: 4vh; }
+.g4 { grid-column: 2 / 8; margin-top: 2vh; }
+.g5 { grid-column: 9 / 12; margin-top: -6vh; }
+.g-item { position: relative; margin: 0; animation: g-float 11s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes g-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+.g-item::before { content: ""; position: absolute; inset: -14%; z-index: -1; pointer-events: none; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 214, 140, .38), rgba(255, 214, 140, 0)); animation: g-glow 7s ease-in-out infinite alternate; animation-delay: var(--d); }
+@keyframes g-glow { from { opacity: .45; } to { opacity: 1; } }
+.g-open { display: block; width: 100%; padding: 10px; border: 0; cursor: zoom-in; background: linear-gradient(145deg, rgba(232, 205, 148, .9), rgba(150, 110, 50, .9) 50%, rgba(232, 205, 148, .9)); box-shadow: 0 40px 70px -30px rgba(0, 0, 0, .85); transition: transform .7s cubic-bezier(.2, .7, .2, 1), box-shadow .7s ease; }
+.g-open img { width: 100%; border: 1px solid rgba(40, 30, 20, .6); }
+.g-open:hover, .g-open:focus-visible { transform: translateY(-8px) scale(1.02); box-shadow: 0 50px 80px -30px rgba(0, 0, 0, .9), 0 0 60px rgba(255, 214, 140, .35); }
+.g-item figcaption { margin-top: 16px; text-align: center; font-family: var(--serif); font-style: italic; font-size: .98rem; letter-spacing: .02em; color: #E8D9BC; text-shadow: 0 0 14px rgba(20, 14, 40, .9); }
+.g-item figcaption::before { content: "✦"; display: block; font-style: normal; font-size: .7rem; color: var(--gold-light); margin-bottom: 4px; }
+.gallery-hint { display: none; }
+
+/* großes Bild */
+.g-light { max-width: none; max-height: none; width: 100vw; height: 100vh; height: 100dvh; margin: 0; padding: 0; border: 0; background: rgba(14, 11, 24, .92); color: #EADFC9; }
+.g-light[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; animation: g-in .5s ease; }
+.g-light::backdrop { background: transparent; }
+@keyframes g-in { from { opacity: 0; } }
+.g-light img { max-width: 92vw; max-height: 80vh; max-height: 80dvh; width: auto; height: auto; padding: 10px; background: linear-gradient(145deg, #E8CD94, #96702F 50%, #E8CD94); box-shadow: 0 40px 90px -30px #000; }
+.g-cap { font-family: var(--serif); font-style: italic; margin: 0; }
+.g-close { position: absolute; top: 18px; right: 18px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--gold-light); cursor: pointer; rotate: 45deg; background: linear-gradient(var(--cream), var(--cream)) center / 16px 1px no-repeat, linear-gradient(var(--cream), var(--cream)) center / 1px 16px no-repeat, transparent; }
+
+/* iPad: zwei Spalten, weiterhin versetzt */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .gallery-wall { grid-template-columns: repeat(2, 1fr); gap: 6vh 5vw; }
+  .g1, .g2, .g3, .g4, .g5 { grid-column: auto; margin-top: 0; }
+  .g2, .g5 { margin-top: 12vh; }
+  .g4 { grid-column: 1 / -1; width: 80%; justify-self: center; margin-top: 0; }
+}
+/* Handy: eine schwebende Reihe zum Wischen */
+@media (max-width: 760px) {
+  .gallery { padding: 20vh 0 22vh; }
+  .gallery-head { padding: 0 var(--pad); margin-bottom: 5vh; }
+  .gallery-hint { display: block; text-align: center; font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-light); margin: 0 0 8px; }
+  .gallery-wall { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 30px 11vw 40px; scrollbar-width: none; align-items: center; }
+  .gallery-wall::-webkit-scrollbar { display: none; }
+  .g-item { flex: 0 0 78vw; scroll-snap-align: center; margin: 0 !important; }
+  .g4 { flex-basis: 86vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-sky img, .gallery-veil span, .gallery-stars, .gallery-stars::after, .g-item, .g-item::before { animation: none; }
+}
