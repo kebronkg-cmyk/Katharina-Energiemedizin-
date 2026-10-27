@@ -1272,3 +1272,94 @@ html:not(.js) .bloom-stage { position: relative; }
 @media (max-width: 899px) { #osten .side-photo-art { order: 2; } }
 .bloom-scroll { height: 165vh; }
 @media (max-width: 760px) { .bloom-scroll { height: 150vh; } }
+
+/* =====================================================================
+   v11 (Endfassung)
+   ===================================================================== */
+/* Schriftzug als Vektor: Seitenverhältnis 6420 : 966 */
+.bar-word { height: 24px; width: auto; }
+@media (max-width: 860px) { .bar-word { height: 18px; } }
+@media (max-width: 600px) { .bar-word { height: 14px; } }
+
+/* 2. Hinweis auf die Malerin */
+.art-credit { position: absolute; right: 12%; bottom: 14%; z-index: 2; font-family: var(--serif); font-style: italic; font-size: .9rem; letter-spacing: .02em; color: rgba(74, 36, 20, .78); }
+.art-credit::before { content: ""; display: inline-block; width: 26px; height: 1px; margin: 0 10px .3em 0; background: rgba(110, 52, 24, .6); }
+@media (max-width: 760px) { .art-credit { right: auto; left: var(--pad); bottom: 30%; font-size: .82rem; } }
+
+/* 3. Text unter „Welcher Wind ruft dich?“ */
+.compass-lede { width: min(560px, 100%); margin: 0 auto; font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 1.7vw, 1.38rem); line-height: 1.55; color: var(--gold-deep); text-shadow: var(--glow-light); }
+.compass-lede span { display: block; margin-top: .35em; color: var(--earth); }
+
+/* 5. Eisberg größer */
+.depth-ice { width: clamp(170px, 19vw, 270px); margin: 3vh 0; }
+@media (max-width: 600px) { .depth-ice { width: 58vw; margin: 3vh auto; } }
+
+/* 6. Kolibri freigestellt, unten weich, am Handy kleiner */
+.joy-photo img { -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0, #000 70%, transparent 100%); }
+.ask--joy .joy-photo { position: relative; }
+.ask--joy .joy-photo::before { content: ""; position: absolute; z-index: -1; inset: 6% -12% 10%; background: radial-gradient(closest-side, rgba(255, 248, 230, .85), rgba(255, 248, 230, 0)); pointer-events: none; }
+@media (min-width: 1000px) { .ask--joy { grid-template-columns: minmax(0, 340px) 1fr; } }
+@media (max-width: 999px) { .joy-photo { width: min(300px, 62vw); } }
+@media (max-width: 600px) { .joy-photo { width: 52vw; margin-bottom: -2vh; } }
+
+/* 7. Neues Kapitel: Begleitungen */
+.overview { padding-top: 26vh; }
+.chapter-break { display: flex; align-items: center; justify-content: center; gap: 22px; margin: 0 auto 5vh; width: min(760px, 100%); }
+.chapter-break span { flex: 1; height: 1px; background: linear-gradient(to right, rgba(176, 138, 76, 0), rgba(176, 138, 76, .85)); }
+.chapter-break span:last-child { background: linear-gradient(to left, rgba(176, 138, 76, 0), rgba(176, 138, 76, .85)); }
+.chapter-break img { width: 74px; }
+.overview-title { font-size: clamp(2.6rem, 5.6vw, 4.6rem); line-height: 1.05; }
+.overview-title em { display: block; }
+.overview-head::before { inset: -26% -22%; }
+
+/* 9. Vier Ebenen */
+.whole-art { width: min(380px, 80vw); height: auto; overflow: visible; }
+.ve-labels { font-family: var(--serif); font-style: italic; font-size: 19px; fill: var(--earth); letter-spacing: .01em; }
+.ve-c { transform-box: fill-box; transform-origin: center; animation: ve-breathe 9s ease-in-out infinite; }
+.ve-c:nth-child(2) { animation-delay: -2.25s; } .ve-c:nth-child(3) { animation-delay: -4.5s; } .ve-c:nth-child(4) { animation-delay: -6.75s; }
+@keyframes ve-breathe { 50% { scale: 1.035; } }
+
+/* 10. Natur: leichter Grünschimmer, weich in den Himmel übergehend */
+.bloom-scroll::before { content: ""; position: absolute; inset: -30vh 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(42% 32% at 34% 42%, rgba(186, 206, 160, .55), rgba(186, 206, 160, 0) 75%),
+    radial-gradient(38% 30% at 72% 58%, rgba(206, 220, 178, .45), rgba(206, 220, 178, 0) 75%),
+    linear-gradient(to bottom, rgba(232, 238, 214, 0) 0%, rgba(232, 238, 214, .62) 22%, rgba(228, 236, 210, .7) 50%, rgba(232, 238, 214, .62) 78%, rgba(232, 238, 214, 0) 100%); }
+.bloom-copy::before { background: radial-gradient(closest-side, rgba(246, 248, 236, .85), rgba(246, 248, 236, .45) 60%, rgba(246, 248, 236, 0)); }
+.bloom-copy .label, .bloom-copy .label::before { color: #5E6B3C; }
+.bloom-copy .label::before, .bloom-copy .label::after { background: #8C9A62; }
+
+/* 11. Über mich: Strandfoto an zweiter Stelle mit Gesicht im Blick, Meerfoto rechts weich */
+.photos--flip .photos-one img { aspect-ratio: 1; object-fit: cover; object-position: 30% 100%; }
+.photos:not(.photos--flip) .photos-one img { aspect-ratio: auto; object-fit: initial; object-position: initial;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .5) 12%, #000 26%, #000 56%, rgba(0, 0, 0, .45) 76%, transparent 96%), linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 10%, #000 24%, #000 72%, rgba(0, 0, 0, .5) 87%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .5) 12%, #000 26%, #000 56%, rgba(0, 0, 0, .45) 76%, transparent 96%), linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .5) 10%, #000 24%, #000 72%, rgba(0, 0, 0, .5) 87%, transparent 100%); }
+
+/* 12. Seitenende dezenter, Kennenlernen heller */
+.btn--solid { background: #6B4A30; box-shadow: 0 14px 30px -16px rgba(80, 52, 30, .8), inset 0 0 0 1px rgba(232, 205, 148, .4); }
+.btn--solid:hover { background: #57412C; }
+.page-nav { gap: 18px 26px; }
+.page-nav .gate { gap: 14px; padding: 8px 40px 8px 8px; background: rgba(251, 246, 236, .7); box-shadow: none; border-color: rgba(176, 138, 76, .5); }
+.page-nav .gate-medal { width: 48px; height: 48px; outline-offset: 2px; }
+.page-nav .gate-text { font-size: 1.2rem; }
+.page-nav .gate-text small { font-size: .58rem; margin-bottom: 3px; }
+.page-nav .gate-text::after { right: 16px; font-size: 1rem; }
+.page-nav .btn { min-height: 44px; padding: 10px 24px; font-size: .72rem; }
+/* 4. Kompass: Norden liest sich wie die anderen (Richtung, dann Tier und Qualität) */
+@media (max-width: 600px) {
+  .wind-card[data-wind="norden"] { flex-direction: column; }
+  .wind-card[data-wind="norden"] .wind-card-dir { order: 1; margin: 0 0 4px; }
+  .wind-card[data-wind="norden"] .wind-card-sub { order: 2; margin: 0 0 10px; }
+  .wind-card[data-wind="norden"] .medal { order: 3; }
+}
+/* 8. Adler am iPad: Text rechts, das Foto links daneben zeigt auf „Der Adler steht für Klarheit“ */
+@media (min-width: 601px) and (max-width: 899px) {
+  #osten { position: relative; }
+  #osten .wind-head { width: 56%; margin-left: auto; }
+  #osten .wind-head::before { inset: 0 -20% 0 -30%; }
+  #osten .head-photo { position: absolute; left: 0; top: 50svh; width: 44%; margin: 0; z-index: 1; }
+  #osten .side-photo-art { width: min(440px, 64vw); justify-self: center; }
+}
+.art-credit { bottom: 4%; right: 18%; color: #5A3420; text-shadow: 0 0 10px rgba(250, 232, 196, 1), 0 0 22px rgba(250, 232, 196, .9); }
+@media (max-width: 760px) { .art-credit { bottom: 8%; left: auto; right: var(--pad); } }
+@media (max-width: 760px) { .art-credit { top: 6%; bottom: auto; right: var(--pad); } }

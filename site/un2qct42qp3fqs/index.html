@@ -47,7 +47,7 @@
   <header class="bar">
     <a class="bar-brand" href="#ankommen" aria-label="Weg der vier Winde, zum Anfang">
       <img src="../img/logo-mark.webp" alt="" width="321" height="275">
-      <img class="bar-word" src="../img/logo-schriftzug.webp" alt="Weg der vier Winde" width="1044" height="152">
+      <img class="bar-word" src="../img/logo-schriftzug.svg" alt="Weg der vier Winde" width="1070" height="161">
     </a>
     <nav class="bar-nav" aria-label="Hauptnavigation">
       <a href="#kompass">Das Medizinrad</a>
@@ -98,7 +98,7 @@
     <section id="ankommen" class="hero">
       <div class="hero-inner">
         <img class="hero-mark" src="../img/logo-mark.webp" alt="" width="321" height="275">
-        <img class="hero-word" src="../img/logo-schriftzug.webp" alt="Weg der vier Winde" width="1044" height="152">
+        <img class="hero-word" src="../img/logo-schriftzug.svg" alt="Weg der vier Winde" width="1070" height="161">
         <p class="eyebrow">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
         <h1>Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
         <p class="scroll-hint"><span>Beginne die Reise</span></p>
@@ -125,6 +125,7 @@
         <img src="../img/gemaelde-gesicht-gross.webp" alt="Farbintensives Gemälde eines Gesichts mit einem Licht auf der Stirn, gemalt von Katharina" width="1132" height="1384" loading="lazy">
         <span class="glow" aria-hidden="true"></span>
         <span class="sparks" aria-hidden="true"><i style="--x:12%;--d:0s"></i><i style="--x:28%;--d:-2.4s"></i><i style="--x:41%;--d:-5s"></i><i style="--x:57%;--d:-1.2s"></i><i style="--x:66%;--d:-3.6s"></i><i style="--x:78%;--d:-6.2s"></i><i style="--x:88%;--d:-4.4s"></i><i style="--x:35%;--d:-7s"></i><i style="--x:72%;--d:-0.6s"></i></span>
+        <figcaption class="art-credit">Gemälde von Katharina</figcaption>
       </figure>
       <div class="energy-copy">
         <p class="energy-title rise">Alles ist <span>Energie.</span></p>
@@ -172,7 +173,7 @@
       <div class="compass-head rise">
         <p class="label">Das Medizinrad</p>
         <h2>Welcher Wind <em>ruft dich?</em></h2>
-        <p class="soft">Die vier Tierarchetypen begegnen uns im Medizinrad der Traditionen der Anden und des Amazonas. Sie verkörpern unterschiedliche Qualitäten des Lebens, die in jedem Menschen angelegt sind. Heute können wir sie als Fähigkeiten und Ressourcen verstehen und für unsere persönliche Entwicklung nutzen.</p>
+        <p class="compass-lede">Im Medizinrad der Anden und des Amazonas verkörpern vier Tierarchetypen Qualitäten, die in jedem Menschen angelegt sind. <span>Kräfte, die dich auf deinem Weg begleiten.</span></p>
       </div>
       <div class="compass-rose">
         <svg class="compass-lines" viewBox="0 0 400 400" aria-hidden="true">
@@ -363,7 +364,7 @@
       </header>
 
       <div class="ask ask--joy">
-        <figure class="joy-photo rise"><img src="../img/kolibri-freude.webp" alt="Katharina in Weiß an einer Säule, die Arme voller Freude in die Höhe gestreckt" width="818" height="1785" loading="lazy"></figure>
+        <figure class="joy-photo rise"><img src="../img/kolibri-frei.webp" alt="Katharina in Weiß, die Arme voller Freude in die Höhe gestreckt" width="818" height="1785" loading="lazy"></figure>
         <p class="label rise">Eine Inspiration für uns alle</p>
         <ul class="ask-list">
           <li class="rise"><b>Wofür willst du Danke sagen?</b> Was stimmt dich fröhlich? Wann hast du zuletzt einen Moment der Schönheit wirklich zu deinem gemacht?</li>
@@ -486,8 +487,9 @@
     <!-- ============ ALLE BEGLEITUNGEN ============ -->
     <section id="begleitungen" class="overview">
       <div class="overview-head rise">
+        <div class="chapter-break" aria-hidden="true"><span></span><img src="../img/logo-mark.webp" alt="" width="321" height="275"><span></span></div>
         <p class="label">Meine Begleitungen</p>
-        <h2>Alle Begleitungen <em>auf einen Blick</em></h2>
+        <h2 class="overview-title">Alle Begleitungen <em>auf einen Blick</em></h2>
         <p class="soft">Jeder Mensch ist anders. Deshalb wählen wir gemeinsam, was zu dir und deinem Thema passt. Alle Begleitungen basieren auf Werkzeugen der Energiearbeit der Anden und des Amazonas.</p>
       </div>
 
@@ -525,7 +527,30 @@
       <div class="wheel-dots" aria-hidden="true"></div>
 
       <div class="whole">
-        <img class="whole-art rise" src="../img/vier-ebenen.svg" alt="Vier sich überschneidende Kreise: Körper, Geist, Emotionen und Energie" width="320" height="320" loading="lazy">
+        <svg class="whole-art rise" viewBox="0 0 360 360" role="img" aria-label="Vier sich überschneidende Kreise: Körper, Geist, Emotionen und Energie">
+          <defs>
+            <linearGradient id="ve-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9B878"/><stop offset=".5" stop-color="#A57A35"/><stop offset="1" stop-color="#7A5522"/></linearGradient>
+            <radialGradient id="ve-fill" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F3DDAE" stop-opacity=".55"/><stop offset="1" stop-color="#F3DDAE" stop-opacity="0"/></radialGradient>
+            <radialGradient id="ve-core" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF6DE"/><stop offset="1" stop-color="#FFF6DE" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle cx="180" cy="180" r="168" fill="none" stroke="url(#ve-gold)" stroke-width=".6" opacity=".55"/>
+          <circle cx="180" cy="180" r="160" fill="none" stroke="url(#ve-gold)" stroke-width=".5" stroke-dasharray="1 7" opacity=".7"/>
+          <g fill="url(#ve-fill)" stroke="url(#ve-gold)" stroke-width="1.1">
+            <circle class="ve-c" cx="180" cy="128" r="74"/>
+            <circle class="ve-c" cx="232" cy="180" r="74"/>
+            <circle class="ve-c" cx="180" cy="232" r="74"/>
+            <circle class="ve-c" cx="128" cy="180" r="74"/>
+          </g>
+          <circle cx="180" cy="180" r="34" fill="url(#ve-core)"/>
+          <path d="M180 162 L184 176 L198 180 L184 184 L180 198 L176 184 L162 180 L176 176 Z" fill="url(#ve-gold)"/>
+          <g fill="#B08A4C"><circle cx="180" cy="12" r="2.4"/><circle cx="348" cy="180" r="2.4"/><circle cx="180" cy="348" r="2.4"/><circle cx="12" cy="180" r="2.4"/></g>
+          <g class="ve-labels" text-anchor="middle">
+            <text x="180" y="96">Geist</text>
+            <text x="264" y="186">Emotionen</text>
+            <text x="180" y="276">Körper</text>
+            <text x="96" y="186">Energie</text>
+          </g>
+        </svg>
         <div class="whole-text rise">
           <h2>Ich sehe dich als <em>ganzen Menschen.</em></h2>
           <p>Körper, Geist, Emotionen und Energie gehören zusammen. Wenn du zu mir kommst, schaue ich nicht nur auf ein Thema, sondern darauf, was dich bewegt, was dich geprägt hat und was sich jetzt zeigen möchte.</p>

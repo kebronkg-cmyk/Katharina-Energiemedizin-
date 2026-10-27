@@ -138,8 +138,14 @@
       var key = Math.round(pos * 8);
       if (!a || key === shown) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      put(a, 1);
-      if (b && b !== a && f > .02) put(b, f);
+      // additiv mischen: (1 − f) · A + f · B ergibt exakt die Zwischenstufe,
+      // ohne dass halbtransparente Ränder kurz dichter werden (kein Hell-dunkel-Flackern)
+      if (b && b !== a && f > .02) {
+        ctx.globalCompositeOperation = "lighter";
+        put(a, 1 - f);
+        put(b, f);
+        ctx.globalCompositeOperation = "source-over";
+      } else put(a, 1);
       ctx.globalAlpha = 1;
       shown = key;
     }
