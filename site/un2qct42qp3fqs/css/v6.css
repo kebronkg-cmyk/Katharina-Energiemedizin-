@@ -1363,3 +1363,47 @@ html:not(.js) .bloom-stage { position: relative; }
 .art-credit { bottom: 4%; right: 18%; color: #5A3420; text-shadow: 0 0 10px rgba(250, 232, 196, 1), 0 0 22px rgba(250, 232, 196, .9); }
 @media (max-width: 760px) { .art-credit { bottom: 8%; left: auto; right: var(--pad); } }
 @media (max-width: 760px) { .art-credit { top: 6%; bottom: auto; right: var(--pad); } }
+
+/* =====================================================================
+   v12: iPad-Feinschliff, Blüte auch bei „Bewegung reduzieren“
+   iPad = Tablet-Breite oder Touch-Bildschirm bis 1366 px
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .bloom-scroll { height: 165vh; }
+  .bloom-stage { position: sticky; }
+  .bloom-step { position: relative; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 760px) {
+  .bloom-scroll { height: 150vh; }
+  .bloom-step { position: absolute; }
+}
+
+/* Kompass: Norden über dem Medaillon, nicht in der Mitte des Kompasses */
+@media (min-width: 601px) and (max-width: 899px), (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+  .wind-card[data-wind="norden"] { flex-direction: column; }
+  .wind-card[data-wind="norden"] .wind-card-dir { order: 1; margin: 0 0 6px; }
+  .wind-card[data-wind="norden"] .wind-card-sub { order: 2; margin: 0 0 16px; }
+  .wind-card[data-wind="norden"] .medal { order: 3; }
+  .wind-card[data-wind="norden"]::before { top: auto; bottom: 6px; }
+}
+
+/* Adler: Text rechts, Arme-Foto kleiner und tiefer links daneben (zeigt auf
+   „Der Adler steht für Klarheit“), Gipfelfoto mittig über „Vision“ */
+@media (min-width: 601px) and (max-width: 899px), (min-width: 601px) and (max-width: 1366px) and (pointer: coarse) {
+  #osten { position: relative; }
+  #osten .wind-head { width: 56%; margin-left: auto; }
+  #osten .wind-head::before { inset: 0 -20% 0 -30%; }
+  #osten .head-photo { position: absolute; left: var(--pad); top: 52svh; width: 40%; margin: 0; z-index: 1; }
+  #osten .side-photo { grid-template-columns: 1fr; }
+  #osten .side-photo > .fog { margin: 0 auto; }
+  #osten .side-photo-art { order: 2; width: min(460px, 60vw); justify-self: center; }
+}
+
+/* Über mich: Einstieg wie „Willkommen“, das Porträt verblendet hinter dem Text */
+.about-welcome .welcome-title { font-size: clamp(2.8rem, 5.6vw, 5rem); }
+.about-welcome .welcome-copy .lead { max-width: 20em; }
+.about-welcome .welcome-copy :is(h1, p) { text-shadow: var(--glow-light); }
+@media (max-width: 760px) { .about-welcome .welcome-copy .lead { max-width: 14em; } }
+/* zweites Bild näher an den Text darunter */
+.photos--flip { gap: 0 3vw; }
+@media (max-width: 899px) { .photos--flip .photos-one { margin-bottom: -6vh; } .photos--flip .fog { padding-top: 4vh; } }

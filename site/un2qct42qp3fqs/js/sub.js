@@ -38,7 +38,7 @@
   gsap.utils.toArray(".rise").forEach(function (el) {
     gsap.from(el, { opacity: 0, y: 46, duration: 1.3, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
   });
-  gsap.utils.toArray(".about-photo, .photos-one, .travel-photo").forEach(function (el) {
+  gsap.utils.toArray(".welcome-photo img, .photos-one, .travel-photo").forEach(function (el) {
     gsap.fromTo(el, { yPercent: 6 }, { yPercent: -6, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.2 } });
   });
 

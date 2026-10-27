@@ -110,13 +110,19 @@
         img.src = src(i);
       });
     }
-    // alle Bilder vorladen, sechs gleichzeitig
+    // alle Bilder vorladen: erst grob (jedes 8., 4., 2. Bild), dann den Rest.
+    // So läuft die Animation auch bei langsamem Handynetz sofort und wird dann feiner.
     function preloadAll() {
       if (started) return;
       started = true;
-      var next = 1;
-      function worker() { if (next >= COUNT) return Promise.resolve(); var i = next++; return load(i).then(worker); }
-      for (var w = 0; w < 6; w++) worker();
+      var order = [], seen = {};
+      [8, 4, 2, 1].forEach(function (step) {
+        for (var k = 0; k < COUNT; k += step) if (!seen[k]) { seen[k] = 1; order.push(k); }
+      });
+      if (!seen[COUNT - 1]) order.push(COUNT - 1);
+      var next = 0;
+      function worker() { if (next >= order.length) return Promise.resolve(); var i = order[next++]; return (frames[i] ? Promise.resolve() : load(i)).then(worker); }
+      for (var w = 0; w < 4; w++) worker();
     }
     // Canvas in Gerätepixeln (scharf auf Retina); die freigestellte Blüte wird ganz gezeigt
     function size() {
@@ -151,14 +157,18 @@
     }
     function request() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
     window.addEventListener("resize", size);
+    // Canvas-Größe nachziehen, wenn sich das Layout ändert (sonst wirkt die Blüte verzerrt)
+    if ("ResizeObserver" in window) new ResizeObserver(size).observe(canvas);
     load(0).then(function () { size(); request(); });
+    // spätestens kurz nach dem Laden der Seite, sonst sobald die Blüte in die Nähe kommt
+    window.addEventListener("load", function () { setTimeout(preloadAll, 1200); });
     if ("IntersectionObserver" in window) {
-      var near = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { preloadAll(); near.disconnect(); } }, { rootMargin: "250% 0px" });
+      var near = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { preloadAll(); near.disconnect(); } }, { rootMargin: "400% 0px" });
       near.observe(wrap);
     } else preloadAll();
 
     var steps = gsap.utils.toArray(".bloom-step", wrap);
-    if (reduced) { pos = COUNT - 1; preloadAll(); return; }
+
     var seq = { f: 0 };
     // die Blüte beginnt sich schon beim Hereinscrollen zu öffnen und ist offen, kurz bevor es weitergeht
     var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top 55%", end: "bottom bottom", scrub: .5 } });
@@ -460,4 +470,17 @@
     }
   }
   window.addEventListener("load", function () { ScrollTrigger.refresh(); centerFeatured(); markDot(); });
+  // Am Handy laden Bilder und Schriften nach und verschieben die Seite:
+  // dann alle Scroll-Punkte neu berechnen (nur bei echter Höhenänderung)
+  if ("ResizeObserver" in window) {
+    var lastH = 0, refreshTimer;
+    new ResizeObserver(function () {
+      var h = document.documentElement.scrollHeight;
+      if (Math.abs(h - lastH) < 2) return;
+      lastH = h;
+      clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(function () { ScrollTrigger.refresh(); }, 200);
+    }).observe(document.querySelector("main"));
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
 })();
