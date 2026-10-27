@@ -43,11 +43,22 @@
   winds.forEach(function (name) {
     var section = document.getElementById(name);
     var el = layer(name);
-    fades.push(gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: 1.2 } }));
+    fades.push(gsap.fromTo(el, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", scrollTrigger: { trigger: section, start: "top 90%", end: "top 10%", scrub: 1.2 } }));
+    ScrollTrigger.create({ trigger: section, start: "top bottom", end: "bottom top", onToggle: function (self) { el.classList.toggle("is-live", self.isActive); } });
     if (!reduced) {
       gsap.fromTo(el.querySelector("img"), { scale: 1.14 }, { scale: 1, ease: "none", scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: 1.2 } });
     }
   });
+  // überdeckte Himmel gar nicht mehr zeichnen: ist ein Wind ganz da, verschwinden die Ebenen darunter
+  var stack = [layer("mitte"), document.querySelector(".sky-veil")];
+  winds.forEach(function (name, i) {
+    var below = stack.concat(winds.slice(0, i).map(layer));
+    ScrollTrigger.create({ trigger: document.getElementById(name), start: "top 8%",
+      onEnter: function () { below.forEach(function (el) { el.classList.add("is-covered"); }); },
+      onLeaveBack: function () { below.forEach(function (el) { el.classList.remove("is-covered"); }); } });
+  });
+  ScrollTrigger.create({ trigger: "#ankommen", endTrigger: "#kompass", start: "top top", end: "bottom top", onToggle: function (self) { layer("mitte").classList.toggle("is-live", self.isActive); } });
+  layer("mitte").classList.add("is-live");
   gsap.to(".sky-dawn", { opacity: 1, ease: "none", scrollTrigger: { trigger: "#begleitungen", start: "top bottom", end: "top 25%", scrub: 1.2 } });
 
   // ---------- Inhalte steigen sanft auf ----------
@@ -64,18 +75,6 @@
     // der Weg im Medizinrad zeichnet sich: Süden, Westen, Norden, Osten
     gsap.fromTo(".compass-lines .route", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.6, ease: "power2.inOut", scrollTrigger: { trigger: ".compass-rose", start: "top 70%", once: true } });
     gsap.fromTo(".compass-lines .route-tip", { opacity: 0 }, { opacity: 1, duration: .6, delay: 2.4, scrollTrigger: { trigger: ".compass-rose", start: "top 70%", once: true } });
-    // die Passionsblume öffnet sich Schicht für Schicht
-    var petals = gsap.utils.toArray(".bloom-layer");
-    var rings = gsap.utils.toArray(".bloom-ring");
-    gsap.set(rings, { xPercent: -50, yPercent: -50, scale: .2, opacity: 0 });
-    gsap.set(".bloom-flower", { xPercent: -50 });
-    gsap.timeline({ scrollTrigger: { trigger: ".nature", start: "top 92%", end: "top 30%", scrub: 1.4 } })
-      .fromTo(".bloom-flower", { yPercent: 78 }, { yPercent: 0, ease: "power1.out", duration: 2 }, 0)
-      .fromTo(petals[0], { "--r": "0%", rotate: -70, scale: 1.3 }, { "--r": "34%", rotate: 0, scale: 1, ease: "power2.out", duration: 1 }, 0)
-      .fromTo(petals[1], { "--r": "0%", rotate: -45, scale: 1.2 }, { "--r": "60%", rotate: 0, scale: 1, ease: "power2.out", duration: 1 }, .45)
-      .fromTo(petals[2], { "--r": "0%", rotate: -25, scale: 1.12, filter: "blur(6px)" }, { "--r": "100%", rotate: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1.1 }, .9)
-      .to(rings[0], { scale: 2.4, opacity: .9, duration: .6 }, .15).to(rings[0], { opacity: 0, scale: 2.9, duration: .45 }, .75)
-      .to(rings[1], { scale: 3.1, opacity: .8, duration: .6 }, .7).to(rings[1], { opacity: 0, scale: 3.6, duration: .45 }, 1.3);
     // vom Funktionieren ins Wahrnehmen: Zeile für Zeile
     gsap.utils.toArray(".shift-rows li").forEach(function (row) {
       gsap.timeline({ scrollTrigger: { trigger: row, start: "top 85%", once: true } })
@@ -83,6 +82,86 @@
         .from(row.querySelector(".to"), { opacity: 0, x: 20, duration: .9, ease: "power2.out" }, .35);
     });
   }
+
+  // ---------- Endlos-Animationen nur, solange ihr Abschnitt zu sehen ist ----------
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle("is-off", !en.isIntersecting); });
+    }, { rootMargin: "10% 0px" });
+    document.querySelectorAll("main > section").forEach(function (sec) { io.observe(sec); });
+  }
+
+  // ---------- Natur: die Passionsblume öffnet sich Bild für Bild ----------
+  (function () {
+    var wrap = document.querySelector(".bloom-scroll");
+    if (!wrap) return;
+    var canvas = wrap.querySelector(".bloom-canvas"), ctx = canvas.getContext("2d");
+    var COUNT = 144;
+    var small = window.matchMedia("(max-width: 760px)").matches;
+    var dir = "../assets/bloom-frames/" + (small ? "720" : "1080") + "/f";
+    var frames = new Array(COUNT), loaded = 0, started = false, current = 0, drawn = -1, queued = false;
+    function src(i) { return dir + String(i + 1).padStart(3, "0") + ".webp"; }
+    function load(i) {
+      return new Promise(function (res) {
+        var img = new Image();
+        img.decoding = "async";
+        img.onload = function () { frames[i] = img; loaded++; res(); if (i === current || drawn < 0) request(); };
+        img.onerror = res;
+        img.src = src(i);
+      });
+    }
+    // alle Bilder vorladen, sechs gleichzeitig
+    function preloadAll() {
+      if (started) return;
+      started = true;
+      var next = 1;
+      function worker() { if (next >= COUNT) return Promise.resolve(); var i = next++; return load(i).then(worker); }
+      for (var w = 0; w < 6; w++) worker();
+    }
+    // Canvas in Gerätepixeln anlegen (scharf auf Retina), Inhalt wie object-fit: cover
+    function size() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+      if (w && h && (canvas.width !== w || canvas.height !== h)) { canvas.width = w; canvas.height = h; drawn = -1; request(); }
+    }
+    function nearest(i) { for (var d = 0; d < COUNT; d++) { if (frames[i - d]) return frames[i - d]; if (frames[i + d]) return frames[i + d]; } return null; }
+    function draw() {
+      queued = false;
+      var img = nearest(current);
+      if (!img || (drawn === current && frames[current])) return;
+      var cw = canvas.width, ch = canvas.height, iw = img.naturalWidth, ih = img.naturalHeight;
+      var sc = Math.max(cw / iw, ch / ih), w = iw * sc, h = ih * sc;
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      drawn = frames[current] ? current : -1;
+    }
+    function request() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+    window.addEventListener("resize", size);
+    load(0).then(function () { size(); request(); });
+    // Rest erst laden, wenn die Blüte näher kommt
+    if ("IntersectionObserver" in window) {
+      var near = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { preloadAll(); near.disconnect(); } }, { rootMargin: "250% 0px" });
+      near.observe(wrap);
+    } else preloadAll();
+
+    var steps = gsap.utils.toArray(".bloom-step", wrap);
+    if (reduced) { current = COUNT - 1; preloadAll(); return; }
+    var seq = { f: 0 };
+    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: .6 } });
+    tl.to(seq, { f: COUNT - 1, ease: "none", duration: 1, onUpdate: function () { var f = Math.round(seq.f); if (f !== current) { current = f; request(); } } }, 0)
+      .fromTo(".bloom-view", { scale: 1.08 }, { scale: 1, ease: "none", duration: 1 }, 0);
+    if (small) {
+      // am Handy: ein Textteil nach dem anderen
+      gsap.set(steps, { autoAlpha: 0, y: 16 });
+      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .1 }, .04).to(steps[0], { autoAlpha: 0, y: -16, duration: .08 }, .36)
+        .to(steps[1], { autoAlpha: 1, y: 0, duration: .1 }, .42).to(steps[1], { autoAlpha: 0, y: -16, duration: .08 }, .68)
+        .to(steps[2], { autoAlpha: 1, y: 0, duration: .1 }, .74);
+    } else {
+      gsap.set(steps, { autoAlpha: 0, y: 24 });
+      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .14 }, .02)
+        .to(steps[1], { autoAlpha: 1, y: 0, duration: .14 }, .34)
+        .to(steps[2], { autoAlpha: 1, y: 0, duration: .14 }, .66);
+    }
+  })();
 
   // ---------- Windrose, Leiste und Wegweiser: wo bin ich ----------
   var bar = document.querySelector(".bar");
@@ -197,8 +276,9 @@
     lay.style.setProperty("--x", ox || origin[name][0]);
     lay.style.setProperty("--y", oy || origin[name][1]);
     lay.style.setProperty("--r", "0%");
+    lay.classList.remove("is-covered");
     lay.classList.add("is-opening");
-    gsap.set(lay, { opacity: 1 });
+    gsap.set(lay, { autoAlpha: 1 });
     gust(v, 2.8);
     gsap.timeline()
       // die Böe erfasst die Seite und trägt sie fort

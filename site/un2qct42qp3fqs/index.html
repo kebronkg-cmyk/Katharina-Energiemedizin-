@@ -28,16 +28,16 @@
     </div>
     <div class="sky-veil"></div>
     <div class="sky-layer" data-scene="sueden" style="--focus: 62%">
-      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-sueden-hoch.webp"><img src="../v3/img/szene-sueden.webp" srcset="../v3/img/szene-sueden-1280.webp 1280w, ../v3/img/szene-sueden.webp 1584w" sizes="100vw" alt="" decoding="async"></picture>
+      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-sueden-hoch.webp"><img src="../v3/img/szene-sueden.webp" srcset="../v3/img/szene-sueden-1280.webp 1280w, ../v3/img/szene-sueden-1600.webp 1600w, ../v3/img/szene-sueden.webp 1584w" sizes="100vw" alt="" decoding="async"></picture>
     </div>
     <div class="sky-layer" data-scene="westen" style="--focus: 40%">
-      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-westen-hoch.webp"><img src="../v3/img/szene-westen.webp" srcset="../v3/img/szene-westen-1280.webp 1280w, ../v3/img/szene-westen.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
+      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-westen-hoch.webp"><img src="../v3/img/szene-westen.webp" srcset="../v3/img/szene-westen-1280.webp 1280w, ../v3/img/szene-westen-1600.webp 1600w, ../v3/img/szene-westen.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
     </div>
     <div class="sky-layer" data-scene="norden" style="--focus: 68%">
-      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-norden-hoch.webp"><img src="../v3/img/szene-norden.webp" srcset="../v3/img/szene-norden-1280.webp 1280w, ../v3/img/szene-norden.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
+      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-norden-hoch.webp"><img src="../v3/img/szene-norden.webp" srcset="../v3/img/szene-norden-1280.webp 1280w, ../v3/img/szene-norden-1600.webp 1600w, ../v3/img/szene-norden.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
     </div>
     <div class="sky-layer" data-scene="osten" style="--focus: 52%">
-      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-osten-hoch.webp"><img src="../v3/img/szene-osten.webp" srcset="../v3/img/szene-osten-1280.webp 1280w, ../v3/img/szene-osten.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
+      <picture><source media="(max-width: 600px)" srcset="../v3/img/szene-osten-hoch.webp"><img src="../v3/img/szene-osten.webp" srcset="../v3/img/szene-osten-1280.webp 1280w, ../v3/img/szene-osten-1600.webp 1600w, ../v3/img/szene-osten.webp 2560w" sizes="100vw" alt="" decoding="async"></picture>
     </div>
     <div class="sky-mist"></div>
     <div class="sky-dawn"></div>
@@ -533,25 +533,32 @@
         </div>
       </div>
 
-      <div class="pair">
+      <div class="pair pair--single">
         <div class="rise">
           <p class="label">In jeder Begleitung</p>
           <h3>Was möchte sich in dir <em>zeigen?</em></h3>
           <p>Ich verbinde die energetische Arbeit mit kreativem Ausdruck. In Farbe, Bewegung, Tanz, Klang oder in einem Bild aus Naturmaterialien. So kannst du das, was sich zeigt, auf deine eigene Weise integrieren und verankern.</p>
         </div>
-        <div class="nature">
-          <div class="bloom-flower" aria-hidden="true">
-            <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
-            <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
-            <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
-            <span class="bloom-ring"></span><span class="bloom-ring"></span>
+      </div>
+
+      <!-- Natur: die Passionsblume öffnet sich beim Scrollen (Einzelbilder auf einem Canvas) -->
+      <div id="natur" class="bloom-scroll">
+        <div class="bloom-stage">
+          <div class="bloom-view">
+            <canvas class="bloom-canvas" width="1080" height="608" aria-hidden="true"></canvas>
           </div>
-          <div class="nature-panel">
-            <p class="label">Wo wir arbeiten</p>
-            <h3>Natur, unsere <em>größte Kraftquelle</em></h3>
-            <p class="nature-lead">In der Verbindung mit der Natur verbindest du dich mit dir selbst.</p>
-            <p>Jedes Setting findet in einem geschützten Raum statt. Auf Wunsch arbeiten wir auch draußen, in direkter Verbindung mit Erde und Himmel. Die Details besprechen wir persönlich, im Einklang mit Wetter und Jahreszeit.</p>
-            <p class="aside">Wie die Passionsblume sich Schicht für Schicht öffnet, entfaltet sich auch Veränderung in ihrem eigenen Rhythmus. Von innen heraus.</p>
+          <div class="bloom-copy">
+            <div class="bloom-step">
+              <p class="label">Wo wir arbeiten</p>
+              <h3>Natur, unsere <em>größte Kraftquelle</em></h3>
+              <p class="nature-lead">In der Verbindung mit der Natur verbindest du dich mit dir selbst.</p>
+            </div>
+            <div class="bloom-step">
+              <p>Jedes Setting findet in einem geschützten Raum statt. Auf Wunsch arbeiten wir auch draußen, in direkter Verbindung mit Erde und Himmel. Die Details besprechen wir persönlich, im Einklang mit Wetter und Jahreszeit.</p>
+            </div>
+            <div class="bloom-step">
+              <p class="aside">Wie die Passionsblume sich Schicht für Schicht öffnet, entfaltet sich auch Veränderung in ihrem eigenen Rhythmus. <em>Von innen heraus.</em></p>
+            </div>
           </div>
         </div>
       </div>
