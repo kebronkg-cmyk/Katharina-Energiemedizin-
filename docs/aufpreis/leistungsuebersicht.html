@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Leistungsübersicht Überarbeitung · Weg der vier Winde</title>
+<style>
+  @font-face { font-family: "Bodoni Moda"; src: url("../../site/fonts/bodoni-moda-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Bodoni Moda"; src: url("../../site/fonts/bodoni-moda-latin-400-italic.woff2"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Jost"; src: url("../../site/fonts/jost-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Jost"; src: url("../../site/fonts/jost-latin-500-normal.woff2"); font-weight: 500; }
+  @page { size: A4; margin: 18mm 18mm 20mm; }
+  :root { --earth: #3F2A1C; --gold: #B08A4C; --gold-deep: #765422; --cream: #FBF6EC; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 400 10pt/1.55 "Jost", sans-serif; color: #2A2018; }
+  h1, h2, h3, .serif { font-family: "Bodoni Moda", Georgia, serif; font-weight: 400; color: var(--earth); }
+  em { font-style: italic; color: var(--gold-deep); }
+  .head { text-align: center; padding-bottom: 8mm; margin-bottom: 7mm; border-bottom: .3mm solid var(--gold); }
+  .head img { height: 16mm; margin-bottom: 3mm; }
+  .head .word { height: 7mm; display: block; margin: 0 auto 4mm; }
+  .head h1 { font-size: 20pt; margin: 0 0 1mm; }
+  .head p { margin: 0; color: #6A5D52; }
+  .label { font-size: 7.5pt; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); margin: 7mm 0 2mm; }
+  h2 { font-size: 14pt; margin: 0 0 3mm; }
+  p { margin: 0 0 2.5mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .box { border: .3mm solid rgba(176,138,76,.55); border-radius: 3mm; padding: 4mm 5mm; background: var(--cream); break-inside: avoid; }
+  .box h3 { font-size: 11.5pt; margin: 0 0 2mm; }
+  ul { margin: 0; padding-left: 4.5mm; }
+  li { margin: 0 0 1.2mm; }
+  li::marker { color: var(--gold); }
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 3mm; break-inside: avoid; }
+  th, td { text-align: left; padding: 2.2mm 2mm; border-bottom: .25mm solid rgba(176,138,76,.45); vertical-align: top; }
+  th { font-size: 7.5pt; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  tr.sum td { border-top: .5mm solid var(--gold); border-bottom: 0; font-family: "Bodoni Moda", serif; font-size: 12pt; color: var(--earth); }
+  tr.offer td { font-family: "Bodoni Moda", serif; font-size: 14pt; color: var(--gold-deep); border-bottom: 0; }
+  .note { font-size: 8.5pt; color: #6A5D52; }
+  .time { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin: 2mm 0 4mm; }
+  .time div { text-align: center; padding: 3mm; border-radius: 3mm; background: var(--cream); border: .3mm solid rgba(176,138,76,.45); }
+  .time b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 16pt; color: var(--earth); }
+  .time span { font-size: 8pt; color: #6A5D52; }
+  .keep { break-inside: avoid; }
+  .page-break { break-before: page; }
+  .foot { margin-top: 8mm; text-align: center; font-size: 8.5pt; color: #6A5D52; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <img src="../../site/img/logo-mark.webp" alt="">
+  <img class="word" src="../../site/img/logo-schriftzug.svg" alt="Weg der vier Winde">
+  <h1>Überarbeitung der Website: <em>Leistungsübersicht</em></h1>
+  <p>Für Katharina · Stand 27. Oktober 2026</p>
+</div>
+
+<p>Liebe Katharina,</p>
+<p>hier ist eine Übersicht über alles, was seit deiner Rückmeldung zur Nutzerführung an der Website entstanden ist. Ich habe sie so aufgebaut, dass du siehst, wo wir gestartet sind, was jetzt da ist und wie sich der Aufpreis zusammensetzt.</p>
+
+<p class="label">Ausgangspunkt: die bisherige Hauptfassung</p>
+<div class="box">
+  <ul>
+    <li>Eine lange Seite mit den vier Winden, Kompass zum freien Anklicken, „Welcher Wind ruft dich?“</li>
+    <li>Begleitungen vollständig ausgeschrieben, verteilt über die Winde; „Über mich“ mitten im Norden</li>
+    <li>Ablauf und Preise im Osten, Fotos mit Bogenrahmen, Navigation nur nach unten</li>
+    <li>Schriftzug als unscharfes Bild, das „g“ von „Weg“ abgeschnitten</li>
+  </ul>
+</div>
+
+<p class="label">Was jetzt da ist</p>
+<div class="cols">
+  <div class="box">
+    <h3>Nutzerführung und Medizinrad</h3>
+    <ul>
+      <li>Geführter Weg: Süden, Westen, Norden, Osten mit Nummern 1 bis 4 und goldener Weglinie</li>
+      <li>Kurze Erklärung der vier Archetypen und ihrer Qualitäten vor der Reise</li>
+      <li>Knopf „Die Reise beginnen“, Wegweiser „Station 2 von 4“ am unteren Rand</li>
+      <li>Neue Zuordnung der Begleitungen, Illumination als Herzstück jeder Begleitung</li>
+      <li>Eigenes Kapitel „Alle Begleitungen auf einen Blick“ als Rad, am Handy zum Wischen</li>
+      <li>Begleitungen kompakt in den Winden, ausführliche Texte öffnen sich als Fenster</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Räumliche Navigation (Mischform)</h3>
+    <ul>
+      <li>Jeder Wind weht aus seiner Himmelsrichtung herein: Windfäden, Nebel, weich aufgehender Himmel</li>
+      <li>Klick auf ein Medaillon öffnet den Himmel aus dem Medaillon heraus</li>
+      <li>Handy: Wischen zwischen den Winden; Computer: Pfeiltasten</li>
+      <li>Menü mit drei Strichen am Handy, Preise direkt in der Navigation</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Inhalte und Texte</h3>
+    <ul>
+      <li>„Herzlich willkommen“ und „Alles ist Energie“ am Anfang, nach deinen Vorlagen</li>
+      <li>Texte aus deinen Bildern in die vier Winde übernommen (Schlange, Jaguar, Kolibri, Adler)</li>
+      <li>„Hast du Mut zur Tiefe?“ mit Eisberg, „Funktionieren und Wahrnehmen“ neu gestaltet</li>
+      <li>Kondor wird Adler, Kolibri steht für Lebensfreude</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Eigene Seite „Über mich“ mit Galerie</h3>
+    <ul>
+      <li>Deine Geschichte im Originaltext auf einer eigenen Seite, außerhalb der Winde</li>
+      <li>Galerie „Aus dem Atelier“: fünf Gemälde in einem bewegten Nachthimmel mit Sternen, zum Vergrößern</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Passionsblume als Scroll-Animation</h3>
+    <ul>
+      <li>Aus deinem Video: 78 Einzelbilder, in jedem die Blüte einzeln vom Hintergrund gelöst</li>
+      <li>Die Knospe öffnet sich beim Scrollen, weich überblendet, auf Handy, iPad und Computer</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Bilder und Gestaltung</h3>
+    <ul>
+      <li>Fünf Fotos von dir freigestellt und weich in den Himmel verblendet, ohne Rahmen</li>
+      <li>Schriftzug „Weg der vier Winde“ aus dem Original als gestochen scharfe Vektorgrafik</li>
+      <li>Gemälde von Staffelei und Rahmen befreit, Grafik „Körper, Geist, Emotionen, Energie“ neu</li>
+      <li>Eigene Anpassungen für iPad und Handy, flüssigeres Scrollen</li>
+    </ul>
+  </div>
+</div>
+
+
+
+<p class="label">Arbeitszeit dieser Runde</p>
+<div class="time">
+  <div><b>ca. 10 Std.</b><span>26.10. ab ca. 20 Uhr bis 27.10. ca. 6 Uhr</span></div>
+  <div><b>6 Runden</b><span>Rückmeldung, Umsetzung, Prüfung</span></div>
+  <div><b>3 Geräte</b><span>jede Änderung auf Handy, iPad und Computer geprüft</span></div>
+</div>
+
+<p class="label">Was im Festpreis enthalten ist und was nicht</p>
+<p>Im Festpreis von 900 € ist eine Überarbeitungsrunde enthalten: Texte schärfen, die Reihenfolge der Winde klarer machen, kleine Gestaltungswünsche. Diese Punkte berechne ich nicht extra, ebenso wenig alle Fehlerbehebungen.</p>
+<p>Ein Großteil dieser Runde ging aber deutlich darüber hinaus: neue Funktionen, eine neue Seite, eine Galerie und eine Animation, die es vorher nicht gab. Die räumliche Navigation hatten wir vorab ausdrücklich als Aufpreis besprochen.</p>
+
+<div class="keep"><p class="label">Aufpreis</p>
+<table>
+  <tr><th>Leistung</th><th class="num">Betrag</th></tr>
+  <tr><td>Räumliche Navigation (Mischform): Windübergänge aus der Himmelsrichtung, Wischen, Pfeiltasten, Wegweiser, Handymenü</td><td class="num">250 €</td></tr>
+  <tr><td>Passionsblume als Scroll-Animation aus deinem Video (78 Einzelbilder, einzeln freigestellt)</td><td class="num">150 €</td></tr>
+  <tr><td>Eigene Seite „Über mich“ mit Galerie „Aus dem Atelier“</td><td class="num">150 €</td></tr>
+  <tr><td>Bildbearbeitung: fünf Fotos freigestellt, Schriftzug als Vektor, Gemälde zugeschnitten</td><td class="num">100 €</td></tr>
+  <tr class="sum"><td>Summe der Einzelleistungen</td><td class="num">650 €</td></tr>
+  <tr class="offer"><td>Dein Paketpreis für die Erweiterung</td><td class="num">550 €</td></tr>
+</table>
+<p class="note">Zur Einordnung: Bei rund 10 Stunden Arbeit entspricht der Paketpreis etwa 55 € pro Stunde. Das liegt im unteren Bereich dessen, was für individuelles Webdesign üblich ist. Die Überarbeitung im Rahmen des Festpreises ist darin bereits abgezogen.</p>
+
+</div>
+<p class="label">Gesamt</p>
+<table>
+  <tr><td>Website (Festpreis, inklusive einer Überarbeitungsrunde)</td><td class="num">900 €</td></tr>
+  <tr><td>Erweiterung (Paketpreis)</td><td class="num">550 €</td></tr>
+  <tr class="sum"><td>Gesamt</td><td class="num">1.450 €</td></tr>
+</table>
+
+<p class="foot">Danke für dein Vertrauen und die schöne Zusammenarbeit.<br>Kebron</p>
+
+</body>
+</html>
