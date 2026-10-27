@@ -860,3 +860,234 @@ p, li { text-wrap: pretty; }
   .q-word { font-size: 1.35rem; }
   .q-text { font-size: .8rem; line-height: 1.5; }
 }
+
+/* =====================================================================
+   v7: Bilder fließen in den Himmel, Willkommen, Alles ist Energie,
+   Menü am Handy, Passionsblume, Adler-Collage
+   ===================================================================== */
+
+/* Fotos von Katharina: kein Rahmen, weiche Ränder, die in den Himmel auslaufen */
+.feather { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); }
+
+/* ---------- Leiste: Menü am Handy ---------- */
+.menu-btn { display: none; position: relative; z-index: 2; width: 46px; height: 46px; margin-left: 8px; border: 1px solid var(--gold); border-radius: 50%; background: rgba(251, 246, 236, .6); cursor: pointer; }
+.menu-btn span { position: absolute; left: 14px; right: 14px; height: 1px; background: var(--earth); transition: transform .45s cubic-bezier(.2, .7, .2, 1), opacity .3s ease, top .45s ease; }
+.menu-btn span:nth-child(1) { top: 16px; } .menu-btn span:nth-child(2) { top: 22px; right: 19px; } .menu-btn span:nth-child(3) { top: 28px; }
+.menu-btn[aria-expanded="true"] span:nth-child(1) { top: 22px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+.bar.is-dark .menu-btn { background: rgba(21, 17, 26, .35); border-color: var(--gold-light); }
+.bar.is-dark .menu-btn span { background: var(--cream); }
+.bar.menu-open { background: none; }
+.bar.menu-open .menu-btn { background: var(--cream); border-color: var(--gold); }
+.bar.menu-open .menu-btn span { background: var(--earth); }
+@media (max-width: 860px) { .menu-btn { display: block; } .bar { gap: 10px; } .bar-cta { padding: 8px 16px; } }
+.menu { position: fixed; inset: 0; z-index: 19; overflow-y: auto; overscroll-behavior: contain; background: radial-gradient(120% 80% at 50% 0%, rgba(255, 251, 241, .98), rgba(244, 235, 221, .97)); backdrop-filter: blur(14px); opacity: 0; transition: opacity .5s ease; }
+.menu[hidden] { display: none; }
+.menu.is-open { opacity: 1; }
+.menu-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 100%; padding: 104px var(--pad) 48px; text-align: center; }
+.menu-inner::before { content: ""; width: 200px; height: 24px; margin-bottom: 14px; background: url("../../img/ornament.svg") center / contain no-repeat; }
+.menu-main { display: inline-flex; align-items: center; min-height: 52px; font-family: var(--serif); font-size: 1.75rem; color: var(--earth); text-decoration: none; }
+.menu-main:hover { color: var(--gold-deep); }
+.menu-winds { list-style: none; padding: 0; margin: 6px 0 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: min(380px, 100%); }
+.menu-winds a { display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid rgba(176, 138, 76, .45); border-radius: 999px; text-decoration: none; text-align: left; background: rgba(255, 251, 241, .7); }
+.menu-winds img { flex: none; width: 42px; height: 42px; border-radius: 50%; object-fit: cover; outline: 1px solid var(--gold); outline-offset: 2px; }
+.menu-winds span { display: flex; flex-direction: column; font-family: var(--serif); font-style: italic; font-size: 1rem; line-height: 1.2; color: var(--earth); }
+.menu-winds b { font-family: var(--sans); font-style: normal; font-weight: 500; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); }
+.menu-cta { margin-top: 18px; }
+.menu-inner > * { opacity: 0; translate: 0 14px; transition: opacity .6s ease, translate .6s ease; }
+.menu.is-open .menu-inner > * { opacity: 1; translate: 0 0; }
+.menu.is-open .menu-inner > :nth-child(2) { transition-delay: .05s; } .menu.is-open .menu-inner > :nth-child(3) { transition-delay: .1s; }
+.menu.is-open .menu-inner > :nth-child(4) { transition-delay: .15s; } .menu.is-open .menu-inner > :nth-child(5) { transition-delay: .2s; }
+.menu.is-open .menu-inner > :nth-child(6) { transition-delay: .25s; } .menu.is-open .menu-inner > :nth-child(7) { transition-delay: .3s; }
+.menu.is-open .menu-inner > :nth-child(8) { transition-delay: .35s; } .menu.is-open .menu-inner > :nth-child(9) { transition-delay: .4s; }
+
+/* ---------- Herzlich willkommen ---------- */
+.welcome { position: relative; isolation: isolate; min-height: 112vh; display: flex; align-items: center; padding: 16vh var(--pad) 10vh; }
+/* goldener Schein wie im Hintergrund ihres Fotos, läuft in den Himmel aus */
+.welcome::before { content: ""; position: absolute; z-index: -2; inset: -10% 0; pointer-events: none; background: radial-gradient(60% 55% at 72% 50%, rgba(236, 214, 170, .95), rgba(240, 224, 192, .7) 45%, rgba(244, 235, 221, 0) 78%); }
+.welcome-photo { position: absolute; z-index: -1; top: 4vh; bottom: 0; right: 0; width: min(54vw, 860px); }
+.welcome-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .55) 18%, #000 38%), linear-gradient(to bottom, transparent 0, #000 14%, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, .55) 18%, #000 38%), linear-gradient(to bottom, transparent 0, #000 14%, #000 70%, transparent 100%); }
+.welcome-copy { position: relative; width: min(560px, 50vw); margin-left: max(0px, calc((100vw - 1180px) / 2)); }
+.welcome-copy::before { content: ""; position: absolute; z-index: -1; inset: -16% -20%; background: var(--halo-light); pointer-events: none; }
+.welcome-copy :is(h2, p) { text-shadow: var(--glow-light); }
+.welcome-title { font-size: clamp(3rem, 6.4vw, 5.6rem); line-height: 1; margin-bottom: .2em; }
+.welcome-title em { display: block; padding-left: .6em; }
+.welcome-orn { display: block; width: 240px; height: 26px; margin: 0 0 1.6rem; background: url("../../img/ornament.svg") left center / contain no-repeat; }
+.welcome-copy .aside { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+.welcome-sign { margin: 1.4rem 0 .2rem; font-family: var(--serif); font-style: italic; font-size: 1.9rem; color: var(--gold-deep); }
+
+/* ---------- Alles ist Energie: Bühne in warmem Bernstein ---------- */
+.energy-stage { position: relative; isolation: isolate; display: grid; align-items: center; min-height: 110vh; padding: 14vh var(--pad); }
+.energy-stage::before {
+  content: ""; position: absolute; z-index: -2; inset: -18vh 0; pointer-events: none;
+  background:
+    radial-gradient(48% 56% at 70% 50%, rgba(226, 132, 60, .62), rgba(232, 160, 86, .35) 50%, rgba(240, 196, 132, 0) 80%),
+    linear-gradient(to bottom, rgba(244, 235, 221, 0) 0%, rgba(246, 222, 178, .92) 22%, rgba(245, 214, 162, .95) 50%, rgba(246, 222, 178, .92) 78%, rgba(244, 235, 221, 0) 100%);
+}
+.energy-art { position: absolute; z-index: -1; top: 50%; right: max(0px, calc((100vw - 1240px) / 2)); width: min(60vw, 780px); aspect-ratio: 1132 / 1384; margin: 0; transform: translateY(-50%); }
+.energy-art img { width: 100%; height: 100%; object-fit: cover;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 54% 48%, #000 46%, rgba(0, 0, 0, .6) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 54% 48%, #000 46%, rgba(0, 0, 0, .6) 70%, transparent 100%);
+  animation: breathe-art 14s ease-in-out infinite alternate; }
+@keyframes breathe-art { from { scale: 1; } to { scale: 1.035; } }
+.energy-art .glow { position: absolute; left: 53%; top: 23%; width: 40%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(closest-side, rgba(255, 255, 240, .95), rgba(255, 236, 190, .45) 45%, rgba(255, 220, 160, 0)); animation: breathe 7s ease-in-out infinite; }
+.sparks { position: absolute; inset: 0; pointer-events: none; }
+.sparks i { position: absolute; left: var(--x); bottom: 12%; width: 5px; height: 5px; border-radius: 50%; background: radial-gradient(circle, #FFF6DC, rgba(255, 220, 150, 0) 70%); box-shadow: 0 0 10px 2px rgba(255, 226, 160, .7); animation: rise-spark 9s linear infinite; animation-delay: var(--d); opacity: 0; }
+@keyframes rise-spark { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 15% { opacity: 1; } 80% { opacity: .8; } 100% { opacity: 0; transform: translate(18px, -60vh) scale(1.1); } }
+.energy-copy { position: relative; width: min(480px, 44vw); margin-left: max(0px, calc((100vw - 1180px) / 2)); }
+.energy-copy::before { content: ""; position: absolute; z-index: -1; inset: -14% -30% -14% -24%; pointer-events: none; background: radial-gradient(closest-side, rgba(250, 232, 196, .85), rgba(250, 232, 196, .45) 60%, rgba(250, 232, 196, 0)); }
+.energy-title { margin: 0; font-family: var(--serif); font-size: clamp(3rem, 6.6vw, 5.8rem); line-height: .98; letter-spacing: -.01em; text-transform: uppercase; color: #4A2414; }
+.energy-title span { display: block; }
+.energy-rule { display: block; width: 74px; height: 1px; margin: 2.2rem 0 1.6rem; background: #6E3418; }
+.energy-form { font-family: var(--serif); font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.25; color: #2E1A10; margin: 0 0 1.2rem; max-width: 13em; }
+.energy-list { font-family: var(--serif); font-size: clamp(1.15rem, 1.6vw, 1.35rem); line-height: 1.5; color: #4A2E20; margin: 0; }
+.energy-list span { display: block; }
+.energy-close { margin: 0; font-family: var(--serif); font-size: clamp(2.4rem, 4.8vw, 4rem); line-height: 1.02; color: #7A2E12; }
+.energy-close em { font-style: italic; color: #9A4A1C; }
+.intro { padding-top: 10vh; }
+
+/* ---------- Westen: Porträt im Dunkeln, ohne Rahmen ---------- */
+.depth-art img { border-radius: 0; outline: 0; aspect-ratio: auto;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 42%, #000 50%, rgba(0, 0, 0, .5) 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 42%, #000 50%, rgba(0, 0, 0, .5) 75%, transparent 100%); }
+.depth-art { width: min(400px, 80vw); }
+
+/* ---------- Norden: Kolibri-Foto, Fragen daneben ---------- */
+.ask--joy { display: grid; gap: 4vh 5vw; align-items: center; }
+.joy-photo { margin: 0 auto; width: min(400px, 74vw); }
+.joy-photo img { width: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, #000 52%, rgba(0, 0, 0, .55) 76%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, #000 52%, rgba(0, 0, 0, .55) 76%, transparent 100%); }
+@media (min-width: 1000px) {
+  .ask--joy { grid-template-columns: minmax(0, 400px) 1fr; grid-template-areas: "photo label" "photo list" "photo close"; text-align: left; }
+  .ask--joy .joy-photo { grid-area: photo; width: 100%; }
+  .ask--joy > .label { grid-area: label; justify-self: start; align-self: end; }
+  .ask--joy .ask-list { grid-area: list; grid-template-columns: 1fr !important; gap: 10px; }
+  .ask--joy .ask-list li { width: min(440px, 90%) !important; margin: 0 !important; text-align: center; }
+  .ask--joy .ask-list li:nth-child(2) { margin-left: auto !important; }
+  .ask--joy .ask-close { grid-area: close; margin: 2vh 0 0; text-align: left; }
+}
+.duo--flip .painting { width: min(400px, 74vw); }
+
+/* ---------- Osten: Collage vom Gipfel ---------- */
+.eagle-view { position: relative; width: min(1180px, 100%); margin-inline: auto; aspect-ratio: 16 / 9.4; }
+.eagle-view img { position: absolute; object-fit: cover; }
+.eagle-wide { left: 0; bottom: 0; width: 74%; aspect-ratio: 1023 / 450;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, rgba(0, 0, 0, .55) 76%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 52%, rgba(0, 0, 0, .55) 76%, transparent 100%); }
+.eagle-clear { right: 0; top: 0; width: 52%; aspect-ratio: 1023 / 615;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 50%, rgba(0, 0, 0, .55) 74%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 50%, rgba(0, 0, 0, .55) 74%, transparent 100%); }
+
+/* ---------- Passionsblume öffnet sich beim Scrollen ---------- */
+.bloom { display: grid; justify-items: center; gap: 4vh; text-align: center; }
+.bloom-flower { position: relative; width: min(460px, 82vw); aspect-ratio: 1; }
+.bloom-layer { position: absolute; inset: 0; width: 100%; height: 100%; --r: 0%;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--r) * .7), transparent var(--r));
+  mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--r) * .7), transparent var(--r)); }
+.bloom-ring { position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(176, 138, 76, .8); opacity: 0; pointer-events: none; }
+.bloom-text { width: min(620px, 100%); margin: 0; text-shadow: var(--glow-light); }
+.bloom-text em { color: var(--earth); }
+html:not(.js) .bloom-layer { --r: 72%; }
+
+/* ---------- Handy ---------- */
+@media (max-width: 760px) {
+  .welcome { display: block; min-height: 0; padding: 0 0 8vh; }
+  .welcome::before { inset: 0 -10%; background: radial-gradient(80% 50% at 72% 30%, rgba(236, 214, 170, .95), rgba(240, 224, 192, .6) 50%, rgba(244, 235, 221, 0) 85%); }
+  .welcome-photo { position: relative; top: 0; width: 86vw; height: 74vh; margin-left: auto; }
+  .welcome-photo img { object-position: 46% 14%; }
+  .welcome-copy { width: auto; margin: -36vh var(--pad) 0; }
+  .welcome-title { font-size: clamp(2.7rem, 13vw, 3.6rem); max-width: 6em; }
+  .welcome-title em { padding-left: .3em; }
+  .welcome-copy .lead { max-width: 12em; }
+  .welcome-orn { width: 180px; }
+
+  .energy-stage { display: block; min-height: 0; padding: 0 var(--pad) 10vh; }
+  .energy-art { position: relative; top: 0; right: auto; transform: none; width: calc(100% + 2 * var(--pad)); margin: 0 calc(-1 * var(--pad)); }
+  .energy-art img { -webkit-mask-image: radial-gradient(ellipse 54% 50% at 54% 46%, #000 48%, rgba(0, 0, 0, .55) 72%, transparent 100%); mask-image: radial-gradient(ellipse 54% 50% at 54% 46%, #000 48%, rgba(0, 0, 0, .55) 72%, transparent 100%); }
+  .energy-copy { width: auto; margin: -16vh 0 0; }
+  .energy-title { font-size: clamp(2.8rem, 13vw, 3.6rem); }
+  .energy-rule { margin: 1.6rem 0 1.2rem; }
+
+  .eagle-view { aspect-ratio: auto; margin-inline: calc(-1 * var(--pad)); width: auto; }
+  .eagle-view img { position: relative; display: block; width: 100%; }
+  .eagle-clear { margin-bottom: -16%; }
+  .eagle-wide { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .energy-art img, .energy-art .glow, .sparks i { animation: none; }
+  .bloom-layer { --r: 72%; }
+  .menu, .menu-inner > * { transition: none; }
+}
+
+/* ---------- Windübergang v7 ---------- */
+.travel { background: none; }
+.travel-sky { position: absolute; inset: -6%; background: center / cover no-repeat; --r: 0%; --x: 50%; --y: 50%;
+  -webkit-mask-image: radial-gradient(circle at var(--x) var(--y), #000 calc(var(--r) * .55), rgba(0, 0, 0, .6) calc(var(--r) * .8), transparent var(--r)), radial-gradient(circle at calc(var(--x) + 8%) calc(var(--y) - 6%), #000 calc(var(--r) * .4), transparent calc(var(--r) * .9));
+  mask-image: radial-gradient(circle at var(--x) var(--y), #000 calc(var(--r) * .55), rgba(0, 0, 0, .6) calc(var(--r) * .8), transparent var(--r)), radial-gradient(circle at calc(var(--x) + 8%) calc(var(--y) - 6%), #000 calc(var(--r) * .4), transparent calc(var(--r) * .9));
+  will-change: transform, filter; }
+.travel canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ---------- Über mich v7: Fotos ohne Rahmen ---------- */
+.about-photo::before { display: none; }
+.about-photo img, .photos-one img, .travel-photo img { border-radius: 0; outline: 0; box-shadow: none;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, #000 54%, rgba(0, 0, 0, .55) 77%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, #000 54%, rgba(0, 0, 0, .55) 77%, transparent 100%); }
+.about-photo { width: min(560px, 92vw); }
+.about-photo img { aspect-ratio: auto; }
+.photos-one { width: min(440px, 86vw); }
+.photos-one img { aspect-ratio: auto; }
+.journeys { display: grid; gap: 4vh 4vw; align-items: center; width: min(1180px, 100%); margin-inline: auto; }
+@media (min-width: 900px) { .journeys { grid-template-columns: 1fr 1fr; } .journeys .travel-photo:last-child { margin-top: 18vh; } }
+.travel-photo { margin: 0 auto; width: min(520px, 90vw); }
+.travel-photo figcaption { margin-top: -2vh; text-align: center; font-family: var(--serif); font-style: italic; color: var(--gold-deep); text-shadow: var(--glow-light); }
+
+/* ---------- v7 Feinschliff ---------- */
+html:not(.js) .bloom-layer { --r: 100%; }
+@media (prefers-reduced-motion: reduce) { .bloom-layer { --r: 100%; } }
+.bloom-flower { filter: drop-shadow(0 18px 30px rgba(60, 40, 90, .18)); }
+
+/* Alles ist Energie: das Gemälde kommt vom rechten Rand und fließt nach links ins Licht */
+.energy-stage { min-height: 112vh; }
+.energy-stage::before {
+  background:
+    radial-gradient(42% 60% at 78% 50%, rgba(224, 128, 56, .7), rgba(230, 150, 76, .45) 45%, rgba(240, 190, 120, 0) 82%),
+    linear-gradient(to bottom, rgba(244, 235, 221, 0) 0%, rgba(246, 222, 178, .94) 20%, rgba(245, 212, 160, .96) 50%, rgba(246, 222, 178, .94) 80%, rgba(244, 235, 221, 0) 100%);
+}
+.energy-art { top: 0; bottom: 0; right: 0; height: 100%; width: auto; transform: none; }
+.energy-art img { object-fit: contain;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .35) 16%, rgba(0, 0, 0, .85) 34%, #000 48%), linear-gradient(to bottom, transparent 0%, #000 16%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .35) 16%, rgba(0, 0, 0, .85) 34%, #000 48%), linear-gradient(to bottom, transparent 0%, #000 16%, #000 82%, transparent 100%); }
+
+@media (max-width: 760px) {
+  .energy-art { position: relative; top: auto; bottom: auto; right: auto; height: auto; width: calc(100% + 2 * var(--pad)); }
+  .energy-art img { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 58%, transparent 96%), linear-gradient(to right, transparent 0%, #000 10%, #000 92%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 58%, transparent 96%), linear-gradient(to right, transparent 0%, #000 10%, #000 92%, transparent 100%); }
+  .energy-stage::before { background: radial-gradient(70% 34% at 55% 26%, rgba(224, 128, 56, .6), rgba(240, 190, 120, 0) 80%), linear-gradient(to bottom, rgba(244, 235, 221, 0) 0%, rgba(246, 222, 178, .94) 10%, rgba(245, 212, 160, .96) 50%, rgba(246, 222, 178, .94) 86%, rgba(244, 235, 221, 0) 100%); }
+  .energy-copy { margin-top: -20vh; }
+
+  /* Willkommen: Foto seitlich rechts, Text links darüber, wie in ihrem Bild */
+  .welcome-photo { width: 74vw; height: 66vh; }
+  .welcome-photo img { object-position: 50% 12%; }
+  .welcome-copy { margin-top: -30vh; }
+  .welcome-title { max-width: 5.4em; }
+}
+/* Handy: Schriftzug, Kennenlernen und Menü passen nebeneinander */
+@media (max-width: 600px) {
+  .bar { padding-inline: 14px; gap: 8px; }
+  .bar-brand { gap: 6px; }
+  .bar-brand img:first-child { height: 28px; }
+  .bar-word { height: 13px; }
+  .bar-cta { min-height: 40px; padding: 6px 12px; font-size: .6rem; letter-spacing: .12em; }
+  .menu-btn { width: 40px; height: 40px; margin-left: 2px; }
+  .menu-btn span { left: 12px; right: 12px; }
+  .menu-btn span:nth-child(1) { top: 14px; } .menu-btn span:nth-child(2) { top: 19px; right: 16px; } .menu-btn span:nth-child(3) { top: 24px; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1), .menu-btn[aria-expanded="true"] span:nth-child(3) { top: 19px; }
+}
+.energy-stage + .intro { padding-top: 4vh; }
+@media (max-width: 760px) { .energy-stage { padding-bottom: 2vh; } .energy-stage::before { inset: -12vh 0 -6vh; } }
+.bar.menu-open ~ .journey, .bar.menu-open ~ .rose { opacity: 0; pointer-events: none; }

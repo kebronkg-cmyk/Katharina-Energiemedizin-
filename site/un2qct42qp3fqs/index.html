@@ -52,10 +52,29 @@
     <nav class="bar-nav" aria-label="Hauptnavigation">
       <a href="#kompass">Das Medizinrad</a>
       <a href="#begleitungen">Begleitungen</a>
+      <a href="#preise">Preise</a>
       <a href="ueber-mich/">Über mich</a>
     </nav>
     <a class="btn btn--ghost bar-cta" href="#kennenlernen">Kennenlernen</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
   </header>
+
+  <nav id="menu" class="menu" aria-label="Menü" hidden>
+    <div class="menu-inner">
+      <a class="menu-main" href="#kompass">Das Medizinrad</a>
+      <ul class="menu-winds">
+        <li><a href="#sueden"><img src="../v3/img/medaillon-sueden.webp" alt="" width="640" height="640"><span><b>1 · Süden</b>Loslassen</span></a></li>
+        <li><a href="#westen"><img src="../v3/img/medaillon-westen.webp" alt="" width="640" height="640"><span><b>2 · Westen</b>Tiefer schauen</span></a></li>
+        <li><a href="#norden"><img src="../v3/img/medaillon-norden.webp" alt="" width="640" height="640"><span><b>3 · Norden</b>Lebensfreude</span></a></li>
+        <li><a href="#osten"><img src="../v3/img/medaillon-osten.webp" alt="" width="640" height="640"><span><b>4 · Osten</b>Neu beginnen</span></a></li>
+      </ul>
+      <a class="menu-main" href="#begleitungen">Begleitungen</a>
+      <a class="menu-main" href="#preise">Preise</a>
+      <a class="menu-main" href="ueber-mich/">Über mich</a>
+      <a class="menu-main" href="#fragen">Häufige Fragen</a>
+      <a class="btn btn--solid menu-cta" href="#kennenlernen">Kennenlernen</a>
+    </div>
+  </nav>
 
   <nav class="rose" aria-label="Wo du gerade bist">
     <a href="#ankommen" data-for="ankommen"><span>Mitte</span></a>
@@ -86,27 +105,41 @@
       </div>
     </section>
 
-    <section id="wahrnehmen" class="intro">
-      <div class="intro-open rise">
-        <p class="label">Ankommen</p>
-        <p class="display">Spürst du, dass sich etwas in deinem Leben <em>verändern möchte?</em></p>
-        <p class="soft">Ich begleite dich mit schamanischer Energiearbeit, feiner Körperwahrnehmung und kreativem Ausdruck. Achtsam und in deinem Tempo.</p>
+    <!-- ============ WILLKOMMEN ============ -->
+    <section id="willkommen" class="welcome">
+      <div class="welcome-photo"><img src="../img/willkommen.webp" alt="Katharina mit langem roten Haar und Haarband, lächelnd" width="849" height="1206"></div>
+      <div class="welcome-copy">
+        <h2 class="welcome-title rise">Herzlich <em>willkommen</em></h2>
+        <span class="welcome-orn rise" aria-hidden="true"></span>
+        <p class="lead rise">Spürst du, dass sich etwas in deinem Leben verändern möchte?</p>
+        <p class="aside rise">Ich begleite dich in deinem persönlichen Veränderungsprozess, mit Energie- und Körperarbeit.</p>
+        <p class="rise">In meiner Arbeit verbinde ich schamanische Energiearbeit mit feiner Körperwahrnehmung und kreativer Integration. Gemeinsam schauen wir auf das, was unter der Oberfläche wirkt, und schaffen Raum für Klarheit, Wandlung und neue Lebendigkeit.</p>
+        <p class="welcome-sign rise">Katharina</p>
+        <a class="textlink rise" href="ueber-mich/">Mehr über mich <span aria-hidden="true">→</span></a>
       </div>
+    </section>
 
-      <div class="energy">
-        <figure class="painting painting--glow rise">
-          <img src="../img/gemaelde-gesicht.webp" alt="Farbintensives Gemälde eines Gesichts mit einem Licht auf der Stirn" width="566" height="692" loading="lazy">
-          <span class="glow" aria-hidden="true"></span>
-          <figcaption>„Alles ist Energie“ · gemalt von Katharina</figcaption>
-        </figure>
-        <div class="energy-text">
-          <p class="label rise">Alles ist Energie</p>
-          <h2 class="rise">Veränderung beginnt dort, wo wir anfangen, <em>uns selbst wahrzunehmen.</em></h2>
-          <p class="soft rise">Energie ist nichts Fremdes. Sie zeigt sich in deiner Wahrnehmung, oft lange bevor du Worte dafür hast.</p>
-          <p class="lead rise">Alles, was Form annimmt, ist auch Energie.</p>
-          <p class="elements rise"><span>Mensch.</span> <span>Tier.</span> <span>Pflanze.</span> <span>Wasser.</span> <span>Erde.</span> <span>Berge.</span> <span>Steine.</span></p>
-          <p class="aside rise">Energie ist in allem.</p>
-        </div>
+    <!-- ============ ALLES IST ENERGIE ============ -->
+    <section id="energie" class="energy-stage">
+      <figure class="energy-art">
+        <img src="../img/gemaelde-gesicht-gross.webp" alt="Farbintensives Gemälde eines Gesichts mit einem Licht auf der Stirn, gemalt von Katharina" width="1132" height="1384" loading="lazy">
+        <span class="glow" aria-hidden="true"></span>
+        <span class="sparks" aria-hidden="true"><i style="--x:12%;--d:0s"></i><i style="--x:28%;--d:-2.4s"></i><i style="--x:41%;--d:-5s"></i><i style="--x:57%;--d:-1.2s"></i><i style="--x:66%;--d:-3.6s"></i><i style="--x:78%;--d:-6.2s"></i><i style="--x:88%;--d:-4.4s"></i><i style="--x:35%;--d:-7s"></i><i style="--x:72%;--d:-0.6s"></i></span>
+      </figure>
+      <div class="energy-copy">
+        <p class="energy-title rise">Alles ist <span>Energie.</span></p>
+        <span class="energy-rule rise" aria-hidden="true"></span>
+        <p class="energy-form rise">Alles, was Form annimmt, ist auch Energie.</p>
+        <p class="energy-list rise"><span>Mensch. Tier. Pflanze.</span> <span>Wasser. Erde.</span> <span>Berge. Steine.</span></p>
+        <span class="energy-rule rise" aria-hidden="true"></span>
+        <p class="energy-close rise">Energie ist in <em>allem.</em></p>
+      </div>
+    </section>
+
+    <section id="wahrnehmen" class="intro">
+      <div class="intro-split">
+        <h2 class="rise">Veränderung beginnt dort, wo wir anfangen, <em>uns selbst wahrzunehmen.</em></h2>
+        <p class="soft rise">Energie ist nichts Fremdes. Sie zeigt sich in deiner Wahrnehmung, oft lange bevor du Worte dafür hast.</p>
       </div>
 
       <ol class="cascade">
@@ -132,21 +165,6 @@
       </div>
 
       <p class="display display--center rise">Dann bist du <em>hier richtig.</em></p>
-    </section>
-
-    <!-- ============ KATHARINA ============ -->
-    <section id="katharina" class="person">
-      <figure class="person-photo rise">
-        <img src="../img/portrait-meer.webp" alt="Katharina am Meer, das Haar weht im Wind" width="900" height="1592" loading="lazy">
-      </figure>
-      <div class="person-text rise">
-        <p class="label">Über mich</p>
-        <h2>Ich bin <em>Katharina.</em></h2>
-        <p class="lead">Mutter von drei erwachsenen Kindern, viele Jahre pädagogisch tätig und selbst durch Krisen gegangen.</p>
-        <p>Mein Weg hat mich zur Energiearbeit der Anden und des Amazonas geführt. Heute begleite ich Menschen auf ihrem eigenen Weg.</p>
-        <p class="aside">Veränderung kann niemand für dich machen. Die einzige Person, die wirklich verändern kann, bist du selbst. Ich begleite dich dabei.</p>
-        <a class="textlink" href="ueber-mich/">Mehr über mich <span aria-hidden="true">→</span></a>
-      </div>
     </section>
 
     <!-- ============ MEDIZINRAD ============ -->
@@ -175,25 +193,25 @@
         <a class="wind-card" href="#westen" data-wind="westen" style="grid-area: w">
           <span class="medal"><img src="../v3/img/medaillon-westen.webp" alt="" width="640" height="640" loading="lazy"></span>
           <span class="wind-card-dir"><b class="wind-card-no">2</b>Westen</span>
-          <span class="wind-card-sub">Jaguar · Mut</span>
+          <span class="wind-card-sub">Jaguar · Tiefer schauen</span>
         </a>
         <a class="wind-card" href="#osten" data-wind="osten" style="grid-area: e">
           <span class="medal"><img src="../v3/img/medaillon-osten.webp" alt="" width="640" height="640" loading="lazy"></span>
           <span class="wind-card-dir"><b class="wind-card-no">4</b>Osten</span>
-          <span class="wind-card-sub">Adler · Vision</span>
+          <span class="wind-card-sub">Adler · Neu beginnen</span>
         </a>
         <a class="wind-card" href="#sueden" data-wind="sueden" style="grid-area: s">
           <span class="medal"><img src="../v3/img/medaillon-sueden.webp" alt="" width="640" height="640" loading="lazy"></span>
           <span class="wind-card-dir"><b class="wind-card-no">1</b>Süden</span>
-          <span class="wind-card-sub">Schlange · Wandlungskraft</span>
+          <span class="wind-card-sub">Schlange · Loslassen</span>
         </a>
       </div>
 
       <ol class="qualities">
-        <li class="rise"><span class="q-no">1</span><span class="q-dir">Süden · Die Schlange</span><span class="q-word">Wandlungskraft</span><span class="q-text">Die Schlange lädt dich ein, deine alte Haut abzustreifen und Altes loszulassen.</span></li>
-        <li class="rise"><span class="q-no">2</span><span class="q-dir">Westen · Der Jaguar</span><span class="q-word">Mut</span><span class="q-text">Der Jaguar ermutigt dich, deinen Ängsten und Schatten zu begegnen.</span></li>
+        <li class="rise"><span class="q-no">1</span><span class="q-dir">Süden · Die Schlange</span><span class="q-word">Loslassen</span><span class="q-text">Die Schlange lädt dich ein, deine alte Haut abzustreifen und Altes loszulassen.</span></li>
+        <li class="rise"><span class="q-no">2</span><span class="q-dir">Westen · Der Jaguar</span><span class="q-word">Tiefer schauen</span><span class="q-text">Der Jaguar ermutigt dich, deinen Ängsten und Schatten zu begegnen.</span></li>
         <li class="rise"><span class="q-no">3</span><span class="q-dir">Norden · Der Kolibri</span><span class="q-word">Lebensfreude</span><span class="q-text">Der Kolibri erinnert dich daran, das Schöne im Leben wahrzunehmen und Dankbarkeit zu empfinden.</span></li>
-        <li class="rise"><span class="q-no">4</span><span class="q-dir">Osten · Der Adler</span><span class="q-word">Vision</span><span class="q-text">Der Adler inspiriert dich, eine höhere Perspektive einzunehmen und dich nicht im Detail zu verlieren.</span></li>
+        <li class="rise"><span class="q-no">4</span><span class="q-dir">Osten · Der Adler</span><span class="q-word">Neu beginnen</span><span class="q-text">Der Adler inspiriert dich, eine höhere Perspektive einzunehmen und dich nicht im Detail zu verlieren.</span></li>
       </ol>
 
       <div class="compass-start rise">
@@ -208,7 +226,7 @@
       <header class="wind-head at-left">
         <p class="wind-dir"><b>1</b> Der Wind des Südens</p>
         <h2 class="wind-name">Die Schlange</h2>
-        <p class="wind-theme">Wandlungskraft</p>
+        <p class="wind-theme">Loslassen</p>
         <p class="lead">Die Schlange erinnert dich daran: Du darfst dich verändern. Du musst nicht bleiben, wer du einmal warst.</p>
         <p class="soft">Alte Geschichten, alte Rollen, alte Häute. Sie dürfen abgestreift werden.</p>
       </header>
@@ -271,7 +289,7 @@
       <header class="wind-head at-right">
         <p class="wind-dir"><b>2</b> Der Wind des Westens</p>
         <h2 class="wind-name">Der Jaguar</h2>
-        <p class="wind-theme">Mut</p>
+        <p class="wind-theme">Tiefer schauen</p>
         <p class="lead">Der Jaguar kennt keine Angst vor der Dunkelheit. Er geht hinein.</p>
         <p class="soft">Dort, wo wir sonst ausweichen, beginnt Wandlung. Still. Wach. Unausweichlich.</p>
       </header>
@@ -341,7 +359,8 @@
         <p class="soft">Er lädt dich ein, dir Leichtigkeit zu erlauben. Und lebensfroh zu sein.</p>
       </header>
 
-      <div class="ask">
+      <div class="ask ask--joy">
+        <figure class="joy-photo rise"><img src="../img/kolibri-freude.webp" alt="Katharina in Weiß an einer Säule, die Arme voller Freude in die Höhe gestreckt" width="818" height="1785" loading="lazy"></figure>
         <p class="label rise">Eine Inspiration für uns alle</p>
         <ul class="ask-list">
           <li class="rise"><b>Wofür willst du Danke sagen?</b> Was stimmt dich fröhlich? Wann hast du zuletzt einen Moment der Schönheit wirklich zu deinem gemacht?</li>
@@ -387,10 +406,15 @@
       <header class="wind-head at-right">
         <p class="wind-dir"><b>4</b> Der Wind des Ostens</p>
         <h2 class="wind-name">Der Adler</h2>
-        <p class="wind-theme">Vision</p>
+        <p class="wind-theme">Neu beginnen</p>
         <p class="lead">Der Adler steht für Klarheit und Fokus. Für den Blick von oben.</p>
         <p class="soft">Er sieht das Ganze. Und er erkennt das Wesentliche.</p>
       </header>
+
+      <div class="eagle-view" aria-label="Katharina auf einem Berggipfel über den Alpen">
+        <img class="eagle-wide" src="../img/adler-weit.webp" alt="Katharina breitet auf dem Gipfel die Arme aus wie Flügel, dahinter verschneite Berge" width="1023" height="450" loading="lazy">
+        <img class="eagle-clear" src="../img/adler-klar.webp" alt="Katharina mit Mütze und Schal schaut klar in die Ferne, hinter ihr die Alpen" width="1023" height="615" loading="lazy">
+      </div>
 
       <div class="fog fog--right">
         <div class="fog-inner rise">
@@ -475,13 +499,13 @@
         </div>
         <div class="wheel-q" data-wind="sueden" style="grid-area: s">
           <span class="wheel-medal"><img src="../v3/img/medaillon-sueden.webp" alt="" width="640" height="640" loading="lazy"></span>
-          <p class="wheel-dir"><b>1</b> Süden · Wandlungskraft</p>
+          <p class="wheel-dir"><b>1</b> Süden · Loslassen</p>
           <button class="wheel-item" type="button" data-offer="cord-cutting">Cord Cutting</button>
           <button class="wheel-item" type="button" data-offer="entkopplung">Entkopplung</button>
         </div>
         <div class="wheel-q" data-wind="westen" style="grid-area: w">
           <span class="wheel-medal"><img src="../v3/img/medaillon-westen.webp" alt="" width="640" height="640" loading="lazy"></span>
-          <p class="wheel-dir"><b>2</b> Westen · Mut</p>
+          <p class="wheel-dir"><b>2</b> Westen · Tiefer schauen</p>
           <button class="wheel-item" type="button" data-offer="rollen">Täter-Opfer-Retter-Dreieck</button>
           <button class="wheel-item" type="button" data-offer="extraktion">Extraktion</button>
         </div>
@@ -492,7 +516,7 @@
         </div>
         <div class="wheel-q" data-wind="osten" style="grid-area: e">
           <span class="wheel-medal"><img src="../v3/img/medaillon-osten.webp" alt="" width="640" height="640" loading="lazy"></span>
-          <p class="wheel-dir"><b>4</b> Osten · Vision</p>
+          <p class="wheel-dir"><b>4</b> Osten · Neu beginnen</p>
           <button class="wheel-item" type="button" data-offer="landkarte">Arbeit mit deiner inneren Landkarte</button>
         </div>
       </div>
@@ -520,6 +544,16 @@
         </div>
       </div>
 
+      <div class="bloom">
+        <div class="bloom-flower" aria-hidden="true">
+          <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
+          <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
+          <img class="bloom-layer" src="../img/passionsblume-frei.webp" alt="" width="720" height="720" loading="lazy">
+          <span class="bloom-ring"></span><span class="bloom-ring"></span>
+        </div>
+        <p class="aside bloom-text">Wie die Passionsblume sich Schicht für Schicht öffnet, entfaltet sich auch Veränderung in ihrem eigenen Rhythmus. <em>Von innen heraus.</em></p>
+      </div>
+
       <div class="fog fog--right">
         <div class="fog-inner rise">
           <p class="label">Klar. Achtsam. In deinem Tempo.</p>
@@ -535,7 +569,7 @@
         </div>
       </div>
 
-      <div class="prices-wrap rise">
+      <div id="preise" class="prices-wrap rise">
         <p class="display display--center">Zeit für dich. <em>Raum für Veränderung.</em></p>
         <p class="prices-hint" aria-hidden="true">← wischen →</p>
         <div class="prices">
@@ -723,6 +757,7 @@
     <nav class="foot-nav" aria-label="Weitere Seiten">
       <a href="ueber-mich/">Über mich</a>
       <a href="#begleitungen">Begleitungen</a>
+      <a href="#preise">Preise</a>
       <a href="#fragen">Häufige Fragen</a>
       <a href="#kennenlernen">Kennenlernen</a>
       <a href="impressum/">Impressum</a>

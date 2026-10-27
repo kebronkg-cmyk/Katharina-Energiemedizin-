@@ -11,6 +11,10 @@
   <link rel="preload" href="../../fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/v6.css">
+  <script src="../../v3/js/vendor/gsap.min.js" defer></script>
+  <script src="../../v3/js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../../v3/js/vendor/lenis.min.js" defer></script>
+  <script src="../js/sub.js" defer></script>
 </head>
 <body class="sub">
   <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -30,10 +34,29 @@
     <nav class="bar-nav" aria-label="Hauptnavigation">
       <a href="../#kompass">Das Medizinrad</a>
       <a href="../#begleitungen">Begleitungen</a>
+      <a href="../#preise">Preise</a>
       <a href="../ueber-mich/">Über mich</a>
     </nav>
     <a class="btn btn--ghost bar-cta" href="../#kennenlernen">Kennenlernen</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
   </header>
+
+  <nav id="menu" class="menu" aria-label="Menü" hidden>
+    <div class="menu-inner">
+      <a class="menu-main" href="../#kompass">Das Medizinrad</a>
+      <ul class="menu-winds">
+        <li><a href="../#sueden"><img src="../../v3/img/medaillon-sueden.webp" alt="" width="640" height="640"><span><b>1 · Süden</b>Loslassen</span></a></li>
+        <li><a href="../#westen"><img src="../../v3/img/medaillon-westen.webp" alt="" width="640" height="640"><span><b>2 · Westen</b>Tiefer schauen</span></a></li>
+        <li><a href="../#norden"><img src="../../v3/img/medaillon-norden.webp" alt="" width="640" height="640"><span><b>3 · Norden</b>Lebensfreude</span></a></li>
+        <li><a href="../#osten"><img src="../../v3/img/medaillon-osten.webp" alt="" width="640" height="640"><span><b>4 · Osten</b>Neu beginnen</span></a></li>
+      </ul>
+      <a class="menu-main" href="../#begleitungen">Begleitungen</a>
+      <a class="menu-main" href="../#preise">Preise</a>
+      <a class="menu-main" href="../ueber-mich/">Über mich</a>
+      <a class="menu-main" href="../#fragen">Häufige Fragen</a>
+      <a class="btn btn--solid menu-cta" href="../#kennenlernen">Kennenlernen</a>
+    </div>
+  </nav>
 
   <main id="main">
     <section class="page-head">
