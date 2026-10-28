@@ -28,18 +28,35 @@
   var light = document.querySelector(".g-light");
   if (light && light.showModal) {
     var big = light.querySelector("img"), cap = light.querySelector(".g-cap"), from = null;
-    document.querySelectorAll(".g-open").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var img = btn.querySelector("img");
-        big.src = img.currentSrc || img.src; big.alt = img.alt;
-        cap.textContent = btn.parentElement.querySelector("figcaption").textContent;
-        from = btn; light.showModal();
-      });
+    // per Delegation, damit auch die verdoppelten Bilder der Galerie-Reihen reagieren
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest(".g-open");
+      if (!btn) return;
+      var img = btn.querySelector("img");
+      big.src = img.currentSrc || img.src; big.alt = img.alt;
+      var fc = btn.parentElement.querySelector("figcaption");
+      cap.textContent = fc ? Array.prototype.map.call(fc.children.length ? fc.children : [fc], function (x) { return x.textContent; }).join(" · ") : "";
+      from = btn; light.showModal();
     });
     function close() { light.close(); if (from) from.focus({ preventScroll: true }); }
     light.querySelector(".g-close").addEventListener("click", close);
     light.addEventListener("click", function (e) { if (e.target === light) close(); });
   }
+
+  // Galerie: jede Reihe einmal verdoppeln, damit sie endlos und ohne Sprung weiterzieht
+  document.querySelectorAll(".gw-track").forEach(function (track) {
+    var items = Array.prototype.slice.call(track.children);
+    items.forEach(function (it) {
+      var c = it.cloneNode(true);
+      c.setAttribute("aria-hidden", "true");
+      c.querySelector("button").tabIndex = -1;
+      track.appendChild(c);
+    });
+    track.style.setProperty("--dur", Math.round(items.length * 13) + "s");
+    var row = track.parentElement;
+    row.addEventListener("touchstart", function () { row.classList.add("is-held"); }, { passive: true });
+    row.addEventListener("touchend", function () { setTimeout(function () { row.classList.remove("is-held"); }, 1500); }, { passive: true });
+  });
 
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);

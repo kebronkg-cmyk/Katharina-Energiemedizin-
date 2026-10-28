@@ -170,23 +170,33 @@
     var steps = gsap.utils.toArray(".bloom-step", wrap);
 
     var seq = { f: 0 };
-    // die Blüte beginnt sich schon beim Hereinscrollen zu öffnen und ist offen, kurz bevor es weitergeht
-    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top 55%", end: "bottom bottom", scrub: .5 } });
-    tl.to(seq, { f: COUNT - 1, ease: "power1.inOut", duration: .94, onUpdate: function () { pos = seq.f; request(); } }, 0)
-      .fromTo(".bloom-view", { scale: .9 }, { scale: 1, ease: "none", duration: .94 }, 0)
-      .to({}, { duration: .06 }, .94);
+    // Am Anfang ist die Knospe geschlossen. Sie öffnet sich parallel zum Text und ist erst
+    // beim letzten Satz vollständig offen.
+    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: .5 } });
+    tl.to({}, { duration: .06 }, 0)
+      .to(seq, { f: COUNT - 1, ease: "none", duration: .8, onUpdate: function () { pos = seq.f; request(); } }, .06)
+      .fromTo(".bloom-view", { scale: .92 }, { scale: 1, ease: "none", duration: .8 }, .06)
+      .to({}, { duration: .14 }, .86);
+    var at = [.02, .24, .46, .8];
     if (small) {
       gsap.set(steps, { autoAlpha: 0, y: 14 });
-      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .1 }, .12).to(steps[0], { autoAlpha: 0, y: -14, duration: .07 }, .42)
-        .to(steps[1], { autoAlpha: 1, y: 0, duration: .1 }, .47).to(steps[1], { autoAlpha: 0, y: -14, duration: .07 }, .7)
-        .to(steps[2], { autoAlpha: 1, y: 0, duration: .1 }, .75);
+      steps.forEach(function (st, i) {
+        tl.to(st, { autoAlpha: 1, y: 0, duration: .06 }, at[i]);
+        if (i < steps.length - 1) tl.to(st, { autoAlpha: 0, y: -14, duration: .05 }, at[i + 1] - .06);
+      });
     } else {
       gsap.set(steps, { autoAlpha: 0, y: 22 });
-      tl.to(steps[0], { autoAlpha: 1, y: 0, duration: .14 }, .08)
-        .to(steps[1], { autoAlpha: 1, y: 0, duration: .14 }, .36)
-        .to(steps[2], { autoAlpha: 1, y: 0, duration: .14 }, .62);
+      steps.forEach(function (st, i) { tl.to(st, { autoAlpha: 1, y: 0, duration: .1 }, at[i]); });
     }
   })();
+
+  // ---------- WhatsApp: erscheint erst, wenn eine Nummer hinterlegt ist ----------
+  document.querySelectorAll(".wa-link").forEach(function (a) {
+    var n = (a.dataset.wa || "").replace(/\D/g, "");
+    if (!n) return;
+    a.href = "https://wa.me/" + n;
+    document.querySelectorAll(".wa-row").forEach(function (r) { r.hidden = false; });
+  });
 
   // ---------- Windrose, Leiste und Wegweiser: wo bin ich ----------
   var bar = document.querySelector(".bar");
