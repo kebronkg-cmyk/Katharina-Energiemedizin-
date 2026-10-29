@@ -203,17 +203,13 @@
     img.addEventListener("error", function () { img.style.opacity = ""; }, { once: true });
   });
 
-  // ---------- Kontaktformular: öffnet WhatsApp mit der fertigen Nachricht ----------
-  var form = document.querySelector("form[data-wa]");
+  // ---------- Kontaktformular: öffnet das E-Mail-Programm mit der fertigen Nachricht ----------
+  var form = document.querySelector("form[data-mail]");
   if (form) form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var f = form.elements, lines = ["Hallo Katharina, ich interessiere mich für ein kostenloses Erstgespräch.", ""];
-    function add(label, v) { v = (v || "").trim(); if (v) lines.push(label + ": " + v); }
-    add("Name", f.name.value); add("E-Mail", f.email.value); add("Telefon", f.telefon.value); add("Wunschzeitraum", f.wunschzeitraum.value);
-    if (f.nachricht.value.trim()) lines.push("", f.nachricht.value.trim());
-    var url = "https://wa.me/" + form.dataset.wa + "?text=" + encodeURIComponent(lines.join("\n"));
-    var w = window.open(url, "_blank", "noopener");
-    if (!w) window.location.href = url;
+    var f = form.elements;
+    var body = "Name: " + f.name.value.trim() + "\nErreichbar unter: " + f.kontakt.value.trim() + "\n\n" + f.nachricht.value.trim();
+    window.location.href = "mailto:" + form.dataset.mail + "?subject=" + encodeURIComponent("Nachricht über die Website") + "&body=" + encodeURIComponent(body);
   });
 
   // ---------- WhatsApp: erscheint erst, wenn eine Nummer hinterlegt ist ----------

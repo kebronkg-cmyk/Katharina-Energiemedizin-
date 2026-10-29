@@ -2012,3 +2012,12 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 /* Porträt in „Von der Fantasie zur Brücke“ */
 .bridge-portrait { width: min(560px, 90vw); }
 .bridge-portrait img { filter: sepia(.12); }
+
+/* Kontakt: Einleitung im Formular, WhatsApp und Ort in der Kontaktspalte */
+.letter h3 { margin-bottom: .6rem; }
+.letter .letter-intro { margin: 0 0 .5rem; font-size: .95rem; line-height: 1.55; color: #5C4F45; }
+.letter .letter-intro + .field { margin-top: 1.4rem; }
+.letter .field-hint { margin: -6px 0 20px; }
+.meet-contact .meet-wa-text { display: block; font-family: var(--serif); font-style: italic; font-size: 1.05rem; line-height: 1.5; color: var(--earth); }
+.meet-contact .wa-btn { margin-top: .9rem; }
+.meet-contact .meet-place { display: block; font-family: var(--serif); font-size: 1.15rem; line-height: 1.5; color: var(--earth); }
