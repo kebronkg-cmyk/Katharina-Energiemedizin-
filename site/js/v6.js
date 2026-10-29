@@ -98,7 +98,7 @@
     var canvas = wrap.querySelector(".bloom-canvas"), ctx = canvas.getContext("2d");
     var COUNT = +wrap.dataset.frames || 95;
     var small = window.matchMedia("(max-width: 760px)").matches;
-    var dir = "assets/bloom-frames/" + (small ? "480" : "880") + "/f";
+    var dir = "assets/bloom-frames/" + (small ? "880" : "1160") + "/f";
     var frames = new Array(COUNT), started = false, pos = 0, shown = -1, queued = false;
     function src(i) { return dir + String(i + 1).padStart(3, "0") + ".webp"; }
     function load(i) {
@@ -168,21 +168,20 @@
     } else preloadAll();
 
     var steps = gsap.utils.toArray(".bloom-step", wrap);
-
+    var copy = wrap.querySelector(".bloom-copy");
     var seq = { f: 0 };
-    // Am Anfang ist die Knospe geschlossen. Sie öffnet sich parallel zum Text und ist erst
-    // beim letzten Satz vollständig offen.
-    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: 1 } });
-    tl.to({}, { duration: .06 }, 0)
-      .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: .8, onUpdate: function () { pos = seq.f; request(); } }, .06)
-      .fromTo(".bloom-view", { scale: .92 }, { scale: 1, ease: "sine.inOut", duration: .8 }, .06)
-      .to({}, { duration: .14 }, .86);
-    // ein Abschnitt nach dem anderen, gut lesbar; der letzte Satz, wenn die Blüte ganz offen ist
-    var at = [.08, .26, .42, .6, .8];
-    gsap.set(steps, { autoAlpha: 0, y: small ? 14 : 20 });
-    steps.forEach(function (st, i) {
-      tl.to(st, { autoAlpha: 1, y: 0, duration: .06 }, at[i]);
-      if (i < steps.length - 1) tl.to(st, { autoAlpha: 0, y: -14, duration: .05 }, at[i + 1] - .06);
+    // Die Blüte steht fest, der Text scrollt ganz normal vorbei. Die Blüte öffnet sich mit dem
+    // Lesefortschritt: geschlossen beim ersten Satz, ganz offen beim letzten.
+    gsap.timeline({ scrollTrigger: { trigger: copy, start: "top 70%", end: "bottom 75%", scrub: .6 } })
+      .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: 1, onUpdate: function () { pos = seq.f; request(); } }, 0)
+      .fromTo(".bloom-view canvas", { scale: .94 }, { scale: 1, ease: "sine.inOut", duration: 1 }, 0)
+      // Lichtkreise öffnen sich Schicht für Schicht
+      .fromTo(".bl-r1", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .1)
+      .fromTo(".bl-r2", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .35)
+      .fromTo(".bl-r3", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .6);
+    // der Abschnitt, der gerade gelesen wird, ist hell, die anderen ruhen
+    steps.forEach(function (st) {
+      ScrollTrigger.create({ trigger: st, start: "top 68%", end: "bottom 32%", toggleClass: "is-on" });
     });
   })();
 

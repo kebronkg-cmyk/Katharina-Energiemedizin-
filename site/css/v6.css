@@ -1709,7 +1709,7 @@ img { -webkit-user-drag: none; }
 .bloom-stage::after { content: ""; position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: 56%; pointer-events: none;
   background: linear-gradient(to bottom, rgba(214, 226, 190, 0), rgba(206, 222, 178, .36) 45%, rgba(202, 219, 172, .34) 68%, rgba(214, 226, 190, 0)); }
 .bloom-stage { isolation: isolate; }
-@media (max-width: 760px) { .bloom-scroll { height: 270vh; }
+.bloom-scroll { height: 270vh; }
 @media (max-width: 760px) { .bloom-scroll { height: 300vh; } }
 html:not(.js) .bloom-scroll { height: auto; }
 @media (prefers-reduced-motion: reduce) { .bloom-scroll { height: auto; } }
@@ -1912,3 +1912,70 @@ html:not(.js) .bloom-step { position: static; translate: none; }
   .bloom-canvas { width: min(460px, 118vw); }
   .bloom-copy { min-height: 9.5em; margin-top: 4px; }
 }
+
+/* =====================================================================
+   Heilung, neu: die Blüte steht fest, der Text scrollt ganz normal
+   daneben (Computer) bzw. darunter (Handy) vorbei. Gartenlicht und
+   Lichtkreise, die sich Schicht für Schicht öffnen.
+   ===================================================================== */
+#heilung { --hb: #EEF0E2; position: relative; isolation: isolate; height: auto; margin-inline: calc(-1 * var(--pad)); padding: 0 max(var(--pad), calc((100vw - 1240px) / 2)); display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 0 clamp(32px, 5vw, 90px); }
+/* Gartenlicht: oben warm, zur Blüte hin zartes Grün, oben und unten weich auslaufend */
+#heilung::before { content: ""; position: absolute; z-index: -1; inset: -26vh 0; pointer-events: none;
+  background:
+    radial-gradient(60% 30% at 30% 22%, rgba(255, 238, 200, .55), rgba(255, 238, 200, 0) 70%),
+    linear-gradient(to bottom, rgba(238, 240, 226, 0) 0%, rgba(240, 241, 228, .92) 14%, var(--hb) 30%, #E7EDD8 62%, rgba(238, 240, 226, .92) 86%, rgba(238, 240, 226, 0) 100%); }
+#heilung::after { content: none; }
+#heilung .bloom-stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.2vh; padding: 76px 0 3vh; overflow: visible; grid-template-columns: none; grid-template-areas: none; }
+#heilung .bloom-stage::after { content: none; }
+#heilung .bloom-head { text-align: center; padding: 0; }
+#heilung .bloom-head::before { content: none; }
+#heilung .bloom-head-title { margin: 0; font-family: var(--serif); font-weight: 400; font-style: normal; font-size: clamp(2.3rem, 3.8vw, 3.5rem); line-height: 1.08; color: var(--earth); text-shadow: 0 0 30px rgba(255, 252, 244, .9); }
+#heilung .bloom-head-title em { font-style: normal; color: var(--gold-deep); }
+#heilung .bloom-head-note { margin: .9rem auto 0; max-width: 34em; font-size: .74rem; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); }
+#heilung .bloom-view { position: relative; width: min(560px, 40vw, 58vh); height: auto; aspect-ratio: 1; flex: none; }
+#heilung .bloom-canvas { position: relative; z-index: 1; display: block; width: 100%; height: 100%; translate: none; top: auto; left: auto; }
+/* Licht hinter der Blüte und Lichtkreise */
+.bloom-light { position: absolute; inset: -6%; pointer-events: none; }
+.bloom-light::before { content: ""; position: absolute; inset: 4%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 252, 238, .95), rgba(214, 228, 186, .7) 38%, rgba(196, 214, 162, .35) 62%, rgba(196, 214, 162, 0) 100%); }
+.bl-ring { position: absolute; left: 50%; top: 50%; translate: -50% -50%; border-radius: 50%; border: 1px solid rgba(176, 138, 76, .55); box-shadow: 0 0 18px rgba(232, 205, 148, .35); }
+.bl-r1 { width: 64%; aspect-ratio: 1; }
+.bl-r2 { width: 82%; aspect-ratio: 1; border-color: rgba(176, 138, 76, .4); }
+.bl-r3 { width: 100%; aspect-ratio: 1; border-color: rgba(176, 138, 76, .28); }
+.bl-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: radial-gradient(circle, #FFF8E2, rgba(255, 236, 190, 0) 70%); box-shadow: 0 0 12px 3px rgba(255, 232, 180, .55); opacity: .0; animation: bl-float 14s ease-in-out infinite; }
+.bl-dot:nth-of-type(1) { left: 12%; top: 30%; animation-delay: -1s; }
+.bl-dot:nth-of-type(2) { left: 84%; top: 22%; animation-delay: -4s; }
+.bl-dot:nth-of-type(3) { left: 90%; top: 66%; animation-delay: -7s; }
+.bl-dot:nth-of-type(4) { left: 20%; top: 78%; animation-delay: -9s; }
+.bl-dot:nth-of-type(5) { left: 50%; top: 6%; animation-delay: -11s; }
+.bl-dot:nth-of-type(6) { left: 58%; top: 94%; animation-delay: -13s; }
+@keyframes bl-float { 0%, 100% { opacity: 0; translate: 0 6px; } 30%, 70% { opacity: .85; } 50% { translate: 0 -10px; } }
+@media (prefers-reduced-motion: reduce) { .bl-dot { animation: none; opacity: .6; } }
+/* Text: normale Abschnitte, der gerade gelesene ist hell */
+#heilung .bloom-copy { position: relative; width: auto; min-height: 0; margin: 0; padding: 42vh 0 38vh; align-self: start; }
+#heilung .bloom-copy::before { content: none; }
+#heilung .bloom-step { position: relative; top: auto; left: auto; right: auto; translate: none; min-height: 62vh; display: flex; flex-direction: column; justify-content: center; opacity: .22; transition: opacity .7s ease; }
+#heilung .bloom-step.is-on { opacity: 1; }
+#heilung .bloom-step + .bloom-step { margin-top: 0; }
+#heilung .bloom-step h3 { margin: 0; font-size: clamp(2.2rem, 3.4vw, 3.1rem); line-height: 1.12; }
+#heilung .bloom-step p { margin: 0; max-width: 24em; font-family: var(--serif); font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.5; color: var(--earth); text-shadow: 0 0 24px rgba(255, 252, 244, .9); }
+#heilung .bloom-step--key .aside { font-size: clamp(1.55rem, 2.3vw, 2.05rem); line-height: 1.42; color: var(--gold-deep); }
+#heilung .bloom-step--key .aside em { color: var(--earth); }
+html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1; }
+
+@media (max-width: 760px) {
+  #heilung { display: block; padding: 0; }
+  /* oben steht die Blüte mit Überschrift, der Text gleitet darunter hindurch */
+  #heilung .bloom-stage { top: 54px; height: auto; padding: 10px var(--pad) 26px; gap: 6px; z-index: 2;
+    background: linear-gradient(to bottom, var(--hb) 0%, var(--hb) 82%, rgba(238, 240, 226, 0) 100%); }
+  #heilung .bloom-head-title { font-size: 2rem; }
+  #heilung .bloom-head-note { font-size: .62rem; letter-spacing: .2em; margin-top: .5rem; }
+  #heilung .bloom-view { width: min(78vw, 46vh, 340px); }
+  #heilung .bloom-copy { padding: 4vh 26px 30vh; }
+  #heilung .bloom-step { min-height: 46vh; justify-content: flex-start; padding-top: 6vh; }
+  #heilung .bloom-step h3 { font-size: 1.85rem; }
+  #heilung .bloom-step p { font-size: 1.22rem; line-height: 1.55; max-width: none; }
+  #heilung .bloom-step--key .aside { font-size: 1.35rem; }
+}
+@media (prefers-reduced-motion: reduce) { #heilung .bloom-step { opacity: 1; } }
+#heilung .bloom-copy, #heilung .bloom-stage, #heilung .bloom-head, #heilung .bloom-view { grid-area: auto; }
