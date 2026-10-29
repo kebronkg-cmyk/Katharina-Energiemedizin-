@@ -98,7 +98,10 @@
     var canvas = wrap.querySelector(".bloom-canvas"), ctx = canvas.getContext("2d");
     var COUNT = +wrap.dataset.frames || 95;
     var small = window.matchMedia("(max-width: 760px)").matches;
-    var dir = "assets/bloom-frames/" + (small ? "880" : "1160") + "/f";
+    // Bilder relativ zum Skript laden, damit es auch in Kopien der Seite in Unterordnern klappt
+    var here = document.querySelector('script[src$="js/v6.js"]');
+    var base = here ? here.src.replace(/js\/v6\.js.*$/, "") : "";
+    var dir = base + "assets/bloom-frames/" + (small ? "880" : "1160") + "/f";
     var frames = new Array(COUNT), started = false, pos = 0, shown = -1, queued = false;
     function src(i) { return dir + String(i + 1).padStart(3, "0") + ".webp"; }
     function load(i) {
