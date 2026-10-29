@@ -136,7 +136,7 @@
       if (e.pointerId !== id) return;
       var dx = e.clientX - x0;
       if (!horiz) {
-        if (Math.abs(dx) < 10 || Math.abs(dx) < Math.abs(e.clientY - y0) * 1.2) return;
+        if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(e.clientY - y0)) return;
         horiz = true; dragged = true; row.classList.add("is-dragging"); rate(0, 200);
         try { row.setPointerCapture(id); } catch (err) {}
       }
@@ -151,11 +151,11 @@
       if (!horiz) return;
       horiz = false; row.classList.remove("is-dragging");
       // Schwung ausrollen lassen, dann läuft die Reihe weich von selbst weiter
-      var v = Math.max(-3, Math.min(3, vel)), t0 = performance.now(), last = t0;
+      var v = Math.max(-6, Math.min(6, vel * 1.3)), t0 = performance.now(), last = t0;
       (function roll(now) {
         var dt = now - last; last = now;
-        v *= Math.pow(.94, dt / 16.7); off += v * dt; place();
-        if (Math.abs(v) > .02) fling = requestAnimationFrame(roll);
+        v *= Math.pow(.965, dt / 16.7); off += v * dt; place();
+        if (Math.abs(v) > .015) fling = requestAnimationFrame(roll);
       })(t0);
       rate(1, 1600);
     }
