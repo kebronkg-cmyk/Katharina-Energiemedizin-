@@ -24,6 +24,21 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menuBtn.getAttribute("aria-expanded") === "true") setMenu(false); });
   }
 
+  // ---------- Bilder erst zeigen, wenn sie geladen sind: kein leerer Rahmen, kein Aufblitzen ----------
+  document.querySelectorAll("main img[loading='lazy']").forEach(function (img) {
+    if (img.complete && img.naturalWidth) return;
+    img.style.opacity = "0";
+    function show() {
+      img.style.opacity = "";
+      if (img.animate) img.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, easing: "ease-out" });
+    }
+    // erst entpacken, dann zeigen: so stockt das erste Zeichnen beim Scrollen nicht
+    img.addEventListener("load", function () {
+      if (img.decode) img.decode().then(show, show); else show();
+    }, { once: true });
+    img.addEventListener("error", function () { img.style.opacity = ""; }, { once: true });
+  });
+
   // Galerie: Bild groß öffnen
   var light = document.querySelector(".g-light");
   if (light && light.showModal) {
@@ -34,6 +49,8 @@
       if (!btn) return;
       var img = btn.querySelector("img");
       big.src = img.currentSrc || img.src; big.alt = img.alt;
+      // erst das schon geladene Vorschaubild, dann ohne Aufblitzen die große Fassung
+      if (img.dataset.full) { var hi = new Image(); hi.onload = function () { if (big.alt === img.alt) big.src = hi.src; }; hi.src = img.dataset.full; }
       var fc = btn.parentElement.querySelector("figcaption");
       cap.textContent = fc ? Array.prototype.map.call(fc.children.length ? fc.children : [fc], function (x) { return x.textContent; }).join(" · ") : "";
       from = btn; light.showModal();
@@ -43,9 +60,10 @@
     light.addEventListener("click", function (e) { if (e.target === light) close(); });
   }
 
-  // Galerie: jede Reihe zieht langsam von selbst weiter (die zweite gegenläufig)
-  // und lässt sich zugleich wischen, mit dem Mausrad schieben oder ziehen.
-  // Jede Reihe ist einmal verdoppelt, damit sie endlos und ohne Sprung läuft.
+  // Galerie: jede Reihe zieht langsam von selbst weiter (die zweite gegenläufig) und lässt
+  // sich zugleich wischen, mit der Maus ziehen oder mit dem Trackpad seitlich schieben.
+  // Bewegt wird nur per transform, auf Bruchteile eines Pixels genau: so läuft nichts ruckelig.
+  // Jede Reihe ist einmal verdoppelt, damit sie endlos und ohne Sprung weiterläuft.
   var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var dragged = false;
   document.querySelectorAll(".gw-row").forEach(function (row, n) {
@@ -57,60 +75,79 @@
       c.querySelector("button").tabIndex = -1;
       track.appendChild(c);
     });
-    var dir = n % 2 ? -1 : 1, speed = 28, pos = 0, held = false, resume = 0, half = 0;
+    var dir = n % 2 ? -1 : 1, cruise = calm ? 0 : 26;
+    var half = 0, o = 0, v = dir * cruise, hover = false, held = false, last = 0, seen = true, running = false;
     function measure() { half = track.scrollWidth / 2; }
-    function wrap() {
-      if (!half) return;
-      if (row.scrollLeft >= half) row.scrollLeft -= half;
-      else if (row.scrollLeft <= 0) row.scrollLeft += half;
+    function place() {
+      if (half) { o %= half; if (o < 0) o += half; }
+      track.style.transform = "translate3d(" + (-o).toFixed(2) + "px,0,0)";
     }
-    function hold() { held = true; clearTimeout(resume); }
-    function release() { clearTimeout(resume); resume = setTimeout(function () { held = false; pos = row.scrollLeft; }, 1800); }
-    measure();
-    window.addEventListener("load", function () { measure(); if (dir < 0) row.scrollLeft = half - 1; pos = row.scrollLeft; });
-    window.addEventListener("resize", measure);
-    if (dir < 0) row.scrollLeft = half - 1;
-    pos = row.scrollLeft;
-    row.addEventListener("scroll", function () {
-      wrap();
-      // weicht die Lage deutlich vom Selbstlauf ab, hat jemand gewischt: kurz innehalten
-      if (!held && Math.abs(row.scrollLeft - pos) > 3 && Math.abs(Math.abs(row.scrollLeft - pos) - half) > 3) { hold(); release(); }
-      if (held) pos = row.scrollLeft;
-    }, { passive: true });
-    row.addEventListener("touchstart", hold, { passive: true });
-    row.addEventListener("touchend", release, { passive: true });
-    row.addEventListener("mouseenter", hold);
-    row.addEventListener("mouseleave", release);
-    // Mausrad: nur seitliches Wischen (Trackpad) oder Umschalt+Rad verschiebt die Reihe,
-    // damit die Seite selbst normal weiterscrollt
+    function tick(t) {
+      var dt = last ? Math.min(t - last, 50) / 1000 : 0; last = t;
+      if (!held) {
+        // weich zurück zur Reisegeschwindigkeit, beim Darüberfahren mit der Maus weich anhalten
+        var goal = hover ? 0 : dir * cruise;
+        v += (goal - v) * Math.min(1, dt * (hover ? 4 : 1.2));
+        if (hover && Math.abs(v) < 1) v = 0;
+        if (v) { o += v * dt; place(); }
+      }
+      if (seen && !document.hidden) requestAnimationFrame(tick); else { running = false; last = 0; }
+    }
+    function run() { if (!running) { running = true; last = 0; requestAnimationFrame(tick); } }
+    measure(); place();
+    if (dir < 0) { o = half * 0.37; place(); }
+    window.addEventListener("load", function () { measure(); place(); });
+    window.addEventListener("resize", function () { measure(); place(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; if (seen) run(); }).observe(row);
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) run(); });
+    row.addEventListener("mouseenter", function () { hover = true; });
+    row.addEventListener("mouseleave", function () { hover = false; });
+
+    // Trackpad: seitliches Wischen (oder Umschalt + Mausrad) verschiebt die Reihe;
+    // senkrechtes Scrollen bleibt ganz normal bei der Seite
     row.addEventListener("wheel", function (e) {
       var dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
       if (!dx) return;
-      e.preventDefault(); hold(); row.scrollLeft += dx; release();
+      e.preventDefault();
+      o += dx; v = 0; place();
     }, { passive: false });
-    // Ziehen mit der Maus
-    var startX = 0, startLeft = 0, down = false;
+
+    // Wischen und Ziehen: senkrechte Bewegungen übernimmt der Browser (touch-action: pan-y)
+    var id = null, x0 = 0, y0 = 0, oStart = 0, lastX = 0, lastT = 0, vel = 0, horiz = false;
     row.addEventListener("pointerdown", function (e) {
-      if (e.pointerType !== "mouse") return;
-      down = true; dragged = false; startX = e.clientX; startLeft = row.scrollLeft; hold();
+      if (e.button) return;
+      id = e.pointerId; x0 = lastX = e.clientX; y0 = e.clientY; lastT = e.timeStamp; oStart = o; vel = 0; horiz = false; dragged = false;
     });
-    window.addEventListener("pointermove", function (e) {
-      if (!down) return;
-      var dx = e.clientX - startX;
-      if (Math.abs(dx) > 5) { dragged = true; row.classList.add("is-dragging"); }
-      row.scrollLeft = startLeft - dx;
+    row.addEventListener("pointermove", function (e) {
+      if (e.pointerId !== id) return;
+      var dx = e.clientX - x0;
+      if (!horiz) {
+        if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(e.clientY - y0)) return;
+        horiz = true; held = true; dragged = true; row.classList.add("is-dragging");
+        try { row.setPointerCapture(id); } catch (err) {}
+      }
+      var dt = Math.max(e.timeStamp - lastT, 1);
+      vel = vel * 0.6 + (-(e.clientX - lastX) / dt * 1000) * 0.4;
+      lastX = e.clientX; lastT = e.timeStamp;
+      o = oStart - dx; place();
     });
-    window.addEventListener("pointerup", function () {
-      if (!down) return;
-      down = false; row.classList.remove("is-dragging"); release();
-    });
-    if (calm) return;
-    var last = 0;
-    (function tick(t) {
-      var dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t || 0;
-      if (!held && half) { pos += dir * speed * dt; if (pos >= half) pos -= half; if (pos <= 0) pos += half; row.scrollLeft = pos; }
-      requestAnimationFrame(tick);
-    })(0);
+    function end(e) {
+      if (e.pointerId !== id) return;
+      id = null;
+      if (!horiz) return;
+      held = false; row.classList.remove("is-dragging");
+      // Schwung mitnehmen, dann gleitet die Reihe weich in den Selbstlauf zurück
+      v = Math.max(-2400, Math.min(2400, vel)); last = 0; run();
+    }
+    row.addEventListener("pointerup", end);
+    row.addEventListener("pointercancel", end);
+    run();
+  });
+  // Rahmen erst zeigen, wenn das Bild da ist: kein leerer goldener Kasten beim Laden
+  document.querySelectorAll(".g-open img").forEach(function (img) {
+    var box = img.parentElement;
+    function show() { box.classList.add("is-in"); }
+    if (img.complete && img.naturalWidth) show(); else { img.addEventListener("load", show); img.addEventListener("error", show); }
   });
   // nach dem Ziehen kein Bild aus Versehen öffnen
   document.addEventListener("click", function (e) {

@@ -172,14 +172,16 @@
     var seq = { f: 0 };
     // Am Anfang ist die Knospe geschlossen. Sie öffnet sich parallel zum Text und ist erst
     // beim letzten Satz vollständig offen.
-    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: .5 } });
+    var tl = gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: 1 } });
     tl.to({}, { duration: .06 }, 0)
-      .to(seq, { f: COUNT - 1, ease: "none", duration: .8, onUpdate: function () { pos = seq.f; request(); } }, .06)
-      .fromTo(".bloom-view", { scale: .92 }, { scale: 1, ease: "none", duration: .8 }, .06)
+      .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: .8, onUpdate: function () { pos = seq.f; request(); } }, .06)
+      .fromTo(".bloom-view", { scale: .92 }, { scale: 1, ease: "sine.inOut", duration: .8 }, .06)
       .to({}, { duration: .14 }, .86);
-    var at = [.02, .24, .46, .8];
+    var at = [.1, .3, .52, .8];
     if (small) {
       gsap.set(steps, { autoAlpha: 0, y: 14 });
+      // am Handy macht die Unterschrift unter der Blüte dem ersten Satz Platz
+      tl.to(".bloom-sign", { autoAlpha: 0, y: -10, duration: .05 }, at[0] - .06);
       steps.forEach(function (st, i) {
         tl.to(st, { autoAlpha: 1, y: 0, duration: .06 }, at[i]);
         if (i < steps.length - 1) tl.to(st, { autoAlpha: 0, y: -14, duration: .05 }, at[i + 1] - .06);
@@ -189,6 +191,21 @@
       steps.forEach(function (st, i) { tl.to(st, { autoAlpha: 1, y: 0, duration: .1 }, at[i]); });
     }
   })();
+
+  // ---------- Bilder erst zeigen, wenn sie geladen sind: kein leerer Rahmen, kein Aufblitzen ----------
+  document.querySelectorAll("main img[loading='lazy']").forEach(function (img) {
+    if (img.complete && img.naturalWidth) return;
+    img.style.opacity = "0";
+    function show() {
+      img.style.opacity = "";
+      if (img.animate) img.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, easing: "ease-out" });
+    }
+    // erst entpacken, dann zeigen: so stockt das erste Zeichnen beim Scrollen nicht
+    img.addEventListener("load", function () {
+      if (img.decode) img.decode().then(show, show); else show();
+    }, { once: true });
+    img.addEventListener("error", function () { img.style.opacity = ""; }, { once: true });
+  });
 
   // ---------- WhatsApp: erscheint erst, wenn eine Nummer hinterlegt ist ----------
   document.querySelectorAll(".wa-link").forEach(function (a) {
