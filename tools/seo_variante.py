@@ -79,10 +79,12 @@ BUSINESS = {
     "address": {"@type": "PostalAddress", "addressLocality": "München", "addressCountry": "DE"},
     "areaServed": "München",
     "sameAs": ["https://www.instagram.com/katharinawegdervierwinde/"],
-    "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n}} for n in [
-        "Illumination", "Cord Cutting – energetische Bänder lösen", "Entkopplung",
-        "Extraktion", "Rückverbindung mit Anteilen (Seelenrückholung)",
-        "Täter-Opfer-Retter-Dreieck", "Arbeit mit der inneren Landkarte"]],
+    "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "url": u}} for n, u in [
+        ("Illumination", "illumination/"), ("Cord Cutting – energetische Bänder lösen", "cord-cutting/"),
+        ("Entkopplung", "entkopplung/"), ("Extraktion", "extraktion/"),
+        ("Rückverbindung mit Anteilen (Seelenrückholung)", "rueckverbindung-seelenrueckholung/"),
+        ("Täter-Opfer-Retter-Dreieck", "taeter-opfer-retter-dreieck/"),
+        ("Arbeit mit der inneren Landkarte", "innere-landkarte/")]],
 }
 
 
@@ -108,6 +110,7 @@ def build(main=True):
             ld = "".join(f'\n  <script type="application/ld+json">{json.dumps(d, ensure_ascii=False)}</script>'
                          for d in (BUSINESS, faq_schema(text)))
             text = text.replace("</head>", ld + "\n</head>", 1)
+            text = re.sub(r'\n\s*\n(\s*<script type="application/ld\+json">)', r"\n\1", text)
         target = out_root / page / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(text, encoding="utf-8")
