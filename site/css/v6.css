@@ -1704,8 +1704,8 @@ img { -webkit-user-drag: none; }
 /* Passionsblume: unten ein weiches Grün, in das sich die Knospe einfügt */
 .bloom-view::before { content: ""; position: absolute; z-index: -1; left: -18%; right: -18%; top: 34%; bottom: -26%; pointer-events: none;
   background: radial-gradient(50% 46% at 50% 62%, rgba(176, 200, 140, .62), rgba(198, 216, 164, .38) 46%, rgba(220, 230, 196, .14) 70%, rgba(230, 236, 210, 0) 88%); }
-.bloom-stage::after { content: ""; position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: 46%; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(214, 226, 190, 0), rgba(206, 222, 178, .42) 62%, rgba(198, 216, 168, .58)); }
+.bloom-stage::after { content: ""; position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: 56%; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(214, 226, 190, 0), rgba(206, 222, 178, .36) 45%, rgba(202, 219, 172, .34) 68%, rgba(214, 226, 190, 0)); }
 .bloom-stage { isolation: isolate; }
 /* Unterschrift unter der Blüte: kündigt an, dass hier etwas Wesentliches kommt */
 .bloom-sign { position: absolute; left: 50%; top: calc(100% + 6px); translate: -50% 0; width: max-content; max-width: 92%; text-align: center; pointer-events: none; }
@@ -1759,3 +1759,82 @@ html:not(.js) .bloom-scroll { height: auto; }
   .wind-card[data-wind="norden"] .medal { order: 3; }
   .wind-card[data-wind="norden"]::before { top: auto; bottom: 6px; }
 }
+
+/* =====================================================================
+   Kreative Integration im Stil der Mesa: Himmel, darauf eine weiße
+   Tafel mit feinem Goldrahmen. Am Handy stehen die Elemente versetzt
+   untereinander und sind vollständig zu sehen.
+   ===================================================================== */
+.ki-panel { position: relative; isolation: isolate; width: min(1120px, 100%); margin-inline: auto; padding: clamp(80px, 10vw, 120px) clamp(22px, 5vw, 72px) clamp(64px, 8vw, 100px); }
+.ki-panel::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  border-radius: 320px 320px 18px 18px / 150px 150px 18px 18px;
+  background: radial-gradient(120% 60% at 50% 0%, rgba(255, 252, 244, .97), rgba(251, 246, 236, .94) 55%, rgba(246, 238, 222, .92));
+  box-shadow: 0 60px 110px -60px rgba(60, 40, 20, .55), inset 0 0 0 1px rgba(176, 138, 76, .75), inset 0 0 0 9px rgba(255, 252, 244, .9), inset 0 0 0 10px rgba(176, 138, 76, .4); }
+.ki-panel::after { content: ""; position: absolute; left: 50%; top: -15px; width: 30px; height: 30px; translate: -50% 0; rotate: 45deg; pointer-events: none;
+  background: linear-gradient(135deg, #E8CD94, #96702F); box-shadow: 0 0 0 6px rgba(251, 246, 236, .95), 0 0 0 7px rgba(176, 138, 76, .55); }
+.ki-panel > * + * { margin-top: 12vh; }
+.ki-panel :is(.ki-sound, .ki-close)::before { content: none; }
+.ki-panel :is(p, .statement) { text-shadow: none; }
+.ki-panel .statement::before { content: none; }
+.ki-panel .statement { font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.25; width: min(820px, 100%); margin-inline: auto; }
+.ki-field { width: 100%; }
+.ki-bubble { min-width: 0; background: radial-gradient(circle at 35% 30%, #FFFDF7, #F6EBD3 62%, #EBD8B2); border-color: rgba(176, 138, 76, .7); }
+.ki-bubble h2 { overflow-wrap: break-word; }
+.ki-sand { padding: 1.6rem 0; border-top: 1px solid rgba(176, 138, 76, .35); border-bottom: 1px solid rgba(176, 138, 76, .35); }
+@media (max-width: 760px) {
+  .ki-panel { margin-inline: calc(-1 * var(--pad) + 8px); width: auto; padding-top: 72px; }
+  .ki-panel::before { border-radius: 200px 200px 16px 16px / 90px 90px 16px 16px; }
+  .ki-panel > * + * { margin-top: 9vh; }
+  .ki-field { display: flex; flex-direction: column; gap: 0; }
+  .ki-bubble { width: min(82%, 280px); padding: 13%; margin: 0; }
+  .ki-b1, .ki-b3 { align-self: flex-start; }
+  .ki-b2, .ki-b4 { align-self: flex-end; }
+  .ki-b2, .ki-b3, .ki-b4 { margin-top: -14px; }
+  .ki-b2 { width: min(64%, 220px); }
+  .ki-bubble h2 { font-size: 1.05rem; }
+  .ki-bubble p { font-size: .8rem; }
+  .ki-icon { font-size: 1.5rem; }
+  .ki-panel .statement { font-size: 1.45rem; }
+}
+@media (min-width: 761px) { .ki-b2 { grid-column: 5 / 9; } .ki-b2 h2 { white-space: nowrap; } }
+
+/* Passionsblume: breiteres Bild, damit die offenen Blütenblätter seitlich sichtbar bleiben */
+.bloom-view { width: min(709px, 50vw); aspect-ratio: 1163 / 722; height: auto; }
+@media (max-width: 760px) {
+  .bloom-stage { grid-template-columns: minmax(0, 1fr); }
+  .bloom-view { width: 100%; aspect-ratio: auto; height: min(292px, 74.5vw); justify-self: stretch; }
+  /* die Blüte darf seitlich über den Rand hinaus, ohne den Text zu verschieben */
+  .bloom-canvas { position: absolute; top: 0; left: 50%; width: min(470px, 120vw); height: 100%; translate: -50% 0; }
+}
+@media (max-width: 760px) { .bloom-copy { width: auto; margin-inline: var(--pad); } }
+
+/* =====================================================================
+   Lebensspuren: das Bild ohne festen Rahmen, mit weichen Rändern in den
+   Himmel eingebunden; es schwebt ganz sacht neben dem Text.
+   ===================================================================== */
+.traces-inner { width: min(1080px, 100%); }
+.traces-inner::before { inset: -10% -14%; }
+.traces-grid { display: grid; gap: 4vh 5vw; align-items: center; }
+@media (min-width: 900px) { .traces-grid { grid-template-columns: minmax(0, 380px) 1fr; text-align: left; } .traces-copy .traces-invite { margin-left: -8px; } }
+.traces-art { position: relative; isolation: isolate; justify-self: center; }
+.traces-art::before { content: ""; position: absolute; z-index: -1; inset: -16% -26%; pointer-events: none; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 236, 196, .75), rgba(255, 236, 196, .3) 55%, rgba(255, 236, 196, 0)); }
+.traces-door { display: block; width: min(340px, 70vw); margin: 0; padding: 0; background: none; box-shadow: none; animation: traces-sway 11s ease-in-out infinite; }
+.traces-door:hover { transform: none; box-shadow: none; }
+.traces-door img { display: block; width: 100%; height: auto; border-radius: 12px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, transparent, #000 7%, #000 90%, transparent);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, transparent, #000 7%, #000 90%, transparent);
+  transition: filter .6s ease; }
+.traces-door:hover img { filter: brightness(1.05) saturate(1.06); }
+@keyframes traces-sway { 0%, 100% { translate: 0 0; rotate: -1.2deg; } 50% { translate: 0 -10px; rotate: .8deg; } }
+@media (prefers-reduced-motion: reduce) { .traces-door { animation: none; } }
+.traces-copy p { text-shadow: var(--glow-light); }
+
+/* Link zur kreativen Integration: sichtbar als feine Goldlinie, leiser als der goldene Knopf */
+.minilink { gap: 12px; margin: .2rem 0 .6rem; padding: 9px 12px 9px 16px; border: 1px solid rgba(176, 138, 76, .75); border-radius: 999px; background: rgba(255, 252, 244, .72); text-decoration: none; font-size: 1.12rem; color: var(--earth); text-shadow: none; box-shadow: 0 14px 30px -22px rgba(30, 20, 10, .5); transition: background .4s ease, border-color .4s ease, box-shadow .4s ease; }
+.minilink:hover { color: var(--earth); background: rgba(255, 252, 244, .95); border-color: var(--gold-deep); box-shadow: 0 18px 36px -22px rgba(30, 20, 10, .6), 0 0 24px rgba(232, 205, 148, .45); }
+.minilink-mark { font-style: normal; font-size: .8rem; color: var(--gold); }
+.minilink-arrow { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(176, 138, 76, .6); font-style: normal; font-size: .9rem; color: var(--gold-deep); transition: translate .4s ease; }
+.minilink:hover .minilink-arrow { translate: 3px 0; }
+@media (max-width: 520px) { .minilink { font-size: 1rem; line-height: 1.3; padding: 9px 10px 9px 14px; } }
