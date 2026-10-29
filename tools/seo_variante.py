@@ -33,8 +33,6 @@ TITLES = {
 
 # kleine, sichtbare Änderungen auf der Startseite (alt -> neu)
 INDEX_EDITS = [
-    ('<p class="eyebrow">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>',
-     '<p class="eyebrow">Schamanische Energiearbeit &amp; Körperarbeit in München</p>'),
     ('alt="Katharina mit langem roten Haar und hellem Haarband, lächelnd"',
      'alt="Katharina, schamanische Energiearbeit in München, mit langem roten Haar und hellem Haarband, lächelnd"'),
     ('alt="Katharinas Mesa: ein gewebtes rotes Tuch mit den Kuyas, den Steinen der Kraft, draußen am Wasser"',
