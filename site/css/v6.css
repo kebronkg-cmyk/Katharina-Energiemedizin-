@@ -1988,3 +1988,27 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 .offer-page .offer-text .coda, .offer-page .offer-text .aside { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 1.8vw, 1.45rem); color: var(--gold-deep); margin-top: 1.6em; }
 .offer-page .offer-text .for { background: none; border: 0; padding: 0; box-shadow: none; }
 .letter .wa-hint { margin: 14px 0 0; text-align: center; font-size: .82rem; line-height: 1.5; color: #6A5D52; }
+
+/* =====================================================================
+   WhatsApp-Brücken: persönliche, unverbindliche Einladung zum Schreiben
+   ===================================================================== */
+.wa-bridge { position: relative; isolation: isolate; width: min(620px, 100%); margin: 10vh auto 0; text-align: center; }
+.wa-bridge::before { content: ""; position: absolute; z-index: -1; inset: -30% -22%; background: var(--halo-light); pointer-events: none; }
+.wa-bridge p { margin: 0 0 .35em; font-family: var(--serif); font-style: italic; font-size: clamp(1.12rem, 1.6vw, 1.3rem); line-height: 1.5; color: var(--earth); text-shadow: var(--glow-light); }
+.wa-bridge p:first-child { color: var(--gold-deep); }
+.wa-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 1.4rem; padding: 12px 24px 12px 18px; border-radius: 999px; border: 1px solid var(--gold); background: rgba(255, 252, 244, .9); color: var(--earth); text-decoration: none; font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 16px 34px -22px rgba(30, 20, 10, .55); transition: background .4s ease, box-shadow .4s ease, transform .4s ease; }
+.wa-btn svg { width: 20px; height: 20px; fill: #3E8E5A; flex: none; }
+.wa-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 20px 40px -22px rgba(30, 20, 10, .6), 0 0 24px rgba(232, 205, 148, .45); }
+.faq-section .wa-bridge, .concern .wa-bridge { margin-top: 8vh; }
+.wa-bridge--story { margin-top: 8vh; }
+.ki-panel .wa-bridge::before { content: none; }
+.ki-panel .wa-bridge p { text-shadow: none; }
+/* Wurzeln der Arbeit (Willkommen) */
+.roots { margin: 1.4rem 0 1rem; padding-left: 16px; border-left: 2px solid var(--gold); }
+.roots-title { margin: 0 0 .3rem; font-size: .72rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); }
+.roots p:last-child { margin: 0; }
+/* Mesa: Munay-Ki */
+.mesa-text .munay { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-size: clamp(1.05rem, 1.4vw, 1.2rem); line-height: 1.55; color: var(--earth); }
+/* Porträt in „Von der Fantasie zur Brücke“ */
+.bridge-portrait { width: min(560px, 90vw); }
+.bridge-portrait img { filter: sepia(.12); }
