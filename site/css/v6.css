@@ -2021,3 +2021,9 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 .meet-contact .meet-wa-text { display: block; font-family: var(--serif); font-style: italic; font-size: 1.05rem; line-height: 1.5; color: var(--earth); }
 .meet-contact .wa-btn { margin-top: .9rem; }
 .meet-contact .meet-place { display: block; font-family: var(--serif); font-size: 1.15rem; line-height: 1.5; color: var(--earth); }
+
+/* Medizinrad: die vier Medaillons sind nur zur Information, nicht anklickbar */
+.wind-card { cursor: default; }
+.wind-card:hover .medal { transform: none; }
+.wind-card:hover .medal img { transform: none; }
+.wind-card:hover::before { opacity: 0; }

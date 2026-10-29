@@ -393,15 +393,6 @@
     });
   });
 
-  // ---------- Medizinrad: der Himmel öffnet sich aus dem angeklickten Medaillon ----------
-  document.querySelectorAll(".wind-card").forEach(function (card) {
-    card.addEventListener("click", function (e) {
-      e.preventDefault();
-      var m = card.querySelector(".medal").getBoundingClientRect();
-      travel(card.dataset.wind, (m.left + m.width / 2) / window.innerWidth * 100 + "%", (m.top + m.height / 2) / window.innerHeight * 100 + "%");
-    });
-  });
-
   // ---------- Menü am Handy ----------
   var menuBtn = document.querySelector(".menu-btn");
   var menu = document.getElementById("menu");
