@@ -1663,12 +1663,12 @@ em.mark { font-style: normal; font-family: var(--serif); font-weight: 500; lette
 .gallery-page .gallery-head h1 em { color: var(--gold-light); }
 .gallery-hint { display: block !important; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-light); opacity: .85; }
 .gw-rows { display: grid; gap: 7vh; margin-top: 4vh; }
-.gw-row { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
-.gw-track { display: flex; align-items: flex-end; gap: clamp(28px, 4vw, 64px); width: max-content; padding: 30px 0 10px; animation: gw-left var(--dur, 160s) linear infinite; }
-.gw-row--b .gw-track { animation-name: gw-right; }
-.gw-row:hover .gw-track, .gw-row.is-held .gw-track { animation-play-state: paused; }
-@keyframes gw-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes gw-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.gw-row { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
+.gw-row::-webkit-scrollbar { display: none; }
+.gw-row.is-dragging { cursor: grabbing; user-select: none; }
+.gw-row.is-dragging .g-open { pointer-events: none; }
+.gw-row img { -webkit-user-drag: none; user-select: none; }
+.gw-track { display: flex; align-items: flex-end; gap: clamp(28px, 4vw, 64px); width: max-content; padding: 30px 0 10px; }
 .gw-item { margin: 0; flex: none; }
 .gw-item .g-open { height: clamp(220px, 34vh, 360px); width: auto; padding: 8px; }
 .gw-item .g-open img { height: 100%; width: auto; }
@@ -1676,7 +1676,6 @@ em.mark { font-style: normal; font-family: var(--serif); font-weight: 500; lette
 .gw-item .gt { display: block; font-size: .95rem; color: var(--gold-light); letter-spacing: .02em; }
 .gw-item .gs { display: block; font-size: .82rem; color: #D8CBB2; margin-top: 2px; }
 @media (max-width: 760px) { .gw-item .g-open { height: 30vh; } .gw-rows { gap: 5vh; } }
-@media (prefers-reduced-motion: reduce) { .gw-row { overflow-x: auto; } .gw-track { animation: none; } }
 .page-nav--night { margin-top: 12vh; padding: 0 var(--pad); }
 .page-nav--night .gate { background: rgba(26, 20, 40, .7); border-color: rgba(232, 205, 148, .55); box-shadow: none; }
 .page-nav--night .gate-text { color: #FBF6EC; }
@@ -1684,3 +1683,10 @@ em.mark { font-style: normal; font-family: var(--serif); font-weight: 500; lette
 .sub--night .foot { background: rgba(14, 11, 28, .88); border-top-color: rgba(232, 205, 148, .3); }
 .sub--night .foot-note, .sub--night .foot-copy { color: #CFC3AC; }
 .sub--night .foot-nav a { color: #EADFC9; }
+
+/* Spuren des Weges als Tür zur Galerie, Widmung an Juan bei der Mesa */
+.traces-door { display: block; width: min(300px, 64vw); margin: 4vh auto 0; padding: 8px; background: linear-gradient(145deg, #E8CD94, #96702F 50%, #E8CD94); box-shadow: 0 40px 70px -36px rgba(30, 20, 10, .65); transition: transform .6s ease, box-shadow .6s ease; }
+.traces-door img { display: block; width: 100%; height: auto; }
+.traces-door:hover { transform: translateY(-6px); box-shadow: 0 50px 80px -36px rgba(30, 20, 10, .7), 0 0 50px rgba(232, 205, 148, .45); }
+.mesa-juan { width: min(620px, 100%); margin: 10vh auto 0; }
+.mesa-juan img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 40px 70px -36px rgba(30, 20, 10, .6); }

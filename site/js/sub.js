@@ -43,8 +43,13 @@
     light.addEventListener("click", function (e) { if (e.target === light) close(); });
   }
 
-  // Galerie: jede Reihe einmal verdoppeln, damit sie endlos und ohne Sprung weiterzieht
-  document.querySelectorAll(".gw-track").forEach(function (track) {
+  // Galerie: jede Reihe zieht langsam von selbst weiter (die zweite gegenläufig)
+  // und lässt sich zugleich wischen, mit dem Mausrad schieben oder ziehen.
+  // Jede Reihe ist einmal verdoppelt, damit sie endlos und ohne Sprung läuft.
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var dragged = false;
+  document.querySelectorAll(".gw-row").forEach(function (row, n) {
+    var track = row.querySelector(".gw-track");
     var items = Array.prototype.slice.call(track.children);
     items.forEach(function (it) {
       var c = it.cloneNode(true);
@@ -52,11 +57,65 @@
       c.querySelector("button").tabIndex = -1;
       track.appendChild(c);
     });
-    track.style.setProperty("--dur", Math.round(items.length * 13) + "s");
-    var row = track.parentElement;
-    row.addEventListener("touchstart", function () { row.classList.add("is-held"); }, { passive: true });
-    row.addEventListener("touchend", function () { setTimeout(function () { row.classList.remove("is-held"); }, 1500); }, { passive: true });
+    var dir = n % 2 ? -1 : 1, speed = 28, pos = 0, held = false, resume = 0, half = 0;
+    function measure() { half = track.scrollWidth / 2; }
+    function wrap() {
+      if (!half) return;
+      if (row.scrollLeft >= half) row.scrollLeft -= half;
+      else if (row.scrollLeft <= 0) row.scrollLeft += half;
+    }
+    function hold() { held = true; clearTimeout(resume); }
+    function release() { clearTimeout(resume); resume = setTimeout(function () { held = false; pos = row.scrollLeft; }, 1800); }
+    measure();
+    window.addEventListener("load", function () { measure(); if (dir < 0) row.scrollLeft = half - 1; pos = row.scrollLeft; });
+    window.addEventListener("resize", measure);
+    if (dir < 0) row.scrollLeft = half - 1;
+    pos = row.scrollLeft;
+    row.addEventListener("scroll", function () {
+      wrap();
+      // weicht die Lage deutlich vom Selbstlauf ab, hat jemand gewischt: kurz innehalten
+      if (!held && Math.abs(row.scrollLeft - pos) > 3 && Math.abs(Math.abs(row.scrollLeft - pos) - half) > 3) { hold(); release(); }
+      if (held) pos = row.scrollLeft;
+    }, { passive: true });
+    row.addEventListener("touchstart", hold, { passive: true });
+    row.addEventListener("touchend", release, { passive: true });
+    row.addEventListener("mouseenter", hold);
+    row.addEventListener("mouseleave", release);
+    // Mausrad: nur seitliches Wischen (Trackpad) oder Umschalt+Rad verschiebt die Reihe,
+    // damit die Seite selbst normal weiterscrollt
+    row.addEventListener("wheel", function (e) {
+      var dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (!dx) return;
+      e.preventDefault(); hold(); row.scrollLeft += dx; release();
+    }, { passive: false });
+    // Ziehen mit der Maus
+    var startX = 0, startLeft = 0, down = false;
+    row.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse") return;
+      down = true; dragged = false; startX = e.clientX; startLeft = row.scrollLeft; hold();
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) { dragged = true; row.classList.add("is-dragging"); }
+      row.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener("pointerup", function () {
+      if (!down) return;
+      down = false; row.classList.remove("is-dragging"); release();
+    });
+    if (calm) return;
+    var last = 0;
+    (function tick(t) {
+      var dt = last ? Math.min(t - last, 64) / 1000 : 0; last = t || 0;
+      if (!held && half) { pos += dir * speed * dt; if (pos >= half) pos -= half; if (pos <= 0) pos += half; row.scrollLeft = pos; }
+      requestAnimationFrame(tick);
+    })(0);
   });
+  // nach dem Ziehen kein Bild aus Versehen öffnen
+  document.addEventListener("click", function (e) {
+    if (dragged && e.target.closest(".gw-row")) { e.preventDefault(); e.stopImmediatePropagation(); dragged = false; }
+  }, true);
 
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
