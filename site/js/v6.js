@@ -393,6 +393,32 @@
     });
   });
 
+  // ---------- Medizinrad: Medaillons zur Information ----------
+  // Sie öffnen keine Seite. Beim Hereinscrollen leuchten sie der Reihe nach auf
+  // (Süden, Westen, Norden, Osten). Beim Darüberfahren oder Antippen tritt ein
+  // Medaillon hervor, zusammen mit seiner Beschreibung darunter, und umgekehrt.
+  var cards = document.querySelectorAll(".wind-card"), quals = document.querySelectorAll(".qualities li[data-wind]");
+  function light(wind, on) {
+    cards.forEach(function (c) { c.classList.toggle("is-lit", on && c.dataset.wind === wind); });
+    quals.forEach(function (q) { q.classList.toggle("is-lit", on && q.dataset.wind === wind); });
+  }
+  [cards, quals].forEach(function (list) {
+    list.forEach(function (el) {
+      el.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") light(el.dataset.wind, true); });
+      el.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") light(el.dataset.wind, false); });
+      el.addEventListener("click", function () { light(el.dataset.wind, !el.classList.contains("is-lit")); });
+    });
+  });
+  var rose = document.querySelector(".compass-rose");
+  if (rose && !reduced) {
+    ScrollTrigger.create({ trigger: rose, start: "top 70%", once: true, onEnter: function () {
+      ["sueden", "westen", "norden", "osten"].forEach(function (w, i) {
+        setTimeout(function () { light(w, true); }, 400 + i * 650);
+      });
+      setTimeout(function () { light("", false); }, 400 + 4 * 650 + 300);
+    } });
+  }
+
   // ---------- Menü am Handy ----------
   var menuBtn = document.querySelector(".menu-btn");
   var menu = document.getElementById("menu");
