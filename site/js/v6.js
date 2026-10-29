@@ -18,7 +18,7 @@
   var lenis = null;
   if (!reduced && window.Lenis) {
     // lerp statt fester Dauer: gleitet gleichmäßig nach, ohne Anfahr-Ruck
-    lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.85, smoothWheel: true });
+    lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1, smoothWheel: true });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -177,19 +177,13 @@
       .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: .8, onUpdate: function () { pos = seq.f; request(); } }, .06)
       .fromTo(".bloom-view", { scale: .92 }, { scale: 1, ease: "sine.inOut", duration: .8 }, .06)
       .to({}, { duration: .14 }, .86);
-    var at = [.1, .3, .52, .8];
-    if (small) {
-      gsap.set(steps, { autoAlpha: 0, y: 14 });
-      // am Handy macht die Unterschrift unter der Blüte dem ersten Satz Platz
-      tl.to(".bloom-sign", { autoAlpha: 0, y: -10, duration: .05 }, at[0] - .06);
-      steps.forEach(function (st, i) {
-        tl.to(st, { autoAlpha: 1, y: 0, duration: .06 }, at[i]);
-        if (i < steps.length - 1) tl.to(st, { autoAlpha: 0, y: -14, duration: .05 }, at[i + 1] - .06);
-      });
-    } else {
-      gsap.set(steps, { autoAlpha: 0, y: 22 });
-      steps.forEach(function (st, i) { tl.to(st, { autoAlpha: 1, y: 0, duration: .1 }, at[i]); });
-    }
+    // ein Abschnitt nach dem anderen, gut lesbar; der letzte Satz, wenn die Blüte ganz offen ist
+    var at = [.08, .26, .42, .6, .8];
+    gsap.set(steps, { autoAlpha: 0, y: small ? 14 : 20 });
+    steps.forEach(function (st, i) {
+      tl.to(st, { autoAlpha: 1, y: 0, duration: .06 }, at[i]);
+      if (i < steps.length - 1) tl.to(st, { autoAlpha: 0, y: -14, duration: .05 }, at[i + 1] - .06);
+    });
   })();
 
   // ---------- Bilder erst zeigen, wenn sie geladen sind: kein leerer Rahmen, kein Aufblitzen ----------

@@ -1668,6 +1668,8 @@ em.mark { font-style: normal; font-family: var(--serif); font-weight: 500; lette
 .gw-row.is-dragging .g-open { pointer-events: none; }
 .gw-row img { -webkit-user-drag: none; user-select: none; }
 .gw-track { display: flex; align-items: flex-end; gap: clamp(28px, 4vw, 64px); width: max-content; padding: 30px 0 10px; will-change: transform; backface-visibility: hidden; }
+.gw-shift { width: max-content; will-change: transform; }
+.gw-track > .gw-item:last-child { margin-right: clamp(28px, 4vw, 64px); }
 .gw-item { margin: 0; flex: none; }
 .gw-item .g-open { height: clamp(220px, 34vh, 360px); width: auto; padding: 8px; }
 .gw-item .g-open img { height: 100%; width: auto; }
@@ -1707,13 +1709,7 @@ img { -webkit-user-drag: none; }
 .bloom-stage::after { content: ""; position: absolute; z-index: -2; left: 0; right: 0; bottom: 0; height: 56%; pointer-events: none;
   background: linear-gradient(to bottom, rgba(214, 226, 190, 0), rgba(206, 222, 178, .36) 45%, rgba(202, 219, 172, .34) 68%, rgba(214, 226, 190, 0)); }
 .bloom-stage { isolation: isolate; }
-/* Unterschrift unter der Blüte: kündigt an, dass hier etwas Wesentliches kommt */
-.bloom-sign { position: absolute; left: 50%; top: calc(100% + 6px); translate: -50% 0; width: max-content; max-width: 92%; text-align: center; pointer-events: none; }
-.bloom-sign-line { display: block; width: 1px; height: 38px; margin: 0 auto 12px; background: linear-gradient(to bottom, rgba(150, 112, 47, 0), var(--gold-deep)); }
-.bloom-sign-title { display: block; font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 1.9vw, 1.6rem); line-height: 1.25; color: var(--earth); text-shadow: var(--glow-light); }
-.bloom-sign-sub { display: block; margin-top: 8px; font-size: .7rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-deep); text-shadow: var(--glow-light); }
-@media (max-width: 760px) { .bloom-sign { top: calc(100% + 2px); } .bloom-sign-line { height: 22px; margin-bottom: 8px; } }
-.bloom-scroll { height: 270vh; }
+@media (max-width: 760px) { .bloom-scroll { height: 270vh; }
 @media (max-width: 760px) { .bloom-scroll { height: 300vh; } }
 html:not(.js) .bloom-scroll { height: auto; }
 @media (prefers-reduced-motion: reduce) { .bloom-scroll { height: auto; } }
@@ -1872,4 +1868,47 @@ html:not(.js) .bloom-scroll { height: auto; }
   #wahrnehmen .recognize li { padding: 16px 4px 16px; }
   #wahrnehmen .recognize li::before { position: static; display: block; margin: 0 auto 12px; transform: rotate(45deg); }
   #wahrnehmen .recognize li:first-child::before { display: none; }
+}
+
+/* =====================================================================
+   Heilung: Überschrift über der Blüte, das Grün beginnt schon dort,
+   der Text kommt in ruhigen Abschnitten nacheinander
+   ===================================================================== */
+.bloom-stage { grid-template-columns: auto minmax(0, 520px); grid-template-areas: "head copy" "view copy"; align-content: center; row-gap: 1.6rem; }
+.bloom-head { grid-area: head; text-align: center; position: relative; z-index: 1; }
+.bloom-view { grid-area: view; }
+.bloom-copy { grid-area: copy; align-self: center; position: relative; min-height: 16em; }
+.bloom-head-title { margin: 0; font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.3rem); line-height: 1.2; color: var(--earth); text-shadow: var(--glow-light); }
+.bloom-head-line { display: block; width: 1px; height: 34px; margin: 14px auto 0; background: linear-gradient(to bottom, var(--gold-deep), rgba(150, 112, 47, 0)); }
+/* grünes Feld, das an der Überschrift beginnt und die Blüte trägt */
+.bloom-head::before { content: ""; position: absolute; z-index: -1; left: 50%; top: -30%; width: min(900px, 120vw); height: calc(100% + min(760px, 110vw)); translate: -50% 0; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 55%, rgba(196, 214, 162, .5), rgba(206, 222, 176, .3) 45%, rgba(222, 232, 200, .1) 70%, rgba(230, 236, 210, 0) 85%); }
+.bloom-step { position: absolute; left: 0; right: 0; top: 50%; translate: 0 -50%; }
+.bloom-step + .bloom-step { margin-top: 0; }
+.bloom-step p { font-family: var(--serif); font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.5; color: var(--earth); margin: 0; }
+.bloom-copy h3 { font-size: clamp(2.1rem, 3.4vw, 3rem); }
+.bloom-step--key .aside { font-size: clamp(1.45rem, 2.2vw, 1.9rem); line-height: 1.45; }
+@media (max-width: 760px) {
+  .bloom-stage { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "view" "copy"; row-gap: 0; }
+  .bloom-head { padding-top: 4px; }
+  .bloom-head-title { font-size: 1.45rem; }
+  .bloom-head-line { height: 18px; margin-top: 8px; }
+  .bloom-view { height: min(320px, 82vw); }
+  .bloom-copy { min-height: 11em; margin-top: 10px; }
+  .bloom-step { top: 0; translate: none; }
+  .bloom-step p { font-size: 1.2rem; }
+  .bloom-copy h3 { font-size: 1.75rem; }
+  .bloom-step--key .aside { font-size: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) { .bloom-step { position: static; translate: none; } .bloom-step + .bloom-step { margin-top: 1.2rem; } }
+html:not(.js) .bloom-step { position: static; translate: none; }
+.bloom-stage { padding-top: 74px; }
+.bloom-view { width: min(600px, 42vw, 66vh); }
+.bloom-head::before { top: -40%; height: calc(100% + min(700px, 110vw));
+  background: radial-gradient(50% 50% at 50% 52%, rgba(190, 210, 154, .62), rgba(204, 220, 172, .4) 42%, rgba(220, 230, 196, .16) 68%, rgba(230, 236, 210, 0) 86%); }
+@media (max-width: 760px) {
+  .bloom-stage { padding-top: 64px; }
+  .bloom-view { width: 100%; height: min(410px, 105vw); }
+  .bloom-canvas { width: min(460px, 118vw); }
+  .bloom-copy { min-height: 9.5em; margin-top: 4px; }
 }
