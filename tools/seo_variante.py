@@ -1,7 +1,8 @@
-"""Baut die suchmaschinen-optimierte Variante der Website als Kopie unter einem eigenen,
-nicht erratbaren Pfad. Die Hauptseite bleibt unverändert.
+"""Suchmaschinen-Optimierung der Website: Seitentitel, Beschreibungen, Ort (München),
+Bildbeschreibungen und strukturierte Daten. Katharinas Texte bleiben unverändert.
 
-Aufruf:  python3 tools/seo_variante.py
+Aufruf:  python3 tools/seo_variante.py           (auf die Hauptseite anwenden)
+         python3 tools/seo_variante.py --kopie   (als Kopie unter eigenem Pfad bauen)
 
 Die Variante übernimmt den aktuellen Stand aller Seiten und ändert nur, was für Google
 zählt: Seitentitel, Beschreibungen, Hinweis auf den Ort (München), Fachbegriffe, nach denen
@@ -34,10 +35,6 @@ TITLES = {
 INDEX_EDITS = [
     ('<p class="eyebrow">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>',
      '<p class="eyebrow">Schamanische Energiearbeit &amp; Körperarbeit in München</p>'),
-    ('<span class="wi-name">Rückverbindung mit Anteilen von dir – eine schamanische Reise</span>',
-     '<span class="wi-name">Rückverbindung mit Anteilen von dir – eine schamanische Reise (Seelenrückholung)</span>'),
-    ('<span class="wi-name">Täter-Opfer-Retter-Dreieck – auch das Dreieck der Entmachtung</span>',
-     '<span class="wi-name">Täter-Opfer-Retter-Dreieck – auch das Dreieck der Entmachtung (Dramadreieck)</span>'),
     ('alt="Katharina mit langem roten Haar und hellem Haarband, lächelnd"',
      'alt="Katharina, schamanische Energiearbeit in München, mit langem roten Haar und hellem Haarband, lächelnd"'),
     ('alt="Katharinas Mesa: ein gewebtes rotes Tuch mit den Kuyas, den Steinen der Kraft, draußen am Wasser"',
@@ -89,12 +86,15 @@ BUSINESS = {
 }
 
 
-def build():
-    out_root = ROOT / SLUG
+def build(main=True):
+    """main=True: Änderungen direkt in die Hauptseite schreiben (mehrfach ausführbar).
+    main=False: Kopie unter SLUG bauen."""
+    out_root = ROOT if main else ROOT / SLUG
     for page in PAGES:
         text = (ROOT / page / "index.html").read_text(encoding="utf-8")
         depth = page.count("/")
-        text = rewrite_paths(text, depth)
+        if not main:
+            text = rewrite_paths(text, depth)
         if page in TITLES:
             title, desc = TITLES[page]
             text = re.sub(r"<title>.*?</title>", f"<title>{html.escape(title, quote=False)}</title>", text, count=1)
@@ -102,8 +102,9 @@ def build():
                           f'<meta name="description" content="{html.escape(desc)}">', text, count=1)
         if page == "":
             for old, new in INDEX_EDITS:
-                assert old in text, old[:60]
+                assert old in text or new in text, old[:60]
                 text = text.replace(old, new)
+            text = re.sub(r'\n  <script type="application/ld\+json">.*?</script>', "", text)
             ld = "".join(f'\n  <script type="application/ld+json">{json.dumps(d, ensure_ascii=False)}</script>'
                          for d in (BUSINESS, faq_schema(text)))
             text = text.replace("</head>", ld + "\n</head>", 1)
@@ -114,4 +115,5 @@ def build():
 
 
 if __name__ == "__main__":
-    build()
+    import sys
+    build(main="--kopie" not in sys.argv)
