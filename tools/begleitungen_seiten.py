@@ -16,13 +16,13 @@ ROOT = Path(__file__).resolve().parent.parent / "site"
 
 # data-id -> (Pfad, Seitentitel für Google)
 PAGES = {
-    "illumination": ("illumination", "Illumination · Reinigung des Energiefeldes · Energiearbeit München"),
-    "cord-cutting": ("cord-cutting", "Cord Cutting in München · Energetische Bänder lösen · Weg der vier Winde"),
-    "entkopplung": ("entkopplung", "Entkopplung · Raum zum Durchatmen · Energiearbeit München"),
-    "rollen": ("taeter-opfer-retter-dreieck", "Täter-Opfer-Retter-Dreieck (Dramadreieck) · Energiearbeit München"),
-    "extraktion": ("extraktion", "Extraktion · schamanische Dschungelmedizin · Energiearbeit München"),
-    "rueckverbindung": ("rueckverbindung-seelenrueckholung", "Rückverbindung mit Anteilen (Seelenrückholung) · Schamanische Reise München"),
-    "landkarte": ("innere-landkarte", "Arbeit mit der inneren Landkarte · Energiearbeit München"),
+    "illumination": ("energetische-reinigung-illumination", "Energetische Reinigung · Illumination · Energiearbeit München"),
+    "cord-cutting": ("loslassen-cord-cutting", "Loslassen von Ex-Partner, Eltern und alten Bindungen · Cord Cutting München"),
+    "entkopplung": ("stress-loslassen-entkopplung", "Stress loslassen und zur Ruhe kommen · Entkopplung · Energiearbeit München"),
+    "rollen": ("opferrolle-verlassen-dramadreieck", "Raus aus der Opferrolle · Täter-Opfer-Retter-Dreieck (Dramadreieck) · München"),
+    "extraktion": ("belastende-energien-loesen-extraktion", "Belastende Energien lösen · Extraktion · Energiearbeit München"),
+    "rueckverbindung": ("seelenrueckholung", "Seelenrückholung · Rückverbindung mit Anteilen von dir · München"),
+    "landkarte": ("glaubenssaetze-veraendern", "Alte Glaubenssätze verändern · Arbeit mit der inneren Landkarte · München"),
 }
 
 

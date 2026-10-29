@@ -80,11 +80,11 @@ BUSINESS = {
     "areaServed": "München",
     "sameAs": ["https://www.instagram.com/katharinawegdervierwinde/"],
     "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "url": u}} for n, u in [
-        ("Illumination", "illumination/"), ("Cord Cutting – energetische Bänder lösen", "cord-cutting/"),
-        ("Entkopplung", "entkopplung/"), ("Extraktion", "extraktion/"),
-        ("Rückverbindung mit Anteilen (Seelenrückholung)", "rueckverbindung-seelenrueckholung/"),
-        ("Täter-Opfer-Retter-Dreieck", "taeter-opfer-retter-dreieck/"),
-        ("Arbeit mit der inneren Landkarte", "innere-landkarte/")]],
+        ("Illumination", "energetische-reinigung-illumination/"), ("Cord Cutting – energetische Bänder lösen", "loslassen-cord-cutting/"),
+        ("Entkopplung", "stress-loslassen-entkopplung/"), ("Extraktion", "belastende-energien-loesen-extraktion/"),
+        ("Rückverbindung mit Anteilen (Seelenrückholung)", "seelenrueckholung/"),
+        ("Täter-Opfer-Retter-Dreieck", "opferrolle-verlassen-dramadreieck/"),
+        ("Arbeit mit der inneren Landkarte", "glaubenssaetze-veraendern/")]],
 }
 
 
