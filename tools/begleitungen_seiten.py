@@ -57,6 +57,8 @@ def build():
                                 "address": {"@type": "PostalAddress", "addressLocality": "München", "addressCountry": "DE"}},
                    "areaServed": "München"}
         page_head = re.sub(r"<title>.*?</title>", f"<title>{html.escape(title, quote=False)}</title>", head, count=1)
+        page_head = re.sub(r'<link rel="canonical" href="[^"]*">',
+                           f'<link rel="canonical" href="https://wegdervierwinde.de/{slug}/">', page_head, count=1)
         page_head = re.sub(r'<meta name="description" content="[^"]*">',
                            f'<meta name="description" content="{html.escape(desc)}">', page_head, count=1)
         page_head = page_head.replace("</head>",

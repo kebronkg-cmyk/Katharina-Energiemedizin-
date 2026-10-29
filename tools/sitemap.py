@@ -11,7 +11,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / "site"
-BASE = (sys.argv[1] if len(sys.argv) > 1 else "https://blaufuchs-m8t3.pages.dev").rstrip("/")
+BASE = (sys.argv[1] if len(sys.argv) > 1 else "https://wegdervierwinde.de").rstrip("/")
 
 PAGES = [
     ("", "1.0"),

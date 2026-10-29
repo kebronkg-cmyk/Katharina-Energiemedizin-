@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blaufuchs-m8t3.pages.dev/sitemap.xml
+Sitemap: https://wegdervierwinde.de/sitemap.xml
