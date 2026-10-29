@@ -203,6 +203,19 @@
     img.addEventListener("error", function () { img.style.opacity = ""; }, { once: true });
   });
 
+  // ---------- Kontaktformular: öffnet WhatsApp mit der fertigen Nachricht ----------
+  var form = document.querySelector("form[data-wa]");
+  if (form) form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = form.elements, lines = ["Hallo Katharina, ich interessiere mich für ein kostenloses Erstgespräch.", ""];
+    function add(label, v) { v = (v || "").trim(); if (v) lines.push(label + ": " + v); }
+    add("Name", f.name.value); add("E-Mail", f.email.value); add("Telefon", f.telefon.value); add("Wunschzeitraum", f.wunschzeitraum.value);
+    if (f.nachricht.value.trim()) lines.push("", f.nachricht.value.trim());
+    var url = "https://wa.me/" + form.dataset.wa + "?text=" + encodeURIComponent(lines.join("\n"));
+    var w = window.open(url, "_blank", "noopener");
+    if (!w) window.location.href = url;
+  });
+
   // ---------- WhatsApp: erscheint erst, wenn eine Nummer hinterlegt ist ----------
   document.querySelectorAll(".wa-link").forEach(function (a) {
     var n = (a.dataset.wa || "").replace(/\D/g, "");
