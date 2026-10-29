@@ -1751,3 +1751,11 @@ html:not(.js) .bloom-scroll { height: auto; }
   mask-image: radial-gradient(closest-side, #000 62%, rgba(0, 0, 0, .6) 80%, transparent 100%); }
 @media (max-width: 760px) { .nature-block::before { inset: -6vh -30vw; } }
 .nature-inner .label { justify-content: center; margin-inline: auto; width: fit-content; }
+/* Kompass am großen Bildschirm: Norden steht wie am Handy über dem Medaillon */
+@media (min-width: 601px) {
+  .wind-card[data-wind="norden"] { flex-direction: column; }
+  .wind-card[data-wind="norden"] .wind-card-dir { order: 1; margin: 0 0 6px; }
+  .wind-card[data-wind="norden"] .wind-card-sub { order: 2; margin: 0 0 16px; }
+  .wind-card[data-wind="norden"] .medal { order: 3; }
+  .wind-card[data-wind="norden"]::before { top: auto; bottom: 6px; }
+}
