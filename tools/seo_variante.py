@@ -20,13 +20,15 @@ PAGES = ["", "ueber-mich/", "kreative-integration/", "lebensspuren/", "impressum
 ASSET = r"(?:css|js|img|assets|v3|fonts)/|favicon\.svg"
 
 TITLES = {
-    "": ("Weg der vier Winde · Schamanische Energiearbeit in München · Katharina",
-         "Schamanische Energiearbeit in München nach der Tradition der Anden und des Amazonas: "
-         "Illumination, Cord Cutting, Entkopplung, Rückverbindung und Schattenarbeit. Kostenloses Erstgespräch."),
-    "ueber-mich/": ("Über mich · Katharina, Energiearbeit in München · Weg der vier Winde",
-                    "Katharina, Energiearbeiterin in München: ihr persönlicher Weg zur indigenen Heilkunst der Anden und des Amazonas."),
+    "": ("Weg der vier Winde · Schamanismus & Energiearbeit in München · Katharina",
+         "Schamanismus und schamanische Energiearbeit in München-Pasing nach der Tradition der Anden und des Amazonas: "
+         "Illumination, Cord Cutting, Entkopplung, Seelenrückholung. Kostenloses Erstgespräch."),
+    "ueber-mich/": ("Über mich · Katharina · Schamanische Energiearbeit München · Weg der vier Winde",
+                    "Katharina, schamanische Energiearbeit in München-Pasing: ihr persönlicher Weg zum Schamanismus "
+                    "und zur indigenen Heilkunst der Anden und des Amazonas."),
     "kreative-integration/": ("Kreative Integration in der Energiearbeit · Weg der vier Winde München",
-                              "Kreative Integration in der Energiearbeit: authentische Bewegung, Tanz, intuitives Malen, Klang und das Sandbild."),
+                              "Kreative Integration in der schamanischen Energiearbeit in München: authentische Bewegung, "
+                              "Tanz, intuitives Malen, Klang und das Sandbild."),
     "lebensspuren/": ("Kunstausstellung Lebensspuren · Bilder von Katharina · Weg der vier Winde",
                       "Kunstausstellung Lebensspuren: Gemälde von Katharina, Energiearbeit in München."),
 }
@@ -70,14 +72,34 @@ def faq_schema(text):
     return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items}
 
 
+BASE = "https://wegdervierwinde.de/"
+
+# Orte rund um Pasing, für die Google die Seite kennen soll (nur in den unsichtbaren Daten)
+AREAS = ["München", "München-Pasing", "Pasing-Obermenzing", "Laim", "Aubing", "Neuhausen-Nymphenburg",
+         "Gräfelfing", "Planegg", "Germering", "Puchheim", "Gröbenzell", "Fürstenfeldbruck", "Starnberg",
+         "Landkreis München", "Landkreis Fürstenfeldbruck", "Landkreis Starnberg", "Oberbayern"]
+
+TOPICS = ["Schamanismus", "Schamanische Energiearbeit", "Andenschamanismus", "Schamanische Heilarbeit",
+          "Energiearbeit", "Energiemedizin", "Körperarbeit", "Medizinrad", "Weg der vier Winde", "Mesa",
+          "Munay-Ki", "Illumination", "Cord Cutting", "Entkopplung", "Extraktion", "Seelenrückholung",
+          "Schattenarbeit", "Dramadreieck", "Glaubenssätze verändern", "Kreative Integration"]
+
 BUSINESS = {
     "@context": "https://schema.org", "@type": "LocalBusiness",
     "name": "Weg der vier Winde · Katharina",
-    "description": "Schamanische Energiearbeit, Körperarbeit und kreative Integration nach der Tradition der Anden und des Amazonas.",
-    "address": {"@type": "PostalAddress", "addressLocality": "München", "addressCountry": "DE"},
-    "areaServed": "München",
+    "alternateName": "Weg der vier Winde",
+    "url": BASE,
+    "image": BASE + "img/logo-mark.webp",
+    "description": "Schamanismus und schamanische Energiearbeit, Körperarbeit und kreative Integration in München-Pasing "
+                   "nach der Tradition der Anden und des Amazonas.",
+    "telephone": "+49 1573 4359358",
+    "email": "energie.medizin@web.de",
+    "address": {"@type": "PostalAddress", "addressLocality": "München", "addressRegion": "Bayern", "addressCountry": "DE"},
+    "areaServed": [{"@type": "Place", "name": a} for a in AREAS],
+    "knowsAbout": TOPICS,
+    "keywords": ", ".join(TOPICS + [t + " München" for t in ("Schamanismus", "Energiearbeit", "Schamanische Energiearbeit")]),
     "sameAs": ["https://www.instagram.com/katharinawegdervierwinde/"],
-    "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "url": u}} for n, u in [
+    "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "url": BASE + u}} for n, u in [
         ("Illumination", "energetische-reinigung-illumination/"), ("Cord Cutting – energetische Bänder lösen", "loslassen-cord-cutting/"),
         ("Entkopplung", "stress-loslassen-entkopplung/"), ("Extraktion", "belastende-energien-loesen-extraktion/"),
         ("Rückverbindung mit Anteilen (Seelenrückholung)", "seelenrueckholung/"),

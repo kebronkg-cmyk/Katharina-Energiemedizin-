@@ -12,6 +12,8 @@ import json
 import re
 from pathlib import Path
 
+from seo_variante import AREAS, BASE
+
 ROOT = Path(__file__).resolve().parent.parent / "site"
 
 # data-id -> (Pfad, Seitentitel für Google)
@@ -53,9 +55,11 @@ def build():
         desc = description(body)
         service = {"@context": "https://schema.org", "@type": "Service", "name": text_of(name),
                    "alternateName": text_of(tag), "description": desc,
-                   "provider": {"@type": "LocalBusiness", "name": "Weg der vier Winde · Katharina",
-                                "address": {"@type": "PostalAddress", "addressLocality": "München", "addressCountry": "DE"}},
-                   "areaServed": "München"}
+                   "url": f"{BASE}{slug}/", "serviceType": "Schamanische Energiearbeit",
+                   "provider": {"@type": "LocalBusiness", "name": "Weg der vier Winde · Katharina", "url": BASE,
+                                "address": {"@type": "PostalAddress", "addressLocality": "München",
+                                            "addressRegion": "Bayern", "addressCountry": "DE"}},
+                   "areaServed": [{"@type": "Place", "name": a} for a in AREAS]}
         page_head = re.sub(r"<title>.*?</title>", f"<title>{html.escape(title, quote=False)}</title>", head, count=1)
         page_head = re.sub(r'<link rel="canonical" href="[^"]*">',
                            f'<link rel="canonical" href="https://wegdervierwinde.de/{slug}/">', page_head, count=1)
