@@ -2040,3 +2040,14 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 .wind-card.is-lit .wind-card-dir { color: var(--gold-deep); }
 .qualities li { transition: background .5s ease, box-shadow .5s ease, transform .5s ease; border-radius: 14px; }
 .qualities li.is-lit { background: rgba(255, 252, 244, .85); box-shadow: 0 18px 40px -26px rgba(30, 20, 10, .5), inset 0 0 0 1px rgba(176, 138, 76, .55); transform: translateY(-3px); }
+
+/* Handy: Blüte und Text stehen still, die Sätze wechseln beim Scrollen (Klasse setzt v6.js) */
+@media (max-width: 760px) {
+  #heilung.bloom-fixed::after { content: ""; display: block; position: static; height: 250vh; background: none; }
+  #heilung.bloom-fixed .bloom-copy { position: sticky; top: var(--copy-top, 60vh); height: calc(100vh - var(--copy-top, 60vh)); height: calc(100svh - var(--copy-top, 60vh)); padding: 0 26px; }
+  /* Blüte und Text verlassen den Bildschirm gemeinsam */
+  #heilung.bloom-fixed .bloom-stage { margin-bottom: calc(100vh - var(--copy-top, 60vh)); margin-bottom: calc(100svh - var(--copy-top, 60vh)); }
+  #heilung.bloom-fixed .bloom-copy { margin-top: calc(var(--copy-top, 60vh) - 100vh); margin-top: calc(var(--copy-top, 60vh) - 100svh); }
+  #heilung.bloom-fixed .bloom-step { position: absolute; inset: 0 26px auto; min-height: 0; padding-top: 2.5vh; opacity: 0; translate: 0 10px; transition: opacity .6s ease, translate .6s ease; }
+  #heilung.bloom-fixed .bloom-step.is-on { opacity: 1; translate: none; }
+}

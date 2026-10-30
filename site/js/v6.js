@@ -173,25 +173,43 @@
     var steps = gsap.utils.toArray(".bloom-step", wrap);
     var copy = wrap.querySelector(".bloom-copy");
     var seq = { f: 0 };
-    // Die Blüte steht fest, der Text scrollt ganz normal vorbei. Die Blüte öffnet sich mit dem
-    // Lesefortschritt: geschlossen beim ersten Satz, ganz offen beim letzten.
-    gsap.timeline({ scrollTrigger: { trigger: copy, start: "top 70%", end: "bottom 75%", scrub: .6 } })
-      .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: 1, onUpdate: function () { pos = seq.f; request(); } }, 0)
-      .fromTo(".bloom-view canvas", { scale: .94 }, { scale: 1, ease: "sine.inOut", duration: 1 }, 0)
-      // Lichtkreise öffnen sich Schicht für Schicht
-      .fromTo(".bl-r1", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .1)
-      .fromTo(".bl-r2", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .35)
-      .fromTo(".bl-r3", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .6);
-    // der Abschnitt, der gerade gelesen wird, ist hell, die anderen ruhen
-    // Handy: Blüte steht oben, lesbar ist nur der Bereich darunter. Ein Abschnitt wird
-    // zurückgenommen, bevor er unter die Blüte gleitet.
     var stage = wrap.querySelector(".bloom-stage");
-    var mobile = window.matchMedia("(max-width: 760px)");
-    function below() { return Math.round((parseFloat(getComputedStyle(stage).top) || 0) + stage.offsetHeight); }
-    steps.forEach(function (st) {
-      ScrollTrigger.create({ trigger: st, toggleClass: "is-on", invalidateOnRefresh: true,
-        start: function () { return mobile.matches ? "top 96%" : "top 68%"; },
-        end: function () { return mobile.matches ? "top " + (below() - 10) + "px" : "bottom 32%"; } });
+    function open(tl, trigger, len) {
+      return tl
+        .to(seq, { f: COUNT - 1, ease: "sine.inOut", duration: len, onUpdate: function () { pos = seq.f; request(); } }, 0)
+        .fromTo(".bloom-view canvas", { scale: .94 }, { scale: 1, ease: "sine.inOut", duration: len }, 0)
+        // Lichtkreise öffnen sich Schicht für Schicht
+        .fromTo(".bl-r1", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 * len }, .1 * len)
+        .fromTo(".bl-r2", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 * len }, .35 * len)
+        .fromTo(".bl-r3", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 * len }, .6 * len);
+    }
+    var mm = gsap.matchMedia();
+    // Computer: Die Blüte steht fest, der Text scrollt ganz normal vorbei. Die Blüte öffnet sich
+    // mit dem Lesefortschritt; der Abschnitt, der gerade gelesen wird, ist hell, die anderen ruhen.
+    mm.add("(min-width: 761px)", function () {
+      open(gsap.timeline({ scrollTrigger: { trigger: copy, start: "top 70%", end: "bottom 75%", scrub: .6 } }), copy, 1);
+      steps.forEach(function (st) {
+        ScrollTrigger.create({ trigger: st, start: "top 68%", end: "bottom 32%", toggleClass: "is-on" });
+      });
+    });
+    // Handy: Blüte und Text stehen still. Beim Scrollen öffnet sich die Blüte und unter ihr
+    // wechselt sanft ein Satz nach dem anderen; nichts gleitet unter die Blüte.
+    mm.add("(max-width: 760px)", function () {
+      wrap.classList.add("bloom-fixed");
+      function place() { wrap.style.setProperty("--copy-top", Math.round((parseFloat(getComputedStyle(stage).top) || 0) + stage.offsetHeight) + "px"); }
+      place();
+      var current = -1;
+      function show(i) {
+        if (i === current) return;
+        current = i;
+        steps.forEach(function (st, k) { st.classList.toggle("is-on", k === i); });
+      }
+      show(0);
+      // die Blüte ist ganz offen, wenn der letzte Satz erscheint, und bleibt dann noch stehen
+      open(gsap.timeline({ scrollTrigger: { trigger: wrap, start: "top top", end: "bottom bottom", scrub: .6 } }), wrap, .85).set({}, {}, 1);
+      ScrollTrigger.create({ trigger: wrap, start: "top top", end: "bottom bottom", onRefreshInit: place,
+        onUpdate: function (self) { show(Math.min(steps.length - 1, Math.floor(self.progress * steps.length))); } });
+      return function () { wrap.classList.remove("bloom-fixed"); steps.forEach(function (st) { st.classList.remove("is-on"); }); };
     });
   })();
 
