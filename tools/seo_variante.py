@@ -20,7 +20,7 @@ PAGES = ["", "ueber-mich/", "kreative-integration/", "lebensspuren/", "impressum
 ASSET = r"(?:css|js|img|assets|v3|fonts)/|favicon\.svg"
 
 TITLES = {
-    "": ("Schamanische Energiearbeit in München · Katharina · Weg der vier Winde",
+    "": ("Weg der vier Winde · Schamanische Energiearbeit in München · Katharina",
          "Schamanische Energiearbeit in München nach der Tradition der Anden und des Amazonas: "
          "Illumination, Cord Cutting, Entkopplung, Rückverbindung und Schattenarbeit. Kostenloses Erstgespräch."),
     "ueber-mich/": ("Über mich · Katharina, Energiearbeit in München · Weg der vier Winde",
