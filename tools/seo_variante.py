@@ -79,7 +79,7 @@ AREAS = ["München", "München-Pasing", "Pasing-Obermenzing", "Laim", "Aubing", 
          "Gräfelfing", "Planegg", "Germering", "Puchheim", "Gröbenzell", "Fürstenfeldbruck", "Starnberg",
          "Landkreis München", "Landkreis Fürstenfeldbruck", "Landkreis Starnberg", "Oberbayern"]
 
-TOPICS = ["Schamanismus", "Schamanische Energiearbeit", "Andenschamanismus", "Schamanische Heilarbeit",
+TOPICS = ["Schamanismus", "Schamanische Energiearbeit", "Andenschamanismus", "Schamanische Reise",
           "Energiearbeit", "Energiemedizin", "Körperarbeit", "Medizinrad", "Weg der vier Winde", "Mesa",
           "Munay-Ki", "Illumination", "Cord Cutting", "Entkopplung", "Extraktion", "Seelenrückholung",
           "Schattenarbeit", "Dramadreieck", "Glaubenssätze verändern", "Kreative Integration"]
