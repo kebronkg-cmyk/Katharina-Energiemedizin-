@@ -21,8 +21,9 @@ ASSET = r"(?:css|js|img|assets|v3|fonts)/|favicon\.svg"
 
 TITLES = {
     "": ("Weg der vier Winde · Schamanismus & Energiearbeit in München · Katharina",
-         "Schamanismus und schamanische Energiearbeit in München-Pasing nach der Tradition der Anden und des Amazonas: "
-         "Illumination, Cord Cutting, Entkopplung, Seelenrückholung. Kostenloses Erstgespräch."),
+         # Wortlaut von Katharina
+         "Schamanische Energiearbeit in München – in der Tradition der Anden und des Amazonas. "
+         "Energie- und Körperarbeit für Klarheit, Wandlung und neue Lebendigkeit."),
     "ueber-mich/": ("Über mich · Katharina · Schamanische Energiearbeit München · Weg der vier Winde",
                     "Katharina, schamanische Energiearbeit in München-Pasing: ihr persönlicher Weg zum Schamanismus "
                     "und zur indigenen Heilkunst der Anden und des Amazonas."),

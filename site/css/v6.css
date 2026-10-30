@@ -335,6 +335,8 @@ h3 { font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.2; margin: 0 0 .6
 .price--featured .price-meta, .price-badge { color: var(--gold-light); }
 .price-badge { font-size: .68rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; margin-bottom: .4rem; }
 .prices-note { margin-top: 3vh; font-size: .95rem; color: var(--earth); text-shadow: var(--glow-light); }
+.prices-social { max-width: 34rem; margin: 1.2vh auto 0; line-height: 1.55; }
+.prices-social b { font-weight: 500; }
 
 /* Tor zum nächsten Wind */
 .gate { display: flex; align-items: center; gap: 22px; width: fit-content; max-width: 100%; padding: 14px 62px 14px 14px; text-decoration: none; border-radius: 999px; background: rgba(251, 246, 236, .84); backdrop-filter: blur(12px); border: 1px solid rgba(176, 138, 76, .7); box-shadow: 0 24px 50px -28px rgba(30, 20, 10, .6), inset 0 0 0 4px rgba(251, 246, 236, .6), inset 0 0 0 5px rgba(176, 138, 76, .35); transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .5s ease; }
@@ -1967,12 +1969,13 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
   #heilung { display: block; padding: 0; }
   /* oben steht die Blüte mit Überschrift, der Text gleitet darunter hindurch */
   #heilung .bloom-stage { top: 54px; height: auto; padding: 10px var(--pad) 26px; gap: 6px; z-index: 2;
-    background: linear-gradient(to bottom, var(--hb) 0%, var(--hb) 82%, rgba(238, 240, 226, 0) 100%); }
+    background: linear-gradient(to bottom, var(--hb) 0%, var(--hb) 93%, rgba(238, 240, 226, 0) 100%); }
   #heilung .bloom-head-title { font-size: 2rem; }
   #heilung .bloom-head-note { font-size: .62rem; letter-spacing: .2em; margin-top: .5rem; }
-  #heilung .bloom-view { width: min(78vw, 46vh, 340px); }
+  #heilung .bloom-view { width: min(70vw, 40vh, 310px); }
   #heilung .bloom-copy { padding: 4vh 26px 30vh; }
-  #heilung .bloom-step { min-height: 46vh; justify-content: flex-start; padding-top: 6vh; }
+  #heilung .bloom-step { min-height: 44vh; justify-content: flex-start; padding-top: 4vh; }
+  #heilung .bloom-step:not(.is-on) { opacity: .12; }
   #heilung .bloom-step h3 { font-size: 1.85rem; }
   #heilung .bloom-step p { font-size: 1.22rem; line-height: 1.55; max-width: none; }
   #heilung .bloom-step--key .aside { font-size: 1.35rem; }

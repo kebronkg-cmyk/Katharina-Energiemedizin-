@@ -183,8 +183,15 @@
       .fromTo(".bl-r2", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .35)
       .fromTo(".bl-r3", { scale: .55, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, ease: "sine.out", duration: .35 }, .6);
     // der Abschnitt, der gerade gelesen wird, ist hell, die anderen ruhen
+    // Handy: Blüte steht oben, lesbar ist nur der Bereich darunter. Ein Abschnitt wird
+    // zurückgenommen, bevor er unter die Blüte gleitet.
+    var stage = wrap.querySelector(".bloom-stage");
+    var mobile = window.matchMedia("(max-width: 760px)");
+    function below() { return Math.round((parseFloat(getComputedStyle(stage).top) || 0) + stage.offsetHeight); }
     steps.forEach(function (st) {
-      ScrollTrigger.create({ trigger: st, start: "top 68%", end: "bottom 32%", toggleClass: "is-on" });
+      ScrollTrigger.create({ trigger: st, toggleClass: "is-on", invalidateOnRefresh: true,
+        start: function () { return mobile.matches ? "top 96%" : "top 68%"; },
+        end: function () { return mobile.matches ? "top " + (below() - 10) + "px" : "bottom 32%"; } });
     });
   })();
 
