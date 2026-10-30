@@ -13,8 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent / "site"
 
 
-def stamp(name):
-    return hashlib.md5((ROOT / name).read_bytes()).hexdigest()[:8]
+def stamp(path):
+    return hashlib.md5(path.read_bytes()).hexdigest()[:8]
 
 
 def build():
@@ -25,9 +25,12 @@ def build():
 
         def fix(m):
             name = m.group(3)
-            if name not in cache:
-                cache[name] = stamp(name)
-            return f"{m.group(1)}{m.group(2)}{name}?v={cache[name]}{m.group(4)}"
+            path = (page.parent / (m.group(2) + name)).resolve()
+            if not path.exists():
+                return m.group(0)
+            if path not in cache:
+                cache[path] = stamp(path)
+            return f"{m.group(1)}{m.group(2)}{name}?v={cache[path]}{m.group(4)}"
 
         new = pattern.sub(fix, text)
         if new != text:
