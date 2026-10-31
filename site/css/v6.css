@@ -2088,3 +2088,14 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 .ask--hummingbird .ask-list { margin-top: 3vh; }
 .ask--hummingbird .ask-close { margin-top: 5vh; }
 @media (min-width: 760px) { .ask--hummingbird .ask-list li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 11px); } }
+
+/* Link „Was bedeutet kreative Integration?“: direkt unter dem Absatz, als deutlicher Button */
+.welcome-copy .minilink { margin: .4rem 0 1.4rem; padding: 14px 14px 14px 22px; gap: 14px; border: 1px solid rgba(232, 205, 148, .8);
+  background: radial-gradient(120% 140% at 20% 0%, rgba(98, 70, 48, .97), rgba(63, 42, 28, .95)); color: #FBF6EC; font-size: 1.22rem;
+  box-shadow: 0 18px 36px -20px rgba(40, 26, 14, .75), 0 0 0 0 rgba(232, 205, 148, .5); animation: ki-glow 3.6s ease-in-out infinite; }
+.welcome-copy .minilink:hover { color: #FFFFFF; background: radial-gradient(120% 140% at 20% 0%, rgba(118, 86, 58, .98), rgba(72, 49, 33, .97)); border-color: var(--gold-light); }
+.welcome-copy .minilink-mark { color: var(--gold-light); font-size: .95rem; }
+.welcome-copy .minilink-arrow { width: 34px; height: 34px; font-size: 1.05rem; border-color: rgba(232, 205, 148, .8); color: var(--gold-light); background: rgba(255, 245, 225, .08); }
+@keyframes ki-glow { 0%, 100% { box-shadow: 0 18px 36px -20px rgba(40, 26, 14, .75), 0 0 0 0 rgba(232, 205, 148, 0); } 50% { box-shadow: 0 18px 36px -20px rgba(40, 26, 14, .75), 0 0 26px 4px rgba(232, 205, 148, .55); } }
+@media (prefers-reduced-motion: reduce) { .welcome-copy .minilink { animation: none; } }
+@media (max-width: 520px) { .welcome-copy .minilink { font-size: 1.06rem; padding: 12px 12px 12px 18px; } }
