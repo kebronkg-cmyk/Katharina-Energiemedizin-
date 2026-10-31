@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 28" fill="none" stroke="#B08A4C" stroke-width="1" stroke-linecap="round">
+  <g id="half">
+    <path d="M142 14 H176 c7 0 11 -7 6 -10 c-4 -2.5 -8 1.5 -5.5 4.5"/>
+    <path d="M186 14 H252"/>
+    <circle cx="183" cy="14" r="1.6" fill="#B08A4C" stroke="none"/>
+    <circle cx="256" cy="14" r="1" fill="#B08A4C" stroke="none"/>
+  </g>
+  <use href="#half" transform="matrix(-1 0 0 1 260 0)"/>
+  <path d="M130 3 L132.6 11.4 L141 14 L132.6 16.6 L130 25 L127.4 16.6 L119 14 L127.4 11.4 Z" fill="#B08A4C" fill-opacity=".18"/>
+  <circle cx="130" cy="14" r="1.4" fill="#B08A4C" stroke="none"/>
+</svg>

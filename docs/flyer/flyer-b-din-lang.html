@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Flyer DIN lang, Fassung B · Weg der vier Winde</title>
+<!--
+  Druckvorlage DIN lang hoch, 99 × 210 mm Endformat.
+  Datenformat mit 2 mm Beschnitt rundum: 103 × 214 mm.
+  Texte halten mindestens 6 mm Abstand zur Schnittkante.
+  PDF erzeugen: node docs/flyer/build.js
+-->
+<style>
+  @font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-italic.woff2"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-500-normal.woff2"); font-weight: 500; }
+
+  @page { size: 103mm 214mm; margin: 0; }
+  :root { --earth: #3F2A1C; --gold: #B08A4C; --gold-deep: #765422; --cream: #FBF6EC; --ink: #1C1612; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body { font-family: "Jost", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page { position: relative; width: 103mm; height: 214mm; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* Satzspiegel: 2 mm Beschnitt + 6 mm Sicherheitsabstand */
+  .safe { position: absolute; inset: 8mm; display: flex; flex-direction: column; }
+
+  .serif { font-family: "Bodoni Moda", serif; font-weight: 400; }
+  em { font-style: italic; color: var(--gold-deep); }
+  .label { font-size: 5.6pt; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-deep); }
+  .rule { width: 32mm; height: 4mm; margin: 0 auto; background: url("../../img/ornament.svg") center / contain no-repeat; }
+
+  /* ---------- Vorderseite ---------- */
+  .front .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 0%, rgba(251,246,236,0) 52%, rgba(251,246,236,.82) 72%, rgba(251,246,236,.94) 100%); }
+  .front .mark { position: absolute; left: 50%; top: 47.6%; width: 19mm; transform: translate(-50%, -50%); filter: drop-shadow(0 0 2.5mm rgba(255, 248, 230, 1)); }
+  .front .safe { justify-content: flex-end; text-align: center; }
+  .front .word { width: 52mm; margin: 0 auto 2.2mm; }
+  .front .label { margin-bottom: 5mm; font-size: 5.2pt; letter-spacing: .16em; white-space: nowrap; }
+  .front h1 { font-size: 17pt; line-height: 1.12; color: var(--earth); margin-bottom: 5mm; }
+  .front .offer { margin: 0 auto; padding: 2.4mm 4mm; border: .25mm solid var(--gold); border-radius: 30mm; font-size: 7.2pt; letter-spacing: .04em; color: var(--earth); background: rgba(251,246,236,.6); }
+  .front .offer b { font-weight: 500; }
+
+  /* ---------- Rückseite ---------- */
+  .back .veil { position: absolute; inset: 0; background: rgba(251, 246, 236, .86); }
+  .back .safe { gap: 0; }
+  .me { display: flex; gap: 4mm; align-items: center; margin-bottom: 3.6mm; }
+  .me img { width: 22mm; height: 22mm; border-radius: 50%; border: .8mm solid var(--cream); outline: .25mm solid var(--gold); outline-offset: .8mm; flex: none; }
+  .me h2 { font-size: 15pt; line-height: 1.05; color: var(--earth); }
+  .me p { font-size: 6.6pt; line-height: 1.45; margin-top: 1.4mm; }
+  .intro { font-size: 7.4pt; line-height: 1.55; margin-bottom: 3.6mm; }
+  .quote { font-size: 9pt; line-height: 1.35; text-align: center; color: var(--earth); margin: 0 0 3.8mm; }
+
+  .winds { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 3.4mm; margin: 2.4mm 0 3.8mm; }
+  .wind { display: flex; gap: 2.4mm; align-items: flex-start; }
+  .wind img { width: 11mm; height: 11mm; border-radius: 50%; flex: none; outline: .2mm solid var(--gold); outline-offset: .5mm; }
+  .wind h3 { font-size: 8.4pt; font-style: italic; color: var(--earth); line-height: 1.1; }
+  .wind small { display: block; font-size: 4.6pt; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-deep); margin: .4mm 0 .6mm; }
+  .wind p { font-size: 5.8pt; line-height: 1.35; }
+
+  .card { margin-top: auto; padding: 3.6mm 4mm 3.4mm; border: .25mm solid var(--gold); border-radius: 22mm 22mm 2mm 2mm / 9mm 9mm 2mm 2mm; background: rgba(255, 252, 245, .9); text-align: center; }
+  .card .label { margin-bottom: 1.4mm; }
+  .card h3 { font-size: 11.5pt; color: var(--earth); line-height: 1.15; margin-bottom: 1.2mm; }
+  .card p { font-size: 6.4pt; line-height: 1.45; }
+  .contact { display: flex; gap: 3.4mm; align-items: center; margin-top: 3.4mm; }
+  .contact img { width: 17mm; height: 17mm; flex: none; }
+  .contact dl { font-size: 6.4pt; line-height: 1.5; }
+  .contact dt { font-size: 4.6pt; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); }
+  .contact dd { font-family: "Bodoni Moda", serif; font-size: 8pt; color: var(--earth); margin-bottom: .8mm; }
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin: 0 0 3.8mm; text-align: center; }
+  .flow span { display: block; font-family: "Bodoni Moda", serif; font-style: italic; font-size: 11pt; color: var(--gold); line-height: 1; margin-bottom: .8mm; }
+  .flow p { font-size: 5.6pt; line-height: 1.3; }
+  .prices { display: grid; grid-template-columns: repeat(3, 1fr); border-top: .2mm solid rgba(176,138,76,.6); border-bottom: .2mm solid rgba(176,138,76,.6); margin-bottom: 3.6mm; }
+  .prices div { padding: 2.2mm 1mm; text-align: center; }
+  .prices div + div { border-left: .2mm solid rgba(176,138,76,.45); }
+  .prices b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 12pt; color: var(--earth); line-height: 1.1; }
+  .prices small { display: block; font-size: 4.6pt; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: .6mm; }
+  .prices i { display: block; font-style: normal; font-size: 5.4pt; color: #5E534A; }
+  .fine { margin-top: 2.6mm; font-size: 4.4pt; line-height: 1.4; color: #5E534A; }
+
+  /* ---------- Vorderseite mit Informationen ---------- */
+  .front2 .bg { height: 62%; object-position: 50% 30%; }
+  .front2 .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 0%, rgba(251,246,236,0) 38%, rgba(251,246,236,.9) 56%, #FBF6EC 63%, #FBF6EC 100%); }
+  .front2 .mark { position: absolute; left: 50%; top: 35.1%; width: 14mm; transform: translate(-50%, -50%); filter: drop-shadow(0 0 2.2mm rgba(255, 248, 230, 1)); }
+  .front2 .safe { justify-content: flex-end; text-align: center; }
+  .front2 .word { width: 46mm; margin: 0 auto 1.6mm; }
+  .front2 .label { font-size: 5pt; letter-spacing: .15em; white-space: nowrap; margin-bottom: 4mm; }
+  .front2 .panel { padding: 4.6mm 4.4mm 4mm; border: .25mm solid var(--gold); border-radius: 30mm 30mm 2mm 2mm / 10mm 10mm 2mm 2mm; background: rgba(255, 252, 245, .92); }
+  .front2 h1 { font-size: 13.5pt; line-height: 1.13; color: var(--earth); margin-bottom: 2.2mm; }
+  .front2 .lede { font-size: 6.8pt; line-height: 1.5; margin-bottom: 2.6mm; }
+  .front2 .rule { margin-bottom: 2.4mm; }
+  .facts { list-style: none; text-align: left; font-size: 6.6pt; line-height: 1.35; margin: 0 1mm 3.4mm; }
+  .facts li { display: flex; gap: 2mm; padding: 1.3mm 0; border-bottom: .15mm solid rgba(176,138,76,.4); }
+  .facts li:last-child { border-bottom: 0; }
+  .facts span { color: var(--gold); flex: none; }
+  .facts b { font-weight: 500; color: var(--earth); }
+  .qrrow { display: flex; align-items: center; gap: 3.4mm; padding-top: 3mm; border-top: .25mm solid rgba(176,138,76,.6); text-align: left; }
+  .qrrow img { width: 17mm; height: 17mm; flex: none; }
+  .qrrow p { font-family: "Bodoni Moda", serif; font-size: 8pt; color: var(--earth); line-height: 1.3; }
+  .qrrow small { display: block; font-family: "Jost", sans-serif; font-size: 5pt; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+
+<!-- ======================= VORDERSEITE ======================= -->
+<section class="page front2">
+  <img class="bg" src="src/vorne.jpg" alt="">
+  <div class="veil"></div>
+  <img class="mark" src="src/logo-mark.webp" alt="">
+  <div class="safe">
+    <img class="word" src="src/logo-schriftzug.webp" alt="Weg der vier Winde">
+    <p class="label">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
+
+    <div class="panel">
+      <h1 class="serif">Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
+      <p class="lede">Schamanische Energiearbeit der Anden und des Amazonas, begleitet von Katharina. Achtsam und in deinem Tempo.</p>
+      <div class="rule"></div>
+      <ul class="facts">
+        <li><span>✦</span>Illumination · Cord Cutting · Extraktion · Rückverbindung</li>
+        <li><span>✦</span>Einzel-Setting 90 Min. · 130 €</li>
+        <li><span>✦</span><span style="color:inherit"><b>Kostenloses Kennenlernen</b>, bis zu 30 Min.</span></li>
+      </ul>
+      <div class="qrrow">
+        <img src="src/qr-website.svg" alt="QR-Code zur Website">
+        <p><small>Scannen &amp; Kennenlernen vereinbaren</small>@katharinawegdervierwinde</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RÜCKSEITE ======================= -->
+<section class="page back">
+  <img class="bg" src="src/hinten.jpg" alt="">
+  <div class="veil"></div>
+  <div class="safe">
+    <div class="me">
+      <img src="src/portrait.jpg" alt="Katharina">
+      <div>
+        <h2 class="serif">Ich bin <em>Katharina.</em></h2>
+        <p>Mutter, viele Jahre pädagogisch tätig und selbst durch Krisen gegangen. Heute begleite ich Menschen auf ihrem eigenen Weg.</p>
+      </div>
+    </div>
+
+    <p class="intro">Spürst du, dass sich etwas in deinem Leben verändern möchte? Ich begleite dich mit schamanischer Energiearbeit der Anden und des Amazonas, feiner Körperwahrnehmung und kreativem Ausdruck. Achtsam und in deinem Tempo.</p>
+
+    <div class="rule"></div>
+
+    <div class="winds">
+      <div class="wind"><img src="src/medaillon-sueden.jpg" alt=""><div><h3 class="serif">Loslassen</h3><small>Süden · Schlange</small><p>Illumination, Cord Cutting, Extraktion, Entkopplung</p></div></div>
+      <div class="wind"><img src="src/medaillon-westen.jpg" alt=""><div><h3 class="serif">Tiefer schauen</h3><small>Westen · Jaguar</small><p>Schattenarbeit, Täter-Opfer-Retter-Dreieck</p></div></div>
+      <div class="wind"><img src="src/medaillon-norden.jpg" alt=""><div><h3 class="serif">Ganz werden</h3><small>Norden · Kolibri</small><p>Rückverbindung, innere Landkarte</p></div></div>
+      <div class="wind"><img src="src/medaillon-osten.jpg" alt=""><div><h3 class="serif">Neu beginnen</h3><small>Osten · Kondor</small><p>Kreativer Ausdruck, Natur, dein nächster Schritt</p></div></div>
+    </div>
+
+    <p class="quote serif">Veränderung kann niemand für dich machen. <em>Ich begleite dich dabei.</em></p>
+
+    <p class="label" style="text-align:center;margin-bottom:2.4mm">So steigen wir ein</p>
+    <div class="flow">
+      <div><span>I</span><p>Kostenloses Kennenlernen</p></div>
+      <div><span>II</span><p>Ankommen mit dem Pendel</p></div>
+      <div><span>III</span><p>Die Begleitung, die zu dir passt</p></div>
+      <div><span>IV</span><p>Klärung &amp; Abschluss</p></div>
+    </div>
+
+    <div class="prices">
+      <div><small>Einzel-Setting</small><b>130 €</b><i>90 Minuten</i></div>
+      <div><small>Begleitzyklus</small><b>390 €</b><i>3 × 90 Minuten</i></div>
+      <div><small>Intensiv</small><b>520 €</b><i>4 × 90 Minuten</i></div>
+    </div>
+
+    <div class="card">
+      <p class="label">Für dich</p>
+      <h3 class="serif">Kostenloses <em>Kennenlernen</em></h3>
+      <p>Bis zu 30 Minuten, unverbindlich und in Ruhe. Wir schauen gemeinsam, ob und wie ich dich begleiten kann.</p>
+    </div>
+
+    <div class="contact">
+      <img src="src/qr-website.svg" alt="QR-Code zur Website">
+      <dl>
+        <dt>Website</dt><dd>Reise durch die vier Winde</dd>
+        <dt>Instagram</dt><dd>@katharinawegdervierwinde</dd>
+      </dl>
+    </div>
+
+    <p class="fine">Meine Arbeit ist eine energetische und körperorientierte Begleitung. Sie ersetzt keine ärztliche, psychotherapeutische oder heilpraktische Diagnose oder Behandlung. Ich gebe keine Heilversprechen.</p>
+  </div>
+</section>
+
+</body>
+</html>

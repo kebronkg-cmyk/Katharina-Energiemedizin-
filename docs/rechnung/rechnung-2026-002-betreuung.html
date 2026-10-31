@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Rechnung 2026-002</title>
+<style>
+  @page { size: A4; margin: 22mm 22mm 24mm 25mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 10pt/1.5 Arial, "Helvetica Neue", Helvetica, sans-serif; color: #111; }
+  .ph { background: #FFF3B0; padding: 0 2px; }
+  .sender-line { font-size: 7.5pt; color: #555; border-bottom: .2mm solid #999; display: inline-block; padding-bottom: 1mm; margin-bottom: 3mm; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 6mm; }
+  .addr { width: 85mm; min-height: 30mm; }
+  .meta { text-align: right; font-size: 9.5pt; }
+  .meta table td { padding: .5mm 0 .5mm 6mm; }
+  .meta table td:first-child { color: #555; padding-left: 0; text-align: left; }
+  h1 { font-size: 15pt; font-weight: bold; margin: 8mm 0 5mm; }
+  table.items { width: 100%; border-collapse: collapse; margin: 4mm 0; }
+  table.items th { text-align: left; font-size: 8.5pt; font-weight: bold; border-bottom: .4mm solid #111; padding: 2mm 1.5mm; }
+  table.items td { padding: 2.5mm 1.5mm; border-bottom: .2mm solid #ccc; vertical-align: top; }
+  .r { text-align: right; white-space: nowrap; }
+  .desc small { display: block; color: #555; font-size: 8.5pt; margin-top: .8mm; }
+  tr.total td { border-top: .4mm solid #111; border-bottom: 0; font-weight: bold; font-size: 11pt; padding-top: 3mm; }
+  .note { margin-top: 6mm; }
+  .foot { position: fixed; bottom: 0; left: 0; right: 0; font-size: 7.5pt; color: #555; border-top: .2mm solid #999; padding-top: 2mm; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<div class="sender-line"><span class="ph">[Dein Vor- und Nachname]</span> · <span class="ph">[Straße Nr.]</span> · <span class="ph">[PLZ Ort]</span></div>
+
+<div class="top">
+  <div class="addr">
+    <span class="ph">[Vor- und Nachname von Katharina]</span><br>
+    <span class="ph">[Straße Nr.]</span><br>
+    <span class="ph">[PLZ Ort]</span>
+  </div>
+  <div class="meta">
+    <table>
+      <tr><td>Rechnungsnummer</td><td>2026-002</td></tr>
+      <tr><td>Rechnungsdatum</td><td>01.11.2026</td></tr>
+      <tr><td>Leistungszeitraum</td><td>November 2026</td></tr>
+    </table>
+  </div>
+</div>
+
+<h1>Rechnung</h1>
+
+<p>Sehr geehrte Frau <span class="ph">[Nachname]</span>,</p>
+<p>für die erbrachten Leistungen erlaube ich mir, folgenden Betrag in Rechnung zu stellen:</p>
+
+<table class="items">
+  <tr><th style="width:8mm">Pos.</th><th>Leistung</th><th class="r">Betrag</th></tr>
+  <tr>
+    <td>1</td>
+    <td class="desc">Hosting und Betreuung der Website „Weg der vier Winde“, November 2026
+      <small>Hosting, Domain und verschlüsselte Verbindung, Datensicherung, technische Pflege, kleine inhaltliche Änderungen bis 1 Stunde (monatliche Pauschale)</small></td>
+    <td class="r">39,00 €</td>
+  </tr>
+  <tr class="total"><td></td><td>Rechnungsbetrag</td><td class="r">39,00 €</td></tr>
+</table>
+
+<p class="note"><span class="ph">[Hinweis zur Umsatzsteuer, z. B.: Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.]</span></p>
+<p>Bitte überweisen Sie den Rechnungsbetrag bis zum 10. des Monats unter Angabe der Rechnungsnummer auf das unten genannte Konto.</p>
+<p>Vielen Dank für Ihren Auftrag und die angenehme Zusammenarbeit.</p>
+<p style="margin-top:6mm; margin-bottom: 26mm">Mit freundlichen Grüßen<br><br><span class="ph">[Dein Vor- und Nachname]</span></p>
+
+<div class="foot">
+  <span><span class="ph">[Dein Vor- und Nachname]</span><br><span class="ph">[Straße Nr.]</span>, <span class="ph">[PLZ Ort]</span></span>
+  <span><span class="ph">[E-Mail]</span><br><span class="ph">[Telefon]</span></span>
+  <span>Kontoinhaber: <span class="ph">[Name]</span><br>IBAN: <span class="ph">[DE00 0000 0000 0000 0000 00]</span></span>
+</div>
+
+</body>
+</html>
