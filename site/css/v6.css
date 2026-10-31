@@ -2075,3 +2075,16 @@ html:not(.js) #heilung .bloom-step, .no-motion #heilung .bloom-step { opacity: 1
 .prices-info .prices-info-title { margin-bottom: .45rem; font-family: var(--serif); font-size: 1.25rem; line-height: 1.3; }
 .prices-wrap .prices-fine { margin-top: 2.4vh; opacity: .8; }
 @media (max-width: 760px) { .prices-first { font-size: 1.12rem; line-height: 1.4; } }
+
+/* ---------- Norden: Kolibri-Text neben dem Foto, Fragen als Felder wie beim Adler ---------- */
+.ask--joy .joy-text { text-align: left; width: min(620px, 100%); margin-inline: auto; position: relative; isolation: isolate; }
+.ask--joy .joy-text::before { content: ""; position: absolute; z-index: -1; inset: -8% -10%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 251, 241, .85), rgba(255, 251, 241, .5) 65%, rgba(255, 251, 241, 0)); pointer-events: none; }
+.joy-text p { margin: 0 0 1em; font-family: var(--serif); font-size: clamp(1.12rem, 1.6vw, 1.3rem); line-height: 1.6; color: var(--earth); text-shadow: var(--glow-light); }
+.joy-text .joy-key { margin-bottom: 0; font-style: italic; color: var(--gold-deep); }
+@media (min-width: 760px) {
+  .ask--joy .joy-text { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; }
+}
+.ask--hummingbird { margin-top: 8vh; }
+.ask--hummingbird .ask-list { margin-top: 3vh; }
+.ask--hummingbird .ask-close { margin-top: 5vh; }
+@media (min-width: 760px) { .ask--hummingbird .ask-list li:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 11px); } }
