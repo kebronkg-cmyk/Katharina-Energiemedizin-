@@ -22,9 +22,11 @@ Titel · Über mich & ganzer Mensch · Galerie „Aus dem Atelier“ (drei Gemä
   Druckdaten-Vorlage des Anbieters mit der Feldreihenfolge vergleichen.
 
 ## Vor dem Druck
-- [ ] Telefon / E-Mail ergänzen (Feld 4)
-- [ ] QR-Code auf die endgültige Domain umstellen (zeigt zurzeit auf https://blaufuchs-m8t3.pages.dev/)
-- [ ] Texte und Tiernamen von Katharina freigeben lassen
+- [x] Telefon / E-Mail ergänzt (Feld 4)
+- [x] QR-Code führt auf https://wegdervierwinde.de
+- [x] Texte und Preise auf dem Stand der Website (11/2026)
+- [ ] Freigabe der Texte durch Katharina
+- [ ] Mehrwertsteuer-Hinweis klären (Kleinunternehmerin?) und ggf. ergänzen
 
 ## Neu erzeugen
 `node docs/leporello/build.js` (benötigt Playwright)

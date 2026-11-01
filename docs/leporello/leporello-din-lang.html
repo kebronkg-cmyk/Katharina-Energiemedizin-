@@ -128,6 +128,19 @@
   .wind.dark h2, .wind.dark li b { color: #FBF6EC; }
   .wind.dark .dir { color: var(--gold-light); }
   .wind.dark li { border-color: rgba(232,205,148,.35); }
+
+  /* Stand 11/2026: Preise mit Ersparnis, Zusatzinfos */
+  .meet .price { align-items: center; }
+  .price .was { display: block; font-family: "Jost", sans-serif; font-size: 5pt; color: #5E534A; text-align: right; }
+  .price.rec .was { color: #E9DFCF; }
+  .price .was s { text-decoration-color: var(--gold-deep); }
+  .price .save { display: block; font-family: "Jost", sans-serif; font-size: 4.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); text-align: right; }
+  .price.rec .save { color: var(--gold-light); }
+  .price .amt { text-align: right; line-height: 1.05; }
+  .extras { display: grid; gap: 1.6mm; }
+  .extras p { font-size: 5.6pt; line-height: 1.4; }
+  .extras b { font-weight: 500; color: var(--earth); }
+  .contact { font-size: 5.6pt; line-height: 1.5; color: var(--earth); }
 </style>
 </head>
 <body>
@@ -153,21 +166,21 @@
       <p class="label" style="text-align:center">Über mich</p>
       <img class="portrait" src="../flyer/src/portrait.jpg" alt="Katharina">
       <h2 class="serif">Ich bin <em>Katharina.</em></h2>
-      <p>Mutter von drei erwachsenen Kindern, viele Jahre pädagogisch tätig, viele davon im integrativen Bereich, und selbst durch Krisen gegangen.</p>
-      <p>Mein Weg führte mich zu C. G. Jung, zur Schattenarbeit, zur Tanz- und Ausdrucksarbeit und schließlich zur Energiearbeit der Anden und des Amazonas. Ich bin dankbar, die Munay-Ki-Riten empfangen zu haben.</p>
+      <p>Ich bin Mutter von drei erwachsenen Kindern. Meine jahrzehntelange pädagogische Arbeit, viele Jahre davon im integrativen Bereich, hat meinen Blick auf seelische und familiäre Zusammenhänge geprägt.</p>
+      <p>Meine Arbeit ist in den indigenen Heiltraditionen der Anden und des Amazonas verwurzelt und fand durch Dr. Alberto Villoldo und die von ihm gegründete Four Winds Society ihren Weg in die westliche Welt. In tiefer Dankbarkeit habe ich die Munay-Ki-Riten empfangen.</p>
       <div class="whole">
         <img src="../../img/vier-ebenen.svg" alt="">
         <p><b class="serif">Ich sehe dich als <em>ganzen Menschen.</em></b>Körper, Geist, Emotionen und Energie gehören zusammen.</p>
       </div>
-      <p class="quote">Veränderung kann niemand für dich machen. <em>Ich begleite dich dabei.</em></p>
+      <p class="quote">Niemand kann diesen Weg für einen anderen Menschen gehen. <em>Ich begleite dich auf deiner persönlichen Reise.</em></p>
     </div>
   </div>
 
   <div class="panel p3 gallery">
     <div class="safe">
       <p class="label" style="text-align:center">Aus dem Atelier</p>
-      <h2 class="serif">Von der Fantasie <em>zur Brücke</em></h2>
-      <p class="story">Über die Feste Perus, ihre Musik, Tänze und Farben fand ich zu einer tiefen, ursprünglichen Spiritualität. Und ich begann zu malen.</p>
+      <h2 class="serif">Kunstausstellung <em>Lebensspuren</em></h2>
+      <p class="story">Lass die Bilder einfach auf dich wirken.</p>
       <figure class="art art--wide">
         <div class="mat"><img src="../flyer/src/gemaelde-fiesta.jpg" alt="La fiesta en los Andes"></div>
         <figcaption><i>La fiesta en los Andes</i></figcaption>
@@ -190,27 +203,26 @@
     <img class="bg" src="../flyer/src/hoch-osten.jpg" alt="">
     <div class="veil"></div>
     <div class="safe">
-      <p class="label" style="text-align:center">Klar. Achtsam. In deinem Tempo.</p>
+      <p class="label" style="text-align:center">Zeit und Raum für deinen Weg</p>
       <h2 class="serif">So steigen wir <em>gemeinsam ein</em></h2>
       <ol class="mini-steps">
-        <li><span>I</span>Kostenloses Kennenlernen, bis zu 30 Minuten</li>
-        <li><span>II</span>Ankommen mit einem energetischen Überblick</li>
-        <li><span>III</span>Die Begleitung, die zu deinem Thema passt</li>
-        <li><span>IV</span>Klärung &amp; Abschluss mit Palo Santo</li>
+        <li><span>I</span>Kostenloses Erstgespräch – 30 Minuten</li>
+        <li><span>II</span>Ankommen</li>
+        <li><span>III</span>Die Begleitung</li>
+        <li><span>IV</span>Integrieren und verankern</li>
       </ol>
       <div class="prices">
-        <div class="price"><div><small>90 Minuten</small><strong>Einzel-Setting</strong></div><b>130 €</b></div>
-        <div class="price rec"><div><small>Empfohlen · 3 × 90 Min.</small><strong>Begleitzyklus</strong></div><b>390 €</b></div>
-        <div class="price"><div><small>4 × 90 Minuten</small><strong>Intensiv</strong></div><b>520 €</b></div>
+        <div class="price"><div><small>90 Minuten</small><strong>Einzelbegleitung</strong></div><div class="amt"><b>140 €</b></div></div>
+        <div class="price rec"><div><small>3 × 90 Minuten</small><strong>Vertiefende Begleitung</strong></div><div class="amt"><span class="was">statt <s>420 €</s></span><b>405 €</b></div></div>
+        <div class="price"><div><small>4 × 90 Minuten + 2 × 30 Min. Integration</small><strong>Intensivbegleitung</strong></div><div class="amt"><span class="was">statt <s>560 €</s></span><b>535 €</b></div></div>
       </div>
-      <div class="card">
-        <p class="label">Für dich</p>
-        <h3 class="serif">Kostenloses <em>Kennenlernen</em></h3>
-        <p>Unverbindlich und in Ruhe, bis zu 30 Minuten.</p>
+      <div class="extras">
+        <p><b>Auch danach bin ich für dich da:</b> Für kurze Fragen und Impulse zur Integration erreichst du mich über WhatsApp – ohne zusätzliche Kosten.</p>
+        <p><b>Sozialtarif:</b> In begrenztem Umfang biete ich Termine zu einem reduzierten Sozialtarif an. Sprich mich gerne an.</p>
       </div>
       <div class="qr">
         <img src="../flyer/src/qr-website.svg" alt="QR-Code zur Website">
-        <p><small>Scannen &amp; vereinbaren</small>Reise durch die vier Winde<br><small style="margin-top:1.4mm">Instagram</small>@katharinawegdervierwinde</p>
+        <p><small>Scannen &amp; Erstgespräch vereinbaren</small>wegdervierwinde.de<br><span class="contact">+49 1573 4359358 · energie.medizin@web.de<br>Instagram @katharinawegdervierwinde<br>Vor Ort in München-Pasing</span></p>
       </div>
       <p class="fine">Meine Arbeit ist eine energetische und körperorientierte Begleitung. Sie ersetzt keine ärztliche, psychotherapeutische oder heilpraktische Diagnose oder Behandlung. Ich stelle keine Diagnosen und gebe keine Heilversprechen.</p>
     </div>
@@ -223,15 +235,14 @@
     <img class="bg" src="../flyer/src/hoch-sueden.jpg" alt="">
     <div class="veil"></div>
     <div class="safe">
-      <p class="dir">Der Wind des Südens · Schlange</p>
+      <p class="dir">1 · Der Wind des Südens · Schlange</p>
       <h2 class="serif">Loslassen</h2>
-      <p class="motto">Was zu eng geworden ist, darf gehen.</p>
+      <p class="motto">Du darfst dich verändern. Du darfst loslassen, was nicht mehr zu dir gehört.</p>
       <div class="rule"></div>
       <ul>
-        <li><b>Illumination</b><p>Das Herzstück: Schweres darf sich lösen, damit du wieder mehr Raum für dich spürst.</p></li>
-        <li><b>Cord Cutting</b><p>Energetische Bänder lösen, die dich innerlich noch festhalten.</p></li>
-        <li><b>Extraktion</b><p>Lösen, was sich schwer, eng oder fremd anfühlt.</p></li>
-        <li><b>Entkopplung</b><p>Raum zum Durchatmen, wenn Anspannung dein Leben bestimmt.</p></li>
+        <li><b>Illumination – Kernprozess</b><p>Die Reinigung deines Energiefeldes und deiner Chakren.</p></li>
+        <li><b>Cord Cutting</b><p>Energetische Bänder lösen. Für dich, wenn du dich gebunden oder nicht wirklich frei fühlst.</p></li>
+        <li><b>Entkopplung</b><p>Raum zum Durchatmen. Für dich, wenn du dich dauerhaft angespannt, gestresst, erschöpft fühlst.</p></li>
       </ul>
     </div>
   </div>
@@ -240,13 +251,13 @@
     <img class="bg" src="../flyer/src/hoch-westen.jpg" alt="">
     <div class="veil"></div>
     <div class="safe">
-      <p class="dir">Der Wind des Westens · Jaguar</p>
+      <p class="dir">2 · Der Wind des Westens · Jaguar</p>
       <h2 class="serif">Tiefer schauen</h2>
       <p class="motto">Was im Schatten liegt, möchte gesehen und angenommen werden.</p>
       <div class="rule"></div>
       <ul>
-        <li><b>Sichtbar ist nur die Spitze</b><p>Darunter liegen Prägungen, alte Verletzungen und Überzeugungen, die uns leise steuern.</p></li>
-        <li><b>Täter-Opfer-Retter-Dreieck</b><p>Deine Rollen erkennen, verstehen und in die eigene Kraft zurückfinden.</p></li>
+        <li><b>Täter-Opfer-Retter-Dreieck</b><p>Für dich, wenn du erforschen möchtest, welche Rollen du unbewusst einnimmst und wie du aus ihnen herausfinden kannst.</p></li>
+        <li><b>Extraktion</b><p>Aus der schamanischen Dschungelmedizin. Für dich, wenn sich etwas in dir schwer, eng oder fremd anfühlt.</p></li>
       </ul>
     </div>
   </div>
@@ -255,14 +266,13 @@
     <img class="bg" src="../flyer/src/hoch-norden.jpg" alt="">
     <div class="veil"></div>
     <div class="safe">
-      <p class="dir">Der Wind des Nordens · Kolibri</p>
-      <h2 class="serif">Ganz werden</h2>
-      <p class="motto">Wir sind mehr als unsere Diagnose. Und mehr als unsere Geschichte.</p>
+      <p class="dir">3 · Der Wind des Nordens · Kolibri</p>
+      <h2 class="serif">Lebensfreude</h2>
+      <p class="motto">Der Kolibri erinnert dich daran, das Schöne im Leben wahrzunehmen und Dankbarkeit zu empfinden.</p>
       <div class="rule"></div>
       <ul>
-        <li><b>Rückverbindung mit Anteilen von dir</b><p>Eine schamanische Reise zurück zu dir. Erinnern, verbinden, integrieren.</p></li>
-        <li><b>Arbeit mit deiner inneren Landkarte</b><p>Alte Wege erkennen, neue entdecken.</p></li>
-        <li><b>Meine Mesa</b><p>Mein gewebter Altar mit den Kuyas, den Steinen der Kraft, ist Teil jeder Begleitung.</p></li>
+        <li><b>Rückverbindung mit Anteilen von dir</b><p>Eine schamanische Reise zurück zu dir. Auch Themen aus deiner Ahnenlinie können Teil dieser Arbeit sein.</p></li>
+        <li><b>Meine Mesa</b><p>Was dich und mich durch alle vier Winde begleitet, ist meine persönliche Mesa.</p></li>
       </ul>
     </div>
   </div>
@@ -271,14 +281,14 @@
     <img class="bg" src="../flyer/src/hoch-osten.jpg" alt="">
     <div class="veil"></div>
     <div class="safe">
-      <p class="dir">Der Wind des Ostens · Kondor</p>
+      <p class="dir">4 · Der Wind des Ostens · Adler</p>
       <h2 class="serif">Neu beginnen</h2>
-      <p class="motto">Du hast die Wahl. Sie ist ein Geschenk an dein zukünftiges Ich.</p>
+      <p class="motto">Du hast die Wahl. Mit jeder Entscheidung gestaltest du deinen Weg.</p>
       <div class="rule"></div>
       <ul>
-        <li><b>Kreativer Ausdruck</b><p>Farbe, Bewegung, Tanz, Klang oder ein Bild aus Naturmaterialien, um Erlebtes zu verankern.</p></li>
-        <li><b>Natur als Kraftquelle</b><p>Auf Wunsch arbeiten wir draußen, in Verbindung mit Erde und Himmel.</p></li>
-        <li><b>Dein nächster Schritt</b><p>Im kostenlosen Kennenlernen finden wir gemeinsam deinen Weg.</p></li>
+        <li><b>Arbeite mit deiner inneren Landkarte</b><p>Was wäre möglich, wenn du deinen Blick erweiterst?</p></li>
+        <li><b>Kreative Integration</b><p>Bewegung, Tanz, intuitives Malen, Klang und das Sandbild, um Erlebtes zu verankern.</p></li>
+        <li><b>Dein nächster Schritt</b><p>Im kostenlosen Erstgespräch finden wir gemeinsam heraus, was für dich stimmig ist.</p></li>
       </ul>
     </div>
   </div>

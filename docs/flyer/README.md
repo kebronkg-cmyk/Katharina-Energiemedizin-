@@ -11,7 +11,7 @@
 
 ## Vor dem Druck ergänzen
 - [ ] Telefon / E-Mail (Platz unter Instagram)
-- [ ] QR-Code auf die endgültige Domain umstellen (zeigt zurzeit auf https://blaufuchs-m8t3.pages.dev/)
+- [x] QR-Code führt auf https://wegdervierwinde.de
 - [ ] Freigabe der Texte durch Katharina
 
 ## Empfehlung zum Druck
