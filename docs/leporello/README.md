@@ -15,9 +15,10 @@ Titel · Über mich & ganzer Mensch · Galerie „Aus dem Atelier“ (drei Gemä
 **Innen:** die vier Winde von Süden bis Osten
 
 ## Bestellung (Empfehlung)
-- **Anbieter:** dieUmweltDruckerei (Recyclingpapier, Ökostrom); Alternative Saxoprint (Zickzackfalz).
-- **Papier:** 250 g/m² matt bzw. Recycling-Naturpapier, mit Rillung (bricht sonst am Falz).
-- **Auflage:** 250 Stück, ca. 100–150 € (genauer Preis im Konfigurator).
+- **Anbieter:** SAXOPRINT, Produkt „Folder“: Endformat **DIN lang small (99 × 210 mm) hoch**, **8 Seiten**, Falzen **Zickzackfalz**, 4/4-farbig.
+- **Papier:** bei 8 Seiten Zickzackfalz höchstens 170 g/m² wählbar. Empfehlung 170 g/m² Bilderdruck matt.
+- **Preise am 01.11.2026 (250 Stück, inkl. MwSt. und Versand):** 170 g Bilderdruck matt 60,02 € · 170 g Recycling 88,04 € · 160 g Naturpapier 95,53 €.
+- Kostenübersicht für Katharina: `angebot/Kostenuebersicht-Leporello-Weg-der-vier-Winde.pdf`
 - Beim Hochladen **„Zickzackfalz / Leporello, 8 Seiten, DIN lang“** wählen und die
   Druckdaten-Vorlage des Anbieters mit der Feldreihenfolge vergleichen.
 
