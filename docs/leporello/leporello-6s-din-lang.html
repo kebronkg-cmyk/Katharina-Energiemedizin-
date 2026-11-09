@@ -366,6 +366,31 @@
 
   .me .safe { top: 23mm; }
   .me-photo { height: 68mm; margin-bottom: -9mm; }
+
+  /* Seite 3 jetzt dunkel (Westen), Seite 4 hell (Norden) mit Foto der Passionsblume */
+  .darkp { background: #1D1823; }
+  .darkp h2, .darkp .intro { color: #FBF6EC; }
+  .darkp h2 em, .darkp h3, .darkp .key { color: var(--gold-light); }
+  .darkp p { color: #EFE6D6; }
+  .darkp .rule { filter: brightness(1.6) saturate(.8); }
+  .darkp .wlabel { color: var(--gold-light); text-shadow: 0 0 2mm rgba(20,16,26,.9); }
+  .darkp .wquote { color: #FBF6EC; text-shadow: 0 0 2mm rgba(20,16,26,.95), 0 0 5mm rgba(20,16,26,.8); }
+  .heal { background: var(--cream); }
+  .heal h2, .heal .journey { color: var(--earth); }
+  .heal h2 em, .heal .journey em, .heal .bloom-key { color: var(--gold-deep); }
+  .heal p { color: #2A2018; }
+  .heal .tempo { color: var(--gold-deep); }
+  .heal .wlabel { color: var(--gold-deep); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 4mm rgba(255,250,240,.9); }
+  .heal .wquote { color: var(--earth); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 5mm rgba(255,250,240,.95); }
+  .heal .rule--light { filter: none; }
+  .heal .stance { background: rgba(255,252,245,.92); border-color: var(--gold); }
+  .heal .stance p { color: var(--earth); }
+  .heal .flower-wrap { width: 54mm; height: 54mm; }
+  .heal .flower-wrap::before { background: radial-gradient(closest-side, rgba(255,248,228,.95), rgba(226,236,206,.55) 60%, rgba(226,236,206,0)); }
+  .heal .flower-wrap .ring { border-color: rgba(176,138,76,.55); }
+  .heal .flower-wrap .r2 { border-color: rgba(176,138,76,.38); }
+  .heal .flower-wrap .r3 { border-color: rgba(176,138,76,.22); }
+  .heal .flower-wrap .flower.photo { width: 96%; filter: none; }
 </style>
 </head>
 <body>
@@ -400,9 +425,9 @@
     </div>
   </div>
 
-  <div class="panel p3 kat sky roots">
-    <img class="bg top-sky" src="../flyer/src/hoch-norden.jpg" alt="" style="object-position: 50% 39%"><div class="veil veil--top"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Nordens · Kolibri</p><p class="wquote">Der Norden verbindet dich zugleich mit deinen Wurzeln und deinen Ahnen.</p></div>
+  <div class="panel p3 kat sky roots darkp">
+    <img class="bg top-sky" src="../flyer/src/hoch-westen.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top-dark"></div>
+    <div class="whead"><p class="wlabel">Der Wind des Westens · Jaguar</p><p class="wquote">Was im Schatten liegt, möchte gesehen und angenommen werden.</p></div>
     <div class="safe">
       <h2 class="serif">Die Wurzeln <em>meiner Arbeit</em></h2>
       <div class="rule"></div>
@@ -422,12 +447,12 @@
 <!-- =============== SEITE 2: INNENSEITE (Seiten 4–6) =============== -->
 <section class="sheet">
   <div class="panel p1 kat sky heal">
-    <img class="bg top-sky" src="../flyer/src/hoch-westen.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top-dark"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Westens · Jaguar</p><p class="wquote">Was im Schatten liegt, möchte gesehen und angenommen werden.</p></div>
+    <img class="bg top-sky" src="../flyer/src/hoch-norden.jpg" alt="" style="object-position: 50% 39%"><div class="veil veil--top"></div>
+    <div class="whead"><p class="wlabel">Der Wind des Nordens · Kolibri</p><p class="wquote">Der Kolibri erinnert dich daran, das Schöne im Leben wahrzunehmen und Dankbarkeit zu empfinden.</p></div>
     <div class="safe">
       <h2 class="serif">Was bedeutet Heilung <em>für mich?</em></h2>
       <div class="rule rule--light"></div>
-      <div class="flower-wrap"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><img class="flower" src="src/passionsblume.png" alt="Passionsblume"></div>
+      <div class="flower-wrap"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><img class="flower photo" src="src/passionsblume-foto.png" alt="Passionsblume"></div>
       <p class="journey">Heilung ist eine Reise, <em>keine Intervention.</em></p>
       <p>Niemand kann diesen Weg für einen anderen Menschen gehen.</p>
       <p>Aus der schamanischen Haltung heraus sehe ich mich als Wegbegleiterin auf deiner persönlichen Reise. Ich ermutige dich, ehrlich hinzusehen und anzunehmen, was sich zeigt.</p>
