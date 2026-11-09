@@ -334,6 +334,38 @@
   .me .pic { height: 40mm; }
   .whead { top: 7mm; }
   .whead p { text-align: center; margin-bottom: 1.2mm; }
+
+  /* ===== Überarbeitung: einheitliche Himmelsköpfe, Jaguar sichtbar, Licht um die Blüte ===== */
+  .heal { background: #1D1823; }
+  .sky .veil--top-dark { background: linear-gradient(to bottom, rgba(29,24,35,0) 0mm, rgba(29,24,35,0) 40mm, rgba(29,24,35,.7) 58mm, rgba(29,24,35,.96) 78mm, #1D1823 84mm); }
+  .heal .safe { top: 52mm; justify-content: flex-start; }
+  .heal h2 { font-size: 15pt; margin-bottom: 1.6mm; }
+  .rule--light { filter: brightness(1.6) saturate(.8); margin-bottom: 1mm; }
+  .flower-wrap { position: relative; width: 50mm; height: 50mm; margin: 1mm auto 2.4mm; display: grid; place-items: center; }
+  .flower-wrap::before { content: ""; position: absolute; inset: -14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,246,220,.42), rgba(214,228,186,.18) 55%, rgba(214,228,186,0) 100%); }
+  .flower-wrap .ring { position: absolute; left: 50%; top: 50%; translate: -50% -50%; border-radius: 50%; border: .22mm solid rgba(232,205,148,.55); }
+  .flower-wrap .r1 { width: 74%; height: 74%; }
+  .flower-wrap .r2 { width: 94%; height: 94%; border-color: rgba(232,205,148,.4); }
+  .flower-wrap .r3 { width: 114%; height: 114%; border-color: rgba(232,205,148,.24); }
+  .heal .flower-wrap .flower { position: relative; width: 82%; margin: 0; filter: drop-shadow(0 0 4mm rgba(255,240,200,.3)); }
+  .heal .journey { font-size: 13.5pt; margin-bottom: 2.6mm; }
+  .heal p { font-size: 7.2pt; }
+  .heal .stance { margin-top: 3mm; }
+
+  .me .safe { top: 12mm; }
+  .me-photo { height: 76mm; margin: 0 -6mm -4mm; display: flex; justify-content: center; align-items: flex-end; position: relative; flex: none; }
+  .me-photo::before { content: ""; position: absolute; left: 50%; bottom: 6mm; width: 70mm; height: 56mm; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,244,222,.75), rgba(255,244,222,0)); }
+  .me-photo img { position: relative; height: 100%; width: auto; }
+  .me h2 { font-size: 15pt; margin: 0 0 1.4mm; }
+  .me .rule { margin-bottom: 2.6mm; }
+  .me p { font-size: 6.9pt; line-height: 1.48; margin-bottom: 1.6mm; }
+  .me .ki { margin-top: 1.6mm; }
+  .sky .bg.top-sky { height: 86mm; }
+  .offer h2 { margin-bottom: 1.4mm; }
+  .offer .rule { margin-bottom: 2.4mm; }
+
+  .me .safe { top: 23mm; }
+  .me-photo { height: 68mm; margin-bottom: -9mm; }
 </style>
 </head>
 <body>
@@ -390,11 +422,12 @@
 <!-- =============== SEITE 2: INNENSEITE (Seiten 4–6) =============== -->
 <section class="sheet">
   <div class="panel p1 kat sky heal">
-    <img class="bg" src="../flyer/src/hoch-westen.jpg" alt=""><div class="veil veil--dark"></div>
+    <img class="bg top-sky" src="../flyer/src/hoch-westen.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top-dark"></div>
     <div class="whead"><p class="wlabel">Der Wind des Westens · Jaguar</p><p class="wquote">Was im Schatten liegt, möchte gesehen und angenommen werden.</p></div>
     <div class="safe">
       <h2 class="serif">Was bedeutet Heilung <em>für mich?</em></h2>
-      <img class="flower" src="src/passionsblume.png" alt="Passionsblume">
+      <div class="rule rule--light"></div>
+      <div class="flower-wrap"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><img class="flower" src="src/passionsblume.png" alt="Passionsblume"></div>
       <p class="journey">Heilung ist eine Reise, <em>keine Intervention.</em></p>
       <p>Niemand kann diesen Weg für einen anderen Menschen gehen.</p>
       <p>Aus der schamanischen Haltung heraus sehe ich mich als Wegbegleiterin auf deiner persönlichen Reise. Ich ermutige dich, ehrlich hinzusehen und anzunehmen, was sich zeigt.</p>
@@ -409,8 +442,10 @@
     <img class="bg top-sky" src="../flyer/src/hoch-osten.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top"></div>
     <div class="whead"><p class="wlabel">Der Wind des Ostens · Adler</p><p class="wquote">Der Adler steht für Klarheit und Fokus, für den Blick von oben.</p></div>
     <div class="safe">
+      <div class="me-photo"><img src="src/katharina-arme-freigestellt.png" alt="Katharina mit erhobenen Armen"></div>
       <h2 class="serif">Über <em>mich</em></h2>
-      <div class="pic"><img src="src/katharina-meer-original.jpg" alt="Katharina am Meer"></div>
+      <div class="rule"></div>
+      
       <p>Die jahrzehntelange Begleitung von Kindern und Erwachsenen hat meinen Weg geprägt. Meine Erfahrungen in Pädagogik, Heilpädagogik und Integraler Tanz- und Ausdruckstherapie sowie meine intensive Auseinandersetzung mit der Tiefenpsychologie von C. G. Jung, insbesondere der Schattenarbeit, haben mein Verständnis für den Menschen und seine individuellen Lebensthemen und Wege vertieft.</p>
       <p>Der bedeutendste Wendepunkt meines Lebens war die Begegnung mit der schamanischen Energiemedizin in der Tradition der Anden und des Amazonas. In ihr fand ich die Essenz dessen, was mir schon immer am Herzen lag. Sie eröffnete mir einen neuen Zugang zum Menschen, zu den tieferen Ebenen des Bewusstseins und zur Kraft der Bewusstwerdung für nachhaltige Veränderung.</p>
       <p>Alle Munay-Ki-Riten habe ich in tiefer Dankbarkeit empfangen. Sie sind Teil meines persönlichen Weges und meiner Arbeit im Dienst an den Menschen.</p>
@@ -426,6 +461,7 @@
     <img class="bg" src="../flyer/src/hinten.jpg" alt=""><div class="veil"></div>
     <div class="safe">
       <h2 class="serif">Zeit und Raum <em>für deinen Weg</em></h2>
+      <div class="rule"></div>
       <div class="cards">
         <div class="c"><div><strong>Einzelbegleitung</strong><small>90 Minuten</small></div><div><b>140 €</b></div></div>
         <div class="c dark"><div><strong>Vertiefende Begleitung</strong><small>3 × 90 Minuten</small></div><div><b>405 €</b><em class="save">Du sparst 15 €</em></div></div>
