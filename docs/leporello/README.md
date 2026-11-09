@@ -31,3 +31,8 @@ Titel · Über mich & ganzer Mensch · Galerie „Aus dem Atelier“ (drei Gemä
 
 ## Neu erzeugen
 `node docs/leporello/build.js` (benötigt Playwright)
+
+## 6-seitige Fassung (Katharinas Seiten 1–6)
+- Datei: `leporello-6s-din-lang.html`, Druck-PDF `leporello-6s-din-lang-druck.pdf` (301 × 214 mm inkl. Beschnitt)
+- Bestellen als „Folder“: DIN lang small (99 × 210 mm) hoch, **6 Seiten**, Zickzackfalz. Hier ist **250 g/m²** möglich.
+- Preise am 09.11.2026 (250 Stück, inkl. MwSt. und Versand): 170 g Bilderdruck matt 47,03 € · 250 g Bilderdruck matt 51,92 € · 160 g Naturpapier 54,20 € · 250 g Naturpapier 69,09 €.

@@ -15,13 +15,14 @@ const { chromium } = require('playwright');
 
   // Vorschau im Endformat (2 mm Beschnitt rundum abgeschnitten)
   const mm = 96 / 25.4;
-  await page.setViewportSize({ width: Math.round(400 * mm), height: Math.round(214 * mm) });
+  const sheetW = await page.$eval('.sheet', el => el.getBoundingClientRect().width / (96 / 25.4));
+  await page.setViewportSize({ width: Math.round(sheetW * mm), height: Math.round(214 * mm) });
   const sheets = await page.$$('.sheet');
   for (const [i, el] of sheets.entries()) {
     const box = await el.boundingBox();
     await page.screenshot({
       path: path.join(dir, `vorschau${suffix}-${i === 0 ? 'aussen' : 'innen'}.png`),
-      clip: { x: box.x + 2 * mm, y: box.y + 2 * mm, width: 396 * mm, height: 210 * mm },
+      clip: { x: box.x + 2 * mm, y: box.y + 2 * mm, width: (sheetW - 4) * mm, height: 210 * mm },
       scale: 'device', fullPage: true,
     });
   }
