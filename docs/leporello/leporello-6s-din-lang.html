@@ -404,6 +404,9 @@
   .four-legend b { display: block; font-size: 4.8pt; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); }
   .four-legend span { display: block; font-family: "Bodoni Moda", serif; font-size: 9pt; color: #FBF6EC; margin: .6mm 0 .3mm; }
   .four-legend i { display: block; font-family: "Bodoni Moda", serif; font-size: 6.4pt; color: #E9DFCF; }
+
+  /* Druck: keine Leuchtschatten hinter Schrift (erscheinen in manchen PDF-Ansichten als Kästen) */
+  *, *::before, *::after { text-shadow: none !important; }
 </style>
 </head>
 <body>

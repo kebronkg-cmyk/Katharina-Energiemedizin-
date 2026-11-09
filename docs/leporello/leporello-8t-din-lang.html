@@ -451,6 +451,11 @@
   .sky .bg.top-sky { height: 92mm; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
   .sky .veil--top { background: linear-gradient(to bottom, rgba(251,246,236,0) 0mm, rgba(251,246,236,0) 38mm, rgba(251,246,236,.55) 72mm, rgba(251,246,236,.64) 120mm, rgba(251,246,236,.72) 100%); }
   .sky .veil--top-dark { background: linear-gradient(to bottom, rgba(29,24,35,0) 0mm, rgba(29,24,35,0) 38mm, rgba(29,24,35,.6) 72mm, rgba(29,24,35,.68) 120mm, rgba(29,24,35,.76) 100%); }
+
+  /* Druck: keine Leuchtschatten hinter Schrift (erscheinen in manchen PDF-Ansichten als Kästen) */
+  *, *::before, *::after { text-shadow: none !important; }
+  .sky .veil--top { background: linear-gradient(to bottom, rgba(251,246,236,0) 0mm, rgba(251,246,236,0) 38mm, rgba(251,246,236,.66) 72mm, rgba(251,246,236,.74) 120mm, rgba(251,246,236,.8) 100%) !important; }
+  .sky .veil--top-dark { background: linear-gradient(to bottom, rgba(29,24,35,0) 0mm, rgba(29,24,35,0) 38mm, rgba(29,24,35,.7) 72mm, rgba(29,24,35,.78) 120mm, rgba(29,24,35,.84) 100%) !important; }
 </style>
 </head>
 <body>

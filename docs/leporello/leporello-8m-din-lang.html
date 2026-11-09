@@ -435,6 +435,9 @@
   .nature-p.see h2, .nature-p.see p { color: #F5EEE2; }
   .nature-p.see h2 em, .nature-p.see .lead, .nature-p.see .label { color: var(--gold-light); }
   .nature-p.see .rule { filter: brightness(1.6) saturate(.8); }
+
+  /* Druck: keine Leuchtschatten hinter Schrift (erscheinen in manchen PDF-Ansichten als Kästen) */
+  *, *::before, *::after { text-shadow: none !important; }
 </style>
 </head>
 <body>
