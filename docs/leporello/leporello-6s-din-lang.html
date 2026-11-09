@@ -391,6 +391,19 @@
   .heal .flower-wrap .r2 { border-color: rgba(176,138,76,.38); }
   .heal .flower-wrap .r3 { border-color: rgba(176,138,76,.22); }
   .heal .flower-wrap .flower.photo { width: 96%; filter: none; }
+
+  /* ohne Wind-Kopfzeilen: Katharinas Überschrift steht zuerst */
+  .recog .safe, .roots .safe { top: 44mm; }
+  .heal .safe { top: 40mm; }
+  .me .safe { top: 10mm; }
+  .me-photo { height: 74mm; }
+  /* die vier Winde kurz zugeordnet (Begriffe von der Website) */
+  .four-legend { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 3.4mm; border-top: .2mm solid rgba(232,205,148,.45); border-bottom: .2mm solid rgba(232,205,148,.45); }
+  .four-legend div { text-align: center; padding: 2.2mm .6mm; }
+  .four-legend div + div { border-left: .2mm solid rgba(232,205,148,.3); }
+  .four-legend b { display: block; font-size: 4.8pt; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); }
+  .four-legend span { display: block; font-family: "Bodoni Moda", serif; font-size: 9pt; color: #FBF6EC; margin: .6mm 0 .3mm; }
+  .four-legend i { display: block; font-family: "Bodoni Moda", serif; font-size: 6.4pt; color: #E9DFCF; }
 </style>
 </head>
 <body>
@@ -411,7 +424,6 @@
 
   <div class="panel p2 kat sky recog">
     <img class="bg top-sky" src="../flyer/src/hoch-sueden.jpg" alt="" style="object-position: 50% 58%"><div class="veil veil--top"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Südens · Schlange</p><p class="wquote">Du darfst dich verändern. Du darfst loslassen, was nicht mehr zu dir gehört.</p></div>
     <div class="safe">
       <h2 class="serif">Vielleicht erkennst du dich <em>hier wieder.</em></h2>
       <div class="rule"></div>
@@ -427,7 +439,6 @@
 
   <div class="panel p3 kat sky roots darkp">
     <img class="bg top-sky" src="../flyer/src/hoch-westen.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top-dark"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Westens · Jaguar</p><p class="wquote">Was im Schatten liegt, möchte gesehen und angenommen werden.</p></div>
     <div class="safe">
       <h2 class="serif">Die Wurzeln <em>meiner Arbeit</em></h2>
       <div class="rule"></div>
@@ -439,6 +450,12 @@
       <div class="four">
         <h3>Die vier Winde</h3>
         <p>Die vier Winde werden im Medizinrad durch Schlange, Jaguar, Kolibri und Adler verkörpert. Sie stehen für vier archetypische Kräfte, die als Fähigkeiten und Ressourcen in uns wirken und uns auf unserem persönlichen Weg der Veränderung begleiten.</p>
+      <div class="four-legend">
+        <div><b>Süden</b><span>Schlange</span><i>Loslassen</i></div>
+        <div><b>Westen</b><span>Jaguar</span><i>Tiefer schauen</i></div>
+        <div><b>Norden</b><span>Kolibri</span><i>Lebensfreude</i></div>
+        <div><b>Osten</b><span>Adler</span><i>Neu beginnen</i></div>
+      </div>
       </div>
     </div>
   </div>
@@ -448,7 +465,6 @@
 <section class="sheet">
   <div class="panel p1 kat sky heal">
     <img class="bg top-sky" src="../flyer/src/hoch-norden.jpg" alt="" style="object-position: 50% 39%"><div class="veil veil--top"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Nordens · Kolibri</p><p class="wquote">Der Kolibri erinnert dich daran, das Schöne im Leben wahrzunehmen und Dankbarkeit zu empfinden.</p></div>
     <div class="safe">
       <h2 class="serif">Was bedeutet Heilung <em>für mich?</em></h2>
       <div class="rule rule--light"></div>
@@ -465,7 +481,6 @@
 
   <div class="panel p2 kat sky me">
     <img class="bg top-sky" src="../flyer/src/hoch-osten.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top"></div>
-    <div class="whead"><p class="wlabel">Der Wind des Ostens · Adler</p><p class="wquote">Der Adler steht für Klarheit und Fokus, für den Blick von oben.</p></div>
     <div class="safe">
       <div class="me-photo"><img src="src/katharina-arme-freigestellt.png" alt="Katharina mit erhobenen Armen"></div>
       <h2 class="serif">Über <em>mich</em></h2>
