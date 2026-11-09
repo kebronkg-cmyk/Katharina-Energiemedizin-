@@ -275,6 +275,21 @@
   /* ===== 6 Seiten: drei Felder je Seite, das dritte reicht in den Beschnitt ===== */
   .p3 { width: 101mm; }
   .p3 .safe { right: 8mm; }
+
+  /* Titelfoto ohne Rahmen, wie auf der Website weich in den Hintergrund geblendet */
+  .cover .photo { width: 100%; border: 0; outline: 0; border-radius: 0; overflow: visible; display: flex; align-items: flex-end; justify-content: center; margin-bottom: -8mm; position: relative; }
+  .cover .photo::before { content: ""; position: absolute; left: 50%; top: 4%; width: 80mm; height: 80mm; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,236,200,.85), rgba(255,236,200,0)); }
+  .cover .photo { overflow: hidden; margin: -4mm -6mm -8mm -8mm; width: auto; align-self: stretch; }
+  .cover .photo img { position: relative; width: 100%; height: auto; max-width: none; }
+  /* Die vier Winde als ineinanderfließendes Himmelsband */
+  .winds-band { position: relative; margin: 3.4mm -3mm 2mm; }
+  .p3 .winds-band { margin-right: -5mm; }
+  .winds-band img { display: block; width: 100%; height: 40mm; object-fit: cover; }
+  .winds-band .names { position: absolute; left: 3mm; right: 5mm; bottom: 4.5mm; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .winds-band span { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8.4pt; color: var(--earth); text-shadow: 0 0 1.6mm rgba(255,250,240,1), 0 0 3mm rgba(255,250,240,.9); }
+  .winds-band span:nth-child(2) { color: #FBF6EC; text-shadow: 0 0 2mm rgba(20,16,26,.9); }
+  .winds-band i { display: block; font-family: "Jost", sans-serif; font-style: normal; font-size: 4.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); margin-top: .4mm; }
+  .winds-band span:nth-child(2) i { color: var(--gold-light); }
 </style>
 </head>
 <body>
@@ -289,7 +304,7 @@
       <p class="label">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
       <h1 class="serif">Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
       <p class="lede">Ich begleite dich auf deinem persönlichen Weg der Veränderung mit Energie und Körperarbeit.</p>
-      <div class="photo"><img src="src/portrait-original.jpg" alt="Katharina"></div>
+      <div class="photo"><img src="src/katharina-freigestellt.png" alt="Katharina"></div>
     </div>
   </div>
 
@@ -318,11 +333,9 @@
       <p>Die alte Weisheit der indigenen Heilkunst beruht auf einem tiefen Verständnis von Energie, Natur und der Ganzheit des Menschen.</p>
       <p>Diese Energiearbeit setzt dort an, wo Muster ihre Spuren hinterlassen: im Körper, im Gewebe, im Nervensystem und im Energiefeld.</p>
       <p class="key">Klären wir das Feld, kann sich auch unser Blick auf die Welt verändern – und damit die Art, wie wir unserem Leben begegnen.</p>
-      <div class="winds">
-        <figure><img src="../flyer/src/medaillon-sueden.jpg" alt=""><figcaption>Schlange</figcaption></figure>
-        <figure><img src="../flyer/src/medaillon-westen.jpg" alt=""><figcaption>Jaguar</figcaption></figure>
-        <figure><img src="../flyer/src/medaillon-norden.jpg" alt=""><figcaption>Kolibri</figcaption></figure>
-        <figure><img src="../flyer/src/medaillon-osten.jpg" alt=""><figcaption>Adler</figcaption></figure>
+      <div class="winds-band">
+        <img src="src/vier-winde-band.png" alt="Die Himmel der vier Winde">
+        <div class="names"><span>Schlange<i>Süden</i></span><span>Jaguar<i>Westen</i></span><span>Kolibri<i>Norden</i></span><span>Adler<i>Osten</i></span></div>
       </div>
       <div class="four">
         <h3>Die vier Winde</h3>
