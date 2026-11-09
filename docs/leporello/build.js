@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 (async () => {
   const dir = __dirname;
   const name = process.argv[2] || 'leporello-din-lang';
-  const suffix = name === 'leporello-din-lang' ? '' : '-b';
+  const suffix = name === 'leporello-din-lang' ? '' : '-' + name.split('-')[1];
   const browser = await chromium.launch();
   const page = await browser.newPage({ deviceScaleFactor: 2 });
   await page.goto('file://' + path.join(dir, name + '.html'), { waitUntil: 'networkidle' });
