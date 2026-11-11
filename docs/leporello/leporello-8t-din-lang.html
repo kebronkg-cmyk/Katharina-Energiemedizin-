@@ -457,6 +457,51 @@
   .sky .veil--top { background: linear-gradient(to bottom, rgba(251,246,236,0) 0mm, rgba(251,246,236,0) 38mm, rgba(251,246,236,.66) 72mm, rgba(251,246,236,.74) 120mm, rgba(251,246,236,.8) 100%) !important; }
   .sky .veil--top-dark { background: linear-gradient(to bottom, rgba(29,24,35,0) 0mm, rgba(29,24,35,0) 38mm, rgba(29,24,35,.7) 72mm, rgba(29,24,35,.78) 120mm, rgba(29,24,35,.84) 100%) !important; }
   .me .me-key { font-style: italic; font-size: 8.4pt; line-height: 1.4; color: var(--gold-deep); text-align: center; margin: .6mm 0 2.2mm; }
+
+  /* ===== Korrekturen Katharina, 11.11. ===== */
+  .cover .lede { margin-bottom: 2.2mm; }
+  .cover .lede2 { font-size: 7.4pt; line-height: 1.5; color: var(--earth); margin: 0 4mm 3mm; }
+  .cover .photo img { width: 84%; margin: 0 auto; display: block; }
+  .energy-p .art-top { height: 46%; }
+  .energy-p .credit { top: 38%; }
+  .energy-p h2 { font-size: 21pt; }
+  .energy-p .form { margin-bottom: 2.2mm; }
+  .energy-p .list { font-size: 9.6pt; margin-bottom: 1.8mm; }
+  .energy-p .all { margin-bottom: 3mm; }
+  .energy-p .e-text { font-size: 7.6pt; line-height: 1.5; color: var(--earth); margin: 0 2mm 3.4mm; }
+  .energy-p .e-close { font-size: 10.2pt; line-height: 1.35; color: var(--earth); padding-top: 3mm; border-top: .25mm solid rgba(176,138,76,.6); }
+  .energy-p .e-close em { color: var(--gold-deep); }
+  .recog .safe { top: 34mm; }
+  .recog h2 { font-size: 14.5pt; }
+  .recog p { font-size: 7.3pt; line-height: 1.45; margin-bottom: 1.8mm; }
+  .recog .wishes { list-style: none; margin: 1mm 0 2.2mm; padding: 0; }
+  .recog .wishes li { position: relative; padding-left: 4mm; font-size: 7.3pt; line-height: 1.42; margin-bottom: .9mm; color: #2A2018; }
+  .recog .wishes li::before { content: "✦"; position: absolute; left: 0; top: 0; font-size: 5.4pt; line-height: 1.9; color: var(--gold); }
+  .recog .r-close { font-style: italic; font-size: 8.6pt; line-height: 1.4; color: var(--gold-deep); text-align: center; margin: 1mm 0 2.4mm; }
+  .recog .here { margin: 1mm 0 1.2mm; font-size: 11pt; }
+  .recog .write { font-size: 7.8pt; }
+  .roots .safe { top: 30mm; }
+  .roots h2 { font-size: 14pt; }
+  .roots .intro { font-size: 7.4pt; line-height: 1.45; margin-bottom: 1.4mm; }
+  .roots .intro2 { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 7.6pt; line-height: 1.4; text-align: center; color: var(--gold-light); margin-bottom: 2mm; }
+  .roots h3 { margin: 1.4mm 0 1.2mm; font-size: 8.4pt; }
+  .roots p { font-size: 6.9pt; line-height: 1.45; margin-bottom: 1.5mm; }
+  .roots .key { font-size: 7.6pt; }
+  .roots .four h3 { margin-top: 1.6mm; }
+  .roots .four-legend { margin-top: 2mm; }
+  .roots .four-legend div { padding: 1.6mm .6mm; }
+  .me .safe { top: 30mm; }
+  .me .me-sea { position: relative; margin: 1mm -2mm 2.4mm; }
+  .me .me-sea img { display: block; width: 100%; height: 50mm; object-fit: cover; object-position: 50% 22%; border-radius: 2mm;
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 60%, transparent 100%); mask-image: radial-gradient(120% 100% at 50% 40%, #000 60%, transparent 100%); }
+  .me .me-sea .me-key { margin: 2mm 2mm 0; }
+  .me p { font-size: 6.9pt; line-height: 1.46; margin-bottom: 1.5mm; }
+  .nature-p .art-top { object-position: 50% 45%; }
+  .nature-p.meer .art-top { height: 58%; object-position: 50% 48%; }
+  .nature-p.see .art-top { object-position: 50% 45%; }
+
+  .me .safe { top: 34mm; }
+  .me .me-sea img { height: 54mm; border-radius: 0; -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); }
 </style>
 </head>
 <body>
@@ -470,7 +515,8 @@
       <img class="word" src="../flyer/src/logo-schriftzug.webp" alt="Weg der vier Winde">
       <p class="label">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
       <h1 class="serif">Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
-      <p class="lede">Ich begleite dich auf deinem persönlichen Weg der Veränderung mit Energie und Körperarbeit.</p>
+      <p class="lede">Ich begleite dich auf deinem persönlichen Weg der Veränderung mit Energie- und Körperarbeit.</p>
+      <p class="lede2">Gemeinsam schauen wir auf das, was unter der Oberfläche wirkt, und öffnen Wege zu Klarheit und neuer Lebendigkeit.</p>
       <div class="photo"><img src="src/katharina-freigestellt.png" alt="Katharina"></div>
     </div>
   </div>
@@ -484,6 +530,8 @@
       <p class="form serif">Alles, was Form annimmt, ist auch Energie.</p>
       <p class="list serif">Mensch. Tier. Pflanze.<br>Wasser. Erde.<br>Berge. Steine.</p>
       <p class="all serif"><em>Energie ist in allem.</em></p>
+      <p class="e-text">Energie ist nichts Fremdes. Sie zeigt sich in deiner Wahrnehmung, oft lange bevor du Worte dafür hast.</p>
+      <p class="e-close serif">Energie braucht keinen Beweis. <em>Nur deine Bereitschaft, sie wahrzunehmen.</em></p>
     </div>
   </div>
 
@@ -494,9 +542,16 @@
       <div class="rule"></div>
       <p>Du hast schon vieles verstanden und darüber gesprochen – und dennoch hat sich wenig verändert?</p>
       <p>Vielleicht spürst du, dass Worte allein nicht mehr ausreichen.</p>
-      <p>Oder dich beschäftigt eine konkrete Lebensfrage, ein kleineres Thema oder du wünschst dir einfach eine Reinigung und Klärung deines Energiefeldes.</p>
-      <p>Vielleicht wünschst du dir auch mehr innere Balance und neue Kraft, um dein Leben bewusst, selbstbestimmt und kreativ zu gestalten.</p>
-      <p>Du möchtest dich als Einheit von Körper, Geist, Emotionen und Energie erleben und Veränderung nicht nur verstehen, sondern auch erfahren.</p>
+      <p>Vielleicht wiederholen sich bestimmte Muster gerade in Beziehungen und du erlebst, wie alte Gefühle und Reaktionen immer wieder auftauchen.</p>
+      <p>Vielleicht erlebst du Stress, innere Unruhe oder Erschöpfung und spürst, wie sich Belastungen auch körperlich bemerkbar machen.</p>
+      <ul class="wishes">
+        <li>Dich beschäftigt eine konkrete Lebensfrage.</li>
+        <li>Du möchtest dich selbst besser verstehen und annehmen.</li>
+        <li>Du suchst nach mehr innerer Balance und neuer Kraft.</li>
+        <li>Du möchtest dein Leben bewusst, selbstbestimmt und kreativ gestalten.</li>
+        <li>Du möchtest Veränderung nicht nur verstehen, sondern auch erfahren.</li>
+      </ul>
+      <p class="r-close serif">Du möchtest dich als Einheit von Körper, Geist, Emotionen und Energie erleben und wünschst dir eine Reinigung und Klärung deines Energiefeldes.</p>
       <p class="here">Dann bist du hier <em>richtig.</em></p>
       <p class="write">Was auch immer dich persönlich bewegt – dein Anliegen hat hier Raum.<br>Schreib mir gerne ganz unverbindlich, was dich beschäftigt.</p>
     </div>
@@ -507,10 +562,12 @@
     <div class="safe">
       <h2 class="serif">Die Wurzeln <em>meiner Arbeit</em></h2>
       <div class="rule"></div>
-      <p class="intro">Meine Arbeit ist in den indigenen Heiltraditionen der Anden und des Amazonas verwurzelt und fand durch Dr. Alberto Villoldo und die von ihm gegründete Four Winds Society ihren Weg in die westliche Welt.</p>
+      <p class="intro">Meine Arbeit ist in den indigenen Heiltraditionen der Anden und des Amazonas verwurzelt. Durch Dr. Alberto Villoldo und die von ihm gegründete Four Winds Society fand dieses Wissen seinen Weg in die westliche Welt.</p>
+      <p class="intro2">Als medizinischer Anthropologe und Psychologe verband er die alte Weisheit mit Erkenntnissen der modernen Neurowissenschaft.</p>
       <h3>Was macht die Energiearbeit in dieser Tradition besonders?</h3>
-      <p>Die alte Weisheit der indigenen Heilkunst beruht auf einem tiefen Verständnis von Energie, Natur und der Ganzheit des Menschen.</p>
-      <p>Diese Energiearbeit setzt dort an, wo Muster ihre Spuren hinterlassen: im Körper, im Gewebe, im Nervensystem und im Energiefeld.</p>
+      <p>Die indigene Medizin beruht auf einem tiefen Verständnis von Energie, Natur und der Ganzheit des Menschen.</p>
+      <p>Sie begreift den Menschen als Teil eines größeren Ganzen – verbunden mit sich selbst und anderen, mit der Natur und mit Kräften, die über das unmittelbar Wahrnehmbare hinausreichen.</p>
+      <p>Aus diesem Verständnis heraus setzt die Energiearbeit dort an, wo Muster entstehen und ihre Spuren hinterlassen: im Körper, im Gewebe, im Nervensystem, in körperlichen Reaktionsmustern und als Abdrücke im Energiefeld.</p>
       <p class="key">Klären wir das Feld, kann sich auch unser Blick auf die Welt verändern – und damit die Art, wie wir unserem Leben begegnen.</p>
       <div class="four">
         <h3>Die vier Winde</h3>
@@ -547,12 +604,11 @@
   <div class="panel p2 kat sky me">
     <img class="bg full-sky" src="../flyer/src/hoch-osten.jpg" alt=""><img class="bg top-sky" src="../flyer/src/hoch-osten.jpg" alt="" style="object-position: 50% 54%"><div class="veil veil--top"></div>
     <div class="safe">
-      <div class="me-photo"><img src="src/katharina-arme-freigestellt.png" alt="Katharina mit erhobenen Armen"></div>
       <h2 class="serif">Über <em>mich</em></h2>
       <div class="rule"></div>
       
       <p>Die jahrzehntelange Begleitung von Kindern und Erwachsenen hat meinen Weg geprägt. Meine Erfahrungen in Pädagogik, Heilpädagogik und Integraler Tanz- und Ausdruckstherapie sowie meine intensive Auseinandersetzung mit der Tiefenpsychologie von C. G. Jung, insbesondere der Schattenarbeit, haben mein Verständnis für den Menschen und seine individuellen Lebensthemen und Wege vertieft.</p>
-      <p class="me-key serif">Immer klarer wurde mir: Wir sind mehr als unsere Geschichte oder eine Diagnose.</p>
+      <figure class="me-sea"><img src="src/portrait-meer.jpg" alt="Katharina im blauen Kleid am Meer"><figcaption class="me-key serif">Immer klarer wurde mir: Wir sind mehr als unsere Geschichte oder eine Diagnose.</figcaption></figure>
       <p>Der bedeutendste Wendepunkt meines Lebens war die Begegnung mit der schamanischen Energiemedizin in der Tradition der Anden und des Amazonas. In ihr fand ich die Essenz dessen, was mir schon immer am Herzen lag. Sie eröffnete mir einen neuen Zugang zum Menschen, zu den tieferen Ebenen des Bewusstseins und zur Kraft der Bewusstwerdung für nachhaltige Veränderung.</p>
       <p>Alle Munay-Ki-Riten habe ich in tiefer Dankbarkeit empfangen. Sie sind Teil meines persönlichen Weges und meiner Arbeit im Dienst an den Menschen.</p>
       <p>Heute bündelt sich all das in meiner Arbeit. Ich verbinde schamanische Energiemedizin mit bewusster Körperwahrnehmung und kreativem Ausdruck. So entsteht ein Raum, in dem innere Wandlung nicht nur verstanden, sondern auch auf allen Ebenen gespürt und erlebt werden kann.</p>
@@ -564,13 +620,13 @@
   </div>
 
   <div class="panel p3 kat nature-p meer">
-    <img class="art-top" src="src/portrait-meer.jpg" alt="Katharina am Meer im blauen Kleid">
+    <img class="art-top" src="src/mesa-natur.jpg" alt="Katharinas Mesa in der Natur, am Wasser unter einem Baum">
     <div class="safe">
       <p class="label">Natur</p>
       <h2 class="serif">Natur – unsere <em>größte Kraftquelle</em></h2>
       <div class="rule"></div>
       <p class="lead serif">In der Verbindung mit der Natur verbindest du dich mit dir selbst.</p>
-      <p>Jedes Setting findet für dich in einem geschützten Raum statt.</p>
+      <p>Jede Begleitung findet für dich in einem geschützten Raum statt.</p>
       <p>Die energetische Arbeit in der Natur, in direkter Verbindung mit Mutter Erde und dem Himmel, erlebe ich als besonders kraftvoll und wertvoll.</p>
       <p>Die Kräfte der Natur können energetische Prozesse auf besondere Weise unterstützen und stärken.</p>
       <p>Wenn du dir ein Setting in der Natur wünschst, besprechen wir alle Details persönlich – im Einklang mit den Gegebenheiten der Natur.</p>
