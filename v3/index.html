@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weg der vier Winde – Katharina</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Eine Reise durch die vier Winde: schamanische Energiearbeit, feine Körperwahrnehmung und kreativer Ausdruck – achtsam und in deinem Tempo.">
+  <meta name="theme-color" content="#F4EBDD">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="img/szene-mitte.webp" as="image" type="image/webp">
+  <link rel="preload" href="../fonts/bodoni-moda-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/bodoni-moda-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/v3.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script src="js/v3.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+
+  <!-- Der Himmel: feste Bühne, deren Szenen beim Scrollen ineinander übergehen -->
+  <div class="sky" aria-hidden="true">
+    <div class="sky-layer" data-scene="mitte" style="--focus: 50.5%">
+      <img src="img/szene-mitte.webp" srcset="img/szene-mitte-1280.webp 1280w, img/szene-mitte.webp 1584w" sizes="100vw" alt="" fetchpriority="high">
+    </div>
+    <div class="sky-veil"></div>
+    <div class="sky-layer" data-scene="sueden" style="--focus: 62%">
+      <img src="img/szene-sueden.webp" srcset="img/szene-sueden-1280.webp 1280w, img/szene-sueden.webp 1584w" sizes="100vw" alt="" decoding="async">
+    </div>
+    <div class="sky-layer" data-scene="westen" style="--focus: 40%">
+      <img src="img/szene-westen.webp" srcset="img/szene-westen-1280.webp 1280w, img/szene-westen.webp 2560w" sizes="100vw" alt="" decoding="async">
+    </div>
+    <div class="sky-layer" data-scene="norden" style="--focus: 68%">
+      <img src="img/szene-norden.webp" srcset="img/szene-norden-1280.webp 1280w, img/szene-norden.webp 2560w" sizes="100vw" alt="" decoding="async">
+    </div>
+    <div class="sky-layer" data-scene="osten" style="--focus: 52%">
+      <img src="img/szene-osten.webp" srcset="img/szene-osten-1280.webp 1280w, img/szene-osten.webp 2560w" sizes="100vw" alt="" decoding="async">
+    </div>
+    <div class="sky-dawn"></div>
+    <div class="sky-light"></div>
+  </div>
+
+  <header class="bar">
+    <a class="bar-brand" href="#ankommen" aria-label="Weg der vier Winde – zum Anfang">
+      <img src="../img/logo-mark.webp" alt="" width="321" height="275">
+      <img class="bar-word" src="../img/logo-schriftzug.webp" alt="Weg der vier Winde" width="1044" height="152">
+    </a>
+    <nav class="bar-nav" aria-label="Die vier Winde">
+      <a href="#sueden">Süden</a>
+      <a href="#westen">Westen</a>
+      <a href="#norden">Norden</a>
+      <a href="#osten">Osten</a>
+    </nav>
+    <a class="btn btn--ghost bar-cta" href="../kontakt/">Kennenlernen</a>
+  </header>
+
+  <nav class="rose" aria-label="Wo du gerade bist">
+    <a href="#ankommen" data-for="ankommen"><span>Mitte</span></a>
+    <a href="#sueden" data-for="sueden"><span>Süden</span></a>
+    <a href="#westen" data-for="westen"><span>Westen</span></a>
+    <a href="#norden" data-for="norden"><span>Norden</span></a>
+    <a href="#osten" data-for="osten"><span>Osten</span></a>
+  </nav>
+
+  <main id="main">
+
+    <!-- ===================== MITTE · ANKOMMEN ===================== -->
+    <section id="ankommen" class="hero">
+      <div class="hero-mark"><img src="../img/logo-mark.webp" alt="" width="321" height="275"></div>
+      <div class="hero-inner">
+        <img class="hero-word" src="../img/logo-schriftzug.webp" alt="Weg der vier Winde" width="1044" height="152">
+        <p class="eyebrow">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
+        <h1>Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
+        <p class="scroll-hint"><span>Beginne die Reise</span></p>
+      </div>
+    </section>
+
+    <section id="wahrnehmen" class="flow">
+      <div class="flow-inner">
+        <p class="label rise">Ankommen</p>
+        <p class="lead rise">Spürst du, dass sich etwas in deinem Leben verändern möchte? Ich begleite dich mit schamanischer Energiearbeit, feiner Körperwahrnehmung und kreativem Ausdruck – achtsam und in deinem Tempo.</p>
+
+        <div class="ornament rise" aria-hidden="true"></div>
+
+        <h2 class="rise">Veränderung beginnt dort, wo wir anfangen, <em>uns selbst wahrzunehmen.</em></h2>
+        <p class="rise">Energie ist nichts Fremdes. Sie zeigt sich in deiner Wahrnehmung – oft lange bevor du Worte dafür hast.</p>
+        <ul class="triad">
+          <li class="rise"><strong>Du spürst,</strong> wie sich ein Raum anfühlt.</li>
+          <li class="rise"><strong>Du bemerkst,</strong> was eine Begegnung in dir auslöst.</li>
+          <li class="rise"><strong>Dein Körper reagiert</strong> – manchmal leise, manchmal deutlich.</li>
+        </ul>
+        <p class="whisper rise">Energie braucht keinen Beweis. Nur deine Bereitschaft, sie wahrzunehmen.</p>
+
+        <div class="ornament rise" aria-hidden="true"></div>
+
+        <h2 class="rise">Vielleicht erkennst du dich <em>hier wieder</em> …</h2>
+        <ul class="recognize">
+          <li class="rise">Du funktionierst – aber du spürst dich kaum noch.</li>
+          <li class="rise">Alte Muster wiederholen sich, obwohl du sie längst verstanden hast.</li>
+          <li class="rise">Eine Beziehung oder ein Mensch hält dich innerlich noch fest.</li>
+          <li class="rise">Du stehst an einem Umbruch und suchst deine Richtung.</li>
+          <li class="rise">Du hast das Gefühl, ein Teil von dir ist auf dem Weg verloren gegangen.</li>
+          <li class="rise">Du möchtest dich wieder mehr mit dir, der Natur und deiner Kraft verbinden.</li>
+        </ul>
+        <p class="whisper rise">Dann bist du hier richtig.</p>
+      </div>
+    </section>
+
+    <!-- ===================== DER KOMPASS ===================== -->
+    <section id="kompass" class="compass">
+      <div class="compass-head rise">
+        <p class="label">Meine Begleitungen</p>
+        <h2>Welcher Wind <em>ruft dich?</em></h2>
+        <p>Jeder Mensch ist anders – deshalb wählen wir gemeinsam, was zu dir und deinem Thema passt. Alle Begleitungen basieren auf Werkzeugen der Energiearbeit der Anden und des Amazonas.</p>
+        <p class="whisper">Vier Winde, vier Wege. Folge dem, der dich gerade ruft.</p>
+      </div>
+      <div class="compass-rose">
+        <svg class="compass-lines" viewBox="0 0 400 400" aria-hidden="true">
+          <circle cx="200" cy="200" r="150"/>
+          <circle cx="200" cy="200" r="112" class="thin"/>
+          <path d="M200 20 V380 M20 200 H380"/>
+          <path class="thin" d="M200 200 L95 95 M200 200 L305 95 M200 200 L95 305 M200 200 L305 305"/>
+        </svg>
+        <div class="compass-center"><img src="../img/logo-mark.webp" alt="" width="321" height="275"></div>
+
+        <a class="wind-card" href="#norden" data-wind="norden" style="grid-area: n">
+          <span class="medal"><img src="img/medaillon-norden.webp" alt="" width="640" height="640" loading="lazy"></span>
+          <span class="wind-card-dir">Norden</span>
+          <span class="wind-card-sub">Kolibri · Ganz werden</span>
+        </a>
+        <a class="wind-card" href="#westen" data-wind="westen" style="grid-area: w">
+          <span class="medal"><img src="img/medaillon-westen.webp" alt="" width="640" height="640" loading="lazy"></span>
+          <span class="wind-card-dir">Westen</span>
+          <span class="wind-card-sub">Jaguar · Tiefer schauen</span>
+        </a>
+        <a class="wind-card" href="#osten" data-wind="osten" style="grid-area: e">
+          <span class="medal"><img src="img/medaillon-osten.webp" alt="" width="640" height="640" loading="lazy"></span>
+          <span class="wind-card-dir">Osten</span>
+          <span class="wind-card-sub">Kondor · Neu beginnen</span>
+        </a>
+        <a class="wind-card" href="#sueden" data-wind="sueden" style="grid-area: s">
+          <span class="medal"><img src="img/medaillon-sueden.webp" alt="" width="640" height="640" loading="lazy"></span>
+          <span class="wind-card-dir">Süden</span>
+          <span class="wind-card-sub">Schlange · Loslassen</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== SÜDEN · SCHLANGE · LOSLASSEN ===================== -->
+    <section id="sueden" class="wind wind--light side-left" style="--scene: url('img/szene-sueden.webp')">
+      <header class="wind-head">
+        <p class="wind-dir">Der Wind des Südens</p>
+        <h2 class="wind-name">Die Schlange</h2>
+        <p class="wind-theme">Loslassen</p>
+        <p class="bridge">Wie die Schlange ihre Haut abstreift, darf auch von uns abfallen, was zu eng geworden ist: alte Geschichten, übernommene Muster, Bänder, die uns noch festhalten.</p>
+      </header>
+
+      <div class="window rise">
+        <h3>Was macht schamanische Energiearbeit <em>besonders?</em></h3>
+        <dl class="points">
+          <dt>Du verstehst – und trotzdem bleibt es gleich.</dt>
+          <dd>Wir können unsere Geschichte kennen und vieles verstanden haben. Und reagieren doch immer wieder ähnlich.</dd>
+          <dt>Wir gehen dorthin, wo das Muster beginnt.</dt>
+          <dd>Die Arbeit setzt tiefer an als beim Reden – dort, wo Erfahrungen im Körper und im Erleben gespeichert sind.</dd>
+          <dt>Veränderung darf erfahrbar werden.</dt>
+          <dd>Es geht nicht nur ums Verstehen, sondern ums Erleben. So kann sich Festgehaltenes auf natürliche Weise lösen.</dd>
+        </dl>
+      </div>
+
+      <div class="offers">
+        <article class="window offer rise">
+          <p class="offer-tag">Das Herzstück meiner Arbeit</p>
+          <h3>Illumination</h3>
+          <p class="for"><strong>Für dich, wenn</strong> du das Gefühl hast, alte Geschichten und übernommene Muster lasten auf dir.</p>
+          <p>In der Energiearbeit der Anden gilt die Illumination als Kernprozess. Wir arbeiten mit den Eindrücken, die prägende Erfahrungen in deinem Energiefeld hinterlassen haben können. Ziel ist, dass sich Schweres lösen darf und du wieder mehr Raum für dich selbst spürst.</p>
+          <p class="coda">Körper · Geist · Emotionen · Energie</p>
+        </article>
+        <article class="window offer rise">
+          <p class="offer-tag">Energetische Bänder lösen</p>
+          <h3>Cord Cutting</h3>
+          <p class="for"><strong>Für dich, wenn</strong> dich eine Beziehung innerlich noch festhält – zu einem früheren Partner, zu Eltern, zu Ahnen oder zu anderen Menschen.</p>
+          <p>Manche Verbindungen binden unsere Energie und halten uns in alten Dynamiken. In einem begleiteten Ritual lösen wir diese Bänder und setzen mit dem rituellen Schnitt ein klares Zeichen.</p>
+          <p class="coda">Damit du frei wirst für neue Verbindungen – aus deiner eigenen Kraft.</p>
+        </article>
+      </div>
+
+      <blockquote class="verse rise"><p>Damit du frei wirst – <em>aus deiner eigenen Kraft.</em></p></blockquote>
+
+      <div class="offers">
+        <article class="window offer rise">
+          <p class="offer-tag">Aus der Tradition des Amazonas</p>
+          <h3>Extraktion</h3>
+          <p class="for"><strong>Für dich, wenn</strong> sich etwas in dir schwer, eng oder fremd anfühlt.</p>
+          <p>In der schamanischen Vorstellung können sich belastende Energien im Energiefeld festsetzen – manche fest und verdichtet, andere fließend und schwer greifbar. In der Extraktion arbeiten wir mit Atem, Ritual und einem Kristall, um sie wahrzunehmen und zu lösen. Zum Abschluss wird dein Energiefeld stabilisiert.</p>
+          <p class="coda">Leichtigkeit. Ruhe. Wieder bei dir ankommen.</p>
+        </article>
+        <article class="window offer rise">
+          <p class="offer-tag">Raum zum Durchatmen</p>
+          <h3>Entkopplung</h3>
+          <p class="for"><strong>Für dich, wenn</strong> du dich dauerhaft angespannt fühlst und kaum noch abschalten kannst.</p>
+          <p>In fordernden Situationen reagieren wir mit einem uralten Muster: Kampf, Flucht oder Erstarren. Manchmal bleibt dieses Gefühl, obwohl die Situation längst vorbei ist. Die Entkopplung ist ein Werkzeug aus der Energiearbeit des Amazonas, das dir helfen soll, aus diesem Zustand wieder in die Ruhe zu finden.</p>
+          <p class="coda">Viele Menschen erleben dabei Geborgenheit, Sicherheit und einen ruhigeren Atem.</p>
+        </article>
+      </div>
+
+      <a class="gate rise" href="#westen">
+        <span class="gate-medal"><img src="img/medaillon-westen.webp" alt="" width="640" height="640" loading="lazy"></span>
+        <span class="gate-text"><small>Weiter mit dem Wind des</small>Westens</span>
+      </a>
+    </section>
+
+    <!-- ===================== WESTEN · JAGUAR · TIEFER SCHAUEN ===================== -->
+    <section id="westen" class="wind wind--dark side-right" style="--scene: url('img/szene-westen.webp')">
+      <header class="wind-head">
+        <p class="wind-dir">Der Wind des Westens</p>
+        <h2 class="wind-name">Der Jaguar</h2>
+        <p class="wind-theme">Tiefer schauen</p>
+        <p class="bridge">Der Jaguar bewegt sich ohne Furcht durch die Dunkelheit. Er lädt dich ein, auch dorthin zu schauen, wo es still und schattig ist – mit Mut und in deinem eigenen Tempo.</p>
+      </header>
+
+      <div class="window window--art rise">
+        <figure class="art art--iceberg"><img src="../img/eisberg.webp" alt="Eisberg, dessen größter Teil unter Wasser liegt" width="357" height="716" loading="lazy"></figure>
+        <div>
+          <h3>Sichtbar ist nur die <em>Spitze des Eisbergs.</em></h3>
+          <p>Was wir nach außen zeigen, ist oft nur ein kleiner Teil dessen, was in uns wirkt. Darunter liegen Prägungen, alte Verletzungen, ungelebte Gefühle und Überzeugungen, die uns leise steuern.</p>
+          <p>Wenn wir uns trauen, auch dorthin zu schauen, kann Neues entstehen.</p>
+        </div>
+      </div>
+
+      <div class="duo">
+        <figure class="painting painting--tilt-l rise">
+          <img src="../img/gemaelde.webp" alt="Farbintensives Gemälde eines Gesichts" width="497" height="1266" loading="lazy">
+          <figcaption>„Alles ist Energie“</figcaption>
+        </figure>
+        <blockquote class="verse rise"><p>Was im Schatten liegt, möchte <em>gesehen</em> und <em>angenommen</em> werden.</p></blockquote>
+      </div>
+
+      <article class="window offer rise">
+        <p class="offer-tag">Auch genannt: das Dreieck der Entmachtung</p>
+        <h3>Täter-Opfer-Retter-Dreieck</h3>
+        <p class="for"><strong>Für dich, wenn</strong> du erforschen möchtest, welche Rollen du (unbewusst) einnimmst – und wie du aus ihnen herausfindest.</p>
+        <p><em>Alles, was triggert, möchte gesehen werden.</em> Jedes Urteil über andere kann uns etwas über uns selbst zeigen. Ich öffne dir einen Raum, um deine Rollen mit den Werkzeugen der Energiearbeit zu erkennen und in deine eigene Kraft zurückzufinden.</p>
+        <p class="coda">Erkennen · Verstehen · Verändern</p>
+      </article>
+
+      <blockquote class="verse rise"><p>Alles, was bewusst wird, <em>verliert die Macht</em> über uns.</p></blockquote>
+
+      <div class="window window--art rise">
+        <figure class="art art--arch"><img src="../img/portrait-tiefe.webp" alt="Katharina in nachdenklicher Haltung" width="454" height="745" loading="lazy"></figure>
+        <div>
+          <h3>Hast du Mut zur <em>Tiefe?</em></h3>
+          <p>Im kostenlosen Kennenlernen schauen wir gemeinsam, ob und wie ich dich begleiten kann. Unverbindlich und in Ruhe.</p>
+          <a class="btn btn--gold" href="../kontakt/">Kennenlernen</a>
+        </div>
+      </div>
+
+      <a class="gate rise" href="#norden">
+        <span class="gate-medal"><img src="img/medaillon-norden.webp" alt="" width="640" height="640" loading="lazy"></span>
+        <span class="gate-text"><small>Weiter mit dem Wind des</small>Nordens</span>
+      </a>
+    </section>
+
+    <!-- ===================== NORDEN · KOLIBRI · GANZ WERDEN ===================== -->
+    <section id="norden" class="wind wind--light side-left" style="--scene: url('img/szene-norden.webp')">
+      <header class="wind-head">
+        <p class="wind-dir">Der Wind des Nordens</p>
+        <h2 class="wind-name">Der Kolibri</h2>
+        <p class="wind-theme">Ganz werden</p>
+        <p class="bridge">Der Kolibri steht für die Weisheit der Ahnen und für die große Reise, die mit einem einzigen Flügelschlag beginnt. Er erinnert uns: Wir sind mehr als unsere Geschichte.</p>
+      </header>
+
+      <div class="window window--art rise">
+        <figure class="art art--round"><img src="../img/portrait-ueber-mich.webp" alt="Porträt von Katharina" width="460" height="460" loading="lazy"></figure>
+        <div>
+          <h3>Über mich, <em>ganz persönlich</em></h3>
+          <p>Ich bin Katharina, Mutter von drei erwachsenen Kindern. Mein Leben ist reich an Erfahrungen – und jede einzelne hat mich wachsen lassen.</p>
+          <p>Erkrankungen in meiner Familie haben mich früh dazu gebracht, mich mit seelischer Gesundheit und den tieferen Zusammenhängen menschlichen Erlebens zu beschäftigen. Jahrzehnte pädagogischer Arbeit, viele davon im integrativen Bereich, haben meinen Blick auf familiäre Prägungen geschärft.</p>
+          <p>Ich kenne Krisen aus eigener Erfahrung. Sie haben mich gezwungen innezuhalten. Mein Weg führte mich zu C. G. Jung, zur Schattenarbeit und zu der Erkenntnis: Veränderung beginnt dort, wo wir bereit sind, auch unseren verborgenen Anteilen zu begegnen.</p>
+        </div>
+      </div>
+
+      <blockquote class="verse rise"><p>Wir sind mehr als unsere Diagnose. <em>Und mehr als unsere Geschichte.</em></p></blockquote>
+
+      <div class="atelier">
+        <div class="atelier-text window rise">
+          <h3>Von der Fantasie <em>zur Brücke</em></h3>
+          <p>Rückblickend erkenne ich: Hier entstand eine Brücke. Als ich dem Vater meiner Kinder begegnete, der aus Peru stammt, kam ich in Berührung mit den Festen Perus – mit der Musik, den Tänzen, den Farben und einer tiefen, ursprünglichen Spiritualität. Und ich begann zu malen.</p>
+          <p>Diese Arbeit ist kein Zufall. Sie ist eine natürliche Fortsetzung dessen, was immer schon da war.</p>
+          <p class="coda">Heute bündelt sich in ihr alles, was mich auf meinem Weg geprägt hat.</p>
+        </div>
+        <figure class="painting painting--tilt-r painting--wide rise">
+          <img src="../img/gemaelde-fiesta.webp" alt="Gemälde eines Festzugs in den verschneiten Anden" width="337" height="256" loading="lazy">
+          <figcaption>„La fiesta en los Andes“ · gemalt von Katharina</figcaption>
+        </figure>
+        <figure class="painting painting--tilt-l painting--square rise">
+          <img src="../img/gemaelde-amigos.webp" alt="Farbenfrohes Gemälde zweier Gesichter zwischen tropischen Pflanzen" width="326" height="340" loading="lazy">
+          <figcaption>„Amigos de Primavera de Amazonas“ · gemalt von Katharina</figcaption>
+        </figure>
+      </div>
+
+      <div class="window rise">
+        <h3>Heilung ist eine <em>Reise,</em> keine Intervention.</h3>
+        <p>Psychologie und Psychotherapie haben mich viel gelehrt – und mir gezeigt, wo Verstehen allein nicht ausreicht. In der Tanz- und Ausdrucksarbeit habe ich erlebt, wie Lebensthemen durch Bewegung und kreativen Ausdruck in Fluss kommen. Die indigene Energiearbeit der Anden und des Amazonas wurde zur tiefsten Wegmarke meines Lebens. Ich bin dankbar, die Munay-Ki-Riten und ihre Initiationen empfangen zu haben.</p>
+        <p>Niemand kann Veränderung für einen anderen Menschen machen. Aus der schamanischen Haltung heraus sehe ich mich als <strong>Wegbegleiterin</strong> auf deiner persönlichen Reise. Ich ermutige dich, ehrlich hinzusehen und Ja zu sagen zu dem, was auftaucht.</p>
+        <p class="coda">Wie die Passionsblume sich Schicht für Schicht öffnet, entfaltet sich auch Veränderung in ihrem eigenen Rhythmus – von innen heraus.</p>
+      </div>
+
+      <div class="window window--art rise">
+        <figure class="art art--plain"><img src="../img/vier-ebenen.svg" alt="Vier sich überschneidende Kreise: Körper, Geist, Emotionen und Energie" width="320" height="320" loading="lazy"></figure>
+        <div>
+          <h3>Ich sehe dich als <em>ganzen Menschen.</em></h3>
+          <p>Körper, Geist, Emotionen und Energie gehören zusammen. Wenn du zu mir kommst, schaue ich nicht nur auf ein Thema – sondern darauf, was dich bewegt, was dich geprägt hat und was sich jetzt zeigen möchte.</p>
+          <p class="coda">Der Körper lügt nicht. Er zeigt uns, was wir im Alltag oft überhören.</p>
+        </div>
+      </div>
+
+      <div class="window rise">
+        <p class="offer-tag">Die Mesa arbeitet mit dir</p>
+        <h3>Meine <em>persönliche Mesa</em></h3>
+        <p>Meine Mesa ist ein gewebter, tragbarer Altar – ein heiliger Raum, geprägt von meinem Weg. In ihr liegen die Kuyas, Steine der Kraft. Jeder trägt eine eigene Qualität und Geschichte. Die Mesa ist Bestandteil jeder Begleitung.</p>
+        <p class="small">In der Tradition der Q’ero, wie sie durch Alberto Villoldo und The Four Winds Society in die westliche Welt gebracht wurde.</p>
+      </div>
+
+      <div class="offers">
+        <article class="window offer rise">
+          <p class="offer-tag">Eine schamanische Reise zurück zu dir</p>
+          <h3>Rückverbindung mit Anteilen von dir</h3>
+          <p class="for"><strong>Für dich, wenn</strong> du spürst, dass etwas in dir nach mehr Ganzheit und Lebendigkeit sucht.</p>
+          <p>Prägende Erfahrungen können dazu führen, dass sich Anteile von uns in den Hintergrund zurückziehen – als natürlicher Schutz. Mit deinem Einverständnis gehen wir auf eine schamanische Reise, um diese Anteile zurückzuholen. Du entscheidest, ob du sie wieder annehmen möchtest.</p>
+          <p class="coda">Erinnern · Verbinden · Integrieren · Ganz sein</p>
+        </article>
+        <article class="window offer rise">
+          <p class="offer-tag">Was wäre möglich, wenn du sie erweiterst?</p>
+          <h3>Arbeit mit deiner inneren Landkarte</h3>
+          <p class="for"><strong>Für dich, wenn</strong> du merkst, dass du immer denselben Wegen folgst – und neue Möglichkeiten suchst.</p>
+          <p>Mit Energiearbeit und Verkörperung wird sichtbar, was dich geprägt hat, was dich heute steuert und was dich wirklich ruft. Ein liebevoller Prozess, der dich zurück zu dir bringt – nicht um zu bleiben, wie es war, sondern um zu erkennen, was sich weiterentwickeln darf.</p>
+          <p class="coda">Hast du den Mut, eine neue Geschichte zu wählen, die wirklich deine ist?</p>
+        </article>
+      </div>
+
+      <blockquote class="verse rise"><p>Ich bin eine Reisende – <em>offen, neugierig und bereit, weiterzulernen.</em></p></blockquote>
+
+      <a class="gate rise" href="#osten">
+        <span class="gate-medal"><img src="img/medaillon-osten.webp" alt="" width="640" height="640" loading="lazy"></span>
+        <span class="gate-text"><small>Weiter mit dem Wind des</small>Ostens</span>
+      </a>
+    </section>
+
+    <!-- ===================== OSTEN · KONDOR · NEU BEGINNEN ===================== -->
+    <section id="osten" class="wind wind--light side-right" style="--scene: url('img/szene-osten.webp')">
+      <header class="wind-head">
+        <p class="wind-dir">Der Wind des Ostens</p>
+        <h2 class="wind-name">Der Kondor</h2>
+        <p class="wind-theme">Neu beginnen</p>
+        <p class="bridge">Der Kondor fliegt hoch über allem und sieht das große Ganze. Mit ihm richtet sich der Blick nach vorn – auf das, was jetzt möglich wird.</p>
+      </header>
+
+      <div class="window rise">
+        <h3>Deine Entscheidung. <em>Jeden Tag.</em></h3>
+        <p>In der Tradition der Medizinleute der Anden und des Amazonas ist Gleichgewicht kein Zustand, sondern ein fortlaufender Weg. Es geht darum, achtsam mit dir zu bleiben – und wahrzunehmen, was dich aus der Balance bringt, bevor es laut wird.</p>
+        <div class="contrast">
+          <div>
+            <p class="contrast-label">Im Funktionieren</p>
+            <ul>
+              <li>Du hörst erst hin, wenn es nicht mehr anders geht.</li>
+              <li>Du fühlst dich erschöpft und innerlich unruhig.</li>
+              <li>Du verlierst den Blick für dich.</li>
+              <li>Veränderung kommt erst unter Druck.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="contrast-label">Im <em>Wahrnehmen</em></p>
+            <ul>
+              <li>Du nimmst feine Signale wahr und schenkst ihnen Beachtung.</li>
+              <li>Du stärkst deine innere Balance.</li>
+              <li>Du gestaltest dein Leben bewusst.</li>
+              <li>Veränderung darf früh und sanft geschehen.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <blockquote class="verse rise"><p>Du hast die Wahl. <em>Sie ist ein Geschenk an dein zukünftiges Ich.</em></p></blockquote>
+
+      <div class="offers">
+        <div class="window rise">
+          <p class="offer-tag">Ergänzung in jeder Begleitung</p>
+          <h3>Was möchte sich in dir <em>zeigen?</em></h3>
+          <p>Ich verbinde die energetische Arbeit mit kreativem Ausdruck – in Farbe, Bewegung, Tanz, Klang oder in einem Bild aus Naturmaterialien. So kannst du das, was sich zeigt, auf deine eigene Weise integrieren und verankern.</p>
+        </div>
+        <div class="window rise">
+          <p class="offer-tag">Wo wir arbeiten</p>
+          <h3>Natur – unsere <em>größte Kraftquelle</em></h3>
+          <p>Jedes Setting findet in einem geschützten Raum statt. Auf Wunsch arbeiten wir auch draußen – in direkter Verbindung mit Erde und Himmel. Die Details besprechen wir persönlich, im Einklang mit Wetter und Jahreszeit.</p>
+        </div>
+      </div>
+
+      <div class="window rise">
+        <p class="offer-tag">Klar. Achtsam. In deinem Tempo.</p>
+        <h3>So steigen wir <em>gemeinsam ein.</em></h3>
+        <p>Du bringst dein Thema mit. Wir schauen gemeinsam auf das, was sich zeigt. Nichts muss erzwungen werden – du bestimmst, wie tief du gehen möchtest.</p>
+        <ol class="steps">
+          <li><span>I</span><strong>Kostenloses Kennenlernen</strong> Bis zu 30 Minuten. Ich höre zu, erkläre dir den Ablauf und wir schauen, welches Setting zu dir passt.</li>
+          <li><span>II</span><strong>Ankommen</strong> Mit dem Pendel verschaffen wir uns einen energetischen Überblick über deine Chakren – als Orientierung für die Begleitung.</li>
+          <li><span>III</span><strong>Die Begleitung</strong> Die Methode, die zu deinem Thema passt, ergänzt durch Körperwahrnehmung und kreativen Ausdruck.</li>
+          <li><span>IV</span><strong>Klärung &amp; Abschluss</strong> Mit Palo Santo, dem heiligen Holz, und Agua Florida, dem Blütenwasser, schließen wir die Arbeit ab.</li>
+        </ol>
+      </div>
+
+      <div class="prices-wrap rise">
+        <h3 class="prices-title">Zeit für dich. <em>Raum für Veränderung.</em></h3>
+        <div class="prices">
+          <div class="window price">
+            <p class="price-name">Einzel-Setting</p>
+            <p class="price-meta">90 Minuten</p>
+            <p class="price-amount">130 €</p>
+            <p>Ein Raum nur für dich – für dein aktuelles Thema.</p>
+          </div>
+          <div class="window price price--featured">
+            <p class="price-badge">Empfohlen</p>
+            <p class="price-name">Begleitzyklus</p>
+            <p class="price-meta">3 × 90 Minuten</p>
+            <p class="price-amount">390 €</p>
+            <p>Drei aufeinander abgestimmte Sitzungen, um tiefer zu gehen und Veränderung zu verankern.</p>
+          </div>
+          <div class="window price">
+            <p class="price-name">Intensiv-Begleitung</p>
+            <p class="price-meta">4 × 90 Minuten</p>
+            <p class="price-amount">520 €</p>
+            <p>Vier Sitzungen für intensive Themen und langfristige Integration.</p>
+          </div>
+        </div>
+        <p class="prices-note">Kennenlern-Gespräch · bis zu 30 Minuten · kostenfrei · <a href="../ablauf-preise/">Ablauf, Preise &amp; Fragen im Detail</a></p>
+      </div>
+    </section>
+
+    <!-- ===================== ANKUNFT ===================== -->
+    <section id="schritt" class="finale">
+      <div class="finale-inner rise">
+        <img class="finale-mark" src="../img/logo-mark.webp" alt="" width="321" height="275">
+        <h2>Bereit für deinen <em>nächsten Schritt?</em></h2>
+        <p>Im kostenlosen Kennenlernen schauen wir gemeinsam, ob und wie ich dich begleiten kann. Unverbindlich und in Ruhe.</p>
+        <a class="btn btn--solid" href="../kontakt/">Kennenlernen vereinbaren</a>
+        <p class="whisper">Ich freue mich auf dich.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-note">Meine Arbeit ist eine energetische und körperorientierte Begleitung. Sie ersetzt keine ärztliche, psychotherapeutische oder heilpraktische Diagnose oder Behandlung. Ich stelle keine Diagnosen und gebe keine Heilversprechen. Bitte setze ärztlich verordnete Behandlungen oder Medikamente nicht eigenständig ab.</p>
+    <nav class="foot-nav" aria-label="Weitere Seiten">
+      <a href="../begleitungen/">Alle Begleitungen</a>
+      <a href="../ablauf-preise/">Ablauf &amp; Preise</a>
+      <a href="../ueber-mich/">Über mich</a>
+      <a href="../kontakt/">Kontakt</a>
+      <a href="../impressum/">Impressum</a>
+      <a href="../datenschutz/">Datenschutz</a>
+      <a href="https://www.instagram.com/katharinawegdervierwinde/" rel="noopener">Instagram</a>
+    </nav>
+    <p class="foot-copy">© Katharina · Weg der vier Winde</p>
+  </footer>
+</body>
+</html>

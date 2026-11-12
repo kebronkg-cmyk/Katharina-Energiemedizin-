@@ -1,0 +1,280 @@
+/* Weg der vier Winde – Gestaltungsvariante 2
+   Baut auf ../../css/style.css auf: kräftigere Kontraste, wechselnde
+   Abschnittsfarben mit weichen Übergängen, Goldornamente, Bilder in
+   Bogen- und Rahmenformen. */
+
+.v2 {
+  --cream:  #FBF6EC;
+  --sand:   #F0E2CB;
+  --ink:    #1E1813;
+  --earth:  #4A3221;
+  --gold:   #B08A4C;
+  --gold-light: #DDBF82;
+  --forest: #243020;
+  --night:  #100D0A;
+  --line:   #DCCBAE;
+  --gold-text: #7A5A2A;
+  --section: clamp(80px, 12vw, 150px);
+}
+
+.v2 h1, .v2 h2, .v2 h3 { color: var(--earth); }
+.v2 h1 { font-size: clamp(2.8rem, 6.4vw, 5rem); letter-spacing: -.01em; }
+.v2 h2 { font-size: clamp(2.2rem, 4.8vw, 3.7rem); }
+.v2 h1 em, .v2 h2 em, .v2 h3 em { color: var(--gold-text); }
+
+/* ---------- Abschnittsfarben ---------- */
+.v2 .section--cream, .v2 .offer--cream { background: var(--cream); }
+.v2 .section--sand, .v2 .offer--sand { background: var(--sand); }
+.v2 .section--night { background: var(--night); }
+.v2 .section--forest { background: var(--forest); color: #F3ECDD; }
+.v2 .section--earth { background: var(--earth); color: #F6EEE0; }
+.v2 :is(.section--night, .section--forest, .section--earth) :is(h1, h2, h3) { color: #FBF6EC; }
+.v2 :is(.section--night, .section--forest, .section--earth) :is(h1, h2, h3) em { color: var(--gold-light); }
+.v2 :is(.section--night, .section--forest, .section--earth) .quote { color: var(--gold-light); }
+.v2 :is(.section--night, .section--forest, .section--earth) a:not(.btn) { color: var(--gold-light); }
+.v2 :is(.section--night, .section--forest, .section--earth) .muted { color: #D8CCB8; }
+.v2 :is(.section--forest, .section--earth) .chapter { color: #F3ECDD; }
+
+/* Übergang zwischen zwei Abschnitten: weicher Verlauf + Ornament */
+.fade {
+  position: relative;
+  height: clamp(90px, 11vw, 150px);
+  background: linear-gradient(to bottom, var(--from), color-mix(in oklab, var(--from) 55%, var(--to)) 45%, var(--to));
+}
+.fade::after {
+  content: "";
+  position: absolute; left: 50%; top: 50%;
+  width: min(300px, 70vw); height: 32px;
+  transform: translate(-50%, -50%);
+  background: url("../../img/ornament.svg") center / contain no-repeat;
+  opacity: .9;
+}
+/* Abschnitte direkt an einem Übergang brauchen oben/unten weniger Luft */
+.v2 .fade + .section, .v2 .fade + .offer { padding-top: clamp(40px, 6vw, 80px); }
+.v2 .section:has(+ .fade), .v2 .offer:has(+ .fade) { padding-bottom: clamp(40px, 6vw, 80px); }
+.v2 .offer .divider { display: none; }
+.v2 .offer + .offer { padding-top: clamp(40px, 6vw, 80px); }
+
+/* ---------- Kapitelmarke mit großer Ziffer ---------- */
+.v2 .chapter--big {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  margin-bottom: 1.2rem;
+}
+.v2 .center .chapter--big, .v2 .center.chapter--big { align-items: center; }
+.v2 .numeral {
+  font-family: var(--serif); font-weight: 500; font-style: italic;
+  font-size: clamp(3.4rem, 7vw, 5.4rem); line-height: .9;
+  letter-spacing: 0; text-transform: none;
+  color: var(--gold);
+}
+.v2 :is(.section--night, .section--forest, .section--earth) .numeral { color: var(--gold-light); }
+.v2 .chapter-title {
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.v2 .chapter-title::before, .v2 .chapter-title::after {
+  content: ""; width: 28px; height: 1px; background: currentColor; opacity: .5;
+}
+
+/* ---------- Hero ---------- */
+.v2 .hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(221, 191, 130, .28), transparent 70%),
+    linear-gradient(to bottom, var(--cream), var(--sand));
+  padding-bottom: clamp(56px, 8vw, 110px);
+}
+.v2 .hero::before {
+  content: ""; position: absolute; z-index: -1;
+  width: min(760px, 90vw); aspect-ratio: 1;
+  left: -12%; bottom: -30%;
+  background: url("../../img/logo-mark.svg") center / contain no-repeat;
+  opacity: .07;
+}
+.v2 .hero-tagline { color: var(--gold-text); }
+.v2 .hero .lead { font-size: 1.2rem; }
+
+/* ---------- Bilder: Rahmen, Bögen, Tiefe ---------- */
+.v2 .media { position: relative; isolation: isolate; }
+.v2 .media img {
+  position: relative; z-index: 1;
+  box-shadow: 0 34px 60px -34px rgba(30, 20, 10, .55);
+  filter: saturate(1.06) contrast(1.04);
+}
+/* versetzter Goldrahmen: zwei Schatten am Bild selbst, so folgt er
+   Bogen- und Rundformen. --bg ist die Farbe des jeweiligen Abschnitts. */
+.v2 .media:not(.media--round):not(.media--eisberg) img {
+  box-shadow:
+    16px 16px 0 -1px var(--bg, var(--cream)),
+    16px 16px 0 0 var(--gold),
+    0 34px 60px -34px rgba(30, 20, 10, .55);
+}
+.v2 :is(.section--night, .section--forest, .section--earth) .media:not(.media--round):not(.media--eisberg) img {
+  box-shadow:
+    16px 16px 0 -1px var(--bg),
+    16px 16px 0 0 var(--gold-light),
+    0 34px 60px -34px rgba(0, 0, 0, .7);
+}
+.v2 .hero { --bg: #F4E8D4; }
+.v2 :is(.section--cream, .offer--cream, .page-intro) { --bg: var(--cream); }
+.v2 :is(.section--sand, .offer--sand, .closing) { --bg: var(--sand); }
+.v2 .section--night { --bg: var(--night); }
+.v2 .section--forest { --bg: var(--forest); }
+.v2 .section--earth { --bg: var(--earth); }
+
+/* Eckornament */
+.v2 .media:not(.media--round):not(.media--eisberg)::after {
+  content: ""; position: absolute; z-index: 2;
+  width: 44px; height: 44px; left: -12px; top: -12px;
+  background: url("../../img/corner.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+.v2 .media figcaption { position: relative; z-index: 1; margin-top: 26px; font-style: italic; font-family: var(--serif); font-size: 1.05rem; }
+.v2 :is(.section--night, .section--forest, .section--earth) .media figcaption { color: #E6D9C2; }
+
+/* Porträts als Bogen (Arch) */
+.v2 .media--hero img,
+.v2 .media--portrait img { border-radius: 999px 999px 6px 6px; }
+.v2 .media--hero::after,
+.v2 .media--portrait::after { display: none; }
+.v2 .media--hero { max-width: 480px; }
+.v2 .media--medium { max-width: 460px; }
+
+/* runde Porträts mit doppeltem Goldring */
+.v2 .media--round img {
+  border: 6px solid var(--cream);
+  outline: 1px solid var(--gold); outline-offset: 8px;
+}
+.v2 .section--earth .media--round img { border-color: var(--earth); outline-color: var(--gold-light); }
+.v2 .media--circle { max-width: 300px; }
+
+/* Eisberg: leuchtend auf Nacht */
+.v2 .media--eisberg img { box-shadow: 0 0 80px -10px rgba(221, 191, 130, .25); }
+
+/* Gemälde wie in einer Galerie */
+.v2 .media--painting img,
+.v2 .media--small.media--natural img { border: 8px solid #FFFDF8; }
+
+/* Breite Bilder bekommen keine Bogenform */
+.v2 .media--natural.reveal img { border-radius: 4px; }
+
+/* ---------- Text-Elemente ---------- */
+.v2 .quote { color: var(--gold-text); }
+.v2 .quote::before {
+  content: ""; display: block; width: 120px; height: 18px; margin-bottom: 14px;
+  background: url("../../img/ornament.svg") left center / contain no-repeat;
+}
+.v2 .center .quote::before, .v2 .quote.center::before { margin-inline: auto; background-position: center; }
+
+.v2 .dotlist li::before {
+  width: 9px; height: 9px; border-radius: 0; transform: rotate(45deg);
+  top: .62em; background: transparent; border: 1px solid var(--gold);
+  box-shadow: inset 0 0 0 2px var(--sand), inset 0 0 0 5px var(--gold);
+}
+.v2 .dotlist li { padding: 10px 0 10px 32px; border-bottom: 1px solid var(--line); }
+
+.v2 .col-item { border-top: 0; padding-top: 0; position: relative; }
+.v2 .col-item::before {
+  content: ""; display: block; width: 100%; height: 18px; margin-bottom: 22px;
+  background: url("../../img/ornament.svg") center / contain no-repeat;
+  opacity: .8;
+}
+.v2 .icon { color: var(--gold-text); width: 48px; height: 48px; }
+
+.v2 .pullquote { border-left: 0; padding: 26px 0; border-block: 1px solid var(--gold); text-align: center; font-style: italic; }
+
+/* ---------- Vergleich auf Grün ---------- */
+.v2 .section--forest .compare-col h3 { border-color: rgba(221, 191, 130, .4); }
+.v2 .section--forest .compare-col li { border-color: rgba(243, 236, 221, .18); }
+.v2 .section--forest .compare-col--muted li { color: #BFB6A2; }
+.v2 .section--forest .compare-col:first-child { border-color: rgba(221, 191, 130, .4); }
+.v2 .section--forest .compare-col:last-child li::before { content: "✦ "; color: var(--gold-light); }
+
+/* ---------- Karten ---------- */
+.v2 .card {
+  background: linear-gradient(to bottom, #FFFDF8, #FBF4E6);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--gold);
+  box-shadow: 0 20px 40px -32px rgba(30, 20, 10, .5);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.v2 .card:hover { transform: translateY(-4px); box-shadow: 0 28px 50px -30px rgba(30, 20, 10, .55); border-color: var(--line); border-top-color: var(--earth); }
+.v2 .card .icon {
+  width: 56px; height: 56px; padding: 11px;
+  border: 1px solid var(--gold); border-radius: 50%;
+}
+
+/* ---------- Buttons ---------- */
+.v2 .btn--solid {
+  background: linear-gradient(135deg, #5A3D29, var(--earth));
+  box-shadow: 0 12px 24px -14px rgba(74, 50, 33, .8);
+}
+.v2 .btn--solid:hover { background: var(--forest); }
+.v2 :is(.section--night, .section--forest, .section--earth) .btn--solid { background: var(--gold-light); color: var(--night); box-shadow: none; }
+.v2 :is(.section--night, .section--forest, .section--earth) .btn--solid:hover { background: var(--cream); }
+.v2 .btn--light { background: var(--gold-light); }
+.v2 .btn--light:hover { background: var(--cream); }
+
+/* ---------- Ablauf, Preise, FAQ ---------- */
+.v2 .steps li { border-top: 0; text-align: center; padding: 0 8px; }
+.v2 .step-no {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 84px; height: 84px; margin: 0 auto 18px;
+  border: 1px solid var(--gold); border-radius: 50%;
+  outline: 1px solid var(--line); outline-offset: 6px;
+  font-style: italic; font-size: 2.8rem;
+}
+.v2 .price { border-radius: 4px; box-shadow: 0 24px 44px -34px rgba(30, 20, 10, .5); }
+.v2 .price--featured {
+  background: linear-gradient(to bottom, var(--earth), #3B271A);
+  color: #F6EEE0; border: 1px solid var(--gold);
+  outline: 1px solid var(--gold); outline-offset: -10px;
+}
+.v2 .price--featured :is(h3, .price-amount, .price-badge) { color: #FBF6EC; }
+.v2 .price--featured .price-badge { color: var(--gold-light); }
+.v2 .price--featured .price-duration { color: #D8CCB8; }
+.v2 .faq summary { font-size: 1.5rem; }
+.v2 .faq summary::after { color: var(--gold); }
+
+/* ---------- Begleitungen ---------- */
+.v2 .jumpbar { background: var(--sand); border-color: var(--gold); }
+.v2 .jumpbar a:hover { color: var(--gold-text); }
+.v2 .for-you { background: transparent; border-left: 2px solid var(--gold); }
+.v2 .offer--sand .for-you { background: rgba(251, 246, 236, .5); }
+.v2 .offer-close { color: var(--gold-text); }
+
+/* einspaltig, wenn ein Bild (noch) fehlt */
+.v2 .split > :only-child { grid-column: 1 / -1; max-width: 780px; margin-inline: auto; }
+
+/* ---------- Abschluss & Footer ---------- */
+.v2 .closing {
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 100%, rgba(221, 191, 130, .35), transparent 70%),
+    var(--sand);
+}
+.v2 .closing::before { display: none; }
+.v2 .notice { background: var(--cream); }
+.v2 .site-footer { background: var(--sand); position: relative; }
+.v2 .site-footer::before {
+  content: ""; position: absolute; left: 50%; top: -16px; transform: translateX(-50%);
+  width: 260px; height: 32px; background: var(--sand) url("../../img/ornament.svg") center / 220px no-repeat;
+}
+
+/* ---------- Seitenanfang der Unterseiten ---------- */
+.v2 .page-intro {
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 0%, rgba(221, 191, 130, .22), transparent 70%),
+    var(--cream);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 .card, .v2 .card:hover { transition: none; transform: none; }
+}
+
+/* zentrierte Abschnitte: Button und Ornament mittig */
+.v2 :is(.closing, .center) .actions { justify-content: center; }
+.v2 :is(.closing, .center) .quote::before { margin-inline: auto; background-position: center; }
+/* die Übergänge tragen die Ornamente – alte Stern-Trenner entfallen */
+.v2 .divider { display: none; }
+.v2 .section > .wrap > .center > .divider + h2 { margin-top: 0 !important; }
+@media (min-width: 900px) { .v2 .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.v2 .steps h2 { font-size: 1.6rem; }

@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Leporello 8-seitig · 6 Seiten · Weg der vier Winde</title>
+<!--
+  Leporello, 8 Seiten (4 Felder je Seite), Zickzackfalz, DIN lang.
+  Datenformat mit 2 mm Beschnitt rundum: 400 × 214 mm.
+  PDF erzeugen: node docs/leporello/build.js leporello-8-final-…
+-->
+<style>
+  @font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Bodoni Moda"; src: url("../../fonts/bodoni-moda-latin-400-italic.woff2"); font-weight: 400; font-style: italic; }
+  @font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-400-normal.woff2"); font-weight: 400; }
+  @font-face { font-family: "Jost"; src: url("../../fonts/jost-latin-500-normal.woff2"); font-weight: 500; }
+
+  @page { size: 400mm 214mm; margin: 0; }
+  :root { --earth: #3F2A1C; --gold: #B08A4C; --gold-deep: #765422; --gold-light: #E8CD94; --cream: #FBF6EC; --ink: #1C1612; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Jost", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { position: relative; width: 400mm; height: 214mm; overflow: hidden; page-break-after: always; background: var(--cream); }
+  .sheet:last-child { page-break-after: auto; }
+
+  /* Felder: 99 mm breit, das erste und letzte reichen 2 mm in den Beschnitt */
+  .panel { position: absolute; top: 0; height: 214mm; width: 99mm; overflow: hidden; }
+  .p1 { left: 0; width: 101mm; } .p2 { left: 101mm; } .p3 { left: 200mm; } .p4 { left: 299mm; width: 101mm; }
+  .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* Satzspiegel: 8 mm oben/unten (Beschnitt + Abstand), 6 mm zum Falz */
+  .safe { position: absolute; top: 8mm; bottom: 8mm; left: 6mm; right: 6mm; display: flex; flex-direction: column; }
+  .p1 .safe { left: 8mm; } .p4 .safe { right: 8mm; }
+
+  .serif { font-family: "Bodoni Moda", serif; font-weight: 400; }
+  em { font-style: italic; color: var(--gold-deep); }
+  .label { font-size: 5.4pt; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); }
+  .rule { width: 30mm; height: 4mm; margin: 0 auto; background: url("../../img/ornament.svg") center / contain no-repeat; }
+  p { font-size: 7pt; line-height: 1.55; }
+
+  /* ===== Außenseite ===== */
+  .title .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 52%, rgba(251,246,236,.85) 72%, rgba(251,246,236,.96)); }
+  .title .mark { position: absolute; left: 50%; top: 47.6%; width: 19mm; transform: translate(-50%, -50%); filter: drop-shadow(0 0 2.5mm rgba(255, 248, 230, 1)); }
+  .title .safe { justify-content: flex-end; text-align: center; }
+  .title .word { width: 52mm; margin: 0 auto 2.2mm; }
+  .title .label { font-size: 5pt; letter-spacing: .15em; white-space: nowrap; margin-bottom: 5mm; }
+  .title h1 { font-size: 16pt; line-height: 1.13; color: var(--earth); margin-bottom: 4mm; }
+  .title .hint { font-size: 6pt; letter-spacing: .2em; text-transform: uppercase; color: var(--earth); }
+
+  .soft-bg .veil { position: absolute; inset: 0; background: rgba(251, 246, 236, .87); }
+  .about .portrait { width: 34mm; height: 34mm; margin: 4mm auto 5mm; border-radius: 50%; border: 1mm solid var(--cream); outline: .25mm solid var(--gold); outline-offset: 1mm; display: block; }
+  .about h2 { font-size: 17pt; text-align: center; color: var(--earth); margin-bottom: 4mm; }
+  .about p { margin-bottom: 2.6mm; }
+  .about .quote { margin-top: auto; font-family: "Bodoni Moda", serif; font-size: 10pt; line-height: 1.35; text-align: center; color: var(--earth); }
+
+  .flow h2 { font-size: 14pt; text-align: center; color: var(--earth); margin: 2mm 0 1.4mm; }
+  .flow .sub { text-align: center; font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8pt; color: var(--gold-deep); margin-bottom: 4mm; }
+  .steps { list-style: none; margin-bottom: 5mm; }
+  .steps li { display: grid; grid-template-columns: 9mm 1fr; padding: 2.2mm 0; border-top: .2mm solid rgba(176,138,76,.5); }
+  .steps li:last-child { border-bottom: .2mm solid rgba(176,138,76,.5); }
+  .steps span { grid-row: span 2; font-family: "Bodoni Moda", serif; font-style: italic; font-size: 13pt; color: var(--gold); line-height: 1; }
+  .steps b { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 8.4pt; color: var(--earth); }
+  .steps p { font-size: 6.2pt; line-height: 1.4; }
+  .prices { display: grid; gap: 2mm; margin-top: auto; }
+  .price { display: flex; justify-content: space-between; align-items: baseline; padding: 2.4mm 3.4mm; border: .25mm solid rgba(176,138,76,.7); border-radius: 1.5mm; background: rgba(255,252,245,.8); }
+  .price.rec { background: var(--earth); color: var(--cream); border-color: var(--earth); }
+  .price small { display: block; font-size: 4.8pt; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); }
+  .price.rec small { color: var(--gold-light); }
+  .price strong { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 8.6pt; }
+  .price b { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 13pt; }
+
+  /* Galerie: gerade gehängt, Passepartout, feine Goldlinie */
+  .gallery { background: #F7F1E6; }
+  .gallery::before { content: ""; position: absolute; inset: 4mm 3mm; border: .2mm solid rgba(176,138,76,.55); pointer-events: none; }
+  .p3.gallery::before { inset: 6mm 3.5mm; }
+  .gallery .safe { top: 12mm; bottom: 12mm; left: 9mm; right: 9mm; text-align: center; }
+  .gallery h2 { font-size: 13.5pt; color: var(--earth); margin: 1mm 0 2.4mm; }
+  .gallery .story { font-size: 6.4pt; line-height: 1.5; margin-bottom: 5mm; }
+  .art { margin: 0; }
+  .mat { background: #FFFDF8; padding: 2.6mm; box-shadow: 0 .6mm 1.6mm rgba(40,28,18,.18), 0 3mm 6mm -3mm rgba(40,28,18,.25); outline: .2mm solid rgba(176,138,76,.75); outline-offset: -1.3mm; }
+  .mat img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .art-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-top: 5mm; }
+  .art-row .mat img { aspect-ratio: 3 / 4; }
+  .art-row .art:first-child .mat img { object-position: 50% 40%; }
+  .art figcaption { margin-top: 2mm; font-family: "Bodoni Moda", serif; font-size: 6.2pt; line-height: 1.3; color: var(--earth); }
+  .art figcaption::before { content: ""; display: block; width: 6mm; height: .2mm; background: var(--gold); margin: 0 auto 1.4mm; }
+  .signature { margin-top: auto; font-size: 5pt; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); }
+  .mini-steps { list-style: none; margin: 2.4mm 0 3.4mm; }
+  .mini-steps li { display: flex; gap: 2.6mm; align-items: baseline; font-size: 6.4pt; line-height: 1.35; padding: 1.2mm 0; border-top: .2mm solid rgba(176,138,76,.45); }
+  .mini-steps span { flex: none; width: 5mm; font-family: "Bodoni Moda", serif; font-style: italic; font-size: 9pt; color: var(--gold); }
+  .whole { display: flex; align-items: center; gap: 3mm; margin: 1mm 0 3mm; }
+  .whole img { width: 26mm; flex: none; }
+  .whole p { font-size: 6.4pt; }
+  .whole b { display: block; font-weight: 400; font-size: 9pt; line-height: 1.2; color: var(--earth); margin-bottom: 1mm; }
+  .meet .veil { position: absolute; inset: 0; background: rgba(251,246,236,.9); }
+  .meet .safe { justify-content: space-between; }
+  .meet h2 { font-size: 13pt !important; margin-bottom: 0 !important; }
+  .meet .prices { margin: 0; }
+  .meet .card { margin-bottom: 0; }
+  .meet .qr { margin-top: 0; }
+  .meet .price { padding: 1.8mm 3mm; }
+  .meet .mark { width: 15mm; margin: 0 auto 4mm; filter: drop-shadow(0 0 2mm rgba(255, 248, 230, 1)); }
+  .meet h2 { font-size: 16pt; line-height: 1.12; text-align: center; color: var(--earth); margin-bottom: 3mm; }
+  .meet .lede { text-align: center; margin-bottom: 4mm; }
+  .card { padding: 4mm; border: .25mm solid var(--gold); border-radius: 26mm 26mm 2mm 2mm / 9mm 9mm 2mm 2mm; background: rgba(255,252,245,.94); text-align: center; margin-bottom: 4mm; }
+  .card h3 { font-size: 11.5pt; color: var(--earth); margin: 1.4mm 0; }
+  .card p { font-size: 6.4pt; }
+  .qr { display: flex; align-items: center; gap: 3.4mm; }
+  .qr img { width: 19mm; height: 19mm; flex: none; }
+  .qr p { font-family: "Bodoni Moda", serif; font-size: 8pt; color: var(--earth); line-height: 1.35; }
+  .qr small { display: block; font-family: "Jost", sans-serif; font-size: 4.8pt; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-deep); }
+  .fine { margin-top: 3.4mm; font-size: 4.4pt; line-height: 1.4; color: #5E534A; }
+
+  /* ===== Innenseite: die vier Winde ===== */
+  .wind .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 30%, rgba(251,246,236,.88) 50%, rgba(251,246,236,.96) 100%); }
+  .wind.dark .veil { background: linear-gradient(to bottom, rgba(21,17,26,0) 30%, rgba(21,17,26,.82) 50%, rgba(21,17,26,.92) 100%); }
+  .wind .safe { justify-content: flex-end; }
+  .wind .dir { font-size: 5.2pt; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1mm; }
+  .wind h2 { font-size: 21pt; font-style: italic; line-height: 1; color: var(--earth); margin-bottom: 1.6mm; }
+  .wind .motto { font-family: "Bodoni Moda", serif; font-size: 8.6pt; line-height: 1.35; color: var(--earth); margin-bottom: 3.4mm; }
+  .wind .rule { margin: 0 0 3.4mm; background-position: left center; }
+  .wind ul { list-style: none; }
+  .wind li { padding: 1.9mm 0; border-top: .2mm solid rgba(176,138,76,.45); }
+  .wind li b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 8.6pt; color: var(--earth); }
+  .wind li p { font-size: 6.2pt; line-height: 1.4; }
+  .wind.dark, .wind.dark li p, .wind.dark .motto { color: #F5EEE2; }
+  .wind.dark h2, .wind.dark li b { color: #FBF6EC; }
+  .wind.dark .dir { color: var(--gold-light); }
+  .wind.dark li { border-color: rgba(232,205,148,.35); }
+
+  /* Stand 11/2026: Preise mit Ersparnis, Zusatzinfos */
+  .meet .price { align-items: center; }
+  .price .was { display: block; font-family: "Jost", sans-serif; font-size: 5pt; color: #5E534A; text-align: right; }
+  .price.rec .was { color: #E9DFCF; }
+  .price .was s { text-decoration-color: var(--gold-deep); }
+  .price .save { display: block; font-family: "Jost", sans-serif; font-size: 4.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); text-align: right; }
+  .price.rec .save { color: var(--gold-light); }
+  .price .amt { text-align: right; line-height: 1.05; }
+  .extras { display: grid; gap: 1.6mm; }
+  .extras p { font-size: 5.6pt; line-height: 1.4; }
+  .extras b { font-weight: 500; color: var(--earth); }
+  .contact { font-size: 5.6pt; line-height: 1.5; color: var(--earth); }
+
+  /* ===== 6 Seiten: Katharinas Texte für die Außenseite ===== */
+  .kat { background: var(--cream); }
+  .kat .glow { position: absolute; inset: 0; background: radial-gradient(70% 45% at 50% 30%, rgba(255,240,210,.9), rgba(251,246,236,0) 70%), linear-gradient(to bottom, #F8F1E4, #FBF6EC 40%, #F3EBDD); }
+  .kat h2 { color: var(--earth); }
+  .kat p { font-size: 7.2pt; line-height: 1.5; margin-bottom: 2.2mm; }
+
+  /* Seite 1: Titel mit Originalfoto */
+  .cover .safe { align-items: center; text-align: center; }
+  .cover .mark { width: 15mm; margin: 1mm 0 1.8mm; }
+  .cover .word { width: 54mm; margin-bottom: 2mm; }
+  .cover .label { font-size: 4.9pt; letter-spacing: .14em; white-space: nowrap; margin-bottom: 4.6mm; }
+  .cover h1 { font-size: 15.5pt; line-height: 1.14; color: var(--earth); margin-bottom: 3mm; }
+  .cover .lede { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8.2pt; line-height: 1.4; color: var(--gold-deep); margin-bottom: 5mm; }
+  .cover .photo { width: 62mm; flex: 1; min-height: 0; border-radius: 31mm 31mm 2mm 2mm; overflow: hidden; border: .35mm solid var(--gold); outline: .25mm solid rgba(176,138,76,.5); outline-offset: 1.2mm; }
+  .cover .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; }
+
+  /* Seite 2: Vielleicht erkennst du dich */
+  .recog .safe { justify-content: center; }
+  .recog h2 { font-size: 16pt; line-height: 1.15; text-align: center; margin: 0 0 2mm; }
+  .recog .rule { margin-bottom: 4mm; }
+  .recog p { text-align: left; }
+  .recog .here { font-family: "Bodoni Moda", serif; font-size: 11pt; text-align: center; color: var(--earth); margin: 3.4mm 0 2.4mm; }
+  .recog .write { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8.4pt; line-height: 1.4; text-align: center; color: var(--gold-deep); }
+  .recog .contact-box { margin-top: 4mm; display: flex; align-items: center; gap: 3.2mm; padding: 3mm; border: .25mm solid var(--gold); border-radius: 2mm; background: rgba(255,252,245,.9); }
+  .recog .contact-box img { width: 17mm; height: 17mm; flex: none; }
+  .recog .contact-box p { margin: 0; font-size: 6pt; line-height: 1.5; }
+  .recog .contact-box b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 8.4pt; color: var(--earth); }
+
+  /* Seite 3: Wurzeln */
+  .roots .safe { justify-content: center; }
+  .roots h2 { font-size: 14.5pt; text-align: center; margin-bottom: 2mm; }
+  .roots .rule { margin-bottom: 3.6mm; }
+  .roots .intro { font-family: "Bodoni Moda", serif; font-size: 7.8pt; line-height: 1.45; text-align: center; color: var(--earth); }
+  .roots h3 { font-family: "Bodoni Moda", serif; font-weight: 400; font-style: italic; font-size: 9pt; color: var(--gold-deep); margin: 3mm 0 1.6mm; text-align: center; }
+  .roots .key { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8pt; line-height: 1.4; text-align: center; color: var(--gold-deep); }
+  .roots .winds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm; margin: 4mm 0 2.6mm; }
+  .roots .winds figure { margin: 0; text-align: center; }
+  .roots .winds img { width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; border: .3mm solid var(--gold); }
+  .roots .winds figcaption { font-size: 4.8pt; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); margin-top: 1mm; }
+  .roots .four h3 { margin-top: 0; }
+
+  /* Seite 4: Heilung mit Passionsblume */
+  .heal { background: #EEF1E2; }
+  .heal .glow { background: radial-gradient(60% 34% at 50% 27%, rgba(255,250,232,.95), rgba(214,228,186,.55) 55%, rgba(238,241,226,0) 80%), linear-gradient(to bottom, #EDF0DF, #F3F2E6 50%, #F6F2E8); }
+  .heal .safe { align-items: center; text-align: center; justify-content: center; }
+  .heal .label { margin-bottom: 1mm; }
+  .heal h2 { font-size: 15pt; line-height: 1.15; margin-bottom: 2mm; }
+  .heal .flower { width: 60mm; margin: 0 0 1mm; filter: drop-shadow(0 1mm 2mm rgba(60,70,30,.18)); }
+  .heal .journey { font-family: "Bodoni Moda", serif; font-size: 14pt; line-height: 1.2; color: var(--earth); margin-bottom: 3mm; }
+  .heal p { text-align: center; font-size: 7pt; margin-bottom: 2.2mm; }
+  .heal .bloom-key { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8.4pt; line-height: 1.4; color: var(--gold-deep); }
+  .heal .tempo { font-size: 5.2pt; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); margin: 1.4mm 0 2.4mm; }
+  .heal .stance { margin-top: 2mm; padding: 3mm 3.4mm; border-radius: 16mm 16mm 2mm 2mm / 6mm 6mm 2mm 2mm; border: .25mm solid var(--gold); background: rgba(255,252,245,.9); }
+  .heal .stance p { margin: 0; font-family: "Bodoni Moda", serif; font-size: 8pt; line-height: 1.45; color: var(--earth); }
+
+  /* ===== 6 Seiten: Innenseite mit Über mich, Preisen und den vier Winden ===== */
+  .me .safe { justify-content: flex-start; }
+  .me h2 { font-size: 17pt; text-align: center; margin: 0 0 3mm; }
+  .me .pic { width: 100%; height: 66mm; border-radius: 2mm; overflow: hidden; border: .3mm solid var(--gold); margin-bottom: 3.6mm; flex: none; }
+  .me .pic img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+  .me p { font-size: 6.9pt; line-height: 1.5; margin-bottom: 2mm; }
+  .me .ki { margin-top: auto; padding: 2.8mm 3.2mm; border-radius: 2mm; border: .25mm solid var(--gold); background: rgba(255,252,245,.92); }
+  .me .ki h3 { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 10pt; color: var(--earth); margin: 0 0 1mm; }
+  .me .ki p { margin: 0; font-size: 6.7pt; }
+
+  .offer .safe { justify-content: flex-start; }
+  .offer h2 { font-size: 13.5pt; line-height: 1.15; text-align: center; margin: 0 0 3mm; }
+  .offer .cards { display: grid; gap: 1.8mm; }
+  .offer .c { display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 2mm 3mm; border: .25mm solid rgba(176,138,76,.75); border-radius: 1.6mm; background: rgba(255,252,245,.92); }
+  .offer .c.dark { background: var(--earth); border-color: var(--earth); color: #F5EEE2; }
+  .offer .c strong { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 9pt; color: var(--earth); display: block; }
+  .offer .c.dark strong { color: #FBF6EC; }
+  .offer .c small { font-size: 5.8pt; letter-spacing: .08em; color: var(--gold-deep); font-weight: 500; }
+  .offer .c.dark small { color: var(--gold-light); }
+  .offer .c b { font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 13pt; text-align: right; line-height: 1; }
+  .offer .c em.save { display: block; font-style: normal; font-size: 5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); text-align: right; margin-top: .6mm; }
+  .offer .c.dark em.save { color: var(--gold-light); }
+  .offer .c .extra { grid-column: 1 / -1; font-size: 5.8pt; line-height: 1.4; margin: 1.2mm 0 0; padding-top: 1.2mm; border-top: .2mm solid rgba(176,138,76,.4); }
+  .offer .info { margin-top: 2.4mm; }
+  .offer .info p { font-size: 6pt; line-height: 1.42; margin-bottom: 1.4mm; }
+  .offer .info b { font-weight: 500; color: var(--earth); }
+  .offer .vat { font-size: 5pt; color: #6A5D52; margin-bottom: 2.4mm; }
+  .offer .next { padding: 2.8mm 3mm; border-radius: 14mm 14mm 2mm 2mm / 5mm 5mm 2mm 2mm; border: .25mm solid var(--gold); background: rgba(255,252,245,.95); text-align: center; }
+  .offer .next .q { font-family: "Bodoni Moda", serif; font-size: 9.4pt; color: var(--earth); margin-bottom: .6mm; }
+  .offer .next .call { font-size: 5.4pt; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2mm; }
+  .offer .next p { font-size: 6.2pt; margin: 0; }
+  .offer .contact { display: flex; gap: 3mm; align-items: center; margin-top: 2.4mm; }
+  .offer .contact img { width: 22mm; height: 22mm; flex: none; }
+  .offer .contact p { margin: 0; font-size: 6.1pt; line-height: 1.5; color: var(--earth); }
+  .offer .contact p b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 8.6pt; }
+  .offer .contact .lbl { font-size: 5pt; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); }
+
+  /* zwei Winde je Feld */
+  .duo-wind { padding: 0; }
+  .half { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; }
+  .half.top { top: 0; } .half.bottom { bottom: 0; }
+  .half .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  .half .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 15%, rgba(251,246,236,.9) 42%, rgba(251,246,236,.97)); }
+  .half.dark .veil { background: linear-gradient(to bottom, rgba(21,17,26,0) 15%, rgba(21,17,26,.85) 42%, rgba(21,17,26,.94)); }
+  .half .inner { position: absolute; left: 6mm; right: 6mm; bottom: 5mm; }
+  .p3 .half .inner { left: 6mm; } .p4 .half .inner { right: 8mm; }
+  .half.top .inner { bottom: 4mm; } .half.bottom .inner { bottom: 8mm; }
+  .half .dir { font-size: 5pt; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: .8mm; }
+  .half h2 { font-size: 17pt; font-style: italic; line-height: 1; color: var(--earth); margin-bottom: 1.2mm; }
+  .half .motto { font-family: "Bodoni Moda", serif; font-size: 7.4pt; line-height: 1.35; color: var(--earth); margin-bottom: 2mm; }
+  .half ul { list-style: none; }
+  .half li { padding: 1.1mm 0; border-top: .2mm solid rgba(176,138,76,.45); }
+  .half li b { display: block; font-family: "Bodoni Moda", serif; font-weight: 400; font-size: 7.6pt; color: var(--earth); }
+  .half li p { font-size: 5.7pt; line-height: 1.35; }
+  .half.dark .dir { color: var(--gold-light); }
+  .half.dark h2, .half.dark li b { color: #FBF6EC; }
+  .half.dark .motto, .half.dark li p { color: #F5EEE2; }
+  .half.dark li { border-color: rgba(232,205,148,.35); }
+
+  .offer .c .extra b { font-family: "Jost", sans-serif; font-weight: 500; font-size: inherit; text-align: left; line-height: inherit; color: var(--earth); }
+  .me p { font-size: 7.5pt; line-height: 1.5; margin-bottom: 2.2mm; }
+  .me .pic { height: 64mm; }
+  .me .ki p { font-size: 7.2pt; }
+  .offer .c .extra { font-size: 6.4pt; }
+  .offer .c small { font-size: 6.4pt; }
+  .offer .info p { font-size: 6.7pt; line-height: 1.45; margin-bottom: 1.6mm; }
+  .offer .vat { font-size: 5.8pt; }
+  .offer .next p { font-size: 6.8pt; }
+  .offer .contact img { width: 25mm; height: 25mm; }
+  .offer .contact p { font-size: 6.6pt; }
+
+  .recog p { font-size: 8pt; line-height: 1.5; margin-bottom: 2.8mm; }
+  .recog .write { font-size: 9pt; }
+  .recog .here { font-size: 12.5pt; }
+  .roots p { font-size: 7.4pt; }
+  .heal p { font-size: 7.3pt; }
+
+  /* ===== 6 Seiten: drei Felder je Seite, das dritte reicht in den Beschnitt ===== */
+
+  /* Titelfoto ohne Rahmen, wie auf der Website weich in den Hintergrund geblendet */
+  .cover .photo { width: 100%; border: 0; outline: 0; border-radius: 0; overflow: visible; display: flex; align-items: flex-end; justify-content: center; margin-bottom: -8mm; position: relative; }
+  .cover .photo::before { content: ""; position: absolute; left: 50%; top: 4%; width: 80mm; height: 80mm; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,236,200,.85), rgba(255,236,200,0)); }
+  .cover .photo { overflow: hidden; margin: -4mm -6mm -8mm -8mm; width: auto; align-self: stretch; }
+  .cover .photo img { position: relative; width: 100%; height: auto; max-width: none; }
+  /* Die vier Winde als ineinanderfließendes Himmelsband */
+  .winds-band { position: relative; margin: 3.4mm -3mm 2mm; }
+  .p3 .winds-band { margin-right: -5mm; }
+  .winds-band img { display: block; width: 100%; height: 40mm; object-fit: cover; }
+  .winds-band .names { position: absolute; left: 3mm; right: 5mm; bottom: 4.5mm; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .winds-band span { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 8.4pt; color: var(--earth); text-shadow: 0 0 1.6mm rgba(255,250,240,1), 0 0 3mm rgba(255,250,240,.9); }
+  .winds-band span:nth-child(2) { color: #FBF6EC; text-shadow: 0 0 2mm rgba(20,16,26,.9); }
+  .winds-band i { display: block; font-family: "Jost", sans-serif; font-style: normal; font-size: 4.4pt; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); margin-top: .4mm; }
+  .winds-band span:nth-child(2) i { color: var(--gold-light); }
+
+  /* ===== Himmel als Hintergrund, je Seite ein Wind ===== */
+  .sky .bg { object-position: 50% 0; }
+  .sky .veil { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(251,246,236,0) 0%, rgba(251,246,236,.15) 14%, rgba(251,246,236,.86) 30%, rgba(251,246,236,.94) 55%, rgba(251,246,236,.97) 100%); }
+  .sky .veil--dark { background: linear-gradient(to bottom, rgba(24,19,30,0) 0%, rgba(24,19,30,.2) 14%, rgba(24,19,30,.82) 32%, rgba(24,19,30,.9) 60%, rgba(24,19,30,.94) 100%); }
+  .cover.sky .veil { background: linear-gradient(to bottom, rgba(251,246,236,0) 0%, rgba(251,246,236,.25) 20%, rgba(251,246,236,.7) 34%, rgba(251,246,236,.35) 52%, rgba(251,246,236,0) 70%); }
+  .whead { position: absolute; top: 8mm; left: 7mm; right: 7mm; text-align: center; }
+  .p1 .whead { left: 9mm; } .p3 .whead { right: 9mm; }
+  .wlabel { font-size: 5.2pt; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 4mm rgba(255,250,240,.9); margin-bottom: 1.4mm; }
+  .wquote { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 9pt; line-height: 1.35; color: var(--earth); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 5mm rgba(255,250,240,.95); }
+  .heal .wlabel { color: var(--gold-light); text-shadow: 0 0 2mm rgba(20,16,26,.9); }
+  .heal .wquote { color: #FBF6EC; text-shadow: 0 0 2mm rgba(20,16,26,.95), 0 0 5mm rgba(20,16,26,.8); }
+  .recog .safe, .roots .safe, .me .safe { top: 34mm; justify-content: flex-start; }
+  .heal .safe { top: 30mm; }
+  .offer .safe { top: 9mm; }
+  /* Westen: dunkle Seite mit leuchtender Passionsblume */
+  .heal h2, .heal .journey { color: #FBF6EC; }
+  .heal h2 em, .heal .journey em, .heal .bloom-key { color: var(--gold-light); }
+  .heal p { color: #EFE6D6; }
+  .heal .tempo { color: var(--gold-light); }
+  .heal .flower { filter: drop-shadow(0 0 6mm rgba(255,240,200,.35)); }
+  .heal .stance { background: rgba(255,250,240,.08); border-color: rgba(232,205,148,.7); }
+  .heal .stance p { color: #FBF6EC; }
+  /* Über mich etwas kompakter */
+  .me h2 { font-size: 15pt; margin-bottom: 2mm; }
+  .me .pic { height: 44mm; margin-bottom: 2.6mm; }
+  .me p { font-size: 7pt; margin-bottom: 1.8mm; }
+  .me .ki { margin-top: 1.4mm; }
+  /* Seite 6: Himmelsband als Abschluss */
+  .winds-band.closing { margin: 2.6mm -3mm 0; }
+  .winds-band.closing img { height: 26mm; }
+  .winds-band.closing .names { bottom: 2.4mm; }
+  .winds-band.closing span { font-size: 7.4pt; }
+  .offer .contact { margin-top: 1.6mm; }
+  .offer .contact img { width: 21mm; height: 21mm; }
+
+  /* Seiten 2, 3, 5: das Himmelsmotiv oben deutlich, nach unten weich in Creme */
+  .sky .bg.top-sky { height: 82mm; object-fit: cover; object-position: 50% 50%; }
+  .sky .veil--top { background: linear-gradient(to bottom, rgba(251,246,236,0) 0mm, rgba(251,246,236,0) 36mm, rgba(251,246,236,.75) 54mm, rgba(251,246,236,.96) 76mm, #FBF6EC 84mm); }
+  .recog .safe, .roots .safe { top: 52mm; justify-content: center; }
+  .me .safe { top: 46mm; }
+  .me .pic { height: 40mm; }
+  .whead { top: 7mm; }
+  .whead p { text-align: center; margin-bottom: 1.2mm; }
+
+  /* ===== Überarbeitung: einheitliche Himmelsköpfe, Jaguar sichtbar, Licht um die Blüte ===== */
+  .heal { background: #1D1823; }
+  .sky .veil--top-dark { background: linear-gradient(to bottom, rgba(29,24,35,0) 0mm, rgba(29,24,35,0) 40mm, rgba(29,24,35,.7) 58mm, rgba(29,24,35,.96) 78mm, #1D1823 84mm); }
+  .heal .safe { top: 52mm; justify-content: flex-start; }
+  .heal h2 { font-size: 15pt; margin-bottom: 1.6mm; }
+  .rule--light { filter: brightness(1.6) saturate(.8); margin-bottom: 1mm; }
+  .flower-wrap { position: relative; width: 50mm; height: 50mm; margin: 1mm auto 2.4mm; display: grid; place-items: center; }
+  .flower-wrap::before { content: ""; position: absolute; inset: -14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,246,220,.42), rgba(214,228,186,.18) 55%, rgba(214,228,186,0) 100%); }
+  .flower-wrap .ring { position: absolute; left: 50%; top: 50%; translate: -50% -50%; border-radius: 50%; border: .22mm solid rgba(232,205,148,.55); }
+  .flower-wrap .r1 { width: 74%; height: 74%; }
+  .flower-wrap .r2 { width: 94%; height: 94%; border-color: rgba(232,205,148,.4); }
+  .flower-wrap .r3 { width: 114%; height: 114%; border-color: rgba(232,205,148,.24); }
+  .heal .flower-wrap .flower { position: relative; width: 82%; margin: 0; filter: drop-shadow(0 0 4mm rgba(255,240,200,.3)); }
+  .heal .journey { font-size: 13.5pt; margin-bottom: 2.6mm; }
+  .heal p { font-size: 7.2pt; }
+  .heal .stance { margin-top: 3mm; }
+
+  .me .safe { top: 12mm; }
+  .me-photo { height: 76mm; margin: 0 -6mm -4mm; display: flex; justify-content: center; align-items: flex-end; position: relative; flex: none; }
+  .me-photo::before { content: ""; position: absolute; left: 50%; bottom: 6mm; width: 70mm; height: 56mm; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,244,222,.75), rgba(255,244,222,0)); }
+  .me-photo img { position: relative; height: 100%; width: auto; }
+  .me h2 { font-size: 15pt; margin: 0 0 1.4mm; }
+  .me .rule { margin-bottom: 2.6mm; }
+  .me p { font-size: 6.9pt; line-height: 1.48; margin-bottom: 1.6mm; }
+  .me .ki { margin-top: 1.6mm; }
+  .sky .bg.top-sky { height: 86mm; }
+  .offer h2 { margin-bottom: 1.4mm; }
+  .offer .rule { margin-bottom: 2.4mm; }
+
+  .me .safe { top: 23mm; }
+  .me-photo { height: 68mm; margin-bottom: -9mm; }
+
+  /* Seite 3 jetzt dunkel (Westen), Seite 4 hell (Norden) mit Foto der Passionsblume */
+  .darkp { background: #1D1823; }
+  .darkp h2, .darkp .intro { color: #FBF6EC; }
+  .darkp h2 em, .darkp h3, .darkp .key { color: var(--gold-light); }
+  .darkp p { color: #EFE6D6; }
+  .darkp .rule { filter: brightness(1.6) saturate(.8); }
+  .darkp .wlabel { color: var(--gold-light); text-shadow: 0 0 2mm rgba(20,16,26,.9); }
+  .darkp .wquote { color: #FBF6EC; text-shadow: 0 0 2mm rgba(20,16,26,.95), 0 0 5mm rgba(20,16,26,.8); }
+  .heal { background: var(--cream); }
+  .heal h2, .heal .journey { color: var(--earth); }
+  .heal h2 em, .heal .journey em, .heal .bloom-key { color: var(--gold-deep); }
+  .heal p { color: #2A2018; }
+  .heal .tempo { color: var(--gold-deep); }
+  .heal .wlabel { color: var(--gold-deep); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 4mm rgba(255,250,240,.9); }
+  .heal .wquote { color: var(--earth); text-shadow: 0 0 2mm rgba(255,250,240,1), 0 0 5mm rgba(255,250,240,.95); }
+  .heal .rule--light { filter: none; }
+  .heal .stance { background: rgba(255,252,245,.92); border-color: var(--gold); }
+  .heal .stance p { color: var(--earth); }
+  .heal .flower-wrap { width: 54mm; height: 54mm; }
+  .heal .flower-wrap::before { background: radial-gradient(closest-side, rgba(255,248,228,.95), rgba(226,236,206,.55) 60%, rgba(226,236,206,0)); }
+  .heal .flower-wrap .ring { border-color: rgba(176,138,76,.55); }
+  .heal .flower-wrap .r2 { border-color: rgba(176,138,76,.38); }
+  .heal .flower-wrap .r3 { border-color: rgba(176,138,76,.22); }
+  .heal .flower-wrap .flower.photo { width: 96%; filter: none; }
+
+  /* ohne Wind-Kopfzeilen: Katharinas Überschrift steht zuerst */
+  .recog .safe, .roots .safe { top: 44mm; }
+  .heal .safe { top: 40mm; }
+  .me .safe { top: 10mm; }
+  .me-photo { height: 74mm; }
+  /* die vier Winde kurz zugeordnet (Begriffe von der Website) */
+  .four-legend { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 3.4mm; border-top: .2mm solid rgba(232,205,148,.45); border-bottom: .2mm solid rgba(232,205,148,.45); }
+  .four-legend div { text-align: center; padding: 2.2mm .6mm; }
+  .four-legend div + div { border-left: .2mm solid rgba(232,205,148,.3); }
+  .four-legend b { display: block; font-size: 4.8pt; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-light); }
+  .four-legend span { display: block; font-family: "Bodoni Moda", serif; font-size: 9pt; color: #FBF6EC; margin: .6mm 0 .3mm; }
+  .four-legend i { display: block; font-family: "Bodoni Moda", serif; font-size: 6.4pt; color: #E9DFCF; }
+
+  /* Über mich mit dem Foto mit Feder am Wasser, weich eingeblendet */
+  .me-photo.feder { height: 72mm; margin: 0 -6mm 1mm; justify-content: flex-start; padding-left: 4mm; }
+  .me-photo.feder::before { display: none; }
+  .me-photo.feder img { width: auto; height: 100%; }
+  .me h2 { position: relative; z-index: 1; }
+
+  /* ===== 8 Seiten: Alles ist Energie und Natur als eigene Seiten ===== */
+  .art-top { position: absolute; top: 0; left: 0; width: 100%; height: 58%; object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%); mask-image: linear-gradient(to bottom, #000 60%, transparent 100%); }
+  .energy-p .art-top { object-position: 50% 30%; }
+  .energy-p .credit { position: absolute; top: 49%; right: 9mm; font-size: 4.6pt; letter-spacing: .2em; text-transform: uppercase; color: #FBF6EC; text-shadow: 0 0 1.5mm rgba(0,0,0,.7); }
+  .energy-p .safe, .nature-p .safe { top: auto; bottom: 10mm; justify-content: flex-end; text-align: center; }
+  .energy-p h2 { font-size: 24pt; line-height: 1; margin-bottom: 2mm; }
+  .energy-p .rule { margin-bottom: 3mm; }
+  .energy-p .form { font-size: 9.6pt; color: var(--earth); margin-bottom: 3mm; }
+  .energy-p .list { font-size: 10.4pt; line-height: 1.5; color: var(--earth); margin-bottom: 2.4mm; }
+  .energy-p .all { font-size: 11.5pt; }
+  .nature-p .art-top { height: 52%; object-position: 50% 40%; }
+  .nature-p .label { margin-bottom: 1.2mm; }
+  .nature-p h2 { font-size: 15pt; line-height: 1.15; margin-bottom: 1.6mm; }
+  .nature-p .rule { margin-bottom: 2.6mm; }
+  .nature-p .lead { font-style: italic; font-size: 9.2pt; line-height: 1.4; color: var(--gold-deep); margin-bottom: 2.4mm; }
+  .nature-p p { font-size: 7.3pt; margin-bottom: 1.8mm; }
+
+  /* Natur, Version Meer: helle Seite wie die Himmelsseiten */
+  .nature-p.meer .art-top { height: 60%; object-position: 50% 18%; }
+  /* Natur, Version See: durchgehend dunkel, Foto als ganzer Hintergrund */
+  .nature-p.see { background: #241D30; }
+  .nature-p.see .art-top { height: 100%; object-position: 50% 30%; -webkit-mask-image: none; mask-image: none; }
+  .nature-p.see::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(36,29,48,0) 25%, rgba(36,29,48,.55) 45%, rgba(36,29,48,.88) 62%, rgba(36,29,48,.94) 100%); }
+  .nature-p.see .safe { z-index: 1; }
+  .nature-p.see h2, .nature-p.see p { color: #F5EEE2; }
+  .nature-p.see h2 em, .nature-p.see .lead, .nature-p.see .label { color: var(--gold-light); }
+  .nature-p.see .rule { filter: brightness(1.6) saturate(.8); }
+
+  /* Druck: keine Leuchtschatten hinter Schrift (erscheinen in manchen PDF-Ansichten als Kästen) */
+  *, *::before, *::after { text-shadow: none !important; }
+  .me .me-key { font-style: italic; font-size: 8.4pt; line-height: 1.4; color: var(--gold-deep); text-align: center; margin: .6mm 0 2.2mm; }
+
+  /* ===== Korrekturen Katharina, 11.11. ===== */
+  .cover .lede { margin-bottom: 2.2mm; }
+  .cover .lede2 { font-size: 7.4pt; line-height: 1.5; color: var(--earth); margin: 0 4mm 3mm; }
+  .cover .photo img { width: 84%; margin: 0 auto; display: block; }
+  .energy-p .art-top { height: 46%; }
+  .energy-p .credit { top: 38%; }
+  .energy-p h2 { font-size: 21pt; }
+  .energy-p .form { margin-bottom: 2.2mm; }
+  .energy-p .list { font-size: 9.6pt; margin-bottom: 1.8mm; }
+  .energy-p .all { margin-bottom: 3mm; }
+  .energy-p .e-text { font-size: 7.6pt; line-height: 1.5; color: var(--earth); margin: 0 2mm 3.4mm; }
+  .energy-p .e-close { font-size: 10.2pt; line-height: 1.35; color: var(--earth); padding-top: 3mm; border-top: .25mm solid rgba(176,138,76,.6); }
+  .energy-p .e-close em { color: var(--gold-deep); }
+  .recog .safe { top: 34mm; }
+  .recog h2 { font-size: 14.5pt; }
+  .recog p { font-size: 7.3pt; line-height: 1.45; margin-bottom: 1.8mm; }
+  .recog .wishes { list-style: none; margin: 1mm 0 2.2mm; padding: 0; }
+  .recog .wishes li { position: relative; padding-left: 4mm; font-size: 7.3pt; line-height: 1.42; margin-bottom: .9mm; color: #2A2018; }
+  .recog .wishes li::before { content: "✦"; position: absolute; left: 0; top: 0; font-size: 5.4pt; line-height: 1.9; color: var(--gold); }
+  .recog .r-close { font-style: italic; font-size: 8.6pt; line-height: 1.4; color: var(--gold-deep); text-align: center; margin: 1mm 0 2.4mm; }
+  .recog .here { margin: 1mm 0 1.2mm; font-size: 11pt; }
+  .recog .write { font-size: 7.8pt; }
+  .roots .safe { top: 30mm; }
+  .roots h2 { font-size: 14pt; }
+  .roots .intro { font-size: 7.4pt; line-height: 1.45; margin-bottom: 1.4mm; }
+  .roots .intro2 { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 7.6pt; line-height: 1.4; text-align: center; color: var(--gold-light); margin-bottom: 2mm; }
+  .roots h3 { margin: 1.4mm 0 1.2mm; font-size: 8.4pt; }
+  .roots p { font-size: 6.9pt; line-height: 1.45; margin-bottom: 1.5mm; }
+  .roots .key { font-size: 7.6pt; }
+  .roots .four h3 { margin-top: 1.6mm; }
+  .roots .four-legend { margin-top: 2mm; }
+  .roots .four-legend div { padding: 1.6mm .6mm; }
+  .me .safe { top: 30mm; }
+  .me .me-sea { position: relative; margin: 1mm -2mm 2.4mm; }
+  .me .me-sea img { display: block; width: 100%; height: 50mm; object-fit: cover; object-position: 50% 22%; border-radius: 2mm;
+    -webkit-mask-image: radial-gradient(120% 100% at 50% 40%, #000 60%, transparent 100%); mask-image: radial-gradient(120% 100% at 50% 40%, #000 60%, transparent 100%); }
+  .me .me-sea .me-key { margin: 2mm 2mm 0; }
+  .me p { font-size: 6.9pt; line-height: 1.46; margin-bottom: 1.5mm; }
+  .nature-p .art-top { object-position: 50% 45%; }
+  .nature-p.meer .art-top { height: 58%; object-position: 50% 48%; }
+  .nature-p.see .art-top { object-position: 50% 45%; }
+
+  .me .safe { top: 34mm; }
+  .me .me-sea img { height: 54mm; border-radius: 0; -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); }
+</style>
+</head>
+<body>
+
+<!-- =============== SEITE 1: AUSSENSEITE =============== -->
+<section class="sheet">
+  <div class="panel p1 kat sky cover">
+    <img class="bg" src="../flyer/src/vorne.jpg" alt=""><div class="veil"></div>
+    <div class="safe">
+      <img class="mark" src="../flyer/src/logo-mark.webp" alt="">
+      <img class="word" src="../flyer/src/logo-schriftzug.webp" alt="Weg der vier Winde">
+      <p class="label">Energiearbeit · Körperwahrnehmung · Kreativer Ausdruck</p>
+      <h1 class="serif">Zwischen Verstehen und Erleben liegen oft <em>Welten.</em></h1>
+      <p class="lede">Ich begleite dich auf deinem persönlichen Weg der Veränderung mit Energie- und Körperarbeit.</p>
+      <p class="lede2">Gemeinsam schauen wir auf das, was unter der Oberfläche wirkt, und öffnen Wege zu Klarheit und neuer Lebendigkeit.</p>
+      <div class="photo"><img src="src/katharina-freigestellt.png" alt="Katharina"></div>
+    </div>
+  </div>
+
+  <div class="panel p2 kat energy-p">
+    <img class="art-top" src="src/energie-gesicht.jpg" alt="Gemälde von Katharina: ein Gesicht mit einem Licht auf der Stirn">
+    <p class="credit">Gemälde von Katharina</p>
+    <div class="safe">
+      <h2 class="serif">Alles ist <em>Energie.</em></h2>
+      <div class="rule"></div>
+      <p class="form serif">Alles, was Form annimmt, ist auch Energie.</p>
+      <p class="list serif">Mensch. Tier. Pflanze.<br>Wasser. Erde.<br>Berge. Steine.</p>
+      <p class="all serif"><em>Energie ist in allem.</em></p>
+      <p class="e-text">Energie ist nichts Fremdes. Sie zeigt sich in deiner Wahrnehmung, oft lange bevor du Worte dafür hast.</p>
+      <p class="e-close serif">Energie braucht keinen Beweis. <em>Nur deine Bereitschaft, sie wahrzunehmen.</em></p>
+    </div>
+  </div>
+
+  <div class="panel p3 kat sky recog">
+    <img class="bg top-sky" src="../flyer/src/hinten.jpg" alt="" style="object-position: 50% 30%"><div class="veil veil--top"></div>
+    <div class="safe">
+      <h2 class="serif">Vielleicht erkennst du dich <em>hier wieder.</em></h2>
+      <div class="rule"></div>
+      <p>Du hast schon vieles verstanden und darüber gesprochen – und dennoch hat sich wenig verändert?</p>
+      <p>Vielleicht spürst du, dass Worte allein nicht mehr ausreichen.</p>
+      <p>Vielleicht wiederholen sich bestimmte Muster gerade in Beziehungen und du erlebst, wie alte Gefühle und Reaktionen immer wieder auftauchen.</p>
+      <p>Vielleicht erlebst du Stress, innere Unruhe oder Erschöpfung und spürst, wie sich Belastungen auch körperlich bemerkbar machen.</p>
+      <ul class="wishes">
+        <li>Dich beschäftigt eine konkrete Lebensfrage.</li>
+        <li>Du möchtest dich selbst besser verstehen und annehmen.</li>
+        <li>Du suchst nach mehr innerer Balance und neuer Kraft.</li>
+        <li>Du möchtest dein Leben bewusst, selbstbestimmt und kreativ gestalten.</li>
+        <li>Du möchtest Veränderung nicht nur verstehen, sondern auch erfahren.</li>
+      </ul>
+      <p class="r-close serif">Du möchtest dich als Einheit von Körper, Geist, Emotionen und Energie erleben und wünschst dir eine Reinigung und Klärung deines Energiefeldes.</p>
+      <p class="here">Dann bist du hier <em>richtig.</em></p>
+      <p class="write">Was auch immer dich persönlich bewegt – dein Anliegen hat hier Raum.<br>Schreib mir gerne ganz unverbindlich, was dich beschäftigt.</p>
+    </div>
+  </div>
+
+  <div class="panel p4 kat sky roots darkp">
+    <img class="bg top-sky" src="src/himmel-nacht.jpg" alt="" style="object-position: 50% 40%"><div class="veil veil--top-dark"></div>
+    <div class="safe">
+      <h2 class="serif">Die Wurzeln <em>meiner Arbeit</em></h2>
+      <div class="rule"></div>
+      <p class="intro">Meine Arbeit ist in den indigenen Heiltraditionen der Anden und des Amazonas verwurzelt. Durch Dr. Alberto Villoldo und die von ihm gegründete Four Winds Society fand dieses Wissen seinen Weg in die westliche Welt.</p>
+      <p class="intro2">Als medizinischer Anthropologe und Psychologe verband er die alte Weisheit mit Erkenntnissen der modernen Neurowissenschaft.</p>
+      <h3>Was macht die Energiearbeit in dieser Tradition besonders?</h3>
+      <p>Die indigene Medizin beruht auf einem tiefen Verständnis von Energie, Natur und der Ganzheit des Menschen.</p>
+      <p>Sie begreift den Menschen als Teil eines größeren Ganzen – verbunden mit sich selbst und anderen, mit der Natur und mit Kräften, die über das unmittelbar Wahrnehmbare hinausreichen.</p>
+      <p>Aus diesem Verständnis heraus setzt die Energiearbeit dort an, wo Muster entstehen und ihre Spuren hinterlassen: im Körper, im Gewebe, im Nervensystem, in körperlichen Reaktionsmustern und als Abdrücke im Energiefeld.</p>
+      <p class="key">Klären wir das Feld, kann sich auch unser Blick auf die Welt verändern – und damit die Art, wie wir unserem Leben begegnen.</p>
+      <div class="four">
+        <h3>Die vier Winde</h3>
+        <p>Die vier Winde werden im Medizinrad durch Schlange, Jaguar, Kolibri und Adler verkörpert. Sie stehen für vier archetypische Kräfte, die als Fähigkeiten und Ressourcen in uns wirken und uns auf unserem persönlichen Weg der Veränderung begleiten.</p>
+      <div class="four-legend">
+        <div><b>Süden</b><span>Schlange</span><i>Loslassen</i></div>
+        <div><b>Westen</b><span>Jaguar</span><i>Tiefer schauen</i></div>
+        <div><b>Norden</b><span>Kolibri</span><i>Lebensfreude</i></div>
+        <div><b>Osten</b><span>Adler</span><i>Neu beginnen</i></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== SEITE 2: INNENSEITE =============== -->
+<section class="sheet">
+  <div class="panel p1 kat sky heal">
+    <img class="bg top-sky" src="src/himmel-wolken-hell.jpg" alt="" style="object-position: 50% 35%"><div class="veil veil--top"></div>
+    <div class="safe">
+      <h2 class="serif">Was bedeutet Heilung <em>für mich?</em></h2>
+      <div class="rule rule--light"></div>
+      <div class="flower-wrap"><i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><img class="flower photo" src="src/passionsblume-foto.png" alt="Passionsblume"></div>
+      <p class="journey">Heilung ist eine Reise, <em>keine Intervention.</em></p>
+      <p>Niemand kann diesen Weg für einen anderen Menschen gehen.</p>
+      <p>Aus der schamanischen Haltung heraus sehe ich mich als Wegbegleiterin auf deiner persönlichen Reise. Ich ermutige dich, ehrlich hinzusehen und anzunehmen, was sich zeigt.</p>
+      <p>Was bewusst wird, kann seine Macht über uns verlieren. Darin können Wandlung, innere Kraft und Selbstermächtigung entstehen.</p>
+      <p class="bloom-key">Wie die Passionsblume sich Schicht für Schicht öffnet, geschieht Heilung in ihrem eigenen Rhythmus – von innen heraus.</p>
+      <p class="tempo">Klar. Achtsam. In deinem Tempo.</p>
+      <div class="stance"><p>Ich begleite dich dabei mit offenem Herzen, Präsenz, Feinfühligkeit, großem Respekt vor deinem individuellen Weg und tiefem Vertrauen in dein Potenzial.</p></div>
+    </div>
+  </div>
+
+  <div class="panel p2 kat sky me">
+    <img class="bg top-sky" src="src/himmel-sonnenaufgang.jpg" alt="" style="object-position: 72% 50%"><div class="veil veil--top"></div>
+    <div class="safe">
+      <h2 class="serif">Über <em>mich</em></h2>
+      <div class="rule"></div>
+      
+      <p>Die jahrzehntelange Begleitung von Kindern und Erwachsenen hat meinen Weg geprägt. Meine Erfahrungen in Pädagogik, Heilpädagogik und Integraler Tanz- und Ausdruckstherapie sowie meine intensive Auseinandersetzung mit der Tiefenpsychologie von C. G. Jung, insbesondere der Schattenarbeit, haben mein Verständnis für den Menschen und seine individuellen Lebensthemen und Wege vertieft.</p>
+      <figure class="me-sea"><img src="src/portrait-meer.jpg" alt="Katharina im blauen Kleid am Meer"><figcaption class="me-key serif">Immer klarer wurde mir: Wir sind mehr als unsere Geschichte oder eine Diagnose.</figcaption></figure>
+      <p>Der bedeutendste Wendepunkt meines Lebens war die Begegnung mit der schamanischen Energiemedizin in der Tradition der Anden und des Amazonas. In ihr fand ich die Essenz dessen, was mir schon immer am Herzen lag. Sie eröffnete mir einen neuen Zugang zum Menschen, zu den tieferen Ebenen des Bewusstseins und zur Kraft der Bewusstwerdung für nachhaltige Veränderung.</p>
+      <p>Alle Munay-Ki-Riten habe ich in tiefer Dankbarkeit empfangen. Sie sind Teil meines persönlichen Weges und meiner Arbeit im Dienst an den Menschen.</p>
+      <p>Heute bündelt sich all das in meiner Arbeit. Ich verbinde schamanische Energiemedizin mit bewusster Körperwahrnehmung und kreativem Ausdruck. So entsteht ein Raum, in dem innere Wandlung nicht nur verstanden, sondern auch auf allen Ebenen gespürt und erlebt werden kann.</p>
+      <div class="ki">
+        <h3>Kreative <em>Integration</em></h3>
+        <p>Körperwahrnehmung, authentische Bewegung, intuitives Malen, Musik und Klang unterstützen und vertiefen deinen persönlichen Prozess und verankern das Erlebte.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel p3 kat nature-p meer">
+    <img class="art-top" src="src/mesa-natur.jpg" alt="Katharinas Mesa in der Natur, am Wasser unter einem Baum">
+    <div class="safe">
+      <p class="label">Natur</p>
+      <h2 class="serif">Natur – unsere <em>größte Kraftquelle</em></h2>
+      <div class="rule"></div>
+      <p class="lead serif">In der Verbindung mit der Natur verbindest du dich mit dir selbst.</p>
+      <p>Jede Begleitung findet für dich in einem geschützten Raum statt.</p>
+      <p>Die energetische Arbeit in der Natur, in direkter Verbindung mit Mutter Erde und dem Himmel, erlebe ich als besonders kraftvoll und wertvoll.</p>
+      <p>Die Kräfte der Natur können energetische Prozesse auf besondere Weise unterstützen und stärken.</p>
+      <p>Wenn du dir ein Setting in der Natur wünschst, besprechen wir alle Details persönlich – im Einklang mit den Gegebenheiten der Natur.</p>
+    </div>
+  </div>
+
+  <div class="panel p4 kat sky offer">
+    <img class="bg" src="../flyer/src/hinten.jpg" alt=""><div class="veil"></div>
+    <div class="safe">
+      <h2 class="serif">Zeit und Raum <em>für deinen Weg</em></h2>
+      <div class="rule"></div>
+      <div class="cards">
+        <div class="c"><div><strong>Einzelbegleitung</strong><small>90 Minuten</small></div><div><b>140 €</b></div></div>
+        <div class="c dark"><div><strong>Vertiefende Begleitung</strong><small>3 × 90 Minuten</small></div><div><b>405 €</b><em class="save">Du sparst 15 €</em></div></div>
+        <div class="c"><div><strong>Intensivbegleitung</strong><small>4 × 90 Minuten</small></div><div><b>535 €</b><em class="save">Du sparst 25 €</em></div>
+          <p class="extra"><b>Zusätzlich inklusive:</b> 2 × 30 Minuten Integrationszeit – zum gemeinsamen Nachspüren, Integrieren und Verankern im Alltag.</p></div>
+      </div>
+      <div class="info">
+        <p><b>Auch danach bin ich für dich da.</b> Für kurze Fragen, zum Nachspüren und für Impulse zur Integration und nachhaltigen Verankerung im Alltag kannst du dich auch über WhatsApp bei mir melden – ohne zusätzliche Kosten.</p>
+        <p><b>Sozialtarif</b> · Wenn du dir eine Begleitung wünschst, der reguläre Preis für dich derzeit jedoch nicht möglich ist, sprich mich gerne an. In begrenztem Umfang biete ich Termine zu einem reduzierten Sozialtarif an.</p>
+        <p class="vat">Alle Preise inklusive gesetzlicher Mehrwertsteuer.</p>
+      </div>
+      <div class="next">
+        <p class="q">Bereit für deinen <em>nächsten Schritt?</em></p>
+        <p class="call">30 Minuten kostenloses Erstgespräch</p>
+        <p>Schreib mir gerne ganz unverbindlich. Ich freue mich auf deine Nachricht.</p>
+      </div>
+      <div class="winds-band closing">
+        <img src="src/vier-winde-band.png" alt="Die Himmel der vier Winde">
+        <div class="names"><span>Schlange<i>Süden</i></span><span>Jaguar<i>Westen</i></span><span>Kolibri<i>Norden</i></span><span>Adler<i>Osten</i></span></div>
+      </div>
+      <div class="contact">
+        <img src="../flyer/src/qr-website.svg" alt="QR-Code zur Webseite">
+        <p><span class="lbl">Kontakt</span><b>Katharina Wiesensarter</b>WhatsApp / Telefon: +49 1573 4359358<br>E-Mail: energie.medizin@web.de<br>Webseite: www.wegdervierwinde.de<br>Vor Ort: München-Pasing · Termine nach Vereinbarung</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
